@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
+<title>红星实业集团 · 人才招聘</title>
+<style>
+:root{
+  --brand:#1668dc;--brand-d:#0b4fa6;--brand-l:#e8f1fd;
+  --ink:#1a1a1a;--ink2:#5c5c5c;--ink3:#8a8a8a;--ink4:#b0b0b0;
+  --line:#ececec;--line2:#dcdcdc;--bg:#f4f5f7;--white:#fff;
+  --ok:#12a150;--okl:#e8f6ee;--warn:#c8811a;--warnl:#fdf3e3;--salary:#e8590c;
+  --sb:env(safe-area-inset-bottom,0px);--st:env(safe-area-inset-top,0px);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;background:#e9ebee;color:var(--ink);font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;border:none;background:none;color:inherit;cursor:pointer;font-size:14px}
+input,select,textarea{font-family:inherit;font-size:14px;-webkit-appearance:none;appearance:none;border-radius:0}
+.app{max-width:430px;margin:0 auto;min-height:100vh;background:var(--bg);position:relative;overflow:hidden;box-shadow:0 0 24px rgba(0,0,0,.08)}
+.pb{padding-bottom:calc(64px + var(--sb))}
+
+/* ---------- top bar ---------- */
+.top{position:sticky;top:0;z-index:40;background:var(--white);border-bottom:1px solid var(--line);padding-top:var(--st)}
+.top-in{display:flex;align-items:center;height:48px;padding:0 12px;gap:8px}
+.top-t{font-size:16px;font-weight:600;flex:1;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.top .ic{width:36px;height:36px;display:flex;align-items:center;justify-content:center;flex:none}
+.avatar{width:30px;height:30px;border-radius:50%;background:var(--brand-l);color:var(--brand-d);font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;flex:none}
+
+/* ---------- hero ---------- */
+.hero{position:relative;background:var(--brand);color:#fff;padding:calc(26px + var(--st)) 18px 22px}
+.hero h1{font-size:22px;font-weight:600;line-height:1.4;letter-spacing:.5px}
+.hero p{font-size:12.5px;opacity:.88;margin-top:8px;line-height:1.65}
+.herosc{position:absolute;top:calc(14px + var(--st));right:14px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.18);color:#fff;display:flex;align-items:center;justify-content:center}
+.sbox .scani{flex:none;color:var(--ink2);opacity:.65;display:flex}
+/* ---------- 模拟扫码 ---------- */
+.scanmask{position:fixed;inset:0;background:rgba(0,0,0,.86);z-index:70;display:flex;align-items:center;justify-content:center}
+.scanbox{width:100%;max-width:430px;padding:0 26px;text-align:center;color:#fff}
+.scanframe{position:relative;width:198px;height:198px;margin:0 auto;padding:14px;background:#fff;border-radius:14px;overflow:hidden}
+.scanframe i{position:absolute;left:12px;right:12px;height:2px;background:var(--brand);animation:scanmove 1.5s linear infinite}
+@keyframes scanmove{0%{top:12px}100%{top:186px}}
+.scant{margin-top:18px;font-size:14.5px}
+.scans{margin-top:7px;font-size:12px;color:rgba(255,255,255,.62)}
+.scanbox button{margin-top:24px;background:none;border:1px solid rgba(255,255,255,.42);color:#fff;border-radius:20px;padding:8px 24px;font-size:13px}
+.chan{margin:12px 18px 0;background:var(--white);border-radius:12px;padding:14px;display:flex;align-items:center;gap:12px;box-shadow:0 2px 8px rgba(20,60,120,.08)}
+.chan+.chan{margin-top:10px}
+.chan-ic{width:42px;height:42px;border-radius:10px;background:var(--brand-l);color:var(--brand-d);display:flex;align-items:center;justify-content:center;flex:none}
+.chan-b{flex:1;min-width:0}
+.chan-b h3{font-size:15px;font-weight:600}
+.chan-b p{font-size:11.5px;color:var(--ink3);margin-top:3px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.chan-f{font-size:12px;color:var(--brand);white-space:nowrap}
+.chan-f i{font-style:normal;color:var(--ink4);display:block;font-size:11px;text-align:right;margin-top:2px}
+
+/* ---------- section ---------- */
+.sec{margin-top:14px;background:var(--white);padding:16px 18px}
+.sec-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.sec-h h2{font-size:16px;font-weight:600}
+.sec-h span{font-size:11.5px;color:var(--ink3)}
+.more{font-size:12.5px;color:var(--brand)}
+
+/* ---------- job card ---------- */
+.jc{display:flex;align-items:flex-start;gap:10px;padding:13px 0;border-bottom:1px solid var(--line)}
+.jc:last-child{border-bottom:none}
+.jc-m{flex:1;min-width:0}
+.jc-t{font-size:14.5px;font-weight:500;line-height:1.45;display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.jc-s{color:var(--salary);font-size:13.5px;font-weight:600;flex:none}
+.jc-meta{margin-top:7px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.tag{font-size:11px;color:var(--ink2);background:#f2f4f7;border-radius:4px;padding:2px 7px}
+.tag.b{color:var(--brand-d);background:var(--brand-l)}
+.dot{font-size:11.5px;color:var(--ink3)}
+.star{width:34px;height:34px;flex:none;display:flex;align-items:center;justify-content:center;font-size:19px;color:var(--ink4);line-height:1}
+.star.on{color:#f5a623}
+
+
+/* ---------- search & filter ---------- */
+.sbar{background:var(--white);padding:10px 18px;display:flex;gap:9px;align-items:center}
+.sbox{flex:1;display:flex;align-items:center;gap:7px;background:#f2f4f7;border-radius:18px;padding:0 12px;height:36px}
+.sbox svg{flex:none;opacity:.5}
+.sbox input{flex:1;border:none;background:none;outline:none;height:36px;font-size:13.5px}
+.sbtn{height:36px;padding:0 14px;border-radius:18px;background:var(--brand);color:#fff;font-size:13px;flex:none}
+.frow{background:var(--white);padding:10px 18px 12px;display:flex;gap:8px;align-items:center}
+.fchip{height:30px;padding:0 12px;border-radius:15px;background:#f2f4f7;font-size:12.5px;color:var(--ink2);display:flex;align-items:center;gap:5px;white-space:nowrap}
+.fchip.on{background:var(--brand-l);color:var(--brand-d)}
+.fchip .n{font-style:normal;color:var(--brand);font-size:11px}
+.seg{display:flex;gap:4px;background:#f0f1f4;border-radius:10px;padding:4px;margin:0}
+.seg div{flex:1;text-align:center;height:32px;line-height:32px;font-size:13.5px;color:var(--ink2);border-radius:8px;cursor:pointer}
+.seg div.on{background:var(--white);color:var(--brand-d);font-weight:600;box-shadow:0 1px 3px rgba(16,24,40,.1)}
+.lhead{padding:12px 18px 8px;font-size:12.5px;color:var(--ink3)}
+.lhead b{color:var(--ink);font-weight:600}
+
+/* ---------- detail ---------- */
+.dtop{background:var(--white);padding:18px}
+.dtop h1{font-size:19px;font-weight:600;line-height:1.4}
+.dsal{color:var(--salary);font-size:17px;font-weight:600;margin-top:8px}
+.dmeta{display:flex;gap:10px;margin-top:14px;padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.dmeta div{flex:1;text-align:center}
+.dmeta b{display:block;font-size:11px;color:var(--ink3);font-weight:400;margin-bottom:4px}
+.dmeta span{font-size:13px;color:var(--ink)}
+.daddr{margin-top:12px;font-size:13.5px;color:var(--ink);line-height:1.5}.daddr b{display:block;font-size:11px;color:var(--ink3);font-weight:400;margin-bottom:4px}
+.card{background:var(--white);padding:16px 18px;margin-top:12px}
+.card h3{font-size:15px;font-weight:600;padding-left:9px;border-left:3px solid var(--brand);margin-bottom:12px}
+.card ul{margin:0;padding-left:18px}
+.card li{font-size:13.5px;color:var(--ink2);line-height:1.85}
+.tags{margin-top:16px;padding-top:14px;border-top:1px dashed var(--line);display:flex;flex-wrap:wrap;gap:8px}
+.rc{display:flex;align-items:center;gap:11px}
+.rc-n{font-size:14px;font-weight:500}
+.rc-t{font-size:11.5px;color:var(--ink3)}
+.rc-i{font-size:12px;color:var(--ink2);line-height:1.95;padding-top:11px;margin-top:11px;border-top:1px dashed var(--line)}
+.rc-i b{font-weight:500;word-break:break-all}
+
+/* ---------- bottom cta ---------- */
+.cta{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:45;background:var(--white);border-top:1px solid var(--line);padding:9px 14px calc(9px + var(--sb));display:flex;gap:10px;align-items:center}
+.btn{height:44px;border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:14.5px;flex:1}
+.btn-p{background:var(--brand);color:#fff}
+.btn-p:disabled{background:#c3d7f0}
+.btn-o{border:1px solid var(--brand);color:var(--brand)}
+.btn-g{background:#f2f4f7;color:var(--ink2)}
+.btn-s{flex:none;width:52px;flex-direction:column;gap:1px;font-size:11px;color:var(--ink3);height:auto}
+.btn-s span{font-size:19px;line-height:1;color:var(--ink4)}
+.btn-s.on span{color:#f5a623;}
+
+/* ---------- tabbar ---------- */
+.tabbar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:50;background:var(--white);border-top:1px solid var(--line);display:flex;padding-bottom:var(--sb)}
+.tabbar div{flex:1;padding:7px 0 6px;text-align:center;color:var(--ink4);font-size:11px;display:flex;flex-direction:column;align-items:center;gap:3px}
+.tabbar div.on{color:var(--brand)}
+.tabbar svg{width:23px;height:23px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------- mine ---------- */
+.mhd{background:var(--brand);color:#fff;padding:22px 18px 26px;display:flex;align-items:center;gap:13px}
+.mhd .avatar{width:52px;height:52px;font-size:19px;background:rgba(255,255,255,.22);color:#fff}
+.mhd-n{font-size:17px;font-weight:600}
+.mhd-s{font-size:12px;opacity:.85;margin-top:2px}
+.rp{background:var(--white);border-radius:12px;margin:-14px 14px 0;padding:14px 16px;box-shadow:0 2px 10px rgba(20,60,120,.09)}
+.rp-top{display:flex;align-items:center;gap:14px}
+.rp-n{font-size:28px;font-weight:600;color:var(--brand-d);line-height:1}
+.rp-n i{font-size:13px;font-style:normal;font-weight:400}
+.rp-l{font-size:11.5px;color:var(--ink3)}
+.rbar{height:6px;border-radius:3px;background:#eef0f3;overflow:hidden;margin:12px 0 9px}
+.rbar i{display:block;height:100%;background:var(--brand);border-radius:3px;transition:width .3s}
+.rp-d{font-size:12px;color:var(--ink2);line-height:1.6}
+.mlist{background:var(--white);margin-top:12px}
+.mrow{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.mrow:last-child{border-bottom:none}
+.mrow .l{flex:1;font-size:14.5px}
+.mrow .r{font-size:12.5px;color:var(--ink3);display:flex;align-items:center;gap:6px}
+.mrow .num{background:var(--brand);color:#fff;border-radius:9px;font-size:11px;padding:1px 7px;min-width:20px;text-align:center}
+.arw{color:var(--ink4);font-size:15px}
+
+/* ---------- resume ---------- */
+.rblk{background:var(--white);margin-top:12px;padding:14px 16px}
+.rblk-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.rblk-h h4{font-size:14.5px;font-weight:600}
+.rblk-h span{font-size:11px;color:var(--ink3);display:block;margin-top:2px;font-weight:400}
+.rgrid{display:grid;grid-template-columns:1fr 1fr;gap:11px 14px}
+.rkv i{display:block;font-style:normal;font-size:11.5px;color:var(--ink3)}
+.rkv b{font-size:13.5px;font-weight:400;color:var(--ink)}
+.rkv b.none{color:var(--ink4)}
+.ritem{padding:11px 0;border-bottom:1px dashed var(--line)}
+.ritem:last-child{border-bottom:none}
+.rt{font-size:13.5px;font-weight:500}
+.rs2{font-size:11.5px;color:var(--ink3);margin-top:3px}
+.rd{font-size:12.5px;color:var(--ink2);margin-top:6px;line-height:1.7}
+.rsub{font-size:12.5px;color:var(--ink4);padding:8px 0}
+.rsec{margin-bottom:12px}
+.rsec i{font-style:normal;font-size:11.5px;color:var(--ink3);display:block;margin-bottom:4px}
+.rpre{font-size:12.5px;color:var(--ink2);white-space:pre-wrap;line-height:1.7}
+.upz{border:1.5px dashed var(--line2);border-radius:10px;padding:20px 16px;text-align:center;background:#fafbfc}
+.upz p{font-size:12px;color:var(--ink3);margin:8px 0 12px;line-height:1.6}
+.upz small{display:block;font-size:11px;color:var(--ink4);margin-top:10px}
+.mini{height:34px;padding:0 14px;border-radius:17px;border:1px solid var(--brand);color:var(--brand);font-size:13px;background:var(--white)}
+.mini.g{border:1px solid var(--line2);color:var(--ink2)}
+.filed{display:flex;align-items:center;gap:11px;background:#fafbfc;border:1px solid var(--line);border-radius:10px;padding:12px}
+.filed .fi{width:38px;height:44px;border-radius:6px;background:#fdecea;color:#d9480f;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex:none}
+.filed .rn{font-size:13.5px;font-weight:500}
+.filed .rs{font-size:11px;color:var(--ink3);margin-top:2px}
+.link{font-size:12.5px;color:var(--brand);flex:none}
+.link.d{color:#d9480f}
+.fi-wrap{margin-bottom:12px}
+.fi-wrap label{display:block;font-size:12px;color:var(--ink2);margin-bottom:6px}
+.fi-wrap label.req::after{content:" *";color:#d9480f}
+.fi-wrap input,.fi-wrap textarea{width:100%;border:1px solid var(--line2);border-radius:8px;padding:10px 12px;font-size:13.5px;outline:none;background:var(--white)}
+.fi-wrap input:focus,.fi-wrap textarea:focus{border-color:var(--brand)}
+.fi-wrap textarea{resize:none;line-height:1.6}
+.fi-wrap.bad input,.fi-wrap.bad textarea{border-color:#d9480f}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+
+/* ---------- 投递弹层快速录入（B-58） ---------- */
+.af-hd{display:flex;align-items:center;justify-content:space-between;margin:0 0 10px}
+.af-hd h4{font-size:13px;font-weight:600}
+.af-hd .lnk{font-size:11.5px;color:var(--brand)}
+.opt.tight{gap:7px}
+.opt.tight span{height:30px;padding:0 11px;font-size:12.5px}
+.fi-wrap select{width:100%;border:1px solid var(--line2);border-radius:8px;height:38px;
+  padding:0 32px 0 12px;font-size:13.5px;outline:none;background:var(--white);color:var(--ink);
+  appearance:none;-webkit-appearance:none;-moz-appearance:none;cursor:pointer;
+  background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239aa0a8' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 12px center;background-size:12px}
+.fi-wrap select:focus{border-color:var(--brand)}
+.fi-wrap select.ph{color:var(--ink4)}
+.fi-wrap.bad select{border-color:#d9480f}
+.af-up{border:1.5px dashed var(--line2);border-radius:10px;padding:14px 16px;text-align:center;background:#fafbfc}
+.af-up .t{font-size:12.5px;color:var(--ink2)}
+.af-up .s{font-size:11px;color:var(--ink4);margin-top:5px;line-height:1.6}
+
+/* ---------- sheet ---------- */
+.mask{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:60;display:flex;align-items:flex-end;justify-content:center}
+.sheet{width:100%;max-width:430px;background:var(--white);border-radius:16px 16px 0 0;max-height:88vh;display:flex;flex-direction:column;animation:up .22s ease}
+@keyframes up{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.sh-h{padding:16px 18px 12px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;flex:none}
+.sh-h h3{font-size:16px;font-weight:600}
+.sh-h .x{font-size:22px;color:var(--ink4);line-height:1;width:28px;text-align:right}
+.sh-b{padding:16px 18px;overflow-y:auto;flex:1;-webkit-overflow-scrolling:touch}
+.sh-f{padding:12px 18px calc(12px + var(--sb));border-top:1px solid var(--line);display:flex;gap:10px;flex:none}
+.tipbox{background:var(--brand-l);border-radius:10px;padding:11px 13px;font-size:12.5px;color:var(--brand-d);line-height:1.7;margin-bottom:14px}
+.tipbox.ok{background:var(--okl);color:#0d7a3c}
+.tipbox.w{background:var(--warnl);color:#96590a}
+.tipbox b{font-weight:600}
+.resline{background:#fafbfc;border:1px solid var(--line);border-radius:10px;padding:11px 13px;font-size:12px;color:var(--ink2);line-height:1.75;margin-top:12px}
+.resline b{color:var(--ink);font-weight:600}
+.agree{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--ink2);margin:14px 0 4px;line-height:1.6}
+.agree .cb{width:17px;height:17px;border:1px solid var(--line2);border-radius:4px;flex:none;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff}
+.agree.on .cb{background:var(--brand);border-color:var(--brand)}
+.agree a{color:var(--brand)}
+/* 登录 / 注册（B-56） */
+.auth-hd{text-align:center;margin-bottom:15px}
+.auth-hd .lg{width:46px;height:46px;border-radius:13px;background:linear-gradient(135deg,#1668dc,#0b4fa6);color:#fff;
+  font-size:19px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;box-shadow:0 4px 12px rgba(22,104,220,.28)}
+.auth-hd h4{font-size:16.5px;font-weight:600;margin-bottom:4px}
+.auth-hd p{font-size:12.5px;color:var(--ink3);line-height:1.7}
+.auth-seg{display:flex;gap:5px;background:#f2f4f7;border-radius:10px;padding:4px;margin-bottom:15px}
+.auth-seg button{flex:1;height:33px;border:none;background:transparent;border-radius:8px;font-size:13px;color:var(--ink2);cursor:pointer}
+.auth-seg button.on{background:#fff;color:var(--brand);font-weight:600;box-shadow:0 1px 3px rgba(16,24,40,.09)}
+.fi-err{font-size:11.5px;color:#d9480f;margin-top:5px;display:none;line-height:1.6}
+.fi-wrap.bad .fi-err{display:block}
+.code-row{display:flex;gap:9px}
+.code-row input{flex:1;min-width:0}
+.code-row .mini{flex:none;height:38px;border-radius:8px;min-width:96px;padding:0 12px;font-size:12.5px}
+.code-row .mini:disabled{border-color:var(--line2);color:var(--ink4);background:#f7f8fa}
+.auth-foot{text-align:center;font-size:12.5px;color:var(--ink3)}
+.auth-foot a{color:var(--brand);cursor:pointer;font-weight:500}
+.demo-note{font-size:11.5px;color:var(--ink4);text-align:center;line-height:1.8;margin-top:4px}
+.demo-note b{color:var(--ink2)}
+.gav{width:56px;height:56px;border-radius:17px;background:linear-gradient(135deg,#1668dc,#0b4fa6);color:#fff;
+  font-size:21px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto;box-shadow:0 4px 14px rgba(22,104,220,.25)}
+.mrow .r .sub2{color:var(--ink4);font-size:11.5px;margin-left:5px}
+.opt{display:flex;flex-wrap:wrap;gap:9px}
+.opt span{height:32px;padding:0 13px;border-radius:16px;background:#f2f4f7;font-size:12.5px;color:var(--ink2);display:flex;align-items:center}
+.opt span.on{background:var(--brand-l);color:var(--brand-d);box-shadow:inset 0 0 0 1px var(--brand)}
+.fgrp{margin-bottom:16px}
+.fgrp .lab{font-size:12.5px;color:var(--ink2);margin-bottom:9px;font-weight:500}
+
+/* ---------- 导出 PDF：打印视图 ---------- */
+.prt{display:none}
+@media print{
+  .app,.mask,#sheet,#toast,.tabbar,.cta,.top{display:none !important}
+  body{background:#fff}
+  .prt{display:block !important;padding:0 4mm;color:#111;font-size:12px;line-height:1.75}
+  .prt h1{font-size:19px;font-weight:600;margin-bottom:4px}
+  .prt .psub{font-size:12px;color:#444;margin-bottom:14px}
+  .prt h2{font-size:14px;font-weight:600;margin:16px 0 6px;border-bottom:1px solid #ccc;padding-bottom:4px}
+  .prt table{width:100%;border-collapse:collapse}
+  .prt td{padding:2px 0;vertical-align:top}
+  .prt td.k{width:74px;color:#666;padding-right:12px}
+  .prt .it{margin-bottom:10px}
+  .prt .it b{font-weight:600}
+  .prt .it p{margin:2px 0;white-space:pre-wrap}
+  .prt .ft{margin-top:18px;font-size:11px;color:#888}
+}
+
+/* ---------- misc ---------- */
+.empty{text-align:center;padding:52px 20px}
+.empty b{display:block;font-size:14.5px;font-weight:600;margin-bottom:6px}
+.empty p{font-size:12.5px;color:var(--ink3)}
+.bdg{font-size:11px;padding:2px 8px;border-radius:4px;background:#f2f4f7;color:var(--ink2);flex:none}
+.bdg.b{background:var(--brand-l);color:var(--brand-d)}
+.bdg.g{background:var(--okl);color:#0d7a3c}
+.bdg.r{background:#fdecea;color:#c0392b}
+.subtab{display:flex;gap:4px;background:#f0f1f4;border-radius:10px;padding:4px;margin:12px 16px 0}
+.subtab div{flex:1;text-align:center;height:32px;line-height:32px;font-size:12.5px;color:var(--ink2);border-radius:8px;cursor:pointer;overflow:hidden;white-space:nowrap}
+.subtab div.on{background:var(--white);color:var(--brand-d);font-weight:600;box-shadow:0 1px 3px rgba(16,24,40,.1)}
+.subtab i{font-style:normal;font-size:11px;color:var(--ink4);margin-left:2px}
+.subtab div.on i{color:var(--brand)}
+.subtab .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#e5484d;vertical-align:2px;margin-left:3px}
+.subcard{border-bottom:1px solid var(--line);background:var(--white)}
+.subcard .myrow{border-bottom:0}
+.subcard.act{background:#f7faff}
+.subnote{margin:0 16px 10px;background:var(--brand-l);border-radius:8px;padding:9px 11px;font-size:12px;color:var(--brand-d);line-height:1.7}
+.subnote .hd{font-weight:600;margin-bottom:3px}
+.subnote .row{display:flex;gap:8px}
+.subnote .row em{font-style:normal;flex:0 0 52px;color:#8b93a8}
+.subnote .row span{flex:1;min-width:0}
+.subnote .tel{color:var(--brand-d);text-decoration:underline}
+.subact{display:flex;gap:10px;padding:0 16px 12px}
+.subact .btn{flex:1;height:34px;font-size:13px;line-height:34px}
+.subdone{margin:0 16px 12px;font-size:12px;color:var(--ink4)}
+.myrow{display:flex;align-items:center;gap:11px;padding:13px 16px;border-bottom:1px solid var(--line);background:var(--white)}
+.myrow .t{font-size:14px;font-weight:500}
+.myrow .s{font-size:11.5px;color:var(--ink3);margin-top:3px}
+.myrow .r{margin-left:auto;display:flex;align-items:center;gap:9px;flex:none}
+.crumb{font-size:11.5px;color:var(--ink3);padding:12px 18px 6px}
+.crumb a{color:var(--brand)}
+.toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);z-index:99;background:rgba(26,26,26,.9);color:#fff;font-size:13px;padding:11px 18px;border-radius:8px;max-width:320px;line-height:1.5;text-align:center}
+.notice{background:var(--warnl);color:#96590a;font-size:12px;padding:9px 18px;line-height:1.6}
+.morebtn{text-align:center;padding:14px;font-size:12.5px;color:var(--ink3)}
+</style>
+</head>
+<body>
+<div class="app">
+  <div id="top"></div>
+  <div id="page"></div>
+  <div id="tabbar"></div>
+  <div id="cta"></div>
+</div>
+<div id="sheet"></div>
+<div id="print" class="prt"></div>
+<div id="toast"></div>
+
+<script>
+/* ============ 数据（与招聘官网原型一致） ============ */
+var JOBS=[
+{id:101,track:"social",cat:"技术",title:"高级后端开发工程师",city:"长沙",addr:"长沙市雨花区万家丽中路二段68号 红星总部大楼 12F",salary:"20-35K·14薪",exp:"3-5年",deg:"本科",hc:2,date:"2026-09-18",dl:"2026-11-30",
+ duty:["负责集团农产品流通核心交易系统的架构设计与开发","支撑日均千万级订单交易链路的高并发改造","参与数据中台与业务中台的服务拆分与治理","指导初级工程师，参与代码评审与技术规范建设"],
+ req:["本科及以上学历，计算机相关专业，3年以上Java开发经验","扎实的Java基础，熟悉SpringBoot/MyBatis等主流框架","熟悉MySQL、Redis、消息队列，有高并发系统调优经验","有供应链、仓储或交易系统经验者优先"],
+ tags:["五险一金","带薪年假","项目奖金","定期体检"]},
+{id:102,track:"social",cat:"技术",title:"前端开发工程师",city:"长沙",addr:"长沙市雨花区万家丽中路二段68号 红星总部大楼 12F",salary:"15-25K",exp:"3-5年",deg:"本科",hc:3,date:"2026-09-16",dl:"2026-12-15",
+ duty:["负责集团数据中台前端与可视化大屏的开发","参与前端组件库建设与工程化优化","与产品、设计协作还原高保真交互","持续优化首屏加载与渲染性能"],
+ req:["本科及以上学历，3年以上前端开发经验","熟练掌握 JavaScript/TypeScript，精通 Vue 或 React 技术栈","熟悉 Canvas/SVG 图表渲染者优先","有大屏可视化、GIS 地图开发经验者优先"],
+ tags:["弹性工作","技术分享","年度旅游"]},
+{id:103,track:"social",cat:"产品",title:"产品经理（供应链方向）",city:"长沙",addr:"长沙市雨花区万家丽中路二段68号 红星总部大楼 9F",salary:"18-28K",exp:"5年以上",deg:"本科",hc:1,date:"2026-09-15",dl:"2026-11-20",
+ duty:["负责冷链仓储、物流配送业务线的产品规划与迭代","深入产地与批发市场一线，提炼业务痛点并转化为产品方案","协同研发、运营推进产品落地并持续跟踪效果","输出产品需求文档与业务流程图"],
+ req:["本科及以上学历，5年以上B端产品经验","有供应链、WMS、TMS 或生鲜流通行业背景","具备良好的业务逻辑抽象能力与跨部门推动力","能接受出差调研"],
+ tags:["出差补贴","绩效奖金","餐补"]},
+{id:104,track:"social",cat:"数据",title:"数据分析师",city:"深圳",addr:"深圳市南山区科技园南区 红星大厦 12F",salary:"16-26K",exp:"3-5年",deg:"硕士",hc:2,date:"2026-09-12",dl:"2026-12-01",
+ duty:["搭建农产品价格与流向指标体系，输出经营分析报告","负责专题分析与预测模型建设","为业务决策提供数据支持与策略建议","沉淀分析框架与方法论"],
+ req:["硕士及以上学历，统计学、数学、计算机相关专业","熟练使用 SQL、Python，掌握至少一种 BI 工具","有农产品、零售或大宗商品价格分析经验者优先","具备良好的业务理解与表达能力"],
+ tags:["双休","补充医疗","培训基金"]},
+{id:105,track:"social",cat:"运营",title:"市场运营经理",city:"武汉",addr:"武汉市武昌区中北路127号 红星华中运营中心 6F",salary:"12-20K",exp:"3-5年",deg:"本科",hc:1,date:"2026-09-10",dl:"2026-11-25",
+ duty:["负责区域批发市场的招商与商户运营","策划并执行市场推广活动，提升市场活跃度","维护重点商户关系，推动商户数字化工具使用","监控经营指标并输出运营周报"],
+ req:["本科及以上学历，3年以上市场运营或招商经验","熟悉农批市场、生鲜流通业态者优先","沟通能力强，能承受一定工作压力","可接受驻场办公"],
+ tags:["驻场补贴","季度奖"]},
+{id:106,track:"social",cat:"职能",title:"财务主管",city:"长沙",addr:"长沙市雨花区万家丽中路二段68号 红星总部大楼 8F",salary:"10-16K",exp:"5年以上",deg:"本科",hc:1,date:"2026-09-08",dl:"2026-11-18",
+ duty:["负责分子公司账务核算与报表合并","主导成本费用分析与预算执行跟踪","配合年度审计与税务筹划","优化财务流程与内控规范"],
+ req:["本科及以上学历，财会相关专业，5年以上财务经验","持有中级会计职称，CPA 通过部分科目优先","熟练使用财务软件与 Excel","有连锁或多组织核算经验优先"],
+ tags:["双休","职称补贴"]},
+{id:107,track:"social",cat:"职能",title:"HRBP",city:"长沙",addr:"长沙市雨花区万家丽中路二段68号 红星总部大楼 8F",salary:"12-18K",exp:"3-5年",deg:"本科",hc:1,date:"2026-09-05",dl:"2026-11-30",
+ duty:["作为业务伙伴深入一线，理解业务组织与人才诉求","负责招聘、绩效、员工关系等模块落地","推动人才盘点与梯队建设","协助组织变革与文化宣导"],
+ req:["本科及以上学历，3年以上 HRBP 或综合 HR 经验","沟通协调能力强，具备业务敏感度","有制造、零售或物流行业经验优先"],
+ tags:["五险一金","生日福利"]},
+{id:108,track:"social",cat:"运营",title:"冷链仓储管理专员",city:"长沙",addr:"长沙市长沙县黄兴镇 红星冷链物流园 A 库",salary:"8-12K",exp:"1-3年",deg:"大专",hc:4,date:"2026-09-02",dl:"2026-12-10",
+ duty:["负责冷链库区日常出入库管理与库存盘点","监控库温并记录温控数据，确保货品品质","对接商户与运输方，协调作业排期","维护仓储台账与系统数据录入"],
+ req:["大专及以上学历，物流管理、食品科学相关专业优先","1年以上仓储管理经验，接受倒班","熟悉冷链作业规范者优先","责任心强，数据记录准确"],
+ tags:["倒班补贴","夜班津贴","提供住宿"]},
+{id:201,track:"campus",cat:"管培",title:"管理培训生（供应链方向）",city:"长沙",addr:"长沙市长沙县黄兴镇 红星冷链物流园（轮岗地点按安排调整）",salary:"8-12K",exp:"2027届",deg:"本科",hc:8,date:"2026-09-19",dl:"2026-11-28",
+ duty:["轮岗学习产地采购、冷链仓储、批发交易、终端配送全链路","参与专项课题，输出业务改善方案","由业务负责人一对一带教","轮岗结束后双向定岗"],
+ req:["2027届本科及以上应届毕业生，专业不限","逻辑清晰、学习能力强，愿意深入业务一线","有学生会、社团或实习经历者优先","接受异地轮岗安排"],
+ tags:["导师带教","快速晋升","住宿补贴"]},
+{id:202,track:"campus",cat:"技术",title:"Java开发工程师（校招）",city:"长沙",addr:"长沙市雨花区万家丽中路二段68号 红星总部大楼 12F",salary:"10-15K",exp:"2027届",deg:"本科",hc:6,date:"2026-09-18",dl:"2026-11-28",
+ duty:["参与集团业务系统的功能开发与单元测试","在导师指导下完成模块设计与编码","参与代码评审与技术文档编写","持续优化系统性能与稳定性"],
+ req:["2027届本科及以上，计算机相关专业","掌握 Java 基础与常用数据结构算法","熟悉 MySQL 与至少一种主流框架","有开源项目或竞赛经历优先"],
+ tags:["导师带教","技术氛围好"]},
+{id:203,track:"campus",cat:"运营",title:"产品运营培训生",city:"长沙",addr:"长沙市雨花区万家丽中路二段68号 红星总部大楼 9F",salary:"8-11K",exp:"2027届",deg:"本科",hc:4,date:"2026-09-16",dl:"2026-11-28",
+ duty:["协助产品上线推广与用户反馈收集","运营数据监控与日报周报输出","策划并执行用户运营活动","跟踪行业竞品动态"],
+ req:["2027届本科及以上，专业不限","文字表达与数据敏感度良好","熟悉常用办公软件与数据分析工具","有自媒体或社群运营经历优先"],
+ tags:["双休","导师带教"]},
+{id:204,track:"campus",cat:"市场",title:"市场营销培训生",city:"武汉",addr:"武汉市武昌区中北路127号 红星华中运营中心 6F",salary:"7-10K",exp:"2027届",deg:"本科",hc:5,date:"2026-09-14",dl:"2026-11-28",
+ duty:["协助区域市场调研与商户拜访","支持展会、推介会等市场活动落地","维护客户资料与市场线索台账","输出市场分析报告"],
+ req:["2027届本科及以上，市场营销、工商管理相关专业优先","沟通表达能力强，乐于出差","抗压能力强，执行力好"],
+ tags:["出差补贴","导师带教"]},
+{id:205,track:"campus",cat:"职能",title:"财务专员（校招）",city:"长沙",addr:"长沙市雨花区万家丽中路二段68号 红星总部大楼 8F",salary:"6-9K",exp:"2027届",deg:"本科",hc:3,date:"2026-09-11",dl:"2026-11-28",
+ duty:["协助日常凭证处理与账务核对","参与月度结账与报表编制","支持费用审核与税务资料整理","协同完成年度审计资料准备"],
+ req:["2027届本科及以上，财会相关专业","细致认真，对数字敏感","熟练使用 Excel","有实习经历优先"],
+ tags:["双休","考证补贴"]},
+{id:206,track:"campus",cat:"职能",title:"人力资源专员（校招）",city:"长沙",addr:"长沙市雨花区万家丽中路二段68号 红星总部大楼 8F",salary:"6-9K",exp:"2027届",deg:"本科",hc:2,date:"2026-09-09",dl:"2026-11-28",
+ duty:["协助校园招聘的组织与执行","参与员工入离职手续办理与档案管理","支持培训活动组织与效果跟踪","维护招聘渠道与人才库"],
+ req:["2027届本科及以上，人力资源管理相关专业优先","亲和力强，沟通协调能力好","熟练使用办公软件"],
+ tags:["双休","团建活动"]}
+];
+var RECRUITERS={
+ hr1:{name:"王敏",title:"技术研发中心 HRBP",email:"wangmin@redstar-hr.com",phone:"0731-8828 6621"},
+ hr2:{name:"刘思远",title:"校园招聘负责人",email:"campus@redstar-hr.com",phone:"0731-8828 6635"},
+ hr3:{name:"陈静",title:"职能线招聘经理",email:"chenjing@redstar-hr.com",phone:"0731-8828 6642"},
+ hr4:{name:"赵鹏",title:"冷链事业部招聘专员",email:"zhaopeng@redstar-hr.com",phone:"0731-8828 6658"}
+};
+JOBS.forEach(function(j){
+  if(j.track==="campus")j.rc="hr2";
+  else if(j.cat==="技术"||j.cat==="数据")j.rc="hr1";
+  else if(j.cat==="运营")j.rc="hr4";
+  else j.rc="hr3";
+  j.on=true;
+});
+var CATS=["技术","产品","数据","运营","市场","职能","供应链","管培"];
+var CITIES=["长沙","深圳","武汉","广州","成都","上海","北京","东莞"];
+var DEGS=["大专","本科","硕士","博士","不限"];
+var SOC_EXP=["1年以下","1-3年","3-5年","5年以上","10年以上","不限"];
+var CAM_EXP=["2027届","2028届","2026届","不限（应届 / 在校实习）"];
+var FIELDS=[["name","姓名"],["phone","手机号"],["email","邮箱"],["gender","性别"],["deg","最高学历"],["school","毕业院校"],["major","专业"],["exp","工作年限"],["city","现居城市"]];
+var DEMO={name:"李明轩",phone:"13856789211",email:"mingxuan.li@163.com",gender:"男",deg:"硕士",school:"湖南大学",major:"软件工程",exp:"3年",city:"长沙"};
+var DEMO_EDU=[{from:"2018-09",to:"2021-06",school:"湖南大学",deg:"硕士",major:"软件工程"}];
+var DEMO_WORK=[{from:"2021-07",to:"至今",company:"某互联网科技公司",role:"后端开发工程师",desc:"负责订单与库存核心服务的设计与开发，支撑日均百万级订单处理"}];
+var DEMO_PROJ="农产品溯源平台：主导后端服务拆分与接口设计，将查询响应时间从 1.2s 降至 200ms\n冷链调度系统：实现车辆路径规划算法，调度效率提升 30%";
+var DEMO_SKILL="Java / Spring Boot / MySQL / Redis / 分布式事务";
+
+/* ============ 状态 ============ */
+var KEY="hx_h5_v1";
+var S={tab:"home",track:"social",jid:null,user:null,fav:[],subs:[],form:{},rEdu:[],rWork:[],rProj:"",rSkill:"",rFile:null,files:[],
+  q:"",f:{city:"",cat:"",deg:"",exp:""},sort:"new",pageN:1,edit:false,pending:null,agree:false,code:"",subTab:"all",
+  accounts:[],authMode:"login",codeSent:false,codeLeft:0,codeInput:"",subsSeed:1};
+function save(){try{localStorage.setItem(KEY,JSON.stringify({user:S.user,fav:S.fav,subs:S.subs,form:S.form,rEdu:S.rEdu,rWork:S.rWork,rProj:S.rProj,rSkill:S.rSkill,files:S.files,accounts:S.accounts,subsSeed:S.subsSeed}))}catch(e){}}
+function load(){
+  try{var d=JSON.parse(localStorage.getItem(KEY)||"{}");for(var k in d)S[k]=d[k]}catch(e){}
+  if(!(S.accounts instanceof Array))S.accounts=[];
+  /* 旧数据补齐：面试中的投递若无邀约信息则生成默认邀约；已发 offer 若无详情则补基本信息 */
+  if(!(S.subs instanceof Array))S.subs=[];
+  S.subs.forEach(function(s){
+    if(s.status==="面试中"&&!s.invite)
+      s.invite={time:"时间待定",place:"地点以短信通知为准"};
+    if(s.status==="已发 offer"&&!s.offer)s.offer={salary:s.salary||"",onboard:"",deadline:""};
+  });
+  /* 旧版单份附件 rFile 迁移为多份 files */
+  if(!(S.files instanceof Array))S.files=[];
+  if(!S.files.length&&S.rFile){
+    S.files=[{id:"f1",name:S.rFile.name,ext:S.rFile.ext,size:S.rFile.size,time:S.rFile.time||today(),def:1}];
+  }
+  S.files.forEach(function(f,i){if(!f.id)f.id="f"+(i+1)});
+  if(S.files.length&&!S.files.some(function(f){return f.def}))S.files[0].def=1;
+}
+/* 附件简历：多份，def 标记默认那份 */
+var FILE_MAX=3;
+function newFid(){return "f"+Date.now().toString(36)+Math.random().toString(36).slice(2,6)}
+function defFile(){
+  for(var i=0;i<S.files.length;i++)if(S.files[i].def)return S.files[i];
+  return S.files.length?S.files[0]:null;
+}
+function fileOf(id){for(var i=0;i<S.files.length;i++)if(S.files[i].id===id)return S.files[i];return null}
+function addFile(){
+  if(S.files.length>=FILE_MAX){toast("最多保存 "+FILE_MAX+" 份附件简历，请先删除不需要的");return}
+  var n=(S.form.name||(S.user?S.user.name:"")||"我的").trim();
+  var isPDF=S.files.length%2===0;
+  S.files.push({id:newFid(),name:n+"-简历-"+(S.files.length+1)+(isPDF?".pdf":".docx"),
+    ext:isPDF?"PDF":"DOC",size:isPDF?"1.2MB":"860KB",time:today(),def:S.files.length?0:1});
+  return S.files[S.files.length-1];
+}
+function setDefFile(id){
+  var f=fileOf(id);if(!f)return;
+  S.files.forEach(function(x){x.def=x.id===id?1:0});
+  save();render();toast("已设为默认简历，投递时自动携带《"+f.name+"》");
+}
+function rmFile(id){
+  var f=fileOf(id);if(!f)return;
+  S.files=S.files.filter(function(x){return x.id!==id});
+  if(f.def&&S.files.length)S.files[0].def=1;
+  save();render();toast("已删除《"+f.name+"》，在线简历不受影响");
+}
+
+function $(id){return document.getElementById(id)}
+function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+function today(){var d=new Date(),m=d.getMonth()+1,dd=d.getDate();return d.getFullYear()+"-"+(m<10?"0":"")+m+"-"+(dd<10?"0":"")+dd}
+function byId(id){for(var i=0;i<JOBS.length;i++)if(JOBS[i].id===id)return JOBS[i];return null}
+function liveJobs(){return JOBS.filter(function(j){return j.on!==false})}
+function activeFilters(){var n=0;["city","cat","deg","exp"].forEach(function(k){if(S.f[k])n++});return n}
+function filtered(){
+  return liveJobs().filter(function(j){
+    if(j.track!==S.track)return false;
+    if(S.q&&j.title.indexOf(S.q)<0&&j.cat.indexOf(S.q)<0)return false;
+    if(S.f.city&&j.city!==S.f.city)return false;
+    if(S.f.cat&&j.cat!==S.f.cat)return false;
+    if(S.f.deg&&j.deg!==S.f.deg)return false;
+    if(S.f.exp&&j.exp!==S.f.exp)return false;
+    return true;
+  }).sort(function(a,b){return S.sort==="dl"?(a.dl<b.dl?-1:1):(a.date<b.date?1:-1)});
+}
+function toast(t){
+  var e=$("toast");e.innerHTML='<div class="toast">'+esc(t)+'</div>';
+  clearTimeout(e._t);e._t=setTimeout(function(){e.innerHTML=""},2200);
+}
+function score(){
+  var done=0,total=0;
+  FIELDS.forEach(function(f){total++;if((S.form[f[0]]||"").trim())done++});
+  total+=4;
+  if(S.rEdu.length)done++;
+  if(S.rWork.length)done++;
+  if((S.rProj||"").trim())done++;
+  if((S.rSkill||"").trim())done++;
+  return Math.round(done/total*100);
+}
+function tip(){
+  var sc=score(),f=defFile(),n=S.files.length;
+  if(sc>=90&&f)return {c:"ok",t:"简历完整度 "+sc+"%，默认附件《"+f.name+"》与在线简历均已就绪"+(n>1?"，共 "+n+" 份附件可选":"")};
+  if(sc>=90)return {c:"",t:"完整度 "+sc+"%，但尚未上传附件简历 —— HR 只能看到结构化信息，建议补充一份 PDF"};
+  if(f)return {c:"w",t:"附件已上传，但在线简历仅完成 "+sc+"%。结构化字段用于检索，未填写的部分 HR 无法按条件搜到您"};
+  return {c:"w",t:"完整度仅 "+sc+"%。上传简历可自动解析填充下方字段，解析结果仍可手动修正"};
+}
+function needLogin(a,p){
+  if(S.user)return false;
+  S.pending={a:a,p:p};openLogin();return true;
+}
+
+/* ============ 导航 ============ */
+var ICONS={
+ home:'<path d="M3 11.2 12 4l9 7.2"/><path d="M5.5 10v9.5h13V10"/>',
+ job:'<rect x="3" y="7.5" width="18" height="12" rx="2"/><path d="M9 7.5V5.5h6v2"/><path d="M3 12.5h18"/>',
+ sub:'<path d="M4.5 6.5h15"/><path d="M4.5 12h15"/><path d="M4.5 17.5h9"/>',
+ me:'<circle cx="12" cy="8.5" r="3.5"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/>'
+};
+var TABS=[["home","首页"],["job","职位"],["sub","投递记录"],["me","我的"]];
+/* 扫码图标（入口共用） */
+var SCAN_ICO='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5V6a2 2 0 0 1 2-2h2.5"/><path d="M15.5 4H18a2 2 0 0 1 2 2v2.5"/><path d="M20 15.5V18a2 2 0 0 1-2 2h-2.5"/><path d="M8.5 20H6a2 2 0 0 1-2-2v-2.5"/><path d="M3.5 12h17"/></svg>';
+function renderTabbar(){
+  /* 编辑简历时不显示底部导航栏 */
+  if(S.tab==="detail"||(S.tab==="resume"&&S.edit)){$("tabbar").innerHTML="";return}
+  $("tabbar").innerHTML='<div class="tabbar">'+TABS.map(function(t){
+    return '<div class="'+(S.tab===t[0]?"on":"")+'" onclick="go(\''+t[0]+'\')"><svg viewBox="0 0 24 24">'+ICONS[t[0]]+'</svg>'+t[1]+'</div>';
+  }).join("")+'</div>';
+}
+function go(tab){
+  /* 「我的」允许游客进入（展示登录引导页）；投递记录 / 简历 / 收藏仍要求登录 */
+  if((tab==="sub"||tab==="resume"||tab==="fav")&&needLogin(tab,null))return;
+  if(tab!=="resume")S.edit=false;
+  S.tab=tab;S.jid=null;S.pageN=1;window.scrollTo(0,0);render();
+}
+function goTrack(t){S.edit=false;S.track=t;S.tab="job";S.pageN=1;window.scrollTo(0,0);render()}
+/* 直接进入简历编辑态（个人中心「编辑简历」） */
+function goEditResume(){
+  if(needLogin("resume",null))return;
+  S.tab="resume";S.jid=null;S.pageN=1;S.edit=true;window.scrollTo(0,0);render();
+}
+function openJob(id){S.jid=id;S.tab="detail";window.scrollTo(0,0);render()}
+function back(){S.jid=null;S.tab=S.tab==="detail"?"job":S.tab;window.scrollTo(0,0);render()}
+
+/* ============ 页面 ============ */
+function render(){
+  var t=S.tab,h="";
+  if(t==="home")h=pgHome();
+  else if(t==="job")h=pgList();
+  else if(t==="detail")h=pgDetail();
+  else if(t==="sub")h=pgSubs();
+  else if(t==="me")h=pgMine();
+  else if(t==="resume")h=pgResume();
+  else if(t==="fav")h=pgFav();
+  $("page").innerHTML='<div class="pb">'+h+'</div>';
+  renderTop();renderTabbar();renderCta();
+}
+function renderTop(){
+  var t=S.tab,el=$("top");
+  var backIco='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>';
+  if(t==="home"){
+    el.innerHTML='';   /* 首页不设顶部栏：蓝色 Hero 即为页面顶部 */
+  }else if(t==="detail"){
+    var j=byId(S.jid);
+    el.innerHTML='<div class="top"><div class="top-in"><div class="ic" onclick="back()">'+backIco+'</div>'+
+      '<div class="top-t">'+esc(j?j.title:"职位详情")+'</div><div class="ic" onclick="go(\'home\')">'+
+      '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.2 12 4l9 7.2"/><path d="M5.5 10v9.5h13V10"/></svg></div></div></div>';
+  }else if(t==="resume"||t==="fav"){
+    el.innerHTML='<div class="top"><div class="top-in"><div class="ic" onclick="go(\'me\')">'+backIco+'</div>'+
+      '<div class="top-t">'+(t==="fav"?"我的收藏":(S.edit?"编辑简历":"我的简历"))+'</div><div class="ic"></div></div></div>';
+  }else{
+    el.innerHTML='<div class="top"><div class="top-in"><div class="top-t">'+
+      (t==="job"?"职位":(t==="sub"?"投递记录":"个人中心"))+'</div></div></div>';
+  }
+}
+
+function pgHome(){
+  var L=liveJobs();
+  var hot=L.slice().sort(function(a,b){return a.date<b.date?1:-1}).slice(0,5);
+  var cC=L.filter(function(j){return j.track==="campus"}).length;
+  var sC=L.filter(function(j){return j.track==="social"}).length;
+  return '<div class="hero"><div class="herosc" onclick="openScan()">'+SCAN_ICO+'</div>'+
+    '<h1>与红星同行，让农商更简单</h1>'+
+    '<p>红星实业集团 · 中南地区最大的一级农副产品流通枢纽，正在寻找同路人</p></div>'+
+    '<div class="chan" onclick="goTrack(\'campus\')"><div class="chan-ic">'+
+      '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5 12 4l9 4.5-9 4.5-9-4.5Z"/><path d="M6.5 10.8V16c0 1.7 2.5 3 5.5 3s5.5-1.3 5.5-3v-5.2"/></svg></div>'+
+      '<div class="chan-b"><h3>校园招聘</h3><p>面向 2027 届毕业生开放管理培训生、技术开发、运营、职能等多类岗位，配备导师带教与轮岗计划</p></div>'+
+      '<div class="chan-f">查看<i>'+cC+' 个在招</i></div></div>'+
+    '<div class="chan" onclick="goTrack(\'social\')"><div class="chan-ic">'+
+      '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7.5" width="18" height="12" rx="2"/><path d="M9 7.5V5.5h6v2"/></svg></div>'+
+      '<div class="chan-b"><h3>社会招聘</h3><p>面向有经验的行业人才，覆盖技术研发、供应链、市场运营与职能管理各类专业岗位</p></div>'+
+      '<div class="chan-f">查看<i>'+sC+' 个在招</i></div></div>'+
+    '<div class="sec"><div class="sec-h"><h2>热招职位</h2><a class="more" onclick="goTrack(\'social\')">全部 ('+L.length+') →</a></div>'+
+      '<div>'+hot.map(cardHtml).join("")+'</div></div>'+
+    '<div style="height:18px"></div>';
+}
+function cardHtml(j){
+  var f=S.fav.indexOf(j.id)>=0;
+  return '<div class="jc"><div class="jc-m" onclick="openJob('+j.id+')">'+
+    '<div class="jc-t"><span>'+esc(j.title)+'</span><span class="jc-s">'+esc(j.salary)+'</span></div>'+
+    '<div class="jc-meta"><span class="tag b">'+esc(j.city)+'</span><span class="tag">招 '+j.hc+' 人</span>'+
+    '<span class="dot">发布于 '+j.date+'</span></div></div>'+
+    '<button class="star'+(f?" on":"")+'" onclick="toggleFav('+j.id+')">'+(f?"★":"☆")+'</button></div>';
+}
+
+function pgList(){
+  var jobs=filtered(),n=activeFilters();
+  var show=jobs.slice(0,S.pageN*8);
+  return '<div style="background:var(--white)">'+
+    '<div class="seg" style="margin:12px 18px 0"><div class="'+(S.track==="social"?"on":"")+'" onclick="setTrack(\'social\')">社会招聘</div>'+
+      '<div class="'+(S.track==="campus"?"on":"")+'" onclick="setTrack(\'campus\')">校园招聘</div></div>'+
+    '<div class="sbar"><div class="sbox"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5c5c5c" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>'+
+      '<input id="q" value="'+esc(S.q)+'" placeholder="搜索职位名称或关键词" onkeydown="if(event.key===\'Enter\')doSearch()">'+
+      '<span class="scani" onclick="openScan()">'+SCAN_ICO+'</span></div>'+
+      '<button class="sbtn" onclick="doSearch()">搜索</button></div>'+
+    '<div class="frow"><div class="fchip'+(n?" on":"")+'" onclick="openFilter()">'+
+      '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M7 12h10M10 17h4"/></svg>筛选'+(n?'<i class="n">'+n+'</i>':"")+'</div>'+
+      '<div class="fchip'+(S.sort==="dl"?" on":"")+'" style="margin-left:auto" onclick="setSort()">'+(S.sort==="dl"?"截止最近":"最新发布")+'</div></div></div>'+
+    '<div class="lhead">共 <b>'+jobs.length+'</b> 个职位</div>'+
+    (jobs.length?'<div class="sec" style="margin-top:0">'+show.map(cardHtml).join("")+'</div>'+
+      (show.length<jobs.length?'<div class="morebtn" onclick="more()">加载更多 ↓</div>':'<div class="morebtn">已展示全部职位</div>')
+      :'<div class="empty"><b>没有符合条件的职位</b><p>试试放宽筛选条件</p></div>')+
+    '<div style="height:18px"></div>';
+}
+function setTrack(t){S.track=t;S.pageN=1;render()}
+function setSort(){S.sort=S.sort==="new"?"dl":"new";render()}
+function more(){S.pageN++;render()}
+function doSearch(){S.q=$("q").value.trim();S.pageN=1;render()}
+
+function pgDetail(){
+  var j=byId(S.jid);if(!j)return "";
+  var f=S.fav.indexOf(j.id)>=0,ap=applied(j.id),rc=RECRUITERS[j.rc];
+  var over=j.dl<today();
+  return '<div class="dtop"><h1>'+esc(j.title)+'</h1><div class="dsal">'+esc(j.salary)+'</div>'+
+    '<div class="dmeta"><div><b>招聘人数</b><span>'+j.hc+' 人</span></div><div><b>截止日期</b><span>'+j.dl+'</span></div>'+
+    '<div><b>发布时间</b><span>'+j.date+'</span></div></div>'+
+    (j.addr?'<div class="daddr"><b>工作地点</b><span>'+esc(j.addr)+'</span></div>':"")+'</div>'+
+    (over?'<div class="notice">该职位已过截止日期，招聘流程已结束，仅作信息保留</div>':"")+
+    '<div class="card"><h3>职位描述</h3><ul>'+j.duty.map(function(d){return "<li>"+esc(d)+"</li>"}).join("")+'</ul></div>'+
+    '<div class="card"><h3>任职要求</h3><ul>'+j.req.map(function(d){return "<li>"+esc(d)+"</li>"}).join("")+'</ul>'+
+      '<div class="tags">'+j.tags.map(function(t){return '<span class="tag">'+esc(t)+'</span>'}).join("")+'</div></div>'+
+    '<div class="card"><h3>招聘负责人</h3><div class="rc">'+
+      '<div class="avatar" style="width:44px;height:44px;font-size:16px">'+esc(rc.name.charAt(0))+'</div>'+
+      '<div style="flex:1"><div class="rc-n">'+esc(rc.name)+'</div><div class="rc-t">'+esc(rc.title)+'</div></div></div>'+
+      '<div class="rc-i">简历投递后将直达该负责人邮箱<br>邮箱 <b>'+esc(rc.email)+'</b><br>电话 '+esc(rc.phone)+'</div></div>'+
+    '<div style="height:18px"></div>';
+}
+function renderCta(){
+  var el=$("cta");
+  /* 编辑简历：底部固定「保存」 */
+  if(S.tab==="resume"&&S.edit){
+    el.innerHTML='<div class="cta"><button class="btn btn-p" onclick="saveResume()">保存</button></div>';return;
+  }
+  if(S.tab!=="detail"){el.innerHTML="";return}
+  var j=byId(S.jid);if(!j){el.innerHTML="";return}
+  var f=S.fav.indexOf(j.id)>=0,ap=applied(j.id),over=j.dl<today();
+  el.innerHTML='<div class="cta"><button class="btn btn-s'+(f?" on":"")+'" onclick="toggleFav('+j.id+')"><span>'+(f?"★":"☆")+'</span>'+(f?"已收藏":"收藏")+'</button>'+
+    '<button class="btn '+(ap||over?"btn-g":"btn-p")+'" '+(ap||over?"disabled":"")+' onclick="doApply('+j.id+')">'+
+    (over?"已结束招聘":(ap?"已投递":"投递简历"))+'</button></div>';
+}
+
+/* ============ 收藏 / 投递 ============ */
+function toggleFav(id){
+  if(needLogin("fav",id))return;
+  var i=S.fav.indexOf(id);
+  if(i>=0){S.fav.splice(i,1);toast("已取消收藏")}else{S.fav.push(id);toast("收藏成功，可在「我的」查看")}
+  save();render();
+}
+function applied(id){return S.subs.some(function(s){return s.jid===id})}
+function doApply(id){
+  if(needLogin("apply",id))return;
+  openApply(byId(id));
+}
+
+/* ============ 登录 / 注册（B-56） ============ */
+var codeTimer=null;
+function nowMin(){var d=new Date();function p2(n){return n<10?"0"+n:""+n}
+  return d.getFullYear()+"-"+p2(d.getMonth()+1)+"-"+p2(d.getDate())+" "+p2(d.getHours())+":"+p2(d.getMinutes())}
+function accOf(phone){for(var i=0;i<S.accounts.length;i++)if(S.accounts[i].phone===phone)return S.accounts[i];return null}
+function maskP(p){return p?p.slice(0,3)+"****"+p.slice(7):""}
+function openLogin(mode){if(mode)S.authMode=mode;if(!S.authMode)S.authMode="login";drawLogin()}
+function captureAuth(){
+  if($("f_name"))S.form.name=$("f_name").value||"";
+  if($("f_phone"))S.form.phone=$("f_phone").value||"";
+  if($("f_code"))S.codeInput=$("f_code").value||"";
+}
+function switchAuth(m){captureAuth();S.authMode=m;drawLogin()}
+function badF(id){var w=$(id);if(w)w.className="fi-wrap bad"}
+function clearBadF(){["w_name","w_phone","w_code"].forEach(function(id){var w=$(id);if(w)w.className="fi-wrap"})}
+function drawLogin(){
+  var reg=S.authMode==="reg",p=S.pending,job=p&&p.p?byId(p.p):null;
+  var tip=p?(p.a==="apply"?'您正在投递：<b>'+esc(job?job.title:"")+'</b>。'+(reg?"注册":"登录")+'后即可填写简历信息并投递。'
+    :(p.a==="fav"?'收藏职位需要先'+(reg?"注册":"登录")+'，完成后立即为您保存该职位。'
+    :'登录后可查看投递进度与面试通知。')):"";
+  var agree='<div class="agree'+(S.agree?" on":"")+'" onclick="S.agree=!S.agree;drawLogin()"><div class="cb">✓</div>'+
+    '<div>我已阅读并同意<a href="javascript:void(0)">《用户协议》</a>与<a href="javascript:void(0)">《隐私政策》</a>，同意红星实业集团为招聘目的处理我的简历信息。</div></div>';
+  var demoLink=reg?"":(accOf("13856789211")?'　·　<a onclick="demoLogin()">使用演示账号</a>':"");
+  var b='<div class="sh-h"><h3>'+(reg?"注册账号":"登录")+'</h3><div class="x" onclick="closeS()">×</div></div>'+
+    '<div class="sh-b">'+
+      '<div class="auth-hd"><div class="lg">红</div><h4>'+(reg?"注册红星招聘账号":"欢迎回来")+'</h4>'+
+        '<p>'+(reg?"填写姓名与手机号即可注册，无需邮箱与密码":"用注册手机号接收验证码登录，无需记忆密码")+'</p></div>'+
+      (tip?'<div class="tipbox">'+tip+'</div>':'')+
+      '<div class="auth-seg">'+
+        '<button class="'+(reg?"":"on")+'" onclick="switchAuth(\'login\')">验证码登录</button>'+
+        '<button class="'+(reg?"on":"")+'" onclick="switchAuth(\'reg\')">注册</button></div>'+
+      (reg?'<div class="fi-wrap" id="w_name"><label class="req">姓名</label>'+
+        '<input id="f_name" value="'+esc(S.form.name||"")+'" placeholder="请填写真实姓名" oninput="S.form.name=this.value">'+
+        '<div class="fi-err">请填写真实姓名</div></div>':'')+
+      '<div class="fi-wrap" id="w_phone"><label class="req">手机号</label>'+
+        '<input id="f_phone" type="tel" maxlength="11" value="'+esc(S.form.phone||"")+'" placeholder="11 位手机号，用于接收通知与登录" oninput="S.form.phone=this.value">'+
+        '<div class="fi-err">请输入正确的 11 位手机号</div></div>'+
+      '<div class="fi-wrap" id="w_code"><label class="req">验证码</label><div class="code-row">'+
+        '<input id="f_code" type="tel" maxlength="6" value="'+esc(S.codeInput||"")+'" placeholder="6 位数字验证码" oninput="S.codeInput=this.value">'+
+        '<button class="mini" id="f_code_btn"'+(S.codeLeft>0?" disabled":"")+' onclick="sendCode()">'+(S.codeLeft>0?S.codeLeft+"s 后重发":"获取验证码")+'</button></div>'+
+        '<div class="fi-err">验证码不正确</div></div>'+
+      (reg?agree:'')+
+      '<div class="demo-note">演示环境未接短信通道，验证码固定为 <b>888888</b></div>'+
+    '</div>'+
+    '<div class="sh-f" style="flex-direction:column;align-items:stretch;gap:9px">'+
+      '<button class="btn btn-p" style="width:100%" onclick="submitAuth()">'+(reg?"注册并继续":"登录")+'</button>'+
+      '<div class="auth-foot">'+(reg?'已有账号？<a onclick="switchAuth(\'login\')">直接登录</a>'
+        :'还没有账号？<a onclick="switchAuth(\'reg\')">立即注册</a>'+demoLink)+'</div>'+
+    '</div>';
+  showSheet(b);
+  if(S.codeLeft>0)startTick();
+}
+function sendCode(){
+  var p=($("f_phone")?$("f_phone").value:"").trim();
+  if(!/^1\d{10}$/.test(p)){badF("w_phone");toast("请输入正确的 11 位手机号");return}
+  S.form.phone=p;S.code="888888";S.codeSent=true;S.codeInput="";
+  if($("f_code"))$("f_code").value="";
+  S.codeLeft=60;startTick();
+  toast("验证码已发送至 "+maskP(p)+"（演示码 888888）");
+}
+function startTick(){
+  stopTick();
+  var b=$("f_code_btn");if(b){b.disabled=true;b.textContent=S.codeLeft+"s 后重发"}
+  codeTimer=setInterval(function(){
+    S.codeLeft--;
+    var btn=$("f_code_btn");
+    if(S.codeLeft<=0){S.codeLeft=0;stopTick();if(btn){btn.disabled=false;btn.textContent="重新获取"}}
+    else if(btn)btn.textContent=S.codeLeft+"s 后重发";
+  },1000);
+}
+function stopTick(){if(codeTimer){clearInterval(codeTimer);codeTimer=null}}
+function submitAuth(){
+  captureAuth();
+  var reg=S.authMode==="reg";
+  var name=(S.form.name||"").trim(),phone=(S.form.phone||"").trim(),code=(S.codeInput||"").trim();
+  clearBadF();
+  if(reg&&!name){badF("w_name");toast("请填写真实姓名");return}
+  if(!/^1\d{10}$/.test(phone)){badF("w_phone");toast("请输入正确的 11 位手机号");return}
+  if(!S.codeSent){badF("w_code");toast("请先点击「获取验证码」");return}
+  if(!code){badF("w_code");toast("请填写验证码");return}
+  if(code!==S.code){badF("w_code");toast("验证码不正确，演示环境请填 888888");return}
+  if(reg&&!S.agree){toast("请先阅读并同意用户协议与隐私政策");return}
+  var acc=accOf(phone);
+  if(!reg&&!acc){                       /* 未注册的手机号：引导去注册，表单值保留 */
+    toast("该手机号尚未注册，已为你切换到注册");
+    S.authMode="reg";S.codeInput="";drawLogin();return;
+  }
+  if(reg&&acc){                         /* 已注册：引导去登录，避免重复建档 */
+    toast("该手机号已注册，请直接登录");
+    S.authMode="login";S.codeInput="";drawLogin();return;
+  }
+  if(reg){acc={phone:phone,name:name,createdAt:nowMin(),lastLogin:nowMin()};S.accounts.push(acc);
+    S.form.name=name;S.form.phone=phone}
+  else{acc.lastLogin=nowMin();if(acc.name&&!(S.form.name||"").trim())S.form.name=acc.name}
+  authSuccess(acc,reg);
+}
+function demoLogin(){
+  var acc=accOf("13856789211");
+  if(!acc){toast("演示账号不存在");return}
+  S.form.phone=acc.phone;S.form.name=S.form.name||acc.name;
+  acc.lastLogin=nowMin();
+  authSuccess(acc,false);
+}
+function authSuccess(acc,isNew){
+  S.user={name:acc.name,phone:acc.phone};
+  var job=S.pending&&S.pending.p?byId(S.pending.p):null,act=S.pending?S.pending.a:null;
+  closeS();stopTick();
+  S.codeLeft=0;S.codeInput="";S.code="";S.codeSent=false;S.agree=false;
+  /* 预置的演示投递/收藏只属于演示账号，换成新账号时清掉，避免串档 */
+  if(S.subsSeed&&acc.phone!=="13856789211"){S.subs=[];S.fav=[];S.subsSeed=0}
+  var head=isNew?"注册成功":"登录成功",msg=head+(isNew?"，欢迎加入红星招聘":"，欢迎回来"),openAfter=null;
+  if(act==="apply"&&job){openAfter=job;msg=head+(isNew?"，请补充简历信息后投递":"，请确认简历信息后投递")}
+  else if(act==="fav"&&job){if(S.fav.indexOf(job.id)<0)S.fav.push(job.id);msg=head+"，已收藏「"+job.title+"」"}
+  S.pending=null;
+  if(act==="sub")S.tab="sub";
+  else if(act==="resume")S.tab="resume";
+  else if(act==="me")S.tab="me";
+  save();render();
+  if(openAfter){openApply(openAfter);toast(msg)}else toast(msg);
+}
+function fillDemo(){
+  FIELDS.forEach(function(f){if(!(S.form[f[0]]||"").trim())S.form[f[0]]=DEMO[f[0]]});
+  if(!S.rEdu.length)S.rEdu=JSON.parse(JSON.stringify(DEMO_EDU));
+  if(!S.rWork.length)S.rWork=JSON.parse(JSON.stringify(DEMO_WORK));
+  if(!(S.rProj||"").trim())S.rProj=DEMO_PROJ;
+  if(!(S.rSkill||"").trim())S.rSkill=DEMO_SKILL;
+}
+function demoFill(){fillDemo();drawLogin();toast("解析完成，已填充简历信息，可手动修正")}
+function clearForm(){S.form={};S.rEdu=[];S.rWork=[];S.rProj="";S.rSkill="";drawLogin()}
+
+function addSub(job,note,fid){
+  var f=fid?fileOf(fid):null;
+  S.subs.unshift({jid:job.id,title:job.title,salary:job.salary,city:job.city,rc:job.rc,
+    time:today(),status:"待筛选",note:note||"",fid:fid||"",fname:f?f.name:""});
+  save();
+}
+
+/* ============ 投递弹层（快速录入，B-58） ============ */
+var AF=null,AFJOB=null,AFERR={};
+function afBase(job){
+  var f=S.form||{},u=S.user||{},d=defFile();
+  return {
+    name:((f.name||"").trim()||u.name||""),
+    phone:((f.phone||"").trim()||u.phone||""),
+    deg:(f.deg||"").trim(),
+    school:(f.school||"").trim(),
+    major:(f.major||"").trim(),
+    gender:(f.gender||"").trim(),
+    city:(f.city||"").trim()||job.city,
+    note:"",
+    pick:false,
+    file:d?{id:d.id,name:d.name,ext:d.ext,size:d.size}:null
+  };
+}
+function openApply(job){AFJOB=job;AF=afBase(job);AFERR={};drawApply()}
+function afSet(k,v){if(!AF)return;AF[k]=v;if(AFERR[k])AFERR[k]=0}
+function afUseResume(){
+  if(!AF)return;
+  var b=afBase(AFJOB);
+  ["name","phone","deg","school","major","gender","city"].forEach(function(k){if(b[k])AF[k]=b[k]});
+  if(!AF.file&&b.file)AF.file=b.file;
+  AFERR={};drawApply();toast("已按在线简历填充，可继续修改");
+}
+function afFile(){
+  if(!AF)return;
+  AF.file={id:"",name:(AF.name||"我的")+"-简历.pdf",ext:"PDF",size:"1.1MB"};
+  drawApply();toast("附件已上传，将随本次投递一并发送");
+}
+function afRmFile(){if(!AF)return;AF.file=null;drawApply()}
+function afTogglePick(){if(!AF)return;AF.pick=!AF.pick;drawApply()}
+function afPickFile(id){
+  if(!AF)return;
+  var x=fileOf(id);if(!x)return;
+  AF.file={id:x.id,name:x.name,ext:x.ext,size:x.size};AF.pick=false;
+  drawApply();toast("本次将使用《"+x.name+"》");
+}
+function afInp(k,lab,ph){
+  var bad=AFERR[k]?" bad":"";
+  var er=AFERR[k]?'<div class="fi-err">'+(AFERR[k]===2?"请填写 11 位手机号":"请填写"+lab)+'</div>':"";
+  var extra=k==="phone"?' inputmode="numeric" maxlength="11"':"";
+  return '<div class="fi-wrap'+bad+'"><label class="req">'+lab+'</label>'+
+    '<input value="'+esc(AF[k]||"")+'" placeholder="'+ph+'"'+extra+
+    ' oninput="afSet(\''+k+'\',this.value);this.parentNode.classList.remove(\'bad\')">'+er+'</div>';
+}
+function afSelPick(k,el){
+  afSet(k,el.value);
+  el.className=el.value?"":"ph";
+  el.parentNode.classList.remove("bad");
+}
+function afSel(k,lab,list,req){
+  var cur=AF[k]||"";
+  var bad=AFERR[k]?" bad":"";
+  var er=AFERR[k]?'<div class="fi-err">请选择'+lab+'</div>':"";
+  return '<div class="fi-wrap'+bad+'"><label'+(req?' class="req"':"")+'>'+lab+'</label>'+
+    '<select class="'+(cur?"":"ph")+'" onchange="afSelPick(\''+k+'\',this)">'+
+    list.map(function(o){return '<option value="'+o[0]+'"'+(cur===o[0]?" selected":"")+'>'+o[1]+'</option>'}).join("")+
+    '</select>'+er+'</div>';
+}
+function drawApply(){
+  var job=AFJOB;if(!job||!AF)return;
+  var f=AF.file;
+  var b='<div class="sh-h"><h3>投递简历</h3><div class="x" onclick="closeS()">×</div></div>'+
+    '<div class="sh-b"><div class="tipbox">投递职位：<b>'+esc(job.title)+'</b>　'+esc(job.city)+' · '+esc(job.salary)+'</div>'+
+    '<div class="af-hd"><h4>基本信息</h4><span class="lnk" onclick="afUseResume()">填入在线简历</span></div>'+
+    '<div class="two">'+afInp("name","姓名","真实姓名")+
+      afSel("gender","性别",[["","请选择"],["男","男"],["女","女"]],0)+'</div>'+
+    '<div class="two">'+afInp("phone","手机号","11 位手机号")+
+      afSel("deg","最高学历",[["","请选择"],["大专","大专"],["本科","本科"],["硕士","硕士"],["博士","博士"]],1)+'</div>'+
+    '<div class="two">'+afInp("school","毕业院校","如 湖南大学")+afInp("major","专业","如 计算机科学与技术")+'</div>'+
+    afInp("city","现居城市","如 长沙市雨花区")+
+    '<div class="af-hd" style="margin-top:4px"><h4>简历附件</h4>'+
+      (AF.pick?'<span class="lnk" onclick="afTogglePick()">返回</span>'
+        :'<span style="font-size:11px;color:var(--ink4)">PDF / Word，≤10MB</span>')+'</div>'+
+    (AF.pick?'<div class="af-up" style="padding:12px 14px;text-align:left">'+S.files.map(function(x){
+        var on=AF.file&&AF.file.id===x.id;
+        return '<div class="filed" style="margin-bottom:8px'+(on?";border-color:var(--brand)":"")+'">'+
+          '<div class="fi">'+esc(x.ext)+'</div>'+
+          '<div style="flex:1;min-width:0"><div class="rn">'+esc(x.name)+(x.def?' <span class="bdg b">默认</span>':"")+'</div>'+
+          '<div class="rs">'+esc(x.size)+' · 上传于 '+esc(x.time||"-")+'</div></div>'+
+          (on?'<span class="bdg b">本次</span>':'<button class="link" onclick="afPickFile(\''+x.id+'\')">选用</button>')+'</div>';
+      }).join("")+'</div>'
+      :(f?'<div class="filed"><div class="fi">'+esc(f.ext)+'</div><div style="flex:1;min-width:0"><div class="rn">'+esc(f.name)+'</div>'+
+        '<div class="rs">'+esc(f.size)+' · 随本次投递一并发送</div></div>'+
+        (S.files.length>1?'<button class="link" onclick="afTogglePick()">切换</button>':"")+
+        '<button class="link d" style="margin-left:12px" onclick="afRmFile()">移除</button></div>'
+      :'<div class="af-up"><div class="t">上传附件简历，招聘方可直接查看原件</div>'+
+        '<div class="s">不上传也可投递，将用上方信息生成在线简历</div>'+
+        '<button class="mini" style="margin-top:10px" onclick="afFile()">选择文件</button></div>'))+
+    '<div class="fi-wrap" style="margin-top:14px"><label>附加留言（选填）</label>'+
+      '<textarea rows="2" placeholder="可补充到岗时间、期望等信息" oninput="AF.note=this.value">'+esc(AF.note||"")+'</textarea></div>'+
+    '</div>'+
+    '<div class="sh-f"><button class="btn btn-g" onclick="closeS()">取消</button>'+
+    '<button class="btn btn-p" onclick="submitApply('+job.id+')">确认投递</button></div>';
+  showSheet(b);
+}
+function submitApply(id){
+  var job=byId(id)||AFJOB;if(!job||!AF)return;
+  AFERR={};var msg="";
+  [["name","姓名"],["phone","手机号"],["school","毕业院校"],["major","专业"]].forEach(function(p){
+    if(!(AF[p[0]]||"").trim()){AFERR[p[0]]=1;if(!msg)msg="请填写「"+p[1]+"」"}
+  });
+  if(!AF.deg){AFERR.deg=1;if(!msg)msg="请选择最高学历"}
+  if(!AF.city){AFERR.city=1;if(!msg)msg="请选择现居城市"}
+  if((AF.phone||"").trim()&&!/^1\d{10}$/.test(AF.phone.trim())){AFERR.phone=2;msg="手机号格式不正确"}
+  if(msg){drawApply();toast(msg);return}
+  /* 投递时填写的信息回写在线简历，下次投递免重复填写 */
+  S.form=S.form||{};
+  S.form.name=AF.name.trim();S.form.phone=AF.phone.trim();S.form.deg=AF.deg;
+  S.form.school=AF.school.trim();S.form.major=AF.major.trim();S.form.city=AF.city;
+  if(AF.gender)S.form.gender=AF.gender;
+  if(S.user)S.user.name=S.form.name;
+  /* 附件：本次选用已有的一份，或把新上传的这份存入附件库 */
+  var fid="";
+  if(AF.file){
+    if(AF.file.id)fid=AF.file.id;
+    else{
+      var nf={id:newFid(),name:AF.file.name,ext:AF.file.ext,size:AF.file.size,time:today(),def:S.files.length?0:1};
+      S.files.push(nf);fid=nf.id;
+    }
+  }
+  addSub(job,(AF.note||"").trim(),fid);
+  closeS();toast("简历已投递至「"+job.title+"」，可在投递记录查看进度");render();
+}
+
+/* ============ 筛选弹层 ============ */
+function openFilter(){
+  var expList=S.track==="campus"?CAM_EXP:SOC_EXP;
+  function grp(title,key,list){
+    return '<div class="fgrp"><div class="lab">'+title+'</div><div class="opt">'+
+      list.map(function(v){return '<span class="'+(S.f[key]===v?"on":"")+'" onclick="pickF(\''+key+'\',\''+v+'\')">'+esc(v)+'</span>'}).join("")+'</div></div>';
+  }
+  var b='<div class="sh-h"><h3>筛选</h3><div class="x" onclick="closeS()">×</div></div>'+
+    '<div class="sh-b">'+grp("城市","city",CITIES)+grp("职位类别","cat",CATS)+grp("学历要求","deg",DEGS)+
+    grp(S.track==="campus"?"开放届别":"经验要求","exp",expList)+'</div>'+
+    '<div class="sh-f"><button class="btn btn-g" onclick="resetF()">重置</button>'+
+    '<button class="btn btn-p" onclick="closeS();render()">查看结果</button></div>';
+  showSheet(b);
+}
+function pickF(k,v){S.f[k]=S.f[k]===v?"":v;S.pageN=1;openFilter()}
+function resetF(){S.f={city:"",cat:"",deg:"",exp:""};S.pageN=1;openFilter()}
+
+/* ============ 投递记录 ============ */
+/* 投递记录：C 端视角的状态分组（后台 8 态 → 5 个标签） */
+var SUB_TABS=[["all","我的投递"],["invite","邀约"]];
+var SUB_GROUPS={invite:["面试中"]};
+var SUB_EMPTY={
+  all:["暂无投递记录","找到心仪职位后点击「投递简历」"],
+  invite:["暂无面试邀约","收到面试邀约时，这里会显示面试时间与地点"]
+};
+function subIn(tab,s){return tab==="all"||(SUB_GROUPS[tab]||[]).indexOf(s.status)>=0}
+function subCount(tab){return S.subs.filter(function(s){return subIn(tab,s)}).length}
+function setSubTab(t){S.subTab=t;render()}
+function pgSubs(){
+  var cur=S.subTab||"all";
+  var head='<div class="subtab">'+SUB_TABS.map(function(t){
+    return '<div class="'+(cur===t[0]?"on":"")+'" onclick="setSubTab(\''+t[0]+'\')">'+t[1]+'<i>'+subCount(t[0])+'</i></div>';
+  }).join("")+'</div>';
+  var list=[];
+  S.subs.forEach(function(s,i){if(subIn(cur,s))list.push([i,s])});
+  if(!list.length){var e=SUB_EMPTY[cur]||SUB_EMPTY.all;
+    return head+'<div class="empty"><b>'+e[0]+'</b><p>'+e[1]+'</p></div><div style="height:18px"></div>';}
+  return head+list.map(function(p){return subCard(p[0],p[1])}).join("")+'<div style="height:18px"></div>';
+}
+function subCard(i,s){
+  var j=byId(s.jid),rc=RECRUITERS[s.rc]||RECRUITERS.hr1;
+  var sf=s.fid?fileOf(s.fid):null,sfn=sf?sf.name:(s.fname||"");
+  var h='<div class="subcard"><div class="myrow"><div class="avatar">'+esc(s.title.charAt(0))+'</div>'+
+    '<div style="flex:1;min-width:0"><div class="t">'+esc(s.title)+'</div>'+
+    '<div class="s">'+esc(s.salary)+' · 投递于 '+s.time+(sfn?'<br>简历：'+esc(sfn):"")+'</div></div>'+
+    '<div class="r">'+
+    (j?'<button class="mini g" style="height:28px;padding:0 10px;font-size:12px" onclick="openJob('+s.jid+')">查看</button>':"")+'</div></div>';
+  /* 面试邀约只做展示：面试时间 + 面试地点，不含「接受 / 改期」等候选人操作 */
+  if(s.status==="面试中"&&s.invite){
+    h+='<div class="subnote"><div class="hd">面试邀约</div>'+
+      '<div class="row"><em>面试时间</em><span>'+esc(s.invite.time)+'</span></div>'+
+      '<div class="row"><em>面试地点</em><span>'+esc(s.invite.place)+'</span></div>'+
+      '<div class="row"><em>联系人</em><span>'+esc(rc.name)+'</span></div>'+
+      '<div class="row"><em>联系电话</em><span><a class="tel" href="tel:'+esc(String(rc.phone||"").replace(/\s/g,""))+'">'+esc(rc.phone)+'</a></span></div></div>';
+  }
+  /* offer 环节初版不展示：投递记录只做「面试邀约」触达，面试以上流程后续再补 */
+  /* 不合适 / 转入人才库 的灰色说明初版也不展示 */
+  return h+'</div>';
+}
+
+/* ============ 我的 ============ */
+function pgGuest(){
+  return '<div class="rblk" style="text-align:center;padding:26px 18px 22px">'+
+    '<div class="gav">红</div>'+
+    '<div style="font-size:16.5px;font-weight:600;margin:13px 0 6px">登录后开启完整功能</div>'+
+    '<div style="font-size:12.5px;color:var(--ink3);line-height:1.9">保存简历、一键投递、查看投递进度与面试通知<br>未登录也可以浏览全部在招职位</div>'+
+    '<button class="btn btn-p" style="width:100%;margin-top:18px" onclick="openLogin()">登录 / 注册</button>'+
+    '<div style="font-size:11.5px;color:var(--ink4);margin-top:11px;line-height:1.8">手机号 + 验证码登录，注册无需邮箱与密码</div></div>'+
+    '<div class="mlist" style="margin-top:12px">'+
+      '<div class="mrow" onclick="go(\'job\')"><div class="l">浏览职位</div><div class="r">'+liveJobs().length+' 个在招<span class="arw">›</span></div></div>'+
+    '</div><div style="height:18px"></div>';
+}
+function pgMine(){
+  var u=S.user;
+  if(!u)return pgGuest();
+  var sc=score(),tp=tip();
+  return '<div class="mhd"><div class="avatar">'+esc(u.name.charAt(0))+'</div>'+
+    '<div style="flex:1"><div class="mhd-n">'+esc(u.name)+'</div>'+
+    '<div class="mhd-s">'+esc(maskP(u.phone))+'</div></div>'+
+    '<button class="mini" style="border-color:rgba(255,255,255,.6);color:#fff;background:transparent" onclick="askLogout()">退出</button></div>'+
+    '<div class="rp"><div class="rp-top"><div><div class="rp-n">'+sc+'<i>%</i></div><div class="rp-l">简历完整度</div></div>'+
+    '<button class="mini" style="margin-left:auto" onclick="goEditResume()">编辑简历</button></div>'+
+    '<div class="rbar"><i style="width:'+sc+'%"></i></div>'+
+    '<div class="rp-d">'+esc(tp.t)+'</div></div>'+
+    '<div class="mlist" style="margin-top:12px">'+
+      '<div class="mrow" onclick="go(\'resume\')"><div class="l">我的简历</div><div class="r">'+(S.files.length?"附件 "+S.files.length+" 份 + 在线":"仅在线简历")+'<span class="arw">›</span></div></div>'+
+      '<div class="mrow" onclick="goFav()"><div class="l">我的收藏</div><div class="r">'+S.fav.length+' 个职位<span class="arw">›</span></div></div>'+
+      '<div class="mrow" onclick="go(\'sub\')"><div class="l">投递记录</div><div class="r">'+S.subs.length+' 条<span class="arw">›</span></div></div>'+
+    '</div>'+
+    '<div class="mlist" style="margin-top:12px">'+
+      '<div class="mrow" onclick="openAccount()"><div class="l">账号与安全</div><div class="r">'+esc(maskP(u.phone))+'<span class="arw">›</span></div></div>'+
+      '<div class="mrow" onclick="resetDemo()"><div class="l">重置演示数据</div><div class="r">恢复初始账号与投递记录<span class="arw">›</span></div></div>'+
+    '</div><div style="height:18px"></div>';
+}
+/* 重置演示数据：清除本机缓存并重新写入初始种子（投递记录 8 条覆盖全部状态） */
+function resetDemo(){
+  showSheet('<div class="sh-h"><h3>重置演示数据</h3><div class="x" onclick="closeS()">×</div></div>'+
+    '<div class="sh-b"><div class="resline">将清除本机保存的账号、简历、附件、收藏与投递记录，恢复到初始演示数据。<br>原型演示用，操作不可撤销。</div>'+
+    '<div class="subdone" style="margin:8px 0 0;padding:0">重置后会回到未登录状态，可用演示账号 13856789211 登录查看完整数据。</div></div>'+
+    '<div class="sh-f"><button class="btn btn-g" onclick="closeS()">取消</button>'+
+    '<button class="btn btn-p" onclick="doResetDemo()">确认重置</button></div>');
+}
+function doResetDemo(){
+  try{localStorage.removeItem(KEY)}catch(e){}
+  location.reload();
+}
+function openAccount(){
+  var u=S.user,acc=accOf(u.phone);
+  var b='<div class="sh-h"><h3>账号与安全</h3><div class="x" onclick="closeS()">×</div></div>'+
+    '<div class="sh-b"><div class="fi-wrap"><label>姓名</label><input value="'+esc(u.name)+'" readonly style="background:#fafbfc;color:var(--ink2)"></div>'+
+    '<div class="fi-wrap"><label>登录手机号</label><input value="'+esc(maskP(u.phone))+'" readonly style="background:#fafbfc;color:var(--ink2)">'+
+      '<div class="hint" style="font-size:11.5px;color:var(--ink4);margin-top:5px">手机号即登录账号，作为接收面试与录用通知的唯一边界</div></div>'+
+    '<div class="fi-wrap"><label>注册时间</label><input value="'+esc(acc?acc.createdAt:"—")+'" readonly style="background:#fafbfc;color:var(--ink2)"></div>'+
+    '<div class="fi-wrap"><label>最近登录</label><input value="'+esc(acc?acc.lastLogin:"—")+'" readonly style="background:#fafbfc;color:var(--ink2)"></div>'+
+    '<div class="resline">账号信息由系统维护：注销账号需联系招聘负责人，注销后投递记录与简历将停止对外展示。</div></div>'+
+    '<div class="sh-f"><button class="btn btn-g" onclick="closeS()">关闭</button>'+
+    '<button class="btn btn-p" onclick="askLogout()">退出登录</button></div>';
+  showSheet(b);
+}
+function goFav(){
+  if(!S.fav.length){toast("还没有收藏的职位");return}
+  S.tab="fav";render();
+}
+function askLogout(){
+  showSheet('<div class="sh-h"><h3>退出登录</h3><div class="x" onclick="closeS()">×</div></div>'+
+    '<div class="sh-b"><div class="tipbox">退出后需重新用手机号验证才能投递与查看投递记录；已保存的简历、收藏与投递记录不会丢失。</div></div>'+
+    '<div class="sh-f"><button class="btn btn-g" onclick="closeS()">取消</button>'+
+    '<button class="btn btn-p" onclick="doLogout()">确认退出</button></div>');
+}
+function doLogout(){
+  S.user=null;S.pending=null;S.tab="home";S.edit=false;save();render();toast("已退出登录");
+}
+
+/* ============ 我的简历 ============ */
+function toggleEdit(){S.edit=!S.edit;render()}
+/* 编辑态：最高学历、性别用下拉框，其余保持文本输入 */
+function resField(k,lab){
+  var cur=(S.form[k]||"").trim();
+  if(k==="deg"||k==="gender"){
+    var list=k==="deg"?DEGS:["男","女"];
+    return '<div class="fi-wrap"><label>'+lab+'</label>'+
+      '<select class="'+(cur?"":"ph")+'" onchange="S.form.'+k+'=this.value;this.className=this.value?\'\':\'ph\'">'+
+      '<option value=""'+(cur?"":" selected")+'>请选择</option>'+
+      list.map(function(v){return '<option value="'+v+'"'+(cur===v?" selected":"")+'>'+v+'</option>'}).join("")+
+      '</select></div>';
+  }
+  return '<div class="fi-wrap"><label>'+lab+'</label><input value="'+esc(cur)+'" oninput="S.form.'+k+'=this.value"></div>';
+}
+function pgResume(){
+  var ed=S.edit,sc=score(),tp=tip(),h="";
+  /* 编辑态：不显示完整度进度条、预览按钮与附件简历，只保留可编辑的四个区块 */
+  if(!ed){
+    h+='<div class="rblk"><div class="rp-top" style="margin-bottom:10px"><div><div class="rp-n">'+sc+'<i>%</i></div>'+
+      '<div class="rp-l">简历完整度</div></div></div>'+
+      '<div class="rbar"><i style="width:'+sc+'%"></i></div><div class="rp-d">'+esc(tp.t)+'</div>'+
+      '<div style="margin-top:12px;display:flex;gap:8px">'+
+        '<button class="mini g" style="flex:1;padding:0 6px" onclick="previewResume()">预览</button>'+
+        '<button class="mini g" style="flex:1;padding:0 6px" onclick="exportResumePdf()">导出 PDF</button>'+
+        '<button class="mini" style="flex:1;padding:0 6px" onclick="toggleEdit()">编辑简历</button></div></div>';
+
+    h+='<div class="rblk"><div class="rblk-h"><h4>附件简历<span>PDF / Word，单份 ≤10MB</span></h4>'+
+      (S.files.length?'<span style="font-size:11px;color:var(--ink4)">'+S.files.length+' / '+FILE_MAX+'</span>':"")+'</div>'+
+      (S.files.length?S.files.map(function(x){
+        return '<div class="filed" style="margin-bottom:8px"><div class="fi">'+esc(x.ext)+'</div>'+
+          '<div style="flex:1;min-width:0"><div class="rn">'+esc(x.name)+(x.def?' <span class="bdg b">默认</span>':"")+'</div>'+
+          '<div class="rs">'+esc(x.size)+' · 上传于 '+esc(x.time||"-")+'</div></div>'+
+          (x.def?'':'<button class="link" onclick="setDefFile(\''+x.id+'\')">设为默认</button>')+
+          '<button class="link d" style="margin-left:12px" onclick="rmFile(\''+x.id+'\')">删除</button></div>';
+      }).join("")
+       :'<div class="upz"><div style="font-size:22px;color:var(--ink4)">↓</div><p>上传简历后自动解析并填充下方字段<br>解析结果可随时手动修正</p>'+
+        '<button class="mini" onclick="pickFile()">选择简历文件</button>'+
+        '<small>支持 PDF、Word，大小不超过 10MB</small></div>')+
+      (S.files.length&&S.files.length<FILE_MAX?'<div class="af-up" style="margin-top:8px"><div class="t">还可上传 '+(FILE_MAX-S.files.length)+' 份（默认那份将在投递时自动携带）</div>'+
+        '<button class="mini" style="margin-top:8px" onclick="pickFile()">+ 上传简历</button></div>':"")+'</div>';
+  }
+
+  h+='<div class="rblk"><div class="rblk-h"><h4>基本信息<span>用于检索、筛选与通知</span></h4></div>'+
+    (ed?'<div class="two">'+FIELDS.map(function(fld){return resField(fld[0],fld[1])}).join("")+'</div>'
+      :'<div class="rgrid">'+FIELDS.map(function(fld){
+        var v=(S.form[fld[0]]||"").trim();
+        return '<div class="rkv"><i>'+fld[1]+'</i><b'+(v?"":' class="none"')+'>'+(v?esc(v):"未填写")+'</b></div>'}).join("")+'</div>')+'</div>';
+
+  h+='<div class="rblk"><div class="rblk-h"><h4>教育经历<span>最高学历起倒序填写</span></h4>'+
+    (ed?'<button class="mini g" onclick="addEdu()">+ 添加</button>':"")+'</div>'+
+    (S.rEdu.length?S.rEdu.map(function(e,i){
+      return ed?'<div class="ritem"><div class="two">'+
+        '<div class="fi-wrap"><label>起止</label><input value="'+esc(e.from)+'" oninput="S.rEdu['+i+'].from=this.value"></div>'+
+        '<div class="fi-wrap"><label>至</label><input value="'+esc(e.to)+'" oninput="S.rEdu['+i+'].to=this.value"></div>'+
+        '<div class="fi-wrap"><label>学校</label><input value="'+esc(e.school)+'" oninput="S.rEdu['+i+'].school=this.value"></div>'+
+        '<div class="fi-wrap"><label>学历</label><input value="'+esc(e.deg)+'" oninput="S.rEdu['+i+'].deg=this.value"></div>'+
+        '<div class="fi-wrap"><label>专业</label><input value="'+esc(e.major)+'" oninput="S.rEdu['+i+'].major=this.value"></div></div>'+
+        '<button class="link d" onclick="delEdu('+i+')">删除本条</button></div>'
+        :'<div class="ritem"><div class="rt">'+esc(e.school)+'　'+esc(e.major||"")+'</div>'+
+         '<div class="rs2">'+esc(e.from)+' — '+esc(e.to)+'　·　'+esc(e.deg||"")+'</div></div>'}).join("")
+      :'<div class="rsub">暂无教育经历</div>')+'</div>';
+
+  h+='<div class="rblk"><div class="rblk-h"><h4>工作经历<span>HR 最关注的一栏</span></h4>'+
+    (ed?'<button class="mini g" onclick="addWork()">+ 添加</button>':"")+'</div>'+
+    (S.rWork.length?S.rWork.map(function(w,i){
+      return ed?'<div class="ritem"><div class="two">'+
+        '<div class="fi-wrap"><label>起止</label><input value="'+esc(w.from)+'" oninput="S.rWork['+i+'].from=this.value"></div>'+
+        '<div class="fi-wrap"><label>至</label><input value="'+esc(w.to)+'" oninput="S.rWork['+i+'].to=this.value"></div>'+
+        '<div class="fi-wrap"><label>公司</label><input value="'+esc(w.company)+'" oninput="S.rWork['+i+'].company=this.value"></div>'+
+        '<div class="fi-wrap"><label>职位</label><input value="'+esc(w.role)+'" oninput="S.rWork['+i+'].role=this.value"></div></div>'+
+        '<div class="fi-wrap"><label>工作内容与业绩</label><textarea rows="2" oninput="S.rWork['+i+'].desc=this.value">'+esc(w.desc||"")+'</textarea></div>'+
+        '<button class="link d" onclick="delWork('+i+')">删除本条</button></div>'
+        :'<div class="ritem"><div class="rt">'+esc(w.company)+'　'+esc(w.role||"")+'</div><div class="rs2">'+esc(w.from)+' — '+esc(w.to)+'</div>'+
+         (w.desc?'<div class="rd">'+esc(w.desc)+'</div>':"")+'</div>'}).join("")
+      :'<div class="rsub">暂无工作经历</div>')+'</div>';
+
+  h+='<div class="rblk"><div class="rblk-h"><h4>项目经历与技能<span>这部分决定了您能否被搜索到</span></h4></div>'+
+    (ed?'<div class="fi-wrap"><label>项目经历</label><textarea rows="4" placeholder="每行一个项目，建议写清做了什么、带来什么结果" oninput="S.rProj=this.value">'+esc(S.rProj||"")+'</textarea></div>'+
+      '<div class="fi-wrap"><label>专业技能</label><textarea rows="2" placeholder="用 / 分隔，便于按技能检索" oninput="S.rSkill=this.value">'+esc(S.rSkill||"")+'</textarea></div>'
+      :((S.rProj?'<div class="rsec"><i>项目经历</i><div class="rpre">'+esc(S.rProj)+'</div></div>':"")+
+        (S.rSkill?'<div class="rsec"><i>专业技能</i><div class="rpre">'+esc(S.rSkill)+'</div></div>':"")+
+        (S.rProj||S.rSkill?"":'<div class="rsub">尚未填写项目与技能</div>')))+'</div>';
+  return h+'<div style="height:18px"></div>';
+}
+function saveResume(){
+  var n=(S.form.name||"").trim(),p=(S.form.phone||"").trim();
+  if(!n){toast("请填写姓名");return}
+  if(p&&!/^1\d{10}$/.test(p)){toast("手机号格式不正确");return}
+  if(S.user&&n)S.user.name=n;
+  S.edit=false;save();render();toast("简历已保存，完整度 "+score()+"%");
+}
+function addEdu(){
+  if(S.rEdu.length>=4){toast("教育经历最多 4 条");return}
+  S.rEdu.push({from:"",to:"",school:"",deg:"",major:""});S.edit=true;render();
+}
+function addWork(){
+  if(S.rWork.length>=6){toast("工作经历最多 6 条");return}
+  S.rWork.push({from:"",to:"至今",company:"",role:"",desc:""});S.edit=true;render();
+}
+function delEdu(i){S.rEdu.splice(i,1);render()}
+function delWork(i){S.rWork.splice(i,1);render()}
+function pickFile(){
+  var f=addFile();
+  if(!f)return;
+  fillDemo();save();render();toast("已上传《"+f.name+"》，并自动解析填充了在线简历");
+}
+
+function previewResume(){
+  var f=defFile(),name=S.form.name||(S.user?S.user.name:"");
+  var b='<div class="sh-h"><h3>简历预览</h3><div class="x" onclick="closeS()">×</div></div>'+
+    '<div class="sh-b"><div class="tipbox">完整度 '+score()+'%，以下是投递时会发送的在线简历内容。'+
+      (f?'默认附件《'+esc(f.name)+'》将随本页一并发送。':'当前没有附件简历，将以在线简历内容投递，建议补充一份 PDF。')+'</div>'+
+    '<div class="filed" style="margin-bottom:14px"><div class="avatar" style="width:44px;height:44px;font-size:17px">'+esc((name||"?").charAt(0))+'</div>'+
+      '<div style="flex:1"><div class="rn">'+esc(name||"未填写姓名")+'</div>'+
+      '<div class="rs">'+esc([S.form.deg,S.form.exp,S.form.city].filter(Boolean).join(" · ")||"信息待完善")+'</div></div></div>'+
+    '<div class="rblk" style="margin:0 0 12px;padding:12px 14px"><div class="rblk-h"><h4>基本信息</h4></div>'+
+      '<div class="rgrid">'+FIELDS.map(function(fld){
+        return '<div class="rkv"><i>'+fld[1]+'</i><b class="'+((S.form[fld[0]]||"").trim()?"":"none")+'">'+esc((S.form[fld[0]]||"").trim()||"—")+'</b></div>'}).join("")+'</div></div>'+
+    (S.rEdu.length?'<div class="rblk" style="margin:0 0 12px;padding:12px 14px"><div class="rblk-h"><h4>教育经历</h4></div>'+
+      S.rEdu.map(function(e){return '<div class="ritem"><div class="rt">'+esc(e.school||"—")+'　'+esc(e.major||"")+'</div>'+
+        '<div class="rs2">'+esc(e.from||"")+' — '+esc(e.to||"")+'　'+esc(e.deg||"")+'</div></div>'}).join("")+'</div>':"")+
+    (S.rWork.length?'<div class="rblk" style="margin:0 0 12px;padding:12px 14px"><div class="rblk-h"><h4>工作经历</h4></div>'+
+      S.rWork.map(function(w){return '<div class="ritem"><div class="rt">'+esc(w.company||"—")+'　'+esc(w.role||"")+'</div>'+
+        '<div class="rs2">'+esc(w.from||"")+' — '+esc(w.to||"")+'</div>'+(w.desc?'<div class="rd">'+esc(w.desc)+'</div>':"")+'</div>'}).join("")+'</div>':"")+
+    (S.rProj?'<div class="rblk" style="margin:0 0 12px;padding:12px 14px"><div class="rblk-h"><h4>项目经历</h4></div><div class="rpre">'+esc(S.rProj)+'</div></div>':"")+
+    (S.rSkill?'<div class="rblk" style="margin:0;padding:12px 14px"><div class="rblk-h"><h4>专业技能</h4></div><div class="rpre">'+esc(S.rSkill)+'</div></div>':"")+
+    '</div><div class="sh-f"><button class="btn btn-g" onclick="closeS()">关闭</button>'+
+    '<button class="btn btn-p" onclick="closeS();exportResumePdf()">导出 PDF</button>'+
+    '<button class="btn btn-p" onclick="closeS();S.edit=true;render()">继续完善</button></div>';
+  showSheet(b);
+}
+
+/* ============ 在线简历导出 PDF（打印视图） ============ */
+function printHtml(){
+  var f=defFile(),name=(S.form.name||(S.user?S.user.name:"")||"未填写姓名").trim();
+  var h='<h1>'+esc(name)+'</h1>'+
+    '<div class="psub">'+esc([S.form.gender,S.form.deg,S.form.exp,S.form.city,S.form.phone,S.form.email].filter(Boolean).join(" · ")||"信息待完善")+'</div>';
+  h+='<h2>基本信息</h2><table>'+FIELDS.map(function(fl){
+    var v=(S.form[fl[0]]||"").trim();
+    return v?'<tr><td class="k">'+fl[1]+'</td><td>'+esc(v)+'</td></tr>':"";
+  }).join("")+'</table>';
+  if(S.rEdu.length){
+    h+='<h2>教育经历</h2>'+S.rEdu.map(function(e){
+      return '<div class="it"><b>'+esc(e.school||"—")+(e.major?"　"+esc(e.major):"")+'</b>'+
+        '<p>'+esc((e.from||"")+" — "+(e.to||""))+(e.deg?"　"+esc(e.deg):"")+'</p></div>';
+    }).join("");
+  }
+  if(S.rWork.length){
+    h+='<h2>工作经历</h2>'+S.rWork.map(function(w){
+      return '<div class="it"><b>'+esc(w.company||"—")+(w.role?"　"+esc(w.role):"")+'</b>'+
+        '<p>'+esc((w.from||"")+" — "+(w.to||""))+'</p>'+(w.desc?'<p>'+esc(w.desc)+'</p>':"")+'</div>';
+    }).join("");
+  }
+  if((S.rProj||"").trim())h+='<h2>项目经历</h2><p>'+esc(S.rProj)+'</p>';
+  if((S.rSkill||"").trim())h+='<h2>专业技能</h2><p>'+esc(S.rSkill)+'</p>';
+  if(S.files.length){
+    h+='<h2>附件简历</h2><table>'+S.files.map(function(x){
+      return '<tr><td>'+esc(x.name)+'</td><td>'+esc(x.size)+(x.def?"　默认":"")+'</td></tr>';
+    }).join("")+'</table>';
+  }
+  return h+'<div class="ft">由「红星实业集团 · 人才招聘」在线简历导出 · '+today()+'</div>';
+}
+function exportResumePdf(){
+  $("print").innerHTML=printHtml();
+  toast("已生成打印视图，请在打印窗口选择「另存为 PDF」");
+  setTimeout(function(){try{window.print()}catch(e){}},150);
+}
+
+/* ============ 收藏页 ============ */
+function pgFav(){
+  var fs=S.fav.map(byId).filter(Boolean);
+  return '<div class="lhead">共 <b>'+fs.length+'</b> 个收藏职位</div>'+
+    (fs.length?'<div class="sec" style="margin-top:0">'+fs.map(cardHtml).join("")+'</div>'
+      :'<div class="empty"><b>暂无收藏</b><p>在职位详情页点击星标即可收藏</p></div>')+'<div style="height:18px"></div>';
+}
+
+/* ============ 弹层控制 ============ */
+function showSheet(html){
+  $("sheet").innerHTML='<div class="mask" onclick="if(event.target===this)closeS()"><div class="sheet">'+html+'</div></div>';
+}
+function closeS(){$("sheet").innerHTML=""}
+
+/* ============ 模拟扫码（原型：展示一个示意二维码，1.5 秒后识别成功并进入首页） ============ */
+var scanTimer=null;
+/* 由文本生成一个稳定的示意二维码图案（非真实编码，仅原型展示用） */
+function qrSvg(text,size){
+  var n=21,c=size/n,seed=0,i,x,y;
+  for(i=0;i<text.length;i++)seed=(seed*31+text.charCodeAt(i))%2147483647;
+  function rnd(){seed=(seed*1103515245+12345)%2147483648;return seed/2147483648}
+  function finder(px,py){
+    return '<rect x="'+px+'" y="'+py+'" width="'+(c*7)+'" height="'+(c*7)+'"/>'+
+      '<rect x="'+(px+c)+'" y="'+(py+c)+'" width="'+(c*5)+'" height="'+(c*5)+'" fill="#fff"/>'+
+      '<rect x="'+(px+c*2)+'" y="'+(py+c*2)+'" width="'+(c*3)+'" height="'+(c*3)+'" fill="#111"/>';
+  }
+  var s='<svg viewBox="0 0 '+size+' '+size+'" width="'+size+'" height="'+size+'" fill="#111" shape-rendering="crispEdges">';
+  for(y=0;y<n;y++)for(x=0;x<n;x++){
+    if((x<8&&y<8)||(x>n-9&&y<8)||(x<8&&y>n-9))continue;   /* 三个定位角单独绘制 */
+    if(rnd()>0.52)s+='<rect x="'+(x*c).toFixed(2)+'" y="'+(y*c).toFixed(2)+'" width="'+c.toFixed(2)+'" height="'+c.toFixed(2)+'"/>';
+  }
+  s+=finder(0,0)+finder(size-c*7,0)+finder(0,size-c*7)+'</svg>';
+  return s;
+}
+function openScan(){
+  if(scanTimer)clearTimeout(scanTimer);
+  $("sheet").innerHTML='<div class="scanmask" onclick="if(event.target===this)closeScan()">'+
+    '<div class="scanbox">'+
+      '<div class="scanframe">'+qrSvg("hx://home",170)+'<i></i></div>'+
+      '<div class="scant">正在识别二维码…</div>'+
+      '<div class="scans">示例二维码 · 红星招聘首页</div>'+
+      '<button onclick="closeScan()">取消</button>'+
+    '</div></div>';
+  scanTimer=setTimeout(function(){
+    closeScan();
+    go("home");
+    toast("识别成功，已进入首页");
+  },1500);
+}
+function closeScan(){
+  if(scanTimer){clearTimeout(scanTimer);scanTimer=null}
+  $("sheet").innerHTML="";
+}
+
+/* ============ 启动 ============ */
+load();
+if(!localStorage.getItem(KEY)){
+  /* 演示账号：预置账号 + 该账号的投递与收藏，方便直接体验「登录」路径；换手机号注册即走「注册」路径 */
+  S.accounts=[{phone:"13856789211",name:"李明轩",createdAt:"2026-10-20 09:12",lastLogin:"2026-10-26 18:40"}];
+  S.subs=[
+    {jid:101,title:"高级后端开发工程师",salary:"20-35K·14薪",city:"长沙",rc:"hr1",time:"2026-10-18",status:"面试中",note:"",
+      invite:{time:"11 月 2 日 14:00",place:"长沙市雨花区总部大楼 12F 会议室 A"}},
+    {jid:202,title:"Java开发工程师（校招）",salary:"10-15K",city:"长沙",rc:"hr2",time:"2026-10-12",status:"面试中",note:"",
+      invite:{time:"11 月 3 日 10:30",place:"长沙市雨花区总部大楼 8F 会议室 C"}},
+    {jid:102,title:"前端开发工程师",salary:"15-25K",city:"长沙",rc:"hr1",time:"2026-10-22",status:"待筛选",note:""},
+    {jid:103,title:"产品经理（供应链方向）",salary:"18-28K",city:"长沙",rc:"hr3",time:"2026-10-15",status:"初筛通过",note:""},
+    {jid:104,title:"数据分析师",salary:"16-26K",city:"深圳",rc:"hr3",time:"2026-10-09",status:"已发 offer",note:"",
+      offer:{salary:"22K·14薪",onboard:"2026-11-18",deadline:"2026-11-05"}},
+    {jid:108,title:"冷链仓储管理专员",salary:"8-12K",city:"长沙",rc:"hr4",time:"2026-09-30",status:"不合适",note:""},
+    {jid:105,title:"市场运营经理",salary:"12-20K",city:"武汉",rc:"hr3",time:"2026-09-26",status:"转入人才库",note:""},
+    {jid:201,title:"管理培训生（供应链方向）",salary:"8-12K",city:"长沙",rc:"hr2",time:"2026-09-20",status:"不合适",note:""}
+  ];
+  S.fav=[201,102];
+  save();
+}
+render();
+</script>
+</body>
+</html>
