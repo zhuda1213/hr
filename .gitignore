@@ -1,0 +1,10 @@
+# 系统 / 编辑器垃圾文件
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+
+# 本地临时文件
+*.log
+.cache/
+node_modules/

@@ -33,17 +33,6 @@ input,select,textarea{font-family:inherit;font-size:14px;-webkit-appearance:none
 .hero{position:relative;background:var(--brand);color:#fff;padding:calc(26px + var(--st)) 18px 22px}
 .hero h1{font-size:22px;font-weight:600;line-height:1.4;letter-spacing:.5px}
 .hero p{font-size:12.5px;opacity:.88;margin-top:8px;line-height:1.65}
-.herosc{position:absolute;top:calc(14px + var(--st));right:14px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.18);color:#fff;display:flex;align-items:center;justify-content:center}
-.sbox .scani{flex:none;color:var(--ink2);opacity:.65;display:flex}
-/* ---------- 模拟扫码 ---------- */
-.scanmask{position:fixed;inset:0;background:rgba(0,0,0,.86);z-index:70;display:flex;align-items:center;justify-content:center}
-.scanbox{width:100%;max-width:430px;padding:0 26px;text-align:center;color:#fff}
-.scanframe{position:relative;width:198px;height:198px;margin:0 auto;padding:14px;background:#fff;border-radius:14px;overflow:hidden}
-.scanframe i{position:absolute;left:12px;right:12px;height:2px;background:var(--brand);animation:scanmove 1.5s linear infinite}
-@keyframes scanmove{0%{top:12px}100%{top:186px}}
-.scant{margin-top:18px;font-size:14.5px}
-.scans{margin-top:7px;font-size:12px;color:rgba(255,255,255,.62)}
-.scanbox button{margin-top:24px;background:none;border:1px solid rgba(255,255,255,.42);color:#fff;border-radius:20px;padding:8px 24px;font-size:13px}
 .chan{margin:12px 18px 0;background:var(--white);border-radius:12px;padding:14px;display:flex;align-items:center;gap:12px;box-shadow:0 2px 8px rgba(20,60,120,.08)}
 .chan+.chan{margin-top:10px}
 .chan-ic{width:42px;height:42px;border-radius:10px;background:var(--brand-l);color:var(--brand-d);display:flex;align-items:center;justify-content:center;flex:none}
@@ -505,8 +494,6 @@ var ICONS={
  me:'<circle cx="12" cy="8.5" r="3.5"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/>'
 };
 var TABS=[["home","首页"],["job","职位"],["sub","投递记录"],["me","我的"]];
-/* 扫码图标（入口共用） */
-var SCAN_ICO='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5V6a2 2 0 0 1 2-2h2.5"/><path d="M15.5 4H18a2 2 0 0 1 2 2v2.5"/><path d="M20 15.5V18a2 2 0 0 1-2 2h-2.5"/><path d="M8.5 20H6a2 2 0 0 1-2-2v-2.5"/><path d="M3.5 12h17"/></svg>';
 function renderTabbar(){
   /* 编辑简历时不显示底部导航栏 */
   if(S.tab==="detail"||(S.tab==="resume"&&S.edit)){$("tabbar").innerHTML="";return}
@@ -566,7 +553,7 @@ function pgHome(){
   var hot=L.slice().sort(function(a,b){return a.date<b.date?1:-1}).slice(0,5);
   var cC=L.filter(function(j){return j.track==="campus"}).length;
   var sC=L.filter(function(j){return j.track==="social"}).length;
-  return '<div class="hero"><div class="herosc" onclick="openScan()">'+SCAN_ICO+'</div>'+
+  return '<div class="hero">'+
     '<h1>与红星同行，让农商更简单</h1>'+
     '<p>红星实业集团 · 中南地区最大的一级农副产品流通枢纽，正在寻找同路人</p></div>'+
     '<div class="chan" onclick="goTrack(\'campus\')"><div class="chan-ic">'+
@@ -585,7 +572,7 @@ function cardHtml(j){
   var f=S.fav.indexOf(j.id)>=0;
   return '<div class="jc"><div class="jc-m" onclick="openJob('+j.id+')">'+
     '<div class="jc-t"><span>'+esc(j.title)+'</span><span class="jc-s">'+esc(j.salary)+'</span></div>'+
-    '<div class="jc-meta"><span class="tag b">'+esc(j.city)+'</span><span class="tag">招 '+j.hc+' 人</span>'+
+    '<div class="jc-meta"><span class="tag b">'+esc(j.city)+'</span>'+
     '<span class="dot">发布于 '+j.date+'</span></div></div>'+
     '<button class="star'+(f?" on":"")+'" onclick="toggleFav('+j.id+')">'+(f?"★":"☆")+'</button></div>';
 }
@@ -597,8 +584,7 @@ function pgList(){
     '<div class="seg" style="margin:12px 18px 0"><div class="'+(S.track==="social"?"on":"")+'" onclick="setTrack(\'social\')">社会招聘</div>'+
       '<div class="'+(S.track==="campus"?"on":"")+'" onclick="setTrack(\'campus\')">校园招聘</div></div>'+
     '<div class="sbar"><div class="sbox"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5c5c5c" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>'+
-      '<input id="q" value="'+esc(S.q)+'" placeholder="搜索职位名称或关键词" onkeydown="if(event.key===\'Enter\')doSearch()">'+
-      '<span class="scani" onclick="openScan()">'+SCAN_ICO+'</span></div>'+
+      '<input id="q" value="'+esc(S.q)+'" placeholder="搜索职位名称或关键词" onkeydown="if(event.key===\'Enter\')doSearch()"></div>'+
       '<button class="sbtn" onclick="doSearch()">搜索</button></div>'+
     '<div class="frow"><div class="fchip'+(n?" on":"")+'" onclick="openFilter()">'+
       '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M7 12h10M10 17h4"/></svg>筛选'+(n?'<i class="n">'+n+'</i>':"")+'</div>'+
@@ -619,7 +605,7 @@ function pgDetail(){
   var f=S.fav.indexOf(j.id)>=0,ap=applied(j.id),rc=RECRUITERS[j.rc];
   var over=j.dl<today();
   return '<div class="dtop"><h1>'+esc(j.title)+'</h1><div class="dsal">'+esc(j.salary)+'</div>'+
-    '<div class="dmeta"><div><b>招聘人数</b><span>'+j.hc+' 人</span></div><div><b>截止日期</b><span>'+j.dl+'</span></div>'+
+    '<div class="dmeta"><div><b>截止日期</b><span>'+j.dl+'</span></div>'+
     '<div><b>发布时间</b><span>'+j.date+'</span></div></div>'+
     (j.addr?'<div class="daddr"><b>工作地点</b><span>'+esc(j.addr)+'</span></div>':"")+'</div>'+
     (over?'<div class="notice">该职位已过截止日期，招聘流程已结束，仅作信息保留</div>':"")+
@@ -1238,46 +1224,6 @@ function showSheet(html){
   $("sheet").innerHTML='<div class="mask" onclick="if(event.target===this)closeS()"><div class="sheet">'+html+'</div></div>';
 }
 function closeS(){$("sheet").innerHTML=""}
-
-/* ============ 模拟扫码（原型：展示一个示意二维码，1.5 秒后识别成功并进入首页） ============ */
-var scanTimer=null;
-/* 由文本生成一个稳定的示意二维码图案（非真实编码，仅原型展示用） */
-function qrSvg(text,size){
-  var n=21,c=size/n,seed=0,i,x,y;
-  for(i=0;i<text.length;i++)seed=(seed*31+text.charCodeAt(i))%2147483647;
-  function rnd(){seed=(seed*1103515245+12345)%2147483648;return seed/2147483648}
-  function finder(px,py){
-    return '<rect x="'+px+'" y="'+py+'" width="'+(c*7)+'" height="'+(c*7)+'"/>'+
-      '<rect x="'+(px+c)+'" y="'+(py+c)+'" width="'+(c*5)+'" height="'+(c*5)+'" fill="#fff"/>'+
-      '<rect x="'+(px+c*2)+'" y="'+(py+c*2)+'" width="'+(c*3)+'" height="'+(c*3)+'" fill="#111"/>';
-  }
-  var s='<svg viewBox="0 0 '+size+' '+size+'" width="'+size+'" height="'+size+'" fill="#111" shape-rendering="crispEdges">';
-  for(y=0;y<n;y++)for(x=0;x<n;x++){
-    if((x<8&&y<8)||(x>n-9&&y<8)||(x<8&&y>n-9))continue;   /* 三个定位角单独绘制 */
-    if(rnd()>0.52)s+='<rect x="'+(x*c).toFixed(2)+'" y="'+(y*c).toFixed(2)+'" width="'+c.toFixed(2)+'" height="'+c.toFixed(2)+'"/>';
-  }
-  s+=finder(0,0)+finder(size-c*7,0)+finder(0,size-c*7)+'</svg>';
-  return s;
-}
-function openScan(){
-  if(scanTimer)clearTimeout(scanTimer);
-  $("sheet").innerHTML='<div class="scanmask" onclick="if(event.target===this)closeScan()">'+
-    '<div class="scanbox">'+
-      '<div class="scanframe">'+qrSvg("hx://home",170)+'<i></i></div>'+
-      '<div class="scant">正在识别二维码…</div>'+
-      '<div class="scans">示例二维码 · 红星招聘首页</div>'+
-      '<button onclick="closeScan()">取消</button>'+
-    '</div></div>';
-  scanTimer=setTimeout(function(){
-    closeScan();
-    go("home");
-    toast("识别成功，已进入首页");
-  },1500);
-}
-function closeScan(){
-  if(scanTimer){clearTimeout(scanTimer);scanTimer=null}
-  $("sheet").innerHTML="";
-}
 
 /* ============ 启动 ============ */
 load();

@@ -147,6 +147,8 @@ table.data tr.sel td{background:#f3f8ff}
 table.data .tt{font-weight:600;color:var(--ink)}
 table.data .mt{font-size:12px;color:var(--ink3);margin-top:3px}
 table.data .mt span{margin-right:10px}
+/* 列表里的补充说明：纯信息，不做可点击的视觉暗示（不用品牌蓝、不加下划线） */
+table.data .mt .mnote{color:var(--ink3);cursor:default;white-space:nowrap}
 table.data td.op{white-space:nowrap;text-align:right}
 table.data td.op .btn{margin-left:5px}
 .empty{padding:56px 20px;text-align:center;color:var(--ink3);font-size:13.5px}
@@ -448,12 +450,9 @@ var OFFER_SRC=["系统生成","手动上传"];
 var TPL_TRACK_NAME={social:"社招",campus:"校招",any:"通用"};
 var TPL_TRACK=[["social","社招"],["campus","校招"],["any","通用"]];
 
-/* 黑名单 / 笔试 / 评价笔记 */
+/* 黑名单 / 笔试 */
 var BLOCK_REASONS=["学历 / 履历造假","背景调查异常","多次爽约","恶意投递","其他"];
 var EXAM_LEVELS=["优秀","良好","合格","不合格"];
-var NOTE_STAGES=["简历初筛","笔试","一面","二面","终面","Offer 沟通"];
-var NOTE_VERDICTS=["推荐","保留","不推荐"];
-var NOTE_SCORE_TXT={"5":"显著超出要求","4":"超出要求","3":"达到岗位要求","2":"低于要求","1":"明显不符","0":"不评分"};
 
 /* 系统默认角色（自定义角色在 S.roles 中维护） */
 var ROLES={admin:{t:"管理员",c:"b"},hr:{t:"招聘负责人",c:"g"},viewer:{t:"只读面试官",c:"p"}};
@@ -509,7 +508,7 @@ var MENUS=[
  {id:"subs",name:"候选人管理",desc:"投递、流转与跟进",actions:[
    ["subs.view","查看候选人"],["subs.contact","查看手机号明文"],["subs.export","导出简历"],
    ["subs.screen","初筛通过"],["subs.invite","邀约投递"],["subs.reject","转不合适"],
-   ["subs.exam","安排 / 录入笔试"],["subs.interview","安排面试"],["subs.offer","发起 Offer"],
+   ["subs.exam","安排 / 录入笔试"],["subs.interview","安排面试"],["subs.offer","创建 / 发送 Offer"],
    ["subs.onboard","入职跟进"],["subs.revert","恢复投递"],["subs.batch","批量操作"]]},
  {id:"pool",name:"人才库",desc:"人才沉淀与复用",actions:[
    ["pool.view","查看人才库"],["pool.manage","移入 / 移出人才库"],["pool.invite","邀约投递"]]},
@@ -804,6 +803,15 @@ function load(){
     S.roles=d.roles||seedRoles();
     S.offers=d.offers||[];S.offerTpls=d.offerTpls||[];
     if(!S.cands.length&&S.subs.length)S.cands=buildCands();
+    /* 旧数据迁移：原「评价笔记」多条结构 → 单份备注，取最后一条文本，清空 notes */
+    S.subs.forEach(function(s){
+      if(s.remark==null){
+        var ns=s.notes||[];
+        var last=ns.length?ns[ns.length-1]:null;
+        s.remark=last?String(last.fact||last.text||""):"";
+      }
+      s.notes=[];
+    });
     if(S.settings.blockIntercept==null)S.settings.blockIntercept="1";
     if(!roleById("admin"))S.roles.unshift(seedRoles()[0]);
     S.roles.forEach(function(r){
@@ -1714,7 +1722,7 @@ function pgSubs(){
     return '<tr class="'+(sel?"sel":"")+'">'+
       (canBatch?'<td style="width:36px">'+(S.sTab==="已发 offer"&&!onbOpen(s)?'':'<input type="checkbox" '+(sel?"checked":"")+' onchange="toggleSubSel(\''+s.id+'\',this.checked)">')+'</td>':'')+
       '<td><div class="tt">'+esc(s.name)+bd+hbTag+'</div><div class="mt"><span>'+esc(s.deg)+' · '+esc(s.school)+'</span>'+
-        (othN?'<span style="color:var(--brand)">另有 '+othN+' 个在流程中的投递</span>':'')+'</div></td>'+
+        (othN?'<span class="mnote" title="该候选人还有 '+othN+' 份投递在流程中，可在「全部」页签搜索其姓名或手机号查看">另有 '+othN+' 个投递在流程中</span>':'')+'</div></td>'+
       '<td class="dmono">'+(rv?esc(s.phone):esc(maskPhone(s.phone)))+
         (hasPerm("subs.contact")?'<span class="eye" onclick="toggleReveal(\''+s.id+'\')">'+(rv?"隐藏":"查看")+'</span>':'')+'</td>'+
       '<td style="font-size:13px">'+esc(j?j.title:"—")+'<div class="mt"><span>'+(j?(j.track==="campus"?"校招":"社招"):"")+' · '+esc(j?j.city:"")+'</span></div></td>'+
@@ -1776,11 +1784,10 @@ function pgSubs(){
 /* ---------- 导出候选人（B-47 信息表 / B-48 简历压缩包） ---------- */
 var EXP_COLS=[["姓名","name"],["手机号","phone"],["邮箱","email"],["学历","deg"],["毕业院校","school"],["专业","major"],
   ["工作年限","years"],["现居城市","city"],["投递岗位","job"],["状态","status"],["投递时间","time"],
-  ["技能","skill"],["候选人留言","msg"],["简历附件","attach"],["最新评价结论","note"]];
+  ["技能","skill"],["候选人留言","msg"],["简历附件","attach"],["备注","remark"]];
 function expVal(s,k){
   if(k==="job"){var j=byId(s.jobId);return j?j.title:"—"}
-  if(k==="note"){var n=(s.notes||[]).slice(-1)[0];if(!n)return "—";
-    return n.stage+(n.score?(" "+n.score+" 分"):"")+(n.verdict?(" · "+n.verdict):"")}
+  if(k==="remark")return (s.remark||"").trim()||"—";
   var v=s[k];
   return (v===undefined||v===null||v==="")?"—":String(v);
 }
@@ -2461,6 +2468,8 @@ function openSub(id,src){
       return '<button class="btn pri" onclick="openExam(\''+id+'\')">安排笔试</button>';
     if(to==="面试中")     /* 面试无独立排期表单，按钮按实际操作语义命名 */
       return '<button class="btn '+cls+'" onclick="advance(\''+id+'\',\''+to+'\')">安排面试</button>';
+    if(to==="已发 offer")  /* 状态仍记为「已发 offer」，按钮按动作语义命名 */
+      return '<button class="btn '+cls+'" onclick="advance(\''+id+'\',\''+to+'\')">发送 Offer</button>';
     return '<button class="btn '+cls+'" onclick="advance(\''+id+'\',\''+to+'\')">'+to+'</button>';
   }).join("");
   var kv=[
@@ -2475,19 +2484,15 @@ function openSub(id,src){
       '<div class="td">'+esc(h.by)+' · '+esc(h.t)+'</div>'+
       (h.note?'<div class="tn">备注：'+esc(h.note)+'</div>':'')+'</div>';
   }).join("");
-  var notes=(s.notes||[]).map(function(n,i){
-    var sc=n.score?(n.score+" 分 · "+(NOTE_SCORE_TXT[n.score]||"")):"";
-    var op=canWrite()?
-      '<button class="btn sm" style="margin-left:auto" onclick="openNote(\''+id+'\','+i+')">编辑</button>'+
-      '<button class="btn sm dgg" onclick="delNote(\''+id+'\','+i+')">删除</button>':'';
-    return '<div class="note"><div class="nh"><b>'+esc(n.by||"—")+'</b>'+
-      (n.stage?'<span class="pill b">'+esc(n.stage)+'</span>':'')+
-      (n.verdict?'<span class="pill '+(n.verdict==="不推荐"?"r":(n.verdict==="待定"?"o":"g"))+'">'+esc(n.verdict)+'</span>':'')+
-      '<span>'+esc((n.t||"").slice(0,16))+'</span>'+op+'</div>'+
-      (sc?'<div style="font-size:12.5px;color:var(--ink3);margin-top:4px">评分：'+esc(sc)+'</div>':'')+
-      '<div class="nb">'+(noteText(n)?esc(noteText(n)):'<span style="color:var(--ink3)">未填写事实记录</span>')+'</div>'+
-      '</div>';
-  }).join("");
+  var rmk=(s.remark||"");
+  /* 备注只有一份，随时可改：编辑态是文本域 + 保存，只读态纯展示 */
+  var notesBody=canWrite()?
+    '<textarea class="ip" id="rmk_ip" rows="5" style="width:100%;min-height:96px" placeholder="补充说明，如：技术基础扎实、期望薪资 25K、12 月可到岗">'+esc(rmk)+'</textarea>'+
+    '<div style="display:flex;align-items:center;gap:10px;margin-top:9px">'+
+      '<span style="font-size:12px;color:var(--ink3)">只有一份备注，保存即覆盖原内容</span>'+
+      '<div style="flex:1"></div>'+
+      '<button class="btn pri" onclick="saveRemark(\''+id+'\')">保存备注</button></div>'
+    :'<div style="font-size:13.5px;color:var(--ink2);background:#fafbfc;border-radius:8px;padding:11px 13px;white-space:pre-wrap">'+(esc(rmk)||'（未填写备注）')+'</div>';
 
   /* 详情页不展示人才库 / 黑名单模块：沉淀与拉黑统一走「人才库」「黑名单」菜单，或列表页签的批量动作 */
   var showAdv=(s.status!=="待筛选"&&s.status!=="初筛通过");      /* 线下笔试模块 */
@@ -2497,12 +2502,6 @@ function openSub(id,src){
   var offerN=offersOf(id).length;
   var showOnb=(s.status==="已发 offer")||!!s.onboard;   /* 发 offer 之后才出现；转过不合适的仍保留记录 */
   var onbBody=showOnb?onboardSection(s,id):"";
-  var notesBody=(notes||'<div style="color:var(--ink3);font-size:13px;margin-bottom:10px">暂无评价笔记</div>')+
-    histNotes(s)+
-    (canWrite()?'<div style="display:flex;gap:9px;margin-top:10px;flex-wrap:wrap">'+
-      '<button class="btn pri" onclick="openNote(\''+id+'\')">新增评价笔记</button>'+
-      '<input class="ip" id="note_ip" placeholder="快速备注（不评分），如：技术基础扎实" style="flex:1;min-width:150px">'+
-      '<button class="btn" onclick="addNote(\''+id+'\')">添加</button></div>':"");
   var hb=hiredBefore(s);
   var hbHtml=hb.length?('<div class="notice" style="margin-bottom:14px">该候选人曾入职：'+hb.slice(0,3).map(function(x){
       var L=onbLeft(x);return '「'+esc((byId(x.jobId)||{}).title||"—")+'」'+esc(L.date)+' 离职（'+esc(L.type)+' · '+esc(L.rehire)+'）';
@@ -2531,7 +2530,7 @@ function openSub(id,src){
   (offerBody?secBox("offer","Offer 文件",offerBody,offerN?offerN+" 份":"未生成"):"")+
   (onbBody?secBox("onboard","入职跟进",onbBody,onbState(s)):"")+
   secBox("hist","流转记录",'<div class="tl">'+(hist||"")+'</div>',(s.history||[]).length+" 条")+
-  secBox("notes","评价笔记（B-38 结构化 · 挂本次投递）",notesBody,(s.notes||[]).length+" 条");
+  secBox("notes","备注",notesBody,(s.remark||"").trim()?"已填写":"未填写");
 
   if(s.status==="已发 offer")btns=onbBtns(id,s);      /* 入职跟进：登记接受 / 登记入职 / 登记未入职 */
   /* 终态逆向（B-53）：仅管理员，且只回到这条投递自己上一次的环节 */
@@ -2619,7 +2618,7 @@ function renderTplHtml(tpl,vars){       /* 富文本正文的变量替换：保�
 function offerSection(s,id,noHead){
   var list=offersOf(id),can=canWrite();
   var head=noHead?"":'<div class="sec-t">Offer 文件</div>';
-  var btn=(can&&!list.length)?'<button class="btn pri" onclick="openOffer(\''+id+'\')">发起 Offer</button>':'';
+  var btn=(can&&!list.length)?'<button class="btn pri" onclick="openOffer(\''+id+'\')">创建 Offer</button>':'';
   if(!list.length){
     return head+'<div style="display:flex;align-items:center;gap:10px;background:#fafbfc;border-radius:8px;padding:11px 13px">'+
       '<div style="flex:1;font-size:13.5px;color:var(--ink2)">'+
@@ -2629,13 +2628,87 @@ function offerSection(s,id,noHead){
     return '<div style="display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:8px;padding:11px 13px;margin-bottom:9px">'+
       '<div style="width:34px;height:34px;border-radius:6px;background:var(--dangerl);color:var(--danger);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex:0 0 auto">PDF</div>'+
       '<div style="flex:1;min-width:0"><div style="font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(offerFileName(o))+'</div>'+
-      '<div style="font-size:12px;color:var(--ink3)">'+esc(o.size||offerSize(o))+'</div></div>'+
+      '<div style="font-size:12px;color:var(--ink3)">'+esc(o.size||offerSize(o))+
+        (o.sentAt?'　已发送 '+esc(o.sentAt)+' · 发往 '+esc(o.sendTo||"—"):"")+'</div></div>'+
       '<button class="btn sm" onclick="previewOfferPdf(\''+o.id+'\')">预览</button>'+
       '<button class="btn sm" onclick="downloadOfferPdf(\''+o.id+'\')">下载</button>'+
       (can?'<button class="btn sm dgg" onclick="delOfferPdf(\''+o.id+'\')">删除</button>':'')+
     '</div>';
   }).join("");
 }
+/* ---------- 发送 Offer：一次发送动作，弹层核对附件 / 条款 / 收件人后再流转 ---------- */
+function openSendOffer(id){
+  if(!hasPerm("subs.offer")){toast("当前角色无发送 Offer 权限","err");return}
+  if(!canWrite()){toast("只读角色不可发送 Offer","err");return}
+  var s=bySub(id);if(!s)return;
+  var j=byId(s.jobId)||{title:"—",owner:null};
+  var o=offersOf(id)[0];
+  if(!o){                                   /* 没有附件不发：先引导去创建，避免"发了 offer 却找不到文件" */
+    openModal("发送 Offer · "+esc(s.name)+" · "+esc(j.title),
+      '<div class="banner"><span>⚠</span><div class="sp">该候选人还没有 Offer 文件，发送前需要先生成或上传。</div></div>'+
+      '<div style="font-size:13px;color:var(--ink2);line-height:2">'+
+        '1. 关闭本窗口，在详情页「Offer 文件」区块点「创建 Offer」<br>'+
+        '2. 按匹配的模板填写月薪 / 入职日期 / 有效期并生成 PDF，或直接上传已盖章的 Offer<br>'+
+        '3. 回到这里再次点击「发送 Offer」，核对附件与收件人后发送</div>',
+      '<button class="btn" onclick="closeAll()">取消</button>'+
+      '<button class="btn pri" onclick="closeAll();openOffer(\''+id+'\')">去创建 Offer</button>');
+    return;
+  }
+  var v=o.vars||{};
+  var kvs=[["月薪",v["月薪"]],["拟入职日期",v["入职日期"]],["回复截止",v["有效期"]],["工作地点",v["城市"]]]
+    .map(function(it){
+      return '<div style="background:#f7f8fa;border-radius:8px;padding:9px 11px">'+
+        '<div style="font-size:12px;color:var(--ink3)">'+it[0]+'</div>'+
+        '<div style="font-size:13.5px;margin-top:2px">'+esc(it[1]||"—")+'</div></div>';
+    }).join("");
+  var own=ownerById(j.owner),cc=ownerEmail(j.owner);
+  var subj=o.subject||("录用通知 · "+j.title);
+  var body=
+    '<div class="sec-t" style="margin-top:0">① Offer 附件 · 本次发送的内容</div>'+
+    '<div style="display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:8px;padding:11px 13px">'+
+      '<div style="width:34px;height:34px;border-radius:6px;background:var(--dangerl);color:var(--danger);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex:0 0 auto">PDF</div>'+
+      '<div style="flex:1;min-width:0"><div style="font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(offerFileName(o))+'</div>'+
+      '<div style="font-size:12px;color:var(--ink3)">'+esc(o.size||offerSize(o))+' · '+
+        (o.src==="手动上传"?"手动上传":esc(o.tplName||"模板生成")+(o.tplVer?" v"+esc(o.tplVer):""))+
+        ' · '+esc(o.createdBy||"—")+' 创建于 '+esc(o.createdAt||"—")+'</div></div>'+
+      '<button class="btn sm" onclick="previewOfferPdf(\''+o.id+'\')">预览</button>'+
+      '<button class="btn sm" onclick="downloadOfferPdf(\''+o.id+'\')">下载</button>'+
+    '</div>'+
+    '<div class="sec-t">② 关键条款 · 从 Offer 内容自动带出</div>'+
+    '<div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px">'+kvs+'</div>'+
+    (o.src==="手动上传"?'<div style="font-size:12px;color:var(--ink3);margin-top:7px">手动上传的文件，条款以上传的 PDF 为准。</div>':"")+
+    '<div class="sec-t">③ 发送对象与邮件</div>'+
+    '<div class="fld"><label>收件人<i>*</i></label><input class="ip" id="so_to" value="'+esc(s.email||"")+'" placeholder="候选人邮箱"></div>'+
+    '<div class="fld"><label>抄送</label><label style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink2)">'+
+      '<input type="checkbox" id="so_cc" checked>招聘负责人 '+esc(own.name)+'（'+esc(cc)+'）</label></div>'+
+    '<div class="fld"><label>邮件主题</label><input class="ip" id="so_sub" value="'+esc(subj)+'"></div>'+
+    '<div class="notice">发送后：候选人状态改为「已发 offer」，进入入职跟进「待回复」；本次发送会记录发送人、时间与收件邮箱，可在 Offer 文件处回看。</div>';
+  openModal("发送 Offer · "+esc(s.name)+" · "+esc(j.title),body,
+    '<button class="btn" onclick="closeAll()">取消</button>'+
+    '<button class="btn" onclick="previewOfferPdf(\''+o.id+'\')">预览 Offer</button>'+
+    '<button class="btn pri" onclick="doSendOffer(\''+id+'\')">确认发送</button>',true);
+}
+function doSendOffer(id){
+  if(!canWrite()){toast("只读角色不可发送 Offer","err");return}
+  var s=bySub(id);if(!s)return;
+  var o=offersOf(id)[0];
+  if(!o){toast("请先创建 Offer 文件","err");return}
+  var to=(val("so_to")||"").trim();
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(to)){toast("请填写有效的收件邮箱","err");return}
+  var sub=(val("so_sub")||"").trim()||"录用通知";
+  var ck=$("so_cc"),j=byId(s.jobId);
+  var cc=(ck&&ck.checked)?ownerEmail(j?j.owner:null):"";
+  var t=now();
+  o.sentAt=t;o.sentBy=S.user.name;o.sendTo=to;o.sendCc=cc;o.mailSubject=sub;
+  s.notify.push({t:t,ch:"邮件",to:to,cc:cc,
+    content:"【红星招聘】"+s.name+" 您好，您应聘的「"+(j?j.title:"")+"」录用通知已发送，请查收附件并在有效期内回复确认。"});
+  s.history.push({t:t,act:"发送 Offer",by:S.user.name,
+    note:"发往 "+to+(cc?"；抄送 "+cc:"")+"；主题「"+sub+"」；附件 "+offerFileName(o)});
+  addLog("发送 Offer",s.name+" · "+(j?j.title:""),"面试中","已发 offer · "+offerFileName(o));
+  doAdvance(id,"已发 offer",{noNotify:1,noToast:1});   /* 邮件与记录已在上方写入，避免重复通知 */
+  toast("Offer 已发送至 "+to+"，状态已更新为「已发 offer」","ok");
+}
+
 /* ---------- 入职跟进：发 offer 之后的三个动作（登记接受 / 登记入职 / 登记未入职） ---------- */
 function onboardSection(s,id){
   var o=s.onboard||{state:"待回复"};
@@ -2986,9 +3059,9 @@ function doResetOnb(id){
 }
 function openOffer(id){
   var s=bySub(id);if(!s)return;
-  if(!hasPerm("subs.offer")){toast("当前角色无发起 Offer 权限","err");return}
+  if(!hasPerm("subs.offer")){toast("当前角色无创建 Offer 权限","err");return}
   if(offersOf(id).length){toast("已存在 Offer 文件，如需重新生成请先删除原文件","err");return}
-  if(s.status!=="面试中"&&s.status!=="已发 offer"){toast("仅「面试中」及之后的候选人可发起 Offer","err");return}
+  if(s.status!=="面试中"&&s.status!=="已发 offer"){toast("仅「面试中」及之后的候选人可创建 Offer","err");return}
   var j=byId(s.jobId);
   var m=matchTpl(j);            /* 无启用模板时仍可打开表单，改用手动上传 */
   S.offerDraft={subId:id,src:"系统生成",tplId:m?m.tpl.id:"",vars:defaultVars(s,j),
@@ -3004,7 +3077,7 @@ function drawOfferForm(s,j){
      '<button class="btn pri" onclick="uploadOffer(\''+sb.id+'\')">确认上传</button>'
     :'<button class="btn" onclick="closeAll()">取消</button>'+
      '<button class="btn pri" onclick="previewOffer(\''+sb.id+'\')">预览全文</button>';
-  openModal("发起 Offer · "+esc(sb.name)+" · "+(j?esc(j.title):""),body,foot,true);
+  openModal("创建 Offer · "+esc(sb.name)+" · "+(j?esc(j.title):""),body,foot,true);
 }
 function offerSrc(d){return (d&&d.src==="手动上传")?"手动上传":"系统生成"}
 /* Offer 来源：系统生成（按模板） / 手动上传（直接传 PDF）——置于「Offer 模板」之上 */
@@ -3271,7 +3344,7 @@ function downloadOfferPdf(oid){
 function delOfferPdf(oid){
   var o=offerById(oid);if(!o)return;
   if(!canWrite()){toast("只读角色不可删除","err");return}
-  confirmBox("删除 Offer 文件","确认删除 <b>"+esc(offerFileName(o))+"</b>？<br>删除后该候选人可重新发起 Offer 生成新的 PDF。","确认删除","doDelOfferPdf('"+oid+"')",1);
+  confirmBox("删除 Offer 文件","确认删除 <b>"+esc(offerFileName(o))+"</b>？<br>删除后该候选人可重新创建 Offer 生成新的 PDF。","确认删除","doDelOfferPdf('"+oid+"')",1);
 }
 function doDelOfferPdf(oid){
   var o=offerById(oid);if(!o)return;
@@ -3279,7 +3352,7 @@ function doDelOfferPdf(oid){
   addLog("删除 Offer 文件",o.candName+" · "+o.jobTitle,offerFileName(o),"文件已删除");
   closeAll();save();render();
   if(S.curSub)openSub(S.curSub);
-  toast("Offer 文件已删除，可重新发起生成","ok");
+  toast("Offer 文件已删除，可重新创建生成","ok");
 }
 function pgOfferTpl(){
   var tpls=S.offerTpls||[];
@@ -3309,7 +3382,7 @@ function pgOfferTpl(){
     '</tr></thead><tbody>'+(rows||'<tr><td colspan="6"><div class="empty"><b>暂无模板</b>点击「新建模板」创建</div></td></tr>')+
     '</tbody></table></div></div></div>'+
     '<div class="card" style="margin-top:14px"><div class="hd"><h3>变量说明（B-42）</h3></div><div class="bd">'+
-    '<div style="font-size:13px;color:var(--ink2);margin-bottom:10px">正文与邮件标题中使用 <code>{{变量名}}</code> 占位，发起 Offer 时<b>只填写该模板实际用到的变量</b>并按岗位自动带出，HR 仅需确认或修改少量关键字。带 <span style="color:var(--danger)">*</span> 为必填；模板自带的自定义变量（不在下方清单内）在发起时同样按必填处理。</div>'+
+    '<div style="font-size:13px;color:var(--ink2);margin-bottom:10px">正文与邮件标题中使用 <code>{{变量名}}</code> 占位，创建 Offer 时<b>只填写该模板实际用到的变量</b>并按岗位自动带出，HR 仅需确认或修改少量关键字。带 <span style="color:var(--danger)">*</span> 为必填；模板自带的自定义变量（不在下方清单内）在创建时同样按必填处理。</div>'+
     '<div style="display:flex;gap:7px;flex-wrap:wrap">'+OFFER_VARS.map(function(k){
       return '<span class="pill '+(REQ_VARS.indexOf(k)>=0?"o":"n")+'">'+esc(k)+(REQ_VARS.indexOf(k)>=0?" *":"")+'</span>';
     }).join("")+'</div>'+
@@ -3323,7 +3396,7 @@ function previewTpl(id){
   var isH=!!t.html;
   var body=offerDocHtml(t.subject||"（未设置邮件标题）",isH?tplBodyHtml(t):t.body,
     '本模板使用 '+ks.length+' 个变量：'+esc(ks.join("、")),isH)+
-    '<div style="font-size:12px;color:var(--ink3);margin-top:10px">未填充变量的模板原文，{{}} 为占位符；发起 Offer 时仅出现上方这些变量的输入框。</div>';
+    '<div style="font-size:12px;color:var(--ink3);margin-top:10px">未填充变量的模板原文，{{}} 为占位符；创建 Offer 时仅出现上方这些变量的输入框。</div>';
   openModal("模板预览 · "+esc(t.name)+" v"+t.ver+" · "+tplTrackName(t),body,'<button class="btn" onclick="closeAll()">关闭</button>',true);
 }
 /* ---------- 模板正文富文本编辑（B-55） ---------- */
@@ -3345,7 +3418,7 @@ function rteToolbar(){
     '<span class="sp2"></span>'+b("removeFormat","清格式","清除选中内容格式")+b("undo","↶","撤销")+b("redo","↷","重做");
 }
 function rteVarBar(){
-  return '<div class="varbar"><div class="lb">可用变量（点击即插入到光标处，带 <span style="color:var(--danger)">*</span> 为发起 Offer 时必填）</div>'+
+  return '<div class="varbar"><div class="lb">可用变量（点击即插入到光标处，带 <span style="color:var(--danger)">*</span> 为创建 Offer 时必填）</div>'+
     '<div class="vs">'+OFFER_VARS.map(function(k){
       return '<span class="vchip" title="插入 {{'+k+'}}" onmousedown="event.preventDefault()" onclick="rteInsertVar(\''+k+'\')">'+
         esc(k)+(REQ_VARS.indexOf(k)>=0?'<i>*</i>':'')+'</span>';
@@ -3397,7 +3470,7 @@ function editTpl(id){
   var body=
    '<div class="fld"><label>模板名称</label><input class="ip" id="tp_name" value="'+esc(t.name)+'" placeholder="如：社招标准录用通知"></div>'+
    '<div class="fld"><label>适用通道</label><select class="ip" id="tp_track">'+TPL_TRACK.map(function(x){return '<option value="'+x[0]+'"'+(tplTrackKey(t)===x[0]?" selected":"")+'>'+x[1]+'</option>'}).join("")+'</select>'+
-     '<div class="hint">与岗位的招聘通道对应：社招岗位自动匹配「社招」模板，校招岗位匹配「校招」模板，「通用」作为兜底；HR 发起时仍可手动改选。</div></div>'+
+     '<div class="hint">与岗位的招聘通道对应：社招岗位自动匹配「社招」模板，校招岗位匹配「校招」模板，「通用」作为兜底；HR 创建时仍可手动改选。</div></div>'+
    '<div class="fld"><label>邮件标题（支持变量）</label><input class="ip" id="tp_sub" value="'+esc(t.subject)+'"></div>'+
    '<div class="fld"><label>正文 <i>*</i></label>'+rteBox(initHtml)+'</div>'+
    '<div class="fld"><label>状态</label><select class="ip" id="tp_st"><option value="enabled"'+(t.status==="enabled"?" selected":"")+'>启用</option><option value="disabled"'+(t.status==="disabled"?" selected":"")+'>停用</option></select></div>'+
@@ -3472,88 +3545,17 @@ function seedExams(){
     s3.history.push({t:dayAgo(4)+" 16:35",act:"状态流转",by:"王敏",from:"笔试中",to:"不合适"});}
 }
 function seedNotes(){
-  var facts=["描述了主导 4 人团队在 3 周内完成订单系统迁移的具体做法与结果",
-             "笔试算法题两道完成一道，数据库设计题回答完整",
-             "现场白板推导缓存穿透方案，能给出降级与兜底策略"];
-  var stages=["初筛","笔试","一面"],scores=[4,3,5],verdicts=["推荐","待定","强烈推荐"];
-  S.subs.slice(0,6).forEach(function(s,i){
-    s.notes=[{by:"王敏",t:dayAgo(3)+" 15:20",stage:stages[i%3],score:scores[i%3],
-      verdict:verdicts[i%3],fact:facts[i%3]}];
-  });
+  var facts=["技术基础扎实，能清楚讲出订单系统迁移的排期与风险处理，建议安排一面",
+             "笔试两道算法完成一道，数据库设计题回答完整，可继续推进",
+             "现场白板推导缓存穿透方案，能给出降级与兜底策略，沟通顺畅"];
+  S.subs.slice(0,6).forEach(function(s,i){s.remark=facts[i%3]});
 }
 function val(id){var e=$(id);return e?e.value:""}
-function noteText(n){return n.fact||n.text||""}
-function histNotes(s){
-  var others=subsOfPhone(s.phone).filter(function(x){return x.id!==s.id&&mySubIds()[x.id]});
-  var out=[];
-  others.forEach(function(x){(x.notes||[]).forEach(function(n){out.push({sub:x,n:n})})});
-  if(!out.length)return '';
-  return '<div style="margin-top:12px;border-top:1px dashed var(--line);padding-top:10px">'+
-    '<div style="font-size:12.5px;color:var(--ink3);margin-bottom:7px">历史投递评价（同一候选人其他投递，'+out.length+' 条）</div>'+
-    out.map(function(o){
-      var jj=byId(o.sub.jobId);
-      return '<div class="note" style="opacity:.9"><div class="nh"><b>'+esc(o.n.by||"—")+'</b>'+
-        (o.n.stage?'<span class="pill b">'+esc(o.n.stage)+'</span>':'')+
-        '<span>'+esc(jj?jj.title:"—")+'</span><span>'+esc((o.n.t||"").slice(0,10))+'</span></div>'+
-        '<div class="nb">'+esc(noteText(o.n))+'</div></div>';
-    }).join("")+'</div>';
-}
-function openNote(id,i){
+/* 备注：每个候选人一份，随时可覆盖保存，不保留历史版本 */
+function saveRemark(id){
   var s=bySub(id);if(!s)return;
-  var ed=(i!==undefined&&i!==null&&s.notes)?s.notes[i]:null;   /* 有索引=编辑，否则=新增 */
-  if(i!==undefined&&i!==null&&!ed){toast("笔记不存在，请刷新","err");return}
-  function sel(a,b){return a===b?" selected":""}
-  var body=
-   '<div class="fld"><label>环节</label><select class="ip" id="nt_stage">'+NOTE_STAGES.map(function(x){return '<option'+sel(x,ed?ed.stage:NOTE_STAGES[0])+'>'+x+'</option>'}).join("")+'</select></div>'+
-   '<div class="fld"><label>结论</label><select class="ip" id="nt_verdict">'+NOTE_VERDICTS.map(function(x){return '<option'+sel(x,ed?(ed.verdict||"推荐"):"推荐")+'>'+x+'</option>'}).join("")+'</select></div>'+
-   '<div class="fld"><label>评分（1–5，行为锚定）</label><select class="ip" id="nt_score">'+
-     '<option value="5"'+sel(5,ed?ed.score:3)+'>5 · 显著超出要求</option>'+
-     '<option value="4"'+sel(4,ed?ed.score:3)+'>4 · 超出要求</option>'+
-     '<option value="3"'+sel(3,ed?ed.score:3)+'>3 · 达到岗位要求</option>'+
-     '<option value="2"'+sel(2,ed?ed.score:3)+'>2 · 低于要求</option>'+
-     '<option value="1"'+sel(1,ed?ed.score:3)+'>1 · 明显不符</option>'+
-     '<option value="0"'+sel(0,ed?(ed.score||0):3)+'>0 · 不评分（纯备注）</option></select></div>'+
-   '<div class="fld"><label>事实记录（选填：候选人说了什么、做了什么）</label><textarea class="ip" id="nt_fact" rows="4" style="min-height:78px" placeholder="如：描述了主导 4 人团队在 3 周内完成系统迁移的具体做法与结果">'+esc(ed?(ed.fact||ed.text||""):"")+'</textarea></div>';
-  openModal((ed?"编辑":"新增")+"评价笔记 · "+esc(s.name),body,
-    '<button class="btn" onclick="closeAll()">取消</button><button class="btn pri" onclick="saveNote(\''+id+'\','+(i===undefined||i===null?"null":i)+')">'+(ed?"保存修改":"保存笔记")+'</button>');
-}
-function noteAt(id,i){
-  var s=bySub(id);if(!s||!s.notes)return null;
-  return (i!==undefined&&i!==null&&i>=0&&i<s.notes.length)?s.notes[i]:null;
-}
-function saveNote(id,i){
-  var s=bySub(id);if(!s)return;
-  var old=noteAt(id,i);
-  var f=(val("nt_fact")||"").trim();
-  var sc0=parseInt(val("nt_score"),10);
-  var d={stage:val("nt_stage"),score:(isNaN(sc0)||sc0===0)?0:sc0,
-    verdict:val("nt_verdict"),fact:f};
-  s.notes=s.notes||[];
-  if(old){  /* 就地覆盖：不记操作日志、不改记录人与原时间（B-38 评价可编辑·不留痕） */
-    for(var k in d)old[k]=d[k];
-    if(!old.by)old.by=S.user.name;
-    save();closeAll();render();S.curSub=id;openSub(id);toast("评价笔记已更新","ok");
-    return;
-  }
-  var n={by:S.user.name,t:now(),stage:d.stage,score:d.score,verdict:d.verdict,fact:d.fact};
-  s.notes.push(n);
-  addLog("新增评价笔记",s.name+" · "+n.stage,n.stage+" 评分 "+n.score,n.verdict+(f?" · "+f.slice(0,30):""));
-  save();closeAll();render();S.curSub=id;openSub(id);toast("评价笔记已保存","ok");
-}
-/* 删除评价笔记：直接从数组移除，不软删、不记操作日志、不在页面留任何痕迹 */
-function delNote(id,i){
-  var s=bySub(id);if(!s)return;
-  var n=noteAt(id,i);if(!n){toast("笔记不存在，请刷新","err");return}
-  var prev=(noteText(n)||"（未填写事实记录）").slice(0,40);
-  confirmBox("删除评价笔记",'确定删除这条评价笔记吗？<br><span style="color:var(--ink3);font-size:13px">'+esc(prev)+'</span><br>删除后不可恢复，且不留任何操作痕迹。',
-    "确认删除","doDelNote('"+id+"',"+i+")",1);
-}
-function doDelNote(id,i){
-  var s=bySub(id);if(!s)return;
-  if(!noteAt(id,i)){toast("笔记不存在，请刷新","err");return}
-  closeAll();
-  s.notes.splice(i,1);
-  save();render();S.curSub=id;openSub(id);toast("评价笔记已删除","ok");
+  s.remark=(val("rmk_ip")||"").trim();
+  save();S.curSub=id;openSub(id);toast("备注已保存","ok");
 }
 function examSection(s,id,noHead){
   var e=s.exam,can=canWrite();
@@ -3694,14 +3696,6 @@ function previewAttach(id){
   w.document.write(html);w.document.close();
   toast("已在新窗口打开简历预览","ok");
 }
-function addNote(id){
-  var el=$("note_ip");var v=(el&&el.value||"").trim();
-  if(!v){toast("请输入备注内容","err");return}
-  var s=bySub(id);
-  s.notes.push({by:S.user.name,t:now(),stage:"其他",fact:v});
-  addLog("添加候选人备注",s.name,"",v.slice(0,40));
-  save();openSub(id);toast("备注已保存","ok");
-}
 function advance(id,to){
   if(!hasPerm(FLOW_PERM[to]||"subs.screen")){toast("当前角色无权执行该流转","err");return}
   var s=bySub(id),j=byId(s.jobId),from=s.status;
@@ -3713,9 +3707,10 @@ function advance(id,to){
       "确认安排","doAdvance('"+id+"','面试中')",0);
     return;
   }
+  if(to==="已发 offer"){openSendOffer(id);return}   /* 发送 Offer：核对附件 / 条款 / 收件人后再流转 */
   doAdvance(id,to);
 }
-function doAdvance(id,to){
+function doAdvance(id,to,opt){
   if(!canWrite()){toast("只读角色不可流转","err");return}
   var s=bySub(id),j=byId(s.jobId),from=s.status;
   if(SUB_FLOW[from].indexOf(to)<0){toast("不允许的流转："+from+" → "+to,"err");return}
@@ -3727,12 +3722,13 @@ function doAdvance(id,to){
   }
   s.status=to;
   s.history.push({t:now(),act:"状态流转",by:S.user.name,from:from,to:to});
-  var nf=NOTIFY[to];
-  if(nf)s.notify.push({t:now(),ch:nf.ch,to:s.email,
+  var nf=NOTIFY[to],quiet=(opt&&opt.noNotify);
+  if(nf&&!quiet)s.notify.push({t:now(),ch:nf.ch,to:s.email,
     cc:nf.ccOwner?ownerEmail(j?j.owner:null):"",content:nf.txt(s,j)});
   addLog("候选人状态流转",s.name+" · "+(j?j.title:""),from,to);
   save();closeAll();render();
-  toast("已转为「"+to+"」"+(nf?"，邮件已通知候选人并抄送招聘负责人":""),"ok");
+  if(!(opt&&opt.noToast))
+    toast("已转为「"+to+"」"+((nf&&!quiet)?"，邮件已通知候选人并抄送招聘负责人":""),"ok");
   setTimeout(function(){S.curSub=id;openSub(id)},10);
 }
 
@@ -4016,7 +4012,7 @@ function pgSettings(){
       (hasPerm("settings.export")?'<button class="btn" onclick="exportJson()">导出当前数据 JSON</button>':'')+
     '</div>'+
     '<div class="sec-t">对应需求</div>'+
-    '<div class="notice">B-01~B-16 岗位管理　B-17~B-21 账号权限　B-22~B-31 候选人管理　B-32/B-35/B-36 人才库　B-33/B-34/B-37 黑名单　B-38/B-39 评价笔记　B-40/B-41 线下笔试　B-42~B-45 Offer<br>N-02 个人信息合规（脱敏 / 签名 URL / 留存期）　N-03 文件存储限制　N-08 隐私政策修订</div>'+
+    '<div class="notice">B-01~B-16 岗位管理　B-17~B-21 账号权限　B-22~B-31 候选人管理　B-32/B-35/B-36 人才库　B-33/B-34/B-37 黑名单　B-38/B-39 候选人备注　B-40/B-41 线下笔试　B-42~B-45 Offer<br>N-02 个人信息合规（脱敏 / 签名 URL / 留存期）　N-03 文件存储限制　N-08 隐私政策修订</div>'+
   '</div></div>'+
   '</div>';
 }
