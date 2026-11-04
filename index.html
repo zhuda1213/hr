@@ -29,10 +29,18 @@ input,select,textarea{font-family:inherit;font-size:14px;-webkit-appearance:none
 .top .ic{width:36px;height:36px;display:flex;align-items:center;justify-content:center;flex:none}
 .avatar{width:30px;height:30px;border-radius:50%;background:var(--brand-l);color:var(--brand-d);font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;flex:none}
 
-/* ---------- hero ---------- */
-.hero{position:relative;background:var(--brand);color:#fff;padding:calc(26px + var(--st)) 18px 22px}
-.hero h1{font-size:22px;font-weight:600;line-height:1.4;letter-spacing:.5px}
-.hero p{font-size:12.5px;opacity:.88;margin-top:8px;line-height:1.65}
+/* ---------- 首页品牌横幅（Logo + 公司名称） ---------- */
+.brandbar{position:relative;overflow:hidden;color:#fff;display:flex;align-items:center;gap:12px;
+  padding:calc(14px + var(--st)) 18px 16px;
+  background:linear-gradient(100deg,#0a4a9c 0%,#1668dc 52%,#2f8bf2 100%)}
+.brandbar::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(120% 150% at 92% -30%,rgba(255,255,255,.30),rgba(255,255,255,0) 62%)}
+.bb-logo{position:relative;z-index:1;width:44px;height:44px;flex:none;border-radius:13px;background:#fff;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(4,28,64,.3)}
+.bb-txt{position:relative;z-index:1;flex:1;min-width:0}
+.bb-n{font-size:19px;font-weight:700;letter-spacing:.6px;line-height:1.2}
+.bb-s{margin-top:3px;font-size:10.5px;letter-spacing:1.2px;opacity:.78;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis}
 .chan{margin:12px 18px 0;background:var(--white);border-radius:12px;padding:14px;display:flex;align-items:center;gap:12px;box-shadow:0 2px 8px rgba(20,60,120,.08)}
 .chan+.chan{margin-top:10px}
 .chan-ic{width:42px;height:42px;border-radius:10px;background:var(--brand-l);color:var(--brand-d);display:flex;align-items:center;justify-content:center;flex:none}
@@ -212,15 +220,9 @@ input,select,textarea{font-family:inherit;font-size:14px;-webkit-appearance:none
 .agree .cb{width:17px;height:17px;border:1px solid var(--line2);border-radius:4px;flex:none;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff}
 .agree.on .cb{background:var(--brand);border-color:var(--brand)}
 .agree a{color:var(--brand)}
-/* 登录 / 注册（B-56） */
-.auth-hd{text-align:center;margin-bottom:15px}
-.auth-hd .lg{width:46px;height:46px;border-radius:13px;background:linear-gradient(135deg,#1668dc,#0b4fa6);color:#fff;
-  font-size:19px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;box-shadow:0 4px 12px rgba(22,104,220,.28)}
-.auth-hd h4{font-size:16.5px;font-weight:600;margin-bottom:4px}
-.auth-hd p{font-size:12.5px;color:var(--ink3);line-height:1.7}
-.auth-seg{display:flex;gap:5px;background:#f2f4f7;border-radius:10px;padding:4px;margin-bottom:15px}
-.auth-seg button{flex:1;height:33px;border:none;background:transparent;border-radius:8px;font-size:13px;color:var(--ink2);cursor:pointer}
-.auth-seg button.on{background:#fff;color:var(--brand);font-weight:600;box-shadow:0 1px 3px rgba(16,24,40,.09)}
+/* 登录（B-56）：手机号 + 验证码，未注册自动建档，无 Tab 切换 */
+.auth-btn{height:48px;flex:none;border-radius:24px;font-size:15px;width:100%}
+.lab-tip{float:right;font-size:11px;color:var(--ink4);font-weight:400;line-height:17px}
 .fi-err{font-size:11.5px;color:#d9480f;margin-top:5px;display:none;line-height:1.6}
 .fi-wrap.bad .fi-err{display:block}
 .code-row{display:flex;gap:9px}
@@ -395,7 +397,7 @@ var DEMO_SKILL="Java / Spring Boot / MySQL / Redis / 分布式事务";
 var KEY="hx_h5_v1";
 var S={tab:"home",track:"social",jid:null,user:null,fav:[],subs:[],form:{},rEdu:[],rWork:[],rProj:"",rSkill:"",rFile:null,files:[],
   q:"",f:{city:"",cat:"",deg:"",exp:""},sort:"new",pageN:1,edit:false,pending:null,agree:false,code:"",subTab:"all",
-  accounts:[],authMode:"login",codeSent:false,codeLeft:0,codeInput:"",subsSeed:1};
+  accounts:[],codeSent:false,codeLeft:0,codeInput:"",subsSeed:1};
 function save(){try{localStorage.setItem(KEY,JSON.stringify({user:S.user,fav:S.fav,subs:S.subs,form:S.form,rEdu:S.rEdu,rWork:S.rWork,rProj:S.rProj,rSkill:S.rSkill,files:S.files,accounts:S.accounts,subsSeed:S.subsSeed}))}catch(e){}}
 function load(){
   try{var d=JSON.parse(localStorage.getItem(KEY)||"{}");for(var k in d)S[k]=d[k]}catch(e){}
@@ -502,8 +504,8 @@ function renderTabbar(){
   }).join("")+'</div>';
 }
 function go(tab){
-  /* 「我的」允许游客进入（展示登录引导页）；投递记录 / 简历 / 收藏仍要求登录 */
-  if((tab==="sub"||tab==="resume"||tab==="fav")&&needLogin(tab,null))return;
+  /* 「我的」与投递记录 / 简历 / 收藏一致：游客点击直接弹登录框，登录后自动回到该页签 */
+  if((tab==="sub"||tab==="resume"||tab==="fav"||tab==="me")&&needLogin(tab,null))return;
   if(tab!=="resume")S.edit=false;
   S.tab=tab;S.jid=null;S.pageN=1;window.scrollTo(0,0);render();
 }
@@ -533,7 +535,7 @@ function renderTop(){
   var t=S.tab,el=$("top");
   var backIco='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>';
   if(t==="home"){
-    el.innerHTML='';   /* 首页不设顶部栏：蓝色 Hero 即为页面顶部 */
+    el.innerHTML='';   /* 首页不设顶部栏：品牌横幅即为页面顶部 */
   }else if(t==="detail"){
     var j=byId(S.jid);
     el.innerHTML='<div class="top"><div class="top-in"><div class="ic" onclick="back()">'+backIco+'</div>'+
@@ -553,9 +555,14 @@ function pgHome(){
   var hot=L.slice().sort(function(a,b){return a.date<b.date?1:-1}).slice(0,5);
   var cC=L.filter(function(j){return j.track==="campus"}).length;
   var sC=L.filter(function(j){return j.track==="social"}).length;
-  return '<div class="hero">'+
-    '<h1>与红星同行，让农商更简单</h1>'+
-    '<p>红星实业集团 · 中南地区最大的一级农副产品流通枢纽，正在寻找同路人</p></div>'+
+  return '<div class="brandbar">'+
+    '<div class="bb-logo"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true">'+
+      '<defs><linearGradient id="bbg" x1="0" y1="0" x2="1" y2="1">'+
+        '<stop offset="0" stop-color="#0b4fa6"/><stop offset="1" stop-color="#2f8bf2"/></linearGradient></defs>'+
+      '<path d="M12 2.8 14.85 8.55 21.2 9.47 16.6 13.96 17.68 20.28 12 17.3 6.32 20.28 7.4 13.96 2.8 9.47 9.15 8.55Z" '+
+        'fill="url(#bbg)"/></svg></div>'+
+    '<div class="bb-txt"><div class="bb-n">红星实业集团</div>'+
+      '<div class="bb-s">HONGXING GROUP · 人才招聘</div></div></div>'+
     '<div class="chan" onclick="goTrack(\'campus\')"><div class="chan-ic">'+
       '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5 12 4l9 4.5-9 4.5-9-4.5Z"/><path d="M6.5 10.8V16c0 1.7 2.5 3 5.5 3s5.5-1.3 5.5-3v-5.2"/></svg></div>'+
       '<div class="chan-b"><h3>校园招聘</h3><p>面向 2027 届毕业生开放管理培训生、技术开发、运营、职能等多类岗位，配备导师带教与轮岗计划</p></div>'+
@@ -645,54 +652,43 @@ function doApply(id){
   openApply(byId(id));
 }
 
-/* ============ 登录 / 注册（B-56） ============ */
+/* ============ 登录（B-56）：手机号 + 验证码，未注册自动建档 ============ */
 var codeTimer=null;
 function nowMin(){var d=new Date();function p2(n){return n<10?"0"+n:""+n}
   return d.getFullYear()+"-"+p2(d.getMonth()+1)+"-"+p2(d.getDate())+" "+p2(d.getHours())+":"+p2(d.getMinutes())}
 function accOf(phone){for(var i=0;i<S.accounts.length;i++)if(S.accounts[i].phone===phone)return S.accounts[i];return null}
 function maskP(p){return p?p.slice(0,3)+"****"+p.slice(7):""}
-function openLogin(mode){if(mode)S.authMode=mode;if(!S.authMode)S.authMode="login";drawLogin()}
+function openLogin(){drawLogin()}
 function captureAuth(){
-  if($("f_name"))S.form.name=$("f_name").value||"";
   if($("f_phone"))S.form.phone=$("f_phone").value||"";
   if($("f_code"))S.codeInput=$("f_code").value||"";
 }
-function switchAuth(m){captureAuth();S.authMode=m;drawLogin()}
 function badF(id){var w=$(id);if(w)w.className="fi-wrap bad"}
-function clearBadF(){["w_name","w_phone","w_code"].forEach(function(id){var w=$(id);if(w)w.className="fi-wrap"})}
+function clearBadF(){["w_phone","w_code"].forEach(function(id){var w=$(id);if(w)w.className="fi-wrap"})}
 function drawLogin(){
-  var reg=S.authMode==="reg",p=S.pending,job=p&&p.p?byId(p.p):null;
-  var tip=p?(p.a==="apply"?'您正在投递：<b>'+esc(job?job.title:"")+'</b>。'+(reg?"注册":"登录")+'后即可填写简历信息并投递。'
-    :(p.a==="fav"?'收藏职位需要先'+(reg?"注册":"登录")+'，完成后立即为您保存该职位。'
+  var p=S.pending,job=p&&p.p?byId(p.p):null;
+  var tip=p?(p.a==="apply"?'您正在投递：<b>'+esc(job?job.title:"")+'</b>。登录后即可填写简历信息并投递。'
+    :(p.a==="fav"?'收藏职位需要先登录，完成后立即为您保存该职位。'
     :'登录后可查看投递进度与面试通知。')):"";
   var agree='<div class="agree'+(S.agree?" on":"")+'" onclick="S.agree=!S.agree;drawLogin()"><div class="cb">✓</div>'+
     '<div>我已阅读并同意<a href="javascript:void(0)">《用户协议》</a>与<a href="javascript:void(0)">《隐私政策》</a>，同意红星实业集团为招聘目的处理我的简历信息。</div></div>';
-  var demoLink=reg?"":(accOf("13856789211")?'　·　<a onclick="demoLogin()">使用演示账号</a>':"");
-  var b='<div class="sh-h"><h3>'+(reg?"注册账号":"登录")+'</h3><div class="x" onclick="closeS()">×</div></div>'+
+  var demoLink=accOf("13856789211")?'<div class="auth-foot"><a onclick="demoLogin()">使用演示账号</a></div>':"";
+  var b='<div class="sh-h"><h3>登录</h3><div class="x" onclick="closeS()">×</div></div>'+
     '<div class="sh-b">'+
-      '<div class="auth-hd"><div class="lg">红</div><h4>'+(reg?"注册红星招聘账号":"欢迎回来")+'</h4>'+
-        '<p>'+(reg?"填写姓名与手机号即可注册，无需邮箱与密码":"用注册手机号接收验证码登录，无需记忆密码")+'</p></div>'+
       (tip?'<div class="tipbox">'+tip+'</div>':'')+
-      '<div class="auth-seg">'+
-        '<button class="'+(reg?"":"on")+'" onclick="switchAuth(\'login\')">验证码登录</button>'+
-        '<button class="'+(reg?"on":"")+'" onclick="switchAuth(\'reg\')">注册</button></div>'+
-      (reg?'<div class="fi-wrap" id="w_name"><label class="req">姓名</label>'+
-        '<input id="f_name" value="'+esc(S.form.name||"")+'" placeholder="请填写真实姓名" oninput="S.form.name=this.value">'+
-        '<div class="fi-err">请填写真实姓名</div></div>':'')+
-      '<div class="fi-wrap" id="w_phone"><label class="req">手机号</label>'+
+      '<div class="fi-wrap" id="w_phone"><label class="req">手机号<span class="lab-tip">未注册将自动创建账号</span></label>'+
         '<input id="f_phone" type="tel" maxlength="11" value="'+esc(S.form.phone||"")+'" placeholder="11 位手机号，用于接收通知与登录" oninput="S.form.phone=this.value">'+
         '<div class="fi-err">请输入正确的 11 位手机号</div></div>'+
       '<div class="fi-wrap" id="w_code"><label class="req">验证码</label><div class="code-row">'+
         '<input id="f_code" type="tel" maxlength="6" value="'+esc(S.codeInput||"")+'" placeholder="6 位数字验证码" oninput="S.codeInput=this.value">'+
         '<button class="mini" id="f_code_btn"'+(S.codeLeft>0?" disabled":"")+' onclick="sendCode()">'+(S.codeLeft>0?S.codeLeft+"s 后重发":"获取验证码")+'</button></div>'+
         '<div class="fi-err">验证码不正确</div></div>'+
-      (reg?agree:'')+
+      agree+
       '<div class="demo-note">演示环境未接短信通道，验证码固定为 <b>888888</b></div>'+
     '</div>'+
     '<div class="sh-f" style="flex-direction:column;align-items:stretch;gap:9px">'+
-      '<button class="btn btn-p" style="width:100%" onclick="submitAuth()">'+(reg?"注册并继续":"登录")+'</button>'+
-      '<div class="auth-foot">'+(reg?'已有账号？<a onclick="switchAuth(\'login\')">直接登录</a>'
-        :'还没有账号？<a onclick="switchAuth(\'reg\')">立即注册</a>'+demoLink)+'</div>'+
+      '<button class="btn btn-p auth-btn" onclick="submitAuth()">登录</button>'+
+      demoLink+
     '</div>';
   showSheet(b);
   if(S.codeLeft>0)startTick();
@@ -718,28 +714,20 @@ function startTick(){
 function stopTick(){if(codeTimer){clearInterval(codeTimer);codeTimer=null}}
 function submitAuth(){
   captureAuth();
-  var reg=S.authMode==="reg";
-  var name=(S.form.name||"").trim(),phone=(S.form.phone||"").trim(),code=(S.codeInput||"").trim();
+  var phone=(S.form.phone||"").trim(),code=(S.codeInput||"").trim();
   clearBadF();
-  if(reg&&!name){badF("w_name");toast("请填写真实姓名");return}
   if(!/^1\d{10}$/.test(phone)){badF("w_phone");toast("请输入正确的 11 位手机号");return}
   if(!S.codeSent){badF("w_code");toast("请先点击「获取验证码」");return}
   if(!code){badF("w_code");toast("请填写验证码");return}
   if(code!==S.code){badF("w_code");toast("验证码不正确，演示环境请填 888888");return}
-  if(reg&&!S.agree){toast("请先阅读并同意用户协议与隐私政策");return}
-  var acc=accOf(phone);
-  if(!reg&&!acc){                       /* 未注册的手机号：引导去注册，表单值保留 */
-    toast("该手机号尚未注册，已为你切换到注册");
-    S.authMode="reg";S.codeInput="";drawLogin();return;
-  }
-  if(reg&&acc){                         /* 已注册：引导去登录，避免重复建档 */
-    toast("该手机号已注册，请直接登录");
-    S.authMode="login";S.codeInput="";drawLogin();return;
-  }
-  if(reg){acc={phone:phone,name:name,createdAt:nowMin(),lastLogin:nowMin()};S.accounts.push(acc);
-    S.form.name=name;S.form.phone=phone}
-  else{acc.lastLogin=nowMin();if(acc.name&&!(S.form.name||"").trim())S.form.name=acc.name}
-  authSuccess(acc,reg);
+  if(!S.agree){toast("请先阅读并同意用户协议与隐私政策");return}
+  /* 手机号即账号：已存在则登录并刷新最近登录；不存在则当场建档，用户无需单独注册 */
+  var acc=accOf(phone),isNew=!acc;
+  if(isNew){acc={phone:phone,name:"",createdAt:nowMin(),lastLogin:nowMin()};S.accounts.push(acc)}
+  else{acc.lastLogin=nowMin()}
+  S.form.phone=phone;
+  if(!(S.form.name||"").trim()&&acc.name)S.form.name=acc.name;
+  authSuccess(acc,isNew);
 }
 function demoLogin(){
   var acc=accOf("13856789211");
@@ -755,7 +743,7 @@ function authSuccess(acc,isNew){
   S.codeLeft=0;S.codeInput="";S.code="";S.codeSent=false;S.agree=false;
   /* 预置的演示投递/收藏只属于演示账号，换成新账号时清掉，避免串档 */
   if(S.subsSeed&&acc.phone!=="13856789211"){S.subs=[];S.fav=[];S.subsSeed=0}
-  var head=isNew?"注册成功":"登录成功",msg=head+(isNew?"，欢迎加入红星招聘":"，欢迎回来"),openAfter=null;
+  var head=isNew?"账号已创建":"登录成功",msg=head+(isNew?"，欢迎加入红星招聘":"，欢迎回来"),openAfter=null;
   if(act==="apply"&&job){openAfter=job;msg=head+(isNew?"，请补充简历信息后投递":"，请确认简历信息后投递")}
   else if(act==="fav"&&job){if(S.fav.indexOf(job.id)<0)S.fav.push(job.id);msg=head+"，已收藏「"+job.title+"」"}
   S.pending=null;
@@ -775,10 +763,10 @@ function fillDemo(){
 function demoFill(){fillDemo();drawLogin();toast("解析完成，已填充简历信息，可手动修正")}
 function clearForm(){S.form={};S.rEdu=[];S.rWork=[];S.rProj="";S.rSkill="";drawLogin()}
 
-function addSub(job,note,fid){
+function addSub(job,note,fid,src){
   var f=fid?fileOf(fid):null;
   S.subs.unshift({jid:job.id,title:job.title,salary:job.salary,city:job.city,rc:job.rc,
-    time:today(),status:"待筛选",note:note||"",fid:fid||"",fname:f?f.name:""});
+    time:today(),status:"待筛选",note:note||"",src:src||"",fid:fid||"",fname:f?f.name:""});
   save();
 }
 
@@ -795,6 +783,7 @@ function afBase(job){
     gender:(f.gender||"").trim(),
     city:(f.city||"").trim()||job.city,
     note:"",
+    src:"",
     pick:false,
     file:d?{id:d.id,name:d.name,ext:d.ext,size:d.size}:null
   };
@@ -874,7 +863,8 @@ function drawApply(){
         '<div class="s">不上传也可投递，将用上方信息生成在线简历</div>'+
         '<button class="mini" style="margin-top:10px" onclick="afFile()">选择文件</button></div>'))+
     '<div class="fi-wrap" style="margin-top:14px"><label>附加留言（选填）</label>'+
-      '<textarea rows="2" placeholder="可补充到岗时间、期望等信息" oninput="AF.note=this.value">'+esc(AF.note||"")+'</textarea></div>'+
+      '<textarea rows="2" placeholder="可补充推荐人信息、到岗时间、期望等信息" oninput="AF.note=this.value">'+esc(AF.note||"")+'</textarea></div>'+
+    afSel("src","投递来源（选填）",[["","请选择（选填）"],["内部推荐","内部推荐"],["招聘网站","招聘网站"],["校园招聘","校园招聘"],["猎头推荐","猎头推荐"],["企业官网","企业官网"],["其他","其他"]],0)+
     '</div>'+
     '<div class="sh-f"><button class="btn btn-g" onclick="closeS()">取消</button>'+
     '<button class="btn btn-p" onclick="submitApply('+job.id+')">确认投递</button></div>';
@@ -905,7 +895,7 @@ function submitApply(id){
       S.files.push(nf);fid=nf.id;
     }
   }
-  addSub(job,(AF.note||"").trim(),fid);
+  addSub(job,(AF.note||"").trim(),fid,(AF.src||"").trim());
   closeS();toast("简历已投递至「"+job.title+"」，可在投递记录查看进度");render();
 }
 
@@ -929,7 +919,8 @@ function resetF(){S.f={city:"",cat:"",deg:"",exp:""};S.pageN=1;openFilter()}
 /* ============ 投递记录 ============ */
 /* 投递记录：C 端视角的状态分组（后台 8 态 → 5 个标签） */
 var SUB_TABS=[["all","我的投递"],["invite","邀约"]];
-var SUB_GROUPS={invite:["面试中"]};
+/* 后台的「拟录用」属内部环节，C 端不单独呈现，归入面试中语义 */
+var SUB_GROUPS={invite:["面试中","拟录用"]};
 var SUB_EMPTY={
   all:["暂无投递记录","找到心仪职位后点击「投递简历」"],
   invite:["暂无面试邀约","收到面试邀约时，这里会显示面试时间与地点"]
@@ -953,11 +944,11 @@ function subCard(i,s){
   var sf=s.fid?fileOf(s.fid):null,sfn=sf?sf.name:(s.fname||"");
   var h='<div class="subcard"><div class="myrow"><div class="avatar">'+esc(s.title.charAt(0))+'</div>'+
     '<div style="flex:1;min-width:0"><div class="t">'+esc(s.title)+'</div>'+
-    '<div class="s">'+esc(s.salary)+' · 投递于 '+s.time+(sfn?'<br>简历：'+esc(sfn):"")+'</div></div>'+
+    '<div class="s">'+esc(s.salary)+' · 投递于 '+s.time+(s.src?' · 来源 '+esc(s.src):"")+(sfn?'<br>简历：'+esc(sfn):"")+'</div></div>'+
     '<div class="r">'+
     (j?'<button class="mini g" style="height:28px;padding:0 10px;font-size:12px" onclick="openJob('+s.jid+')">查看</button>':"")+'</div></div>';
   /* 面试邀约只做展示：面试时间 + 面试地点，不含「接受 / 改期」等候选人操作 */
-  if(s.status==="面试中"&&s.invite){
+  if((s.status==="面试中"||s.status==="拟录用")&&s.invite){
     h+='<div class="subnote"><div class="hd">面试邀约</div>'+
       '<div class="row"><em>面试时间</em><span>'+esc(s.invite.time)+'</span></div>'+
       '<div class="row"><em>面试地点</em><span>'+esc(s.invite.place)+'</span></div>'+
@@ -975,8 +966,8 @@ function pgGuest(){
     '<div class="gav">红</div>'+
     '<div style="font-size:16.5px;font-weight:600;margin:13px 0 6px">登录后开启完整功能</div>'+
     '<div style="font-size:12.5px;color:var(--ink3);line-height:1.9">保存简历、一键投递、查看投递进度与面试通知<br>未登录也可以浏览全部在招职位</div>'+
-    '<button class="btn btn-p" style="width:100%;margin-top:18px" onclick="openLogin()">登录 / 注册</button>'+
-    '<div style="font-size:11.5px;color:var(--ink4);margin-top:11px;line-height:1.8">手机号 + 验证码登录，注册无需邮箱与密码</div></div>'+
+    '<button class="btn btn-p" style="width:100%;margin-top:18px" onclick="openLogin()">登录</button>'+
+    '<div style="font-size:11.5px;color:var(--ink4);margin-top:11px;line-height:1.8">手机号 + 验证码即可登录，未注册的手机号将自动创建账号</div></div>'+
     '<div class="mlist" style="margin-top:12px">'+
       '<div class="mrow" onclick="go(\'job\')"><div class="l">浏览职位</div><div class="r">'+liveJobs().length+' 个在招<span class="arw">›</span></div></div>'+
     '</div><div style="height:18px"></div>';
@@ -985,8 +976,8 @@ function pgMine(){
   var u=S.user;
   if(!u)return pgGuest();
   var sc=score(),tp=tip();
-  return '<div class="mhd"><div class="avatar">'+esc(u.name.charAt(0))+'</div>'+
-    '<div style="flex:1"><div class="mhd-n">'+esc(u.name)+'</div>'+
+  return '<div class="mhd"><div class="avatar">'+esc((u.name||"求职者").charAt(0))+'</div>'+
+    '<div style="flex:1"><div class="mhd-n">'+esc(u.name||"求职者")+'</div>'+
     '<div class="mhd-s">'+esc(maskP(u.phone))+'</div></div>'+
     '<button class="mini" style="border-color:rgba(255,255,255,.6);color:#fff;background:transparent" onclick="askLogout()">退出</button></div>'+
     '<div class="rp"><div class="rp-top"><div><div class="rp-n">'+sc+'<i>%</i></div><div class="rp-l">简历完整度</div></div>'+
@@ -1018,7 +1009,7 @@ function doResetDemo(){
 function openAccount(){
   var u=S.user,acc=accOf(u.phone);
   var b='<div class="sh-h"><h3>账号与安全</h3><div class="x" onclick="closeS()">×</div></div>'+
-    '<div class="sh-b"><div class="fi-wrap"><label>姓名</label><input value="'+esc(u.name)+'" readonly style="background:#fafbfc;color:var(--ink2)"></div>'+
+    '<div class="sh-b"><div class="fi-wrap"><label>姓名</label><input value="'+esc(u.name||"未填写")+'" readonly style="background:#fafbfc;color:var(--ink2)"></div>'+
     '<div class="fi-wrap"><label>登录手机号</label><input value="'+esc(maskP(u.phone))+'" readonly style="background:#fafbfc;color:var(--ink2)">'+
       '<div class="hint" style="font-size:11.5px;color:var(--ink4);margin-top:5px">手机号即登录账号，作为接收面试与录用通知的唯一边界</div></div>'+
     '<div class="fi-wrap"><label>注册时间</label><input value="'+esc(acc?acc.createdAt:"—")+'" readonly style="background:#fafbfc;color:var(--ink2)"></div>'+
@@ -1228,7 +1219,7 @@ function closeS(){$("sheet").innerHTML=""}
 /* ============ 启动 ============ */
 load();
 if(!localStorage.getItem(KEY)){
-  /* 演示账号：预置账号 + 该账号的投递与收藏，方便直接体验「登录」路径；换手机号注册即走「注册」路径 */
+  /* 演示账号：预置账号 + 该账号的投递与收藏，方便直接体验「已有账号登录」；换其他手机号登录则当场自动建档 */
   S.accounts=[{phone:"13856789211",name:"李明轩",createdAt:"2026-10-20 09:12",lastLogin:"2026-10-26 18:40"}];
   S.subs=[
     {jid:101,title:"高级后端开发工程师",salary:"20-35K·14薪",city:"长沙",rc:"hr1",time:"2026-10-18",status:"面试中",note:"",

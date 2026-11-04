@@ -88,6 +88,10 @@ table{border-collapse:collapse;width:100%}
 .btn.dg{background:var(--danger);border-color:var(--danger);color:#fff}.btn.dg:hover{background:#bf2f23;color:#fff}
 .btn.gh{border-color:transparent;background:transparent;color:var(--ink2)}.btn.gh:hover{background:#f2f4f7;color:var(--ink)}
 .btn.sm{height:28px;padding:0 10px;font-size:12.5px;border-radius:6px}
+/* 图标小按钮：用于附件下载等行内操作 */
+.ibtn{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border:1px solid var(--line,#e2e6ee);border-radius:6px;background:#fff;color:#5b6472;cursor:pointer;vertical-align:middle;transition:all .15s}
+.ibtn:hover{color:var(--pri,#2f6bff);border-color:var(--pri,#2f6bff);background:#f2f6ff}
+.ibtn svg{display:block}
 .btn:disabled{opacity:.5;cursor:not-allowed}
 .btn.dgg{color:var(--danger);border-color:#f3cfcb}.btn.dgg:hover{background:var(--dangerl);border-color:var(--danger);color:var(--danger)}
 
@@ -102,6 +106,27 @@ textarea.ip{height:auto;padding:9px 11px;line-height:1.7;resize:vertical}
 .fld .hint{font-size:12px;color:var(--ink3);margin-top:5px}
 .fld .err2{font-size:12px;color:var(--danger);margin-top:5px;display:none}
 .fld.bad .err2{display:block}
+/* 不合适处理：三选一单选项 */
+.rjopts{display:flex;flex-direction:column;gap:8px}
+.rjopt{display:flex;align-items:flex-start;gap:9px;border:1px solid var(--line2);border-radius:8px;padding:10px 12px;cursor:pointer;background:#fff}
+.rjopt:hover{border-color:#c8d4e6}
+.rjopt.on{border-color:var(--brand);background:#f3f8ff}
+.rjopt input{margin:2px 0 0;accent-color:var(--brand);cursor:pointer}
+.rjopt .t{font-size:13.5px;color:var(--ink);line-height:1.5}
+.rjopt .d{font-size:12px;color:var(--ink3);line-height:1.6;margin-top:1px}
+/* 附件上传组件（PDF / Word / 图片，可多选） */
+.upz{border:1px dashed var(--line2);border-radius:9px;background:#fafbfc;padding:16px 12px;text-align:center;cursor:pointer;transition:border-color .15s,background .15s}
+.upz:hover,.upz.on{border-color:var(--brand);background:#f6faff}
+.upz .ic{color:#9db0c9;line-height:0}
+.upz .t{font-size:13px;color:var(--ink2);margin-top:5px}
+.upz .s{font-size:11.5px;color:var(--ink3);margin-top:2px}
+.upl{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.upf{display:flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:7px;padding:6px 9px;background:#fff}
+.upf .bd{flex:0 0 auto;width:34px;height:28px;border-radius:5px;background:var(--brand-l);color:var(--brand);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;letter-spacing:.2px}
+.upf .nm{flex:1;min-width:0;font-size:12.5px;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.upf .sz{flex:0 0 auto;font-size:11.5px;color:var(--ink3)}
+.upf .x{flex:0 0 auto;border:0;background:none;color:var(--ink3);cursor:pointer;font-size:15px;line-height:1;padding:2px 3px}
+.upf .x:hover{color:var(--danger)}
 
 /* ---------- 富文本正文编辑器（B-55） ---------- */
 .rte{border:1px solid var(--line2);border-radius:8px;background:#fff;overflow:hidden}
@@ -114,6 +139,8 @@ textarea.ip{height:auto;padding:9px 11px;line-height:1.7;resize:vertical}
 .rte-b:active{background:var(--brand-l);color:var(--brand-d)}
 .rte-bd{min-height:230px;max-height:44vh;overflow:auto;padding:12px 14px;font-size:13.5px;line-height:1.95;
   color:var(--ink);outline:none;word-break:break-word}
+.rte.mini .rte-bd{min-height:96px;max-height:210px;line-height:1.8}
+.fld.bad .rte{border-color:var(--danger)}
 .rte-bd:empty:before{content:attr(data-ph);color:var(--ink4)}
 .rte-bd p{margin:0 0 8px}
 .rte-bd ul,.rte-bd ol{margin:0 0 8px;padding-left:22px}
@@ -126,6 +153,24 @@ textarea.ip{height:auto;padding:9px 11px;line-height:1.7;resize:vertical}
   color:var(--ink2);cursor:pointer;line-height:1.7;user-select:none}
 .vchip:hover{border-color:var(--brand);color:var(--brand-d);background:var(--brand-l)}
 .vchip i{font-style:normal;color:var(--danger);margin-left:1px}
+
+/* ---------- 福利待遇标签输入（无内容时点选 / 可删可自定义） ---------- */
+.tagbox{display:flex;flex-wrap:wrap;align-items:center;gap:6px;min-height:42px;padding:6px 9px;
+  border:1px solid var(--line2);border-radius:8px;background:#fff;cursor:text}
+.tagbox:focus-within{border-color:var(--brand);box-shadow:0 0 0 3px rgba(22,104,220,.08)}
+.tgchip{display:inline-flex;align-items:center;gap:3px;background:var(--brand-l);color:var(--brand-d);
+  border-radius:5px;padding:2px 4px 2px 8px;font-size:12.5px;line-height:1.75}
+.tgchip i{font-style:normal;cursor:pointer;color:#7d9bc9;font-size:13px;line-height:1;padding:0 3px;border-radius:3px}
+.tgchip i:hover{color:var(--danger);background:#f7dedb}
+.tagin{flex:1;min-width:130px;border:none;outline:none;height:26px;font-size:13px;background:transparent;color:var(--ink)}
+.tagpool{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:9px}
+.tagpool .tb{font-size:11.5px;color:var(--ink4);margin-right:1px}
+.tchip{font-size:12px;padding:3px 10px;border-radius:14px;border:1px solid var(--line2);background:#fff;
+  color:var(--ink2);cursor:pointer;line-height:1.7;user-select:none;white-space:nowrap}
+.tchip:hover{border-color:var(--brand);color:var(--brand-d)}
+.tchip.on{background:var(--brand-l);border-color:#bcd6f7;color:var(--brand-d)}
+.tchip.add{border-style:dashed;color:var(--ink3)}
+.tchip.add:hover{color:var(--brand-d)}
 /* 富文本正文在「纸张」预览与 PDF 中的排版 */
 .docbody{font-size:13.5px;line-height:1.95}
 .docbody p{margin:0 0 9px}
@@ -207,6 +252,16 @@ table.data td.op .btn{margin-left:5px}
 .dw .dh h3{font-size:16px;font-weight:600}
 .dw .dh .sp{flex:1}
 .dw .db{flex:1;overflow:auto;padding:18px 20px}
+/* 详情页常驻头：摘要 + 三个 tab，滚动时整体吸附在内容区顶部；换 tab 不必滚回顶部 */
+.dw .dhead{position:sticky;top:-18px;z-index:6;background:var(--white);margin:0 0 14px}
+.dw .dsum{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--ink2);white-space:nowrap;padding:0 0 9px}
+.dw .dsum b{font-weight:400;color:var(--ink3);font-size:11px;margin-right:5px}
+.dw .dtabs{display:flex;gap:4px;border-bottom:1px solid var(--line)}
+.dw .dtab{padding:8px 15px 9px;font-size:13px;color:var(--ink2);cursor:pointer;user-select:none;
+  border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap}
+.dw .dtab:hover{color:var(--brand)}
+.dw .dtab.on{color:var(--brand);border-bottom-color:var(--brand);font-weight:600}
+.dw .dempty{font-size:13px;color:var(--ink3);background:#fafbfc;border-radius:8px;padding:11px 13px}
 .dw .df{padding:13px 20px;border-top:1px solid var(--line);display:flex;gap:10px;justify-content:flex-end;background:#fafbfc}
 .md{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:520px;max-width:94vw;max-height:88vh;background:#fff;border-radius:12px;z-index:61;display:none;flex-direction:column;overflow:hidden;box-shadow:0 20px 50px rgba(16,24,40,.24)}
 .md.on{display:flex}
@@ -233,6 +288,10 @@ table.data td.op .btn{margin-left:5px}
 .pv .pb h5{font-size:14px;font-weight:600;margin:14px 0 8px}
 .pv .pb ul{padding-left:18px;color:var(--ink2);font-size:13.5px}
 .pv .pb ul li{margin-bottom:5px}
+.pv .pb ol{padding-left:20px;color:var(--ink2);font-size:13.5px}
+.pv .pb ol li{margin-bottom:5px}
+.pv .pb p{margin:0 0 8px;color:var(--ink2);font-size:13.5px;line-height:1.85}
+.pv .pb b,.pv .pb strong{font-weight:600;color:var(--ink)}
 .pv .pf{padding:12px 18px;border-top:1px solid var(--line);display:flex;gap:10px;background:#fafbfc}
 .pv .pf .b1{flex:1;height:40px;border-radius:8px;background:#f0f2f5;display:flex;align-items:center;justify-content:center;font-size:13.5px;color:var(--ink2)}
 .pv .pf .b2{flex:2;height:40px;border-radius:8px;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600}
@@ -265,12 +324,21 @@ table.data td.op .btn{margin-left:5px}
 .sec>.sec-t.tg .rt{margin-left:auto;display:flex;align-items:center;gap:10px;flex:0 0 auto}
 .sec>.sec-t.tg .chev{font-size:20px;color:var(--ink2);transition:transform .16s;flex:0 0 auto;line-height:1}
 .sec>.sec-t.tg:hover .chev{color:var(--brand)}
-.sec>.sec-t.tg .cnt{font-size:12px;font-weight:400;color:var(--ink3)}
 .sec.closed>.sec-t.tg .chev{transform:rotate(-90deg)}
 .sec.closed>.sb{display:none}
 .sec.closed>.sec-t.tg:hover{background:#f4f6f9}
 .sec>.sb{padding-top:10px}
 .notice{background:#fafbfc;border:1px dashed var(--line2);border-radius:8px;padding:12px 14px;font-size:12.5px;color:var(--ink2);line-height:1.8}
+/* 风险提示条：如笔试结论为「不通过」仍要安排面试 */
+.warnbox{background:#fff8ec;border:1px solid #f2d8a6;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#8a5a12;line-height:1.7;margin-bottom:14px;display:flex;gap:7px;align-items:flex-start}
+.warnbox svg{flex:0 0 auto;margin-top:2px;color:#d18a1c}
+.warnbox b{color:#a35c00}
+/* 面试轮次块：一面 / 二面 …（最新一轮在最上） */
+.itvr{padding-top:15px;margin-top:15px;border-top:1px solid var(--line)}
+.itvr:first-child{padding-top:0;margin-top:0;border-top:0}
+.itvr-h{display:flex;align-items:center;gap:9px;margin-bottom:10px;flex-wrap:wrap}
+.itvr-h .t{font-size:13px;font-weight:700;color:var(--ink)}
+.itvr-b{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
 .notice b{color:var(--ink)}
 @media(max-width:1080px){.g4{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:780px){.side{width:60px}.side .lg b,.side .nav a span,.side .ft,.side .nav .gp{display:none}.wrap{margin-left:60px}.g4,.g3,.g2{grid-template-columns:1fr}.kv{grid-template-columns:1fr}}
@@ -340,7 +408,7 @@ function stripHtml(h){
 /* ---------- 业务字典 ---------- */
 var CITIES=["长沙","武汉","南昌","广州","深圳","成都","上海","北京"];
 var CATS=["技术","数据","产品","运营","市场","职能","供应链","管培"];
-var DEGS=["大专","本科","硕士","博士"];
+var DEGS=["高中","大专","本科","硕士","博士"];
 var SOCIAL_EXP=["不限","1年以内","1-3年","3-5年","5-10年","10年以上"];
 var CAMPUS_EXP=["2026届","2027届","2028届","不限"];
 var OFFICES={
@@ -420,13 +488,14 @@ var JOB_STATUS={
   deleted:{t:"已删除",c:"n"}
 };
 /* 投递状态机（B-22 ~ B-25）：终态 = 不合适 / 转入人才库；已入职 / 未入职 挂在「已发 offer」的跟进下 */
-var SUB_STATUS=["全部","待筛选","初筛通过","笔试中","面试中","已发 offer","不合适"];
-var SUB_COLOR={"待筛选":"n","初筛通过":"b","笔试中":"o","面试中":"p","已发 offer":"g","不合适":"r","转入人才库":"t"};
+var SUB_STATUS=["全部","待筛选","初筛通过","笔试中","面试中","拟录用","已发 offer","不合适"];
+var SUB_COLOR={"待筛选":"n","初筛通过":"b","笔试中":"o","面试中":"p","拟录用":"a","已发 offer":"g","不合适":"r","转入人才库":"t"};
 var SUB_FLOW={
   "待筛选":["初筛通过","不合适","转入人才库"],
   "初筛通过":["笔试中","面试中","不合适","转入人才库"],
   "笔试中":["面试中","不合适","转入人才库"],
-  "面试中":["已发 offer","不合适","转入人才库"],
+  "面试中":["拟录用","已发 offer","不合适","转入人才库"],
+  "拟录用":["已发 offer","不合适","转入人才库"],
   "已发 offer":["不合适","转入人才库"],
   "不合适":["转入人才库"],
   "转入人才库":[]
@@ -452,7 +521,6 @@ var TPL_TRACK=[["social","社招"],["campus","校招"],["any","通用"]];
 
 /* 黑名单 / 笔试 */
 var BLOCK_REASONS=["学历 / 履历造假","背景调查异常","多次爽约","恶意投递","其他"];
-var EXAM_LEVELS=["优秀","良好","合格","不合格"];
 
 /* 系统默认角色（自定义角色在 S.roles 中维护） */
 var ROLES={admin:{t:"管理员",c:"b"},hr:{t:"招聘负责人",c:"g"},viewer:{t:"只读面试官",c:"p"}};
@@ -663,6 +731,7 @@ var SKILLS={"技术":"Java / SpringBoot / MySQL / Redis / 微服务","数据":"S
 
 /* ---------- 状态 ---------- */
 var S={user:null,page:"dash",jobs:[],subs:[],cands:[],logs:[],accounts:[],roles:[],settings:{},offers:[],offerTpls:[],offerDraft:null,
+  subTab:"profile",curItvRound:null,eximp:{file:"",rows:null},
   jTab:"all",jQ:"",jF:{status:"",city:"",cat:"",owner:""},jSel:[],jPage:1,jPS:SUB_PAGE,
   sTab:"全部",sQ:"",sF:{job:"",deg:"",scope:"",cross:""},sSel:[],sPage:1,sPS:SUB_PAGE,
   pQ:"",pPage:1,pPS:SUB_PAGE,bQ:"",bPage:1,bPS:SUB_PAGE,oQ:"",reveal:{},
@@ -684,7 +753,8 @@ function initJobs(){
   var out=raw.map(function(j){
     return {
       id:j.id,track:j.track,cat:j.cat,title:j.title,city:j.city,salary:j.salary,exp:j.exp,deg:j.deg,hc:j.hc,
-      publish_date:j.date,deadline:j.dl,duty:j.duty.slice(),requirement:j.req.slice(),tags:(j.tags||[]).slice(),
+      publish_date:j.date,deadline:j.dl,duty:j.duty.slice(),requirement:j.req.slice(),
+      dutyHtml:rtFromArr(j.duty),reqHtml:rtFromArr(j.req),tags:(j.tags||[]).slice(),
       owner:j.rc||autoOwner(j),status:j.status||"online",addr:j.addr||((OFFICES[j.city]||[])[0]||""),
       sort_weight:0,view_count:Math.round(180+rnd()*900),apply_count:0,
       created_by:"系统导入",updated_by:"系统导入",updated_at:j.date+" 09:00",demo:j.demo?1:0
@@ -827,6 +897,8 @@ function seedAll(){
   S.cands=buildCands();
   seedCandFlags();
   seedExams();
+  seedInterviews();
+  seedPlans();
   seedNotes();
   S.offerTpls=seedTpls();
   S.offers=[];
@@ -861,7 +933,7 @@ function myJobs(){
   if(!S.user)return [];
   var list=S.jobs.filter(function(j){return j.status!=="deleted"});
   if(roleScope()==="all")return list;
-  return list.filter(function(j){return j.owner===S.user.id});
+  return list.filter(function(j){return ownerResolve(j.owner)===S.user.id});
 }
 function mySubs(){
   if(!S.user)return [];
@@ -870,7 +942,7 @@ function mySubs(){
   var ids={};myJobs().forEach(function(j){ids[j.id]=1});
   return S.subs.filter(function(s){return ids[s.jobId]});
 }
-function canEditJob(j){return canWrite()&&(roleScope()==="all"||j.owner===S.user.id)}
+function canEditJob(j){return canWrite()&&(roleScope()==="all"||ownerResolve(j.owner)===S.user.id)}
 
 /* ---------- 候选人主档 / 人才库 / 黑名单（B-31 ~ B-35） ---------- */
 function dayAdd(n){var d=new Date();d.setDate(d.getDate()+n);return fmtD(d)}
@@ -1088,9 +1160,13 @@ function confirmBox(title,msg,okText,fn,danger){
 function go(page){S.page=page;S.jSel=[];S.sSel=[];S.jPage=1;S.sPage=1;S.pPage=1;S.bPage=1;S.subPool=0;closeAll();render();window.scrollTo(0,0)}
 function byId(id){for(var i=0;i<S.jobs.length;i++)if(S.jobs[i].id===id)return S.jobs[i];return null}
 function bySub(id){for(var i=0;i<S.subs.length;i++)if(S.subs[i].id===id)return S.subs[i];return null}
-function ownerName(id){var a=null;S.accounts.forEach(function(x){if(x.id===id)a=x});return a?a.name:"—"}
-function ownerEmail(id){var a=null;S.accounts.forEach(function(x){if(x.id===id)a=x});return a?a.email:"招聘负责人"}
-function ownerById(id){var a=null;S.accounts.forEach(function(x){if(x.id===id)a=x});return a||{name:"—",title:""}}
+function ownerAcc(v){var a=null;S.accounts.forEach(function(x){if(x.id===v||x.name===v)a=x});return a}
+function ownerName(v){var a=ownerAcc(v);return a?a.name:(String(v==null?"":v).trim()||"—")}
+function ownerEmail(v){var a=ownerAcc(v);return a?a.email:"招聘负责人"}
+function ownerById(v){return ownerAcc(v)||{name:(String(v==null?"":v).trim()||"—"),title:"",email:"",phone:""}}
+function ownerText(v){var a=ownerAcc(v);return a?a.name:(String(v==null?"":v).trim())}   /* 编辑框回填：账号→姓名，自由文本→原文 */
+function ownerResolve(v){var s=String(v==null?"":v).trim();var a=ownerAcc(s);return a?a.id:s}  /* 提交：命中账号存 id，否则存文本 */
+function ownerPhoneOf(j){var p=String((j&&j.ownerPhone)||"").trim();if(p)return p;var a=ownerAcc(j&&j.owner);return (a&&a.phone)||""}  /* 岗位负责人电话：手填优先，未填回落到账号电话 */
 
 /* ==========================================================
    登录（B-19 与 C 端登录隔离）
@@ -1160,7 +1236,7 @@ function render(){
     (navSys.length?'<div class="gp">系统管理</div>'+navSys.map(navItem).join(""):'')+
     '</div><div class="ft">演示原型 v1.6<br>需求清单 B-01 ~ B-56</div>';
 
-  var titles={dash:"数据概览",jobs:"岗位管理",subs:"候选人管理",pool:"人才库",block:"黑名单",otpl:"Offer 模板",accounts:"账号管理",roles:"角色管理",logs:"操作日志",settings:"系统设置"};
+  var titles={dash:"数据概览",jobs:"岗位管理",subs:"候选人管理",pool:"人才库",block:"黑名单",otpl:"Offer 模板",accounts:"账号管理",roles:"角色管理",logs:"操作日志",settings:"系统设置",examimp:"批量导入笔试记录"};
   var rl=roleOf(S.user.role);
   var roleTip='<span class="pill '+roleCls(S.user.role)+'">'+esc(rl.name)+' · '+SCOPE_TIP[rl.scope]+'</span>';
   var top='<h2>'+titles[S.page]+'</h2><div class="sp"></div>'+roleTip+
@@ -1174,6 +1250,7 @@ function render(){
   if(S.page==="dash")main=pgDash();
   else if(S.page==="jobs")main=pgJobs();
   else if(S.page==="subs")main=pgSubs();
+  else if(S.page==="examimp")main=pgExamImp();
   else if(S.page==="pool")main=pgPool();
   else if(S.page==="block")main=pgBlock();
   else if(S.page==="accounts")main=pgAccounts();
@@ -1199,6 +1276,7 @@ function pgDash(){
   var hc=0;online.forEach(function(j){hc+=j.hc});
   var pending=subs.filter(function(s){return s.status==="待筛选"});
   var interview=subs.filter(function(s){return s.status==="面试中"});
+  var plan=subs.filter(function(s){return s.status==="拟录用"});
   var offer=subs.filter(function(s){return s.status==="已发 offer"});
   var expiredN=jobs.filter(function(j){return jobEffStatus(j)==="expired"}).length;
 
@@ -1240,7 +1318,7 @@ function pgDash(){
     stat("在招岗位",online.length,"共 "+jobs.length+" 个岗位（含草稿/下线）","b")+
     stat("招聘人数合计",hc,"仅统计在招岗位","g")+
     stat("累计收到简历",subs.length,"待筛选 "+pending.length+" 份","o")+
-    stat("面试中 / 已发 offer",interview.length+" / "+offer.length,
+    stat("面试中 / 拟录用 / 已发 offer",interview.length+" / "+plan.length+" / "+offer.length,
       "待入职 "+offer.filter(function(s){var t=onbState(s);return t==="待回复"||t==="待入职"}).length+
       " · 在职 "+offer.filter(function(s){return onbState(s)==="已入职"&&!onbLeft(s)}).length+
       " · 已离职 "+offer.filter(function(s){return !!onbLeft(s)}).length+
@@ -1277,6 +1355,31 @@ function barRow(lb,v,mx,color){
 }
 function statusPill(st){
   return '<span class="pill '+(SUB_COLOR[st]||"n")+'"><i class="dt"></i>'+esc(st)+'</span>';
+}
+/* 笔试中的副状态：列表状态列在主状态下方显示，已安排 / 通过 / 不通过 / 缺考 */
+function examSubPill(s){
+  var e=s.exam;
+  if(!e)return '<span class="pill n"><i class="dt"></i>未安排</span>';
+  if(e.status!=="已完成")return '<span class="pill o"><i class="dt"></i>已安排</span>';
+  if(e.attend==="缺考")return '<span class="pill r"><i class="dt"></i>缺考</span>';
+  if(e.result==="通过")return '<span class="pill g"><i class="dt"></i>通过</span>';
+  if(e.result==="不通过")return '<span class="pill r"><i class="dt"></i>不通过</span>';
+  return '<span class="pill n"><i class="dt"></i>已评阅</span>';
+}
+/* 只读取最新一轮面试（列表渲染用，不走 itvRounds 的懒迁移写操作） */
+function itvLatest(s){
+  var rs=(s&&s.interviews&&s.interviews.length)?s.interviews:((s&&s.interview&&s.interview.time)?[s.interview]:[]);
+  return rs.length?rs[rs.length-1]:null;
+}
+/* 面试中的副状态：永远取最新一轮面试的状态 —— 未安排 / 待面试 / 通过 / 不通过 / 待定 / 缺考 */
+function itvSubPill(s){
+  var v=itvLatest(s);
+  if(!v||!v.time)return '<span class="pill n"><i class="dt"></i>未安排</span>';
+  var tip=' title="第 '+(v.round||1)+' 面"';
+  if(!v.done)return '<span class="pill o"'+tip+'><i class="dt"></i>待面试</span>';
+  if(v.attend==="缺考")return '<span class="pill r"'+tip+'><i class="dt"></i>缺考</span>';
+  var r=v.result||"待定";
+  return '<span class="pill '+(r==="通过"?"g":(r==="不通过"?"r":"a"))+'"'+tip+'><i class="dt"></i>'+esc(r)+'</span>';
 }
 /* ---------- 入职跟进 ---------- */
 function onb(s){                 /* 首次写入时才建对象，避免读渲染改数据 */
@@ -1339,7 +1442,7 @@ function jobFiltered(){
   if(f.status)list=list.filter(function(j){return j.status===f.status});
   if(f.city)list=list.filter(function(j){return j.city===f.city});
   if(f.cat)list=list.filter(function(j){return j.cat===f.cat});
-  if(f.owner)list=list.filter(function(j){return j.owner===f.owner});
+  if(f.owner)list=list.filter(function(j){return ownerResolve(j.owner)===f.owner});
   return list.sort(function(a,b){
     if((b.sort_weight||0)!==(a.sort_weight||0))return (b.sort_weight||0)-(a.sort_weight||0);
     return a.publish_date<b.publish_date?1:-1;
@@ -1465,7 +1568,7 @@ function clearSel(){S.jSel=[];renderJobs()}
 function blankJob(){
   return {id:0,track:"social",cat:"技术",title:"",city:"长沙",addr:"",salary:"",exp:"3-5年",deg:"本科",hc:1,
     publish_date:today(),deadline:dayAgo(-30),duty:[""],requirement:[""],tags:["五险一金"],
-    owner:"",status:"draft",sort_weight:0,view_count:0,apply_count:0};
+    owner:"",ownerPhone:"",status:"draft",sort_weight:0,view_count:0,apply_count:0};
 }
 function editJob(id){
   if(!hasPerm(id?"jobs.edit":"jobs.create")){toast("当前角色无岗位编辑权限","err");return}
@@ -1477,11 +1580,12 @@ function editJob(id){
 function fieldErr(k){return S.formErr[k]?'<div class="err2">此项为必填</div>':''}
 function fldCls(k){return "fld"+(S.formErr[k]?" bad":"")}
 function drawJobForm(){
+  var _db=document.querySelector("#dw .db"),_sc=_db?_db.scrollTop:0;   /* 局部重绘（换通道/增减标签）时保持滚动位置 */
   var j=S.editJob;
   var exps=j.track==="campus"?CAMPUS_EXP:SOCIAL_EXP;
   var owners=S.accounts.filter(function(a){return a.role!=="viewer"});
-  var duty=j.duty.map(function(d,i){return '<div style="display:flex;gap:8px;margin-bottom:8px"><input class="ip" value="'+esc(d)+'" oninput="S.editJob.duty['+i+']=this.value" placeholder="一条职责，如：负责……"><button class="btn sm dgg" onclick="rmLine(\'duty\','+i+')">删除</button></div>'}).join("");
-  var req=j.requirement.map(function(d,i){return '<div style="display:flex;gap:8px;margin-bottom:8px"><input class="ip" value="'+esc(d)+'" oninput="S.editJob.requirement['+i+']=this.value" placeholder="一条要求，如：本科及以上……"><button class="btn sm dgg" onclick="rmLine(\'requirement\','+i+')">删除</button></div>'}).join("");
+  var dutyHtml=j.dutyHtml!=null?j.dutyHtml:rtFromArr(j.duty);
+  var reqHtml=j.reqHtml!=null?j.reqHtml:rtFromArr(j.requirement);
 
   var body=
   '<div class="sec-t">基础信息</div>'+
@@ -1491,51 +1595,130 @@ function drawJobForm(){
       '<option value="social"'+(j.track==="social"?" selected":"")+'>社招</option><option value="campus"'+(j.track==="campus"?" selected":"")+'>校招</option></select></div>'+
     '<div class="fld"><label>职位类别</label><select class="ip" onchange="S.editJob.cat=this.value">'+CATS.map(function(c){return '<option'+(j.cat===c?" selected":"")+'>'+c+'</option>'}).join("")+'</select></div>'+
     '<div class="fld"><label>工作城市</label><select class="ip" onchange="S.editJob.city=this.value;drawJobForm()">'+CITIES.map(function(c){return '<option'+(j.city===c?" selected":"")+'>'+c+'</option>'}).join("")+'</select></div>'+
-    '<div class="fld"><label>工作地点（B-46）</label>'+'<input class="ip" list="officeList" value="'+esc(j.addr||"")+'" oninput="S.editJob.addr=this.value" placeholder="如：长沙市雨花区万家丽中路二段68号 红星总部大楼 12F">'+
-      '<datalist id="officeList">'+((OFFICES[j.city]||[]).map(function(o){return '<option value="'+esc(o)+'"></option>'}).join(""))+'</datalist>'+
-      '<div class="hint">选填，与「工作城市」分工：城市用于筛选，此处填详细办公地址；可下拉选常用办公地点或自行填写。留空时 C 端仅展示工作城市</div></div>'+
+    '<div class="fld"><label>工作地点</label>'+'<input class="ip" list="officeList" value="'+esc(j.addr||"")+'" oninput="S.editJob.addr=this.value" placeholder="如：长沙市雨花区万家丽中路二段68号 红星总部大楼 12F">'+
+      '<datalist id="officeList">'+((OFFICES[j.city]||[]).map(function(o){return '<option value="'+esc(o)+'"></option>'}).join(""))+'</datalist></div>'+
     '<div class="'+fldCls("salary")+'"><label>薪资范围<i>*</i></label><input class="ip'+(S.formErr.salary?" err":"")+'" value="'+esc(j.salary)+'" oninput="S.editJob.salary=this.value" placeholder="如：20-35K·14薪">'+fieldErr("salary")+'</div>'+
     '<div class="fld"><label>招聘人数</label><input class="ip" type="number" min="1" value="'+j.hc+'" oninput="S.editJob.hc=Math.max(1,parseInt(this.value||1))"></div>'+
     '<div class="fld"><label>'+(j.track==="campus"?"开放届别":"经验要求")+'</label><select class="ip" onchange="S.editJob.exp=this.value">'+exps.map(function(e){return '<option'+(j.exp===e?" selected":"")+'>'+e+'</option>'}).join("")+'</select></div>'+
     '<div class="fld"><label>学历要求</label><select class="ip" onchange="S.editJob.deg=this.value">'+DEGS.map(function(d){return '<option'+(j.deg===d?" selected":"")+'>'+d+'</option>'}).join("")+'</select></div>'+
     '<div class="fld"><label>截止日期</label><input class="ip" type="date" value="'+esc(j.deadline)+'" onchange="S.editJob.deadline=this.value"></div>'+
-    '<div class="fld"><label>招聘负责人（B-11）</label><select class="ip" onchange="S.editJob.owner=this.value">'+
-      '<option value="">自动分配</option>'+owners.map(function(a){return '<option value="'+a.id+'"'+(j.owner===a.id?" selected":"")+'>'+esc(a.name)+' · '+esc(a.title)+'</option>'}).join("")+'</select>'+
-      '<div class="hint">未指定时按规则自动分配：校招→刘思远 / 技术·数据→王敏 / 运营→赵鹏 / 其他→陈静</div></div>'+
-    '<div class="fld"><label>排序权重（B-13）</label><input class="ip" type="number" value="'+(j.sort_weight||0)+'" oninput="S.editJob.sort_weight=parseInt(this.value||0)"><div class="hint">数值越大越靠前，用于置顶</div></div>'+
+    '<div class="fld"><label>招聘负责人</label>'+
+      '<input class="ip" list="ownerList" value="'+esc(ownerText(j.owner))+'" oninput="S.editJob.owner=this.value" placeholder="填写负责人姓名">'+
+      '<datalist id="ownerList">'+owners.map(function(a){return '<option value="'+esc(a.name)+'"></option>'}).join("")+'</datalist></div>'+
+    '<div class="fld"><label>负责人电话</label><input class="ip" type="tel" value="'+esc(j.ownerPhone||"")+'" oninput="S.editJob.ownerPhone=this.value" placeholder="如：13800138000"></div>'+
   '</div>'+
   '<div class="sec-t">福利待遇</div>'+
-  '<div class="fld"><input class="ip" value="'+esc(j.tags.join("，"))+'" oninput="S.editJob.tags=this.value.split(/[,，]/).map(function(x){return x.trim()}).filter(Boolean)"><div class="hint">中文逗号或英文逗号分隔，留空时默认「五险一金」</div></div>'+
+  '<div class="fld">'+tagBox(j.tags)+'</div>'+
   '<div class="sec-t">岗位职责<i style="color:var(--danger)">*</i></div>'+
-  '<div class="'+fldCls("duty")+'">'+duty+'<button class="btn sm" onclick="addLine(\'duty\')">+ 添加一条</button>'+fieldErr("duty")+'</div>'+
+  '<div class="'+fldCls("duty")+'">'+
+    rteBox(dutyHtml,{id:"rt_duty",mini:true,input:"rteJobSync('rt_duty','dutyHtml')",
+      ph:"如：负责招聘平台与内部管理系统的前端开发"})+
+    fieldErr("duty")+'</div>'+
   '<div class="sec-t">任职要求<i style="color:var(--danger)">*</i></div>'+
-  '<div class="'+fldCls("requirement")+'">'+req+'<button class="btn sm" onclick="addLine(\'requirement\')">+ 添加一条</button>'+fieldErr("requirement")+'</div>'+
-  '<div class="notice" style="margin-top:16px">保存后岗位进入<b>草稿</b>状态，前台不可见；点击「上架」后才会出现在招聘列表（B-08）。</div>';
+  '<div class="'+fldCls("requirement")+'">'+
+    rteBox(reqHtml,{id:"rt_req",mini:true,input:"rteJobSync('rt_req','reqHtml')",
+      ph:"如：3 年以上前端开发经验，熟悉 Vue / React"})+
+    fieldErr("requirement")+'</div>';
 
   var foot='<button class="btn" onclick="closeAll()">取消</button>'+
     (j.id?'<button class="btn" onclick="previewJob(0,1)">预览</button>':'')+
     '<button class="btn pri" onclick="saveJob(0)">保存草稿</button>'+
     '<button class="btn ok" onclick="saveJob(1)">'+(j.id?"保存并上架":"保存并发布")+'</button>';
   openDrawer(j.id?"编辑岗位 · "+esc(j.title):"新建岗位",body,foot);
+  var _db2=document.querySelector("#dw .db");if(_db2)_db2.scrollTop=_sc;
 }
-function addLine(k){S.editJob[k].push("");drawJobForm()}
-function rmLine(k,i){S.editJob[k].splice(i,1);if(!S.editJob[k].length)S.editJob[k].push("");drawJobForm()}
+/* ---------- 福利待遇：标签输入（常用标签点选 + 自定义 + 可删） ---------- */
+var TAG_POOL=["五险一金","六险一金","包吃住","包吃","包住","双休","年终奖","带薪年假","补充医疗",
+  "节日福利","住房补贴","交通补贴","班车","定期体检","绩效奖金","员工旅游","股票期权","培训机会"];
+function tagBox(tags){
+  var sel=tags||[];
+  return '<div class="tagbox" onclick="focusTagInput()">'+
+    sel.map(function(t,i){return '<span class="tgchip">'+esc(t)+
+      '<i title="移除" onclick="event.stopPropagation();rmTag('+i+')">×</i></span>'}).join("")+
+    '<input id="tag_in" class="tagin" placeholder="'+(sel.length?"继续添加，回车确认":"输入福利后回车添加，如：包吃住")+'" onkeydown="tagKey(event)">'+
+  '</div>'+
+  '<div class="tagpool"><span class="tb">常用</span>'+TAG_POOL.map(function(t,i){
+    return '<span class="tchip'+(sel.indexOf(t)>=0?" on":"")+'" onclick="toggleTagIdx('+i+')">'+esc(t)+'</span>';
+  }).join("")+'<span class="tchip add" onclick="focusTagInput()">+ 自定义</span></div>';
+}
+function focusTagInput(){var i=$("tag_in");if(i)i.focus()}
+function toggleTagIdx(i){
+  var t=TAG_POOL[i];if(!t||!S.editJob)return;
+  if(!S.editJob.tags)S.editJob.tags=[];
+  var k=S.editJob.tags.indexOf(t);
+  if(k>=0)S.editJob.tags.splice(k,1);else S.editJob.tags.push(t);
+  drawJobForm();
+}
+function rmTag(i){
+  if(!S.editJob||!S.editJob.tags)return;
+  S.editJob.tags.splice(i,1);drawJobForm();
+}
+function addTag(v){
+  if(!S.editJob)return;
+  var t=String(v==null?"":v).replace(/^[\s,，]+|[\s,，]+$/g,"");
+  if(!S.editJob.tags)S.editJob.tags=[];
+  if(t&&S.editJob.tags.indexOf(t)<0)S.editJob.tags.push(t);
+  drawJobForm();
+  focusTagInput();
+}
+function tagKey(e){
+  if(e.key!=="Enter")return;
+  e.preventDefault();
+  addTag(e.target.value);
+}
+
+/* ---------- 岗位职责 / 任职要求：富文本（复用 rteBox） ---------- */
+function rtFromArr(arr){
+  var a=(arr||[]).map(function(x){return String(x==null?"":x).trim()}).filter(Boolean);
+  if(!a.length)return "";
+  return "<ul>"+a.map(function(x){return "<li>"+esc(x)+"</li>"}).join("")+"</ul>";
+}
+function rtClean(h){
+  var box=document.createElement("div");
+  box.innerHTML=String(h||"");
+  box.querySelectorAll("script,style,iframe,object,link,meta").forEach(function(n){n.parentNode.removeChild(n)});
+  box.querySelectorAll("*").forEach(function(n){
+    n.removeAttribute("style");n.removeAttribute("class");n.removeAttribute("id");
+    n.removeAttribute("face");n.removeAttribute("size");n.removeAttribute("color");
+  });
+  var txt=(box.textContent||"").replace(/\u00a0/g," ").trim();
+  if(!txt&&!box.querySelector("li"))return "";
+  return box.innerHTML.replace(/&nbsp;/g," ");
+}
+function rtLines(h){
+  if(!h)return [];
+  var box=document.createElement("div");
+  box.innerHTML=String(h).replace(/<br\s*\/?>/gi,"\n").replace(/<\/(p|div|li|h[1-6]|blockquote)>/gi,"\n");
+  return (box.textContent||"").replace(/\u00a0/g," ").split(/\n+/)
+    .map(function(x){return x.trim()}).filter(Boolean);
+}
+function rteJobSync(id,key){
+  var ed=$(id);if(!ed||!S.editJob)return;
+  S.editJob[key]=ed.innerHTML;
+}
+function jobRichHtml(html,arr){
+  var h=rtClean(html||"")||rtFromArr(arr);
+  if(!h)return '<div style="font-size:13px;color:var(--ink3);margin-bottom:10px">未填写</div>';
+  return h;
+}
 function saveJob(publish){
   var j=S.editJob,e={};
   if(!(j.title||"").trim())e.title=1;
   if(!(j.salary||"").trim())e.salary=1;
-  j.duty=j.duty.map(function(x){return (x||"").trim()}).filter(Boolean);
-  j.requirement=j.requirement.map(function(x){return (x||"").trim()}).filter(Boolean);
+  j.dutyHtml=rtClean(j.dutyHtml);j.reqHtml=rtClean(j.reqHtml);
+  j.duty=rtLines(j.dutyHtml);j.requirement=rtLines(j.reqHtml);
   if(!j.duty.length)e.duty=1;
   if(!j.requirement.length)e.requirement=1;
   if(Object.keys(e).length){S.formErr=e;drawJobForm();toast("请完善带 * 的必填项","err");return}
+  j.owner=ownerResolve(j.owner);
   if(!j.tags.length)j.tags=["五险一金"];
   if(!j.owner)j.owner=autoOwner(j);
+  j.ownerPhone=(j.ownerPhone||"").trim();   /* 负责人电话：仅存手填值，展示时未填则回落账号电话 */
 
   if(j.id){
     var cur=byId(j.id);
     var before="状态："+JOB_STATUS[cur.status].t+" · HC："+cur.hc+" · 截止："+cur.deadline;
-    ["track","cat","title","city","addr","salary","exp","deg","hc","deadline","duty","requirement","tags","owner","sort_weight"].forEach(function(k){cur[k]=j[k]});
+    ["track","cat","title","city","addr","salary","exp","deg","hc","deadline","duty","requirement","dutyHtml","reqHtml","tags","owner","ownerPhone"].forEach(function(k){cur[k]=j[k]});
     cur.updated_at=now();cur.updated_by=S.user.name;
     if(publish&&cur.status!=="online"){cur.status="online";addLog("岗位上架",cur.title,JOB_STATUS[cur.status].t,"在招")}
     addLog("编辑岗位",cur.title,before,"状态："+JOB_STATUS[cur.status].t+" · HC："+cur.hc+" · 截止："+cur.deadline);
@@ -1578,6 +1761,7 @@ function dupJob(id){
   var c=JSON.parse(JSON.stringify(j));
   c.id=nid;c.title=j.title.replace(/（演示.*?）/g,"")+"（副本）";c.status="draft";
   c.publish_date=today();c.deadline=dayAgo(-30);c.apply_count=0;c.view_count=0;
+  c.dutyHtml=j.dutyHtml||rtFromArr(j.duty);c.reqHtml=j.reqHtml||rtFromArr(j.requirement);
   c.sort_weight=0;c.created_by=S.user.name;c.updated_by=S.user.name;c.updated_at=now();
   S.jobs.unshift(c);
   addLog("复制岗位",c.title,"来源 #"+j.id,"新岗位 #"+nid+"（草稿）");
@@ -1643,11 +1827,13 @@ function previewJob(id,fromForm){
       '<div class="tg"><span>'+esc(j.city)+'</span><span>'+esc(j.exp)+'</span><span>'+esc(j.deg)+'</span><span>招 '+j.hc+' 人</span><span>'+(j.track==="campus"?"校招":"社招")+'</span></div>'+
       (j.addr?'<div style="margin-top:10px;font-size:13px;color:var(--ink2)">工作地点：'+esc(j.addr)+'</div>':'<div style="margin-top:10px;font-size:13px;color:var(--ink3)">工作地点：未填写（C 端仅显示工作城市）</div>')+'</div>'+
     '<div class="pb">'+
-      '<h5>岗位职责</h5><ul>'+(j.duty||[]).map(function(d){return '<li>'+esc(d)+'</li>'}).join("")+'</ul>'+
-      '<h5>任职要求</h5><ul>'+(j.requirement||[]).map(function(d){return '<li>'+esc(d)+'</li>'}).join("")+'</ul>'+
+      '<h5>岗位职责</h5>'+jobRichHtml(j.dutyHtml,j.duty)+
+      '<h5>任职要求</h5>'+jobRichHtml(j.reqHtml,j.requirement)+
       '<h5>福利待遇</h5><div class="tg">'+((j.tags&&j.tags.length)?j.tags:["五险一金"]).map(function(t){return '<span>'+esc(t)+'</span>'}).join("")+'</div>'+
       '<h5>招聘负责人</h5><div style="font-size:13.5px;color:var(--ink2);background:#fafbfc;border-radius:8px;padding:10px 12px">'+
-        esc(ownerName(j.owner))+'　'+esc(ownerById(j.owner).title)+'<br>'+esc(ownerById(j.owner).email)+'　'+esc(ownerById(j.owner).phone)+'</div>'+
+        esc(ownerName(j.owner))+(ownerById(j.owner).title?'　'+esc(ownerById(j.owner).title):'')+
+        (ownerById(j.owner).email?'<br>'+esc(ownerById(j.owner).email):'')+
+        (ownerPhoneOf(j)?'<br>电话：'+esc(ownerPhoneOf(j)):'')+'</div>'+
       '<div style="font-size:12px;color:var(--ink3);margin-top:12px">截止日期：'+esc(j.deadline)+'</div>'+
     '</div>'+
     '<div class="pf'+(canApply?"":" off")+'"><div class="b1">收藏</div><div class="b2">'+(canApply?"投递简历":(st==="expired"?"已过期":"暂不可投递"))+'</div></div>'+
@@ -1731,7 +1917,9 @@ function pgSubs(){
         (cross?' <span class="pill o" title="现居 '+esc(s.city)+' · 岗位工作城市 '+esc(j.city)+'">跨城</span>':'')+'</td>'+
       '<td class="dmono" style="color:var(--ink3);font-size:12.5px">'+esc(s.time)+'</td>'+
       '<td>'+statusPill(s.status)+
-        (s.status==="已发 offer"?'<div style="margin-top:4px">'+onbPill(s)+'</div>':'')+'</td>'+
+        (s.status==="已发 offer"?'<div style="margin-top:4px">'+onbPill(s)+'</div>':'')+
+        (s.status==="笔试中"?'<div style="margin-top:4px">'+examSubPill(s)+'</div>':'')+
+        (s.status==="面试中"?'<div style="margin-top:4px">'+itvSubPill(s)+'</div>':'')+'</td>'+
       '<td class="op"><button class="btn sm" onclick="openSub(\''+s.id+'\',\'sub\')">查看</button></td>'+
     '</tr>';
   }).join("");
@@ -2078,7 +2266,7 @@ function toggleSubSel(id,on){
   renderSubs();
 }
 function batchTabStatus(){   /* 支持批量操作的页签 → 对应的源状态；非批量页签返回空串 */
-  return (S.sTab==="待筛选"||S.sTab==="初筛通过"||S.sTab==="笔试中"||S.sTab==="面试中"||S.sTab==="已发 offer")?S.sTab:"";
+  return (S.sTab==="待筛选"||S.sTab==="初筛通过"||S.sTab==="笔试中"||S.sTab==="面试中"||S.sTab==="拟录用"||S.sTab==="已发 offer")?S.sTab:"";
 }
 function batchBtns(n){       /* 批量栏按钮组：按当前页签给出该环节可用动作 */
   if(S.sTab==="已发 offer")return onbBatchBtns(n);   /* 已发 offer：批量跟进（B-51） */
@@ -2093,11 +2281,13 @@ function batchBtns(n){       /* 批量栏按钮组：按当前页签给出该环
   if(S.sTab==="初筛通过")
     return '<button class="btn sm pri"'+d+' onclick="batchExam()">批量安排笔试</button>'+
       b["面试中"]+b["不合适"]+b["转入人才库"];
-  if(S.sTab==="笔试中")      /* 笔试后：录结果 / 重排 / 安排面试 / 不合适（不合适含拉黑分支） */
-    return '<button class="btn sm pri"'+d+' onclick="batchGrade()">批量录入笔试记录</button>'+
+  if(S.sTab==="笔试中")      /* 笔试后：Excel 导入记录 / 重排 / 安排面试 / 不合适（不合适含拉黑分支） */
+    return '<button class="btn sm pri" onclick="openExamImp()">批量导入笔试记录</button>'+
       '<button class="btn sm pri"'+d+' onclick="batchReExam()">批量重新安排</button>'+
       b["面试中"]+b["不合适"];
   if(S.sTab==="面试中")      /* 面试后：发 offer 前的两个出口 —— 不合适（含拉黑分支）/ 转入人才库 */
+    return b["不合适"]+b["转入人才库"];
+  if(S.sTab==="拟录用")      /* 拟录用：不做批量发 offer / 批量拟录用，只保留两个出口 */
     return b["不合适"]+b["转入人才库"];
   return "";
 }
@@ -2130,7 +2320,6 @@ function selAllFiltered(on){
   renderSubs();
 }
 var BTIP={
-  "初筛通过":'流转到「初筛通过」后进入笔试 / 面试环节。',
   "转入人才库":'流转到「转入人才库」后本次投递进入终态，候选人本人（按手机号识别）进入人才库供后续岗位复用。'
 };
 function batchAdvance(to){
@@ -2139,42 +2328,172 @@ function batchAdvance(to){
   if(S.sSel.length>SUB_BATCH_MAX){toast("单次最多处理 "+SUB_BATCH_MAX+" 份，请分批操作","err");return}
   /* 「不合适」有两条分支（转不合适 / 转黑名单）且备注必填，走独立弹窗 */
   if(to==="不合适"){openReject("",1);return}
-  confirmBox(to==="面试中"?"批量安排面试":"批量"+to,"确定将选中的 <b>"+S.sSel.length+"</b> 份简历流转到「"+to+"」吗？"+(BTIP[to]?'<br>'+BTIP[to]:""),
+  /* 「初筛通过」可填初筛意见（选填），走独立弹窗 */
+  if(to==="初筛通过"){openScreenPass("",1);return}
+  /* 「面试中」先填面试信息，走独立弹窗 */
+  if(to==="面试中"){openInterview("",1);return}
+  confirmBox("批量"+to,"确定将选中的 <b>"+S.sSel.length+"</b> 份简历流转到「"+to+"」吗？"+(BTIP[to]?'<br>'+BTIP[to]:""),
     "确认流转","doBatchAdvance('"+to+"')",0);
 }
-/* 不合适处理：两个分支（转到不合适 / 转到黑名单）+ 备注必填；备注写入流转记录（与批量共用一套） */
-function rejectToggle(){
-  var b=$("rj_bk");if(b)b.style.display=(val("rj_m")==="黑名单"?"":"none");
-}
+/* 不合适处理：三种方式（不合适 / 不合适并转入人才库 / 不合适并拉黑）+ 备注必填；备注写入流转记录（与批量共用一套） */
 function openReject(id,batch){
   if(!hasPerm("subs.reject")){toast("当前角色无权转不合适","err");return}
   if(batch&&!S.sSel.length){toast("请先勾选候选人","err");return}
   if(batch&&S.sSel.length>SUB_BATCH_MAX){toast("单次最多处理 "+SUB_BATCH_MAX+" 份，请分批操作","err");return}
   var n=batch?S.sSel.length:1,nm=batch?"":esc(((bySub(id)||{}).name)||"");
+  RJ_FILES=[];
+  var modes=[{v:"不合适",t:"不合适"}];
+  if(hasPerm("pool.manage"))modes.push({v:"人才库",t:"不合适，并转入人才库"});
+  if(hasPerm("block.add"))modes.push({v:"黑名单",t:"不合适，并加入黑名单"});
   var body=
-   '<div class="notice" style="margin-bottom:12px">'+
-     '<b>转到不合适：</b>终止本次投递，进入终态不可再流转，不影响其投递其他岗位。<br>'+
-     '<b>转到黑名单：</b>终止本次投递的同时，把候选人本人（按手机号识别）加入黑名单，其后续任何岗位的投递将被静默拦截（B-34）。'+
-   '</div>'+
-   '<div class="fld"><label>处理方式 <i>*</i></label><select class="ip" id="rj_m" onchange="rejectToggle()">'+
-     '<option value="不合适">转到不合适</option>'+
-     (hasPerm("block.manage")?'<option value="黑名单">转到黑名单</option>':'')+
-   '</select>'+
-     (hasPerm("block.manage")?'':'<div class="hint">当前角色无拉黑权限，只能处理为「不合适」</div>')+'</div>'+
-   '<div class="fld"><label>备注 <i>*</i></label><textarea class="ip" id="rj_n" rows="3" placeholder="如：笔试成绩 42 分未达 60 分合格线，技术栈与岗位要求不匹配"></textarea>'+
-     '<div class="hint">备注必填，会写入候选人的<b>流转记录</b>，供后续复核。</div></div>'+
+   '<div class="fld"><label>处理方式 <i>*</i></label><div class="rjopts" id="rj_opts">'+
+     modes.map(function(o,i){
+       return '<label class="rjopt'+(i===0?" on":"")+'">'+
+         '<input type="radio" name="rj_m" value="'+o.v+'"'+(i===0?" checked":"")+' onchange="rejectPick()">'+
+         '<div><div class="t">'+o.t+'</div></div></label>';
+     }).join("")+
+   '</div></div>'+
+   '<div class="fld"><label>备注 <i>*</i></label><textarea class="ip" id="rj_n" rows="3" placeholder="如：笔试成绩 42 分未达 60 分合格线，技术栈与岗位要求不匹配"></textarea></div>'+
    '<div id="rj_bk" style="display:none">'+
      '<div class="fld"><label>拉黑原因 <i>*</i></label><select class="ip" id="rj_r">'+
        BLOCK_REASONS.map(function(r){return '<option>'+r+'</option>'}).join("")+'</select></div>'+
-     '<div class="fld"><label>证据附件 <i>*</i></label><input class="ip" id="rj_e" placeholder="如：笔试作弊监控截图-已归档.pdf">'+
-       '<div class="hint">必须留存证据，禁止仅凭主观判断拉黑；有效期默认 2 年。</div></div>'+
+     '<div class="fld"><label>证据附件</label>'+
+       '<div class="upz" onclick="rjPick()" ondragover="event.preventDefault()" ondrop="rjDrop(event)">'+
+         '<div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>'+
+         '<div class="t">点击或拖拽上传</div>'+
+         '<div class="s">PDF / Word / 图片，单个不超过 20MB</div>'+
+       '</div>'+
+       '<div id="rj_fl"></div>'+
+       '<input type="file" id="rj_f" multiple accept=".pdf,.doc,.docx,image/*" style="display:none" onchange="rjPicked(this)">'+
+     '</div>'+
    '</div>';
   openModal("不合适处理"+(batch?" · 已选 "+n+" 份":" · "+nm),body,
     '<button class="btn" onclick="closeAll()">取消</button>'+
     '<button class="btn dgg" onclick="doReject(\''+id+'\','+(batch?1:0)+')">确认处理'+(batch?"（"+n+" 份）":"")+'</button>');
 }
+/* 初筛通过：可填初筛意见（选填），写入流转记录「状态流转 / 批量流转」节点的备注下（单条与批量共用） */
+function openScreenPass(id,batch){
+  var n=batch?S.sSel.length:1,nm=batch?"":esc(((bySub(id)||{}).name)||"");
+  var body=
+   '<div class="fld"><label>备注</label><textarea class="ip" id="sc_n" rows="3" placeholder="如：技术栈匹配、有同类项目经验，通过初筛"></textarea></div>';
+  openModal("初筛通过"+(batch?" · 已选 "+n+" 份":" · "+nm),body,
+    '<button class="btn" onclick="closeAll()">取消</button>'+
+    '<button class="btn pri" onclick="doScreenPass(\''+(batch?"":id)+'\','+(batch?1:0)+')">确认通过'+(batch?"（"+n+" 份）":"")+'</button>');
+}
+function doScreenPass(id,batch){
+  var note=(val("sc_n")||"").trim();   /* 选填：留空则正常流转，节点下不显示备注行 */
+  if(batch){doBatchAdvance("初筛通过",note);return}
+  doAdvance(id,"初筛通过",{note:note});
+}
+/* 安排面试：面试时间 / 面试地点 / 是否携带简历 / 注意事项（单条与批量共用），信息存在 s.interview（最新轮），不写入流转记录
+   第三参 re=1 表示「重新安排」：可选「改期（该轮）」或「安排下一面」；第四参 round 指定操作的轮次，缺省为最新一面 */
+function openInterview(id,batch,re,round){
+  var n=batch?S.sSel.length:1,nm=batch?"":esc(((bySub(id)||{}).name)||"");
+  var cur=batch?bySub(S.sSel[0]):bySub(id);
+  if(!batch)S.curItvRound=round==null?null:round;
+  var one=(batch?(((bySub(S.sSel[0])||{}).interview)||{}):((cur?itvRound(cur,round):null)||{}));
+  /* 单条安排面试：笔试结论为「不通过」时给出风险提示（批量不提示） */
+  var warn="";
+  if(!batch){
+    var cs=bySub(id),ex=(cs&&cs.exam)||{};
+    if(ex.result==="不通过")warn='<div class="warnbox"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>'+
+      '<div>温馨提示：候选人笔试记录为<b>[不通过]</b>，请谨慎操作</div></div>';
+  }
+  var modeField="";
+  if(re){
+    var all=cur?itvRounds(cur):[];
+    var nextN=all.length+1;
+    modeField='<div class="fld"><label>安排类型</label>'+
+      '<div style="display:flex;gap:20px;align-items:center;font-size:13.5px;color:var(--ink2);padding:4px 0">'+
+        '<label style="display:flex;align-items:center;gap:6px;cursor:pointer"><input type="radio" name="itv_mode" value="same" checked onchange="itvModeChange()"> 改期（第 '+(one.round||1)+' 面）</label>'+
+        '<label style="display:flex;align-items:center;gap:6px;cursor:pointer"><input type="radio" name="itv_mode" value="next" onchange="itvModeChange()"> 安排下一面（第 '+nextN+' 面）</label>'+
+      '</div></div>';
+  }
+  var body=warn+modeField+
+   '<div class="fld"><label>面试时间 <i>*</i></label><input class="ip" type="datetime-local" id="itv_t" value="'+dtIn(one.time)+'"></div>'+
+   '<div class="fld"><label>面试地点 <i>*</i></label><input class="ip" id="itv_p" value="'+esc(one.place||"")+'" placeholder="如：集团总部 3 楼会议室"></div>'+
+   '<div class="fld"><label>是否携带简历</label><select class="ip" id="itv_r">'+
+     ["是","否"].map(function(v){return '<option'+(one.resume===v?" selected":"")+'>'+v+'</option>'}).join("")+'</select></div>'+
+   '<div class="fld"><label>注意事项</label><textarea class="ip" id="itv_tips" rows="4" placeholder="如：携带身份证，提前 15 分钟到场">'+esc(one.tips||"")+'</textarea></div>'+
+   (re?'<div class="hint">改期只更新本轮时间与地点，该轮已录入的结论 / 附件 / 评价会保留；安排下一面会新增一轮，历史轮次不受影响。</div>':'');
+  openModal((re?"重新安排面试":"安排面试")+(batch?" · 已选 "+n+" 份":" · "+nm)+((re&&round!=null)?"（第 "+round+" 面）":""),body,
+    '<button class="btn" onclick="closeAll()">取消</button>'+
+    '<button class="btn pri" onclick="doInterview(\''+(batch?"":id)+'\','+(batch?1:0)+','+(re?1:0)+')">'+(re?"确认重新安排":"确认安排")+(batch?"（"+n+" 份）":"")+'</button>');
+}
+/* 切到「安排下一面」时清空时间地点，避免沿用上一面信息误提交 */
+function itvModeChange(){
+  var m=document.querySelector('input[name="itv_mode"]:checked');
+  if(m&&m.value==="next"){
+    var a=$("itv_t"),b=$("itv_p");
+    if(a)a.value="";if(b)b.value="";
+  }
+}
+function doInterview(id,batch,re){
+  var t=dtOut(val("itv_t")),p=(val("itv_p")||"").trim(),
+      resume=val("itv_r")||"是",tips=(val("itv_tips")||"").trim();
+  if(!t||!p){toast("面试时间与地点必填","err");return}
+  if(!batch){
+    var s=bySub(id);if(!s)return;
+    /* 重新安排：改期 = 更新目标轮；安排下一面 = 追加一轮 */
+    if(re){
+      var rs=itvRounds(s);
+      var mode=(document.querySelector('input[name="itv_mode"]:checked')||{}).value||"same";
+      var jt=((byId(s.jobId)||{}).title)||"";
+      if(mode==="next"){
+        var maxR=rs.reduce(function(m,r){return Math.max(m,r.round||0)},0);
+        var nr={round:maxR+1,time:t,place:p,resume:resume,tips:tips,
+          by:S.user.name,at:now(),arrangeCount:1};
+        rs.push(nr);s.interview=nr;
+        addLog("安排下一面",s.name+" · "+jt,"","第 "+nr.round+" 面 · "+t+" / "+p);
+        save();closeAll();render();S.curSub=id;openSub(id);
+        toast("已安排第 "+nr.round+" 面","ok");
+        return;
+      }
+      var iv=itvRound(s,S.curItvRound)||s.interview||{};
+      iv.time=t;iv.place=p;iv.resume=resume;iv.tips=tips;iv.by=S.user.name;iv.at=now();
+      iv.arrangeCount=(iv.arrangeCount||1)+1;
+      s.interview=rs[rs.length-1];
+      addLog("重新安排面试",s.name+" · "+jt,"","第 "+(iv.round||1)+" 面 · "+t+" / "+p);
+      save();closeAll();render();S.curSub=id;openSub(id);
+      toast("第 "+(iv.round||1)+" 面已重新安排","ok");
+      return;
+    }
+    if(SUB_FLOW[s.status].indexOf("面试中")<0){toast("不允许的流转："+s.status+" → 面试中","err");return}
+    itvRounds(s);
+    var f1={round:s.interviews.length+1,time:t,place:p,resume:resume,tips:tips,by:S.user.name,at:now(),arrangeCount:1};
+    s.interviews.push(f1);s.interview=f1;
+    addLog("安排面试",s.name+" · "+(((byId(s.jobId)||{}).title)||""),"",t+" / "+p);
+    doAdvance(id,"面试中");
+    return;
+  }
+  var r=batchRun(function(s){
+    if(SUB_FLOW[s.status].indexOf("面试中")<0)return "不允许的流转";
+    var from=s.status;
+    itvRounds(s);
+    var nb={round:s.interviews.length+1,time:t,place:p,resume:resume,tips:tips,by:S.user.name,at:now(),arrangeCount:1};
+    s.interviews.push(nb);s.interview=nb;
+    s.status="面试中";
+    s.history.push({t:now(),act:"批量流转",by:S.user.name,from:from,to:"面试中"});
+    addLog("批量安排面试",s.name+" · "+(((byId(s.jobId)||{}).title)||""),from,t+" / "+p);
+    return true;
+  });
+  if(!r)return;
+  batchResult("","",r);
+}
+function rejectMode(){
+  var el=document.querySelector('#rj_opts input[name="rj_m"]:checked');
+  return el?el.value:"不合适";
+}
+function rejectPick(){
+  var m=rejectMode();
+  [].forEach.call(document.querySelectorAll("#rj_opts .rjopt"),function(l){
+    var i=l.querySelector("input");
+    l.className="rjopt"+(i&&i.value===m?" on":"");
+  });
+  var b=$("rj_bk");if(b)b.style.display=(m==="黑名单"?"":"none");
+}
 function doReject(id,batch){
-  var m=val("rj_m"),note=(val("rj_n")||"").trim();
+  var m=rejectMode(),note=(val("rj_n")||"").trim();
   if(!note){toast("备注必填，请说明不合适的具体依据","err");return}
   var reason="",ev="";
   if(m==="黑名单"){
@@ -2187,13 +2506,17 @@ function doReject(id,batch){
   function markTrue(s,c,from){          /* 写入状态 + 备注流转记录 + 拉黑（黑名单分支） */
     s.status="不合适";
     s.history.push({t:now(),act:batch?"批量流转":"状态流转",by:S.user.name,from:from,to:"不合适",
-      note:note+(m==="黑名单"?"（同时加入黑名单："+reason+"）":"")});
+      note:note+(m==="黑名单"?"（同时加入黑名单："+reason+"）":(m==="人才库"?"（同时转入人才库）":""))});
     if(m==="黑名单"){
       c.blocked=1;c.blockReason=reason;c.blockEvidence=ev;c.blockBy=S.user.name;c.blockAt=now();
       c.blockUntil=dayAdd(730);c.pooled=0;
+    }else if(m==="人才库"&&!c.blocked){
+      c.pooled=1;c.poolBy=S.user.name;c.poolAt=now();
+      c.poolReason="不合适处理 · "+(note.length>40?note.slice(0,40)+"…":note);
     }
     var jt=((byId(s.jobId)||{}).title)||"";
-    addLog(m==="黑名单"?"不合适并拉黑":"不合适",s.name+" · "+jt,from,"不合适"+(m==="黑名单"?" · 黑名单":""));
+    addLog(m==="黑名单"?"不合适并拉黑":(m==="人才库"?"不合适并转人才库":"不合适"),
+      s.name+" · "+jt,from,"不合适"+(m==="黑名单"?" · 黑名单":(m==="人才库"?" · 人才库":"")));
     return true;
   }
   if(batch){
@@ -2203,7 +2526,7 @@ function doReject(id,batch){
     });
     if(!r)return;
     batchResult('已处理为「<b>不合适</b>」：<b>'+r.okN+'</b> 份'+
-      (m==="黑名单"?'，并已加入黑名单':'')+'。备注：'+esc(note),
+      (m==="黑名单"?'，并已加入黑名单':(m==="人才库"?'，并已转入人才库':''))+'。备注：'+esc(note),
       '备注已逐条写入流转记录（动作：批量流转）。',r);
     return;
   }
@@ -2213,7 +2536,7 @@ function doReject(id,batch){
   if(m==="黑名单"&&c.blocked){toast("该候选人已在黑名单中","err");return}
   markTrue(s,c,s.status);
   save();render();
-  toast("已处理为「不合适」"+(m==="黑名单"?"，并加入黑名单":""),"ok");
+  toast("已处理为「不合适」"+(m==="黑名单"?"，并加入黑名单":(m==="人才库"?"，并转入人才库":"")),"ok");
   setTimeout(function(){S.curSub=id;openSub(id)},10);
 }
 /* 批量执行骨架：统一前置校验 + 遍历选择集；act(s,c) 返回 true=成功，返回字符串=跳过原因 */
@@ -2236,20 +2559,14 @@ function batchRun(act){
   save();S.sSel=[];S.sPage=1;render();
   return {okN:okN,skip:skip,skipped:skipped};
 }
+/* 批量结果：不再弹「批量处理完成」窗，只 toast「操作成功」；有跳过时附带数量，便于发现漏网 */
 function batchResult(head,logNote,r){
   if(!r)return;
-  var ks=Object.keys(r.skip);
-  openModal("批量处理完成",
-    '<div class="notice" style="margin-bottom:12px">'+head+
-      (ks.length?'，跳过 <b>'+ks.reduce(function(a,k){return a+r.skip[k]},0)+'</b> 份':'')+'。'+
-      (logNote?'<br>'+logNote:'')+'</div>'+
-    (ks.length?'<div class="sec-t">跳过明细（'+ks.length+' 类）</div>'+
-      ks.map(function(k){return '<div style="font-size:13px;padding:6px 0;border-bottom:1px solid var(--line)"><b>'+esc(k)+'</b> · '+r.skip[k]+' 份</div>'}).join("")+
-      '<div style="font-size:12.5px;color:var(--ink3);margin-top:10px">'+r.skipped.slice(0,10).map(function(x){return esc(x)}).join("；")+
-        (r.skipped.length>10?" 等 "+r.skipped.length+" 条":"")+'</div>':''),
-    '<button class="btn pri" onclick="closeAll()">知道了</button>');
+  closeAll();
+  var skipN=0;Object.keys(r.skip||{}).forEach(function(k){skipN+=r.skip[k]});
+  toast(skipN?("操作成功，"+r.okN+" 份成功，"+skipN+" 份跳过"):"操作成功","ok");
 }
-function doBatchAdvance(to){
+function doBatchAdvance(to,note){
   if(!canWrite()){toast("只读角色不可流转","err");return}
   if(!S.sSel.length){toast("请先勾选候选人","err");return}
   if(S.sSel.length>SUB_BATCH_MAX){toast("单次最多处理 "+SUB_BATCH_MAX+" 份，请分批操作","err");return}
@@ -2262,7 +2579,7 @@ function doBatchAdvance(to){
         c.poolReason=c.poolReason||"批量转存（"+from+"）"}
     }
     s.status=to;
-    s.history.push({t:now(),act:"批量流转",by:S.user.name,from:from,to:to});
+    s.history.push({t:now(),act:"批量流转",by:S.user.name,from:from,to:to,note:note||""});
     addLog("批量"+to,s.name+" · "+((byId(s.jobId)||{}).title||""),from,to);
     return true;
   });
@@ -2277,16 +2594,14 @@ function batchExam(){        /* 批量安排笔试：统一写入同一场笔试
   if(S.sSel.length>SUB_BATCH_MAX){toast("单次最多处理 "+SUB_BATCH_MAX+" 份，请分批操作","err");return}
   var one=(bySub(S.sSel[0])||{}).exam||{};
   openModal("批量安排笔试",
-    '<div class="notice" style="margin-bottom:12px">将为选中的 <b>'+S.sSel.length+'</b> 份简历写入<b>同一场</b>笔试安排（时间 / 地点 / 注意事项），安排成功后逐个流转到「笔试中」。<br>线下笔试：系统不提供在线作答，仅记录安排与结果；安排后需 HR 线下另行联系候选人（系统不自动发通知）。</div>'+
-    '<div class="fld"><label>笔试时间</label><input class="ip" id="ex_time" value="'+esc(one.examTime||"")+'" placeholder="如：2026-11-05 14:00"></div>'+
+    '<div class="fld"><label>笔试时间</label><input class="ip" type="datetime-local" id="ex_time" value="'+dtIn(one.examTime)+'"></div>'+
     '<div class="fld"><label>笔试地点</label><input class="ip" id="ex_place" value="'+esc(one.place||"")+'" placeholder="如：集团总部 3 楼会议室"></div>'+
-    '<div class="fld"><label>注意事项</label><input class="ip" id="ex_tips" value="'+esc(one.tips||"")+'" placeholder="如：携带身份证与黑色签字笔"></div>'+
-    '<div class="hint">混选不同城市的候选人时，请确认笔试地点对所有人都可行；个别候选人需换场请在其详情页单独「重新安排」。</div>',
+    '<div class="fld"><label>注意事项</label><textarea class="ip" id="ex_tips" rows="4" placeholder="如：携带身份证与黑色签字笔">'+esc(one.tips||"")+'</textarea></div>',
     '<button class="btn" onclick="closeAll()">取消</button><button class="btn pri" onclick="doBatchExam()">确认安排（'+S.sSel.length+' 份）</button>');
 }
 function doBatchExam(){
   if(!canWrite()){toast("只读角色不可安排笔试","err");return}
-  var t=(val("ex_time")||"").trim(),p=(val("ex_place")||"").trim(),tips=(val("ex_tips")||"").trim();
+  var t=dtOut(val("ex_time")),p=(val("ex_place")||"").trim(),tips=(val("ex_tips")||"").trim();
   if(!t||!p){toast("笔试时间与地点必填","err");return}
   closeAll();
   var r=batchRun(function(s){
@@ -2305,57 +2620,123 @@ function doBatchExam(){
   batchResult('已转入「<b>笔试中</b>」：<b>'+r.okN+'</b> 份',
     '笔试安排已逐条写入候选人档案，并记入操作日志（动作：批量笔试安排 / 安排线下笔试）。',r);
 }
-/* 批量录入笔试记录：一行一位候选人，逐个落库；与单条一致，录入后不自动流转 */
-function batchGrade(){
+/* 批量导入笔试记录（独立页面，非弹框）：下载 Excel 模板 → 填写 → 上传解析 → 校验预览 → 确认导入
+   匹配规则：按手机号定位「笔试中」候选人，姓名 / 投递岗位做一致性校验；导入后不自动流转 */
+function openExamImp(){
   if(!hasPerm("subs.exam")){toast("当前角色无该操作权限","err");return}
-  if(!canWrite()){toast("只读角色不可录入笔试记录","err");return}
-  if(!S.sSel.length){toast("请先勾选候选人","err");return}
-  if(S.sSel.length>SUB_BATCH_MAX){toast("单次最多处理 "+SUB_BATCH_MAX+" 份，请分批操作","err");return}
-  var rows=S.sSel.map(function(id){
-    var s=bySub(id);if(!s||!s.exam)return "";
-    var j=byId(s.jobId)||{title:"—"},e=s.exam;
-    return '<tr><td><div class="tt">'+esc(s.name)+'</div><div class="mt"><span>'+esc(j.title)+'</span></div></td>'+
-      '<td><select class="ip" id="bg_a_'+s.id+'" style="padding:5px 8px"><option>到场</option><option>缺考</option></select></td>'+
-      '<td><input class="ip" id="bg_s_'+s.id+'" style="padding:5px 8px;width:76px" value="'+esc(e.score||"")+'" placeholder="分数"></td>'+
-      '<td><select class="ip" id="bg_l_'+s.id+'" style="padding:5px 8px">'+
-        EXAM_LEVELS.map(function(x){return '<option'+(e.level===x?" selected":"")+'>'+x+'</option>'}).join("")+'</select></td>'+
-      '<td><select class="ip" id="bg_r_'+s.id+'" style="padding:5px 8px"><option>通过</option><option>不通过</option></select></td>'+
-      '<td><input class="ip" id="bg_c_'+s.id+'" style="padding:5px 8px" placeholder="笔试评价（选填）"></td></tr>';
-  }).join("");
-  if(!rows){toast("所选候选人尚无笔试安排","err");return}
-  openModal("批量录入笔试记录",
-    '<div class="notice" style="margin-bottom:12px">为选中的 <b>'+S.sSel.length+'</b> 份简历在同一张表单里逐个录入笔试结果（到场情况 / 成绩 / 等级 / 结论 / 评价）。<br>保存后<b>不自动流转</b>：请回到列表批量「安排面试」或「不合适」处理；缺考的需先「批量重新安排」。</div>'+
-    '<div class="tbwrap"><table class="data"><thead><tr><th>候选人</th><th>到场</th><th>成绩</th><th>等级</th><th>结论</th><th>笔试评价</th></tr></thead>'+
-      '<tbody>'+rows+'</tbody></table></div>',
-    '<button class="btn" onclick="closeAll()">取消</button><button class="btn pri" onclick="doBatchGrade()">保存记录（'+S.sSel.length+' 份）</button>',1);
+  if(!canWrite()){toast("只读角色不可导入笔试记录","err");return}
+  S.eximp={file:"",rows:null};
+  S.page="examimp";closeAll();render();window.scrollTo(0,0);
 }
-function doBatchGrade(){
-  if(!canWrite()){toast("只读角色不可录入笔试记录","err");return}
-  closeAll();
-  var r=batchRun(function(s){
-    if(s.status!=="笔试中")return "当前状态不在笔试环节（"+s.status+"）";
-    if(!s.exam)return "尚未安排笔试";
-    var a=val("bg_a_"+s.id),sc=(val("bg_s_"+s.id)||"").trim(),
-      lv=val("bg_l_"+s.id),rs=val("bg_r_"+s.id),cm=(val("bg_c_"+s.id)||"").trim();
-    var jt=((byId(s.jobId)||{}).title)||"";
-    var before=(s.exam.score||"—")+" / "+(s.exam.level||"—");
-    s.exam.attend=a;s.exam.grader=S.user.name;s.exam.gradeAt=now();s.exam.status="已完成";
-    var note;
-    if(a==="缺考"){
-      s.exam.result="";s.exam.score="";s.exam.comment=cm;
-      note="缺考，等待重新安排";
-      addLog("录入笔试记录",s.name+" · "+jt,before,"缺考");
-    }else{
-      s.exam.score=sc;s.exam.level=lv;s.exam.result=rs;s.exam.comment=cm;
-      note=(sc||"—")+" 分 · "+lv+" · "+rs+(cm?"（"+cm.slice(0,20)+"）":"");
-      addLog("录入笔试记录",s.name+" · "+jt,before,(sc||"—")+" / "+lv+" · "+rs);
-    }
-    s.history.push({t:now(),act:"录入笔试记录",by:S.user.name,note:note});
-    return true;
+function examImpMatch(r){   /* 校验一行：返回 ""=通过，否则为错误原因 */
+  var list=S.subs.filter(function(s){return s.status==="笔试中"&&s.phone===r.phone});
+  if(!list.length)return "手机号未匹配到「笔试中」的候选人";
+  var s=list[0];
+  if(s.name!==r.name)return "姓名与手机号不匹配（系统："+s.name+"）";
+  var jt=((byId(s.jobId)||{}).title)||"";
+  if(r.job&&jt&&r.job!==jt)return "投递岗位与系统记录不一致（"+jt+"）";
+  if(r.attend!=="到场"&&r.attend!=="缺考")return "到场情况只能填「到场」或「缺考」";
+  if(r.attend==="到场"&&r.result!=="通过"&&r.result!=="不通过")return "笔试结论只能填「通过」或「不通过」";
+  if(r.score&&isNaN(Number(r.score)))return "成绩需为数字";
+  return "";
+}
+function dlExamTpl(){       /* 下载 Excel 模板（.xls，含表头与填写示例） */
+  var html='<html xmlns:x="urn:schemas-microsoft-com:office:excel"><head><meta charset="UTF-8"></head><body><table border="1">'+
+    '<tr><th>候选人</th><th>手机号</th><th>投递岗位</th><th>到场情况</th><th>笔试结论</th><th>成绩</th><th>笔试评价</th></tr>'+
+    '<tr><td>张三</td><td>13800001111</td><td>Java 开发工程师</td><td>到场</td><td>通过</td><td>82</td><td>基础扎实，算法题完成度高</td></tr>'+
+    '<tr><td>李四</td><td>13800002222</td><td>前端开发工程师</td><td>缺考</td><td></td><td></td><td>未到场，等待重新安排</td></tr>'+
+    '</table></body></html>';
+  var a=document.createElement("a");
+  a.href=URL.createObjectURL(new Blob(["\ufeff"+html],{type:"application/vnd.ms-excel"}));
+  a.download="笔试记录导入模板.xls";
+  document.body.appendChild(a);a.click();
+  setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},800);
+  addLog("下载笔试导入模板","","","Excel 模板（含填写示例）");
+  save();toast("模板已下载，请按模板填写后上传","ok");
+}
+function examImpParse(){
+  var fs=upFiles("impx");
+  if(!fs.length){toast("请先上传 Excel 文件","err");return}
+  /* 演示环境不真正解析 Excel：按当前「笔试中」候选人生成样例解析结果，末尾附一条校验失败行 */
+  var list=S.subs.filter(function(s){return s.status==="笔试中"&&s.exam}).slice(0,4);
+  var rows=list.map(function(s,i){
+    var absent=i===list.length-1;
+    return {name:s.name,phone:s.phone,job:((byId(s.jobId)||{}).title)||"",
+      attend:absent?"缺考":"到场",result:absent?"":(i%2?"不通过":"通过"),
+      score:absent?"":String(72+i*5),
+      comment:absent?"未到场，等待重新安排":"基础扎实，整体表现良好"};
   });
-  if(!r)return;
-  batchResult('已录入笔试记录：<b>'+r.okN+'</b> 份',
-    '结果已逐条写入候选人档案与流转记录；不自动流转，请在列表继续批量处理为「面试中」或「不合适」。',r);
+  rows.push({name:"陈静",phone:"19900001234",job:"数据分析师",attend:"到场",result:"通过",score:"88",comment:""});
+  S.eximp={file:fs[0].name,rows:rows};
+  render();toast("解析完成：共 "+rows.length+" 条记录","ok");
+}
+function examImpReset(){S.eximp.rows=null;render()}
+function doExamImp(){
+  var all=S.eximp.rows||[],rows=all.filter(function(r){return !examImpMatch(r)});
+  if(!rows.length){toast("没有校验通过的记录可导入","err");return}
+  var okN=0;
+  rows.forEach(function(r){
+    var s=S.subs.filter(function(x){return x.status==="笔试中"&&x.phone===r.phone})[0];if(!s)return;
+    var jt=((byId(s.jobId)||{}).title)||"";
+    var before=(s.exam.score||"—");
+    s.exam.attend=r.attend;s.exam.grader=S.user.name;s.exam.gradeAt=now();s.exam.status="已完成";
+    if(r.attend==="缺考"){
+      s.exam.result="";s.exam.score="";s.exam.comment=r.comment||"";
+      s.history.push({t:now(),act:"导入笔试记录",by:S.user.name,note:"缺考，等待重新安排"});
+      addLog("导入笔试记录",s.name+" · "+jt,before,"缺考");
+    }else{
+      s.exam.score=r.score||"";s.exam.result=r.result;s.exam.comment=r.comment||"";
+      s.history.push({t:now(),act:"导入笔试记录",by:S.user.name,note:(r.score||"—")+" 分 · "+r.result});
+      addLog("导入笔试记录",s.name+" · "+jt,before,(r.score||"—")+" · "+r.result);
+    }
+    okN++;
+  });
+  save();
+  var skip=all.length-okN;
+  S.eximp={file:"",rows:null};
+  S.page="subs";S.sTab="笔试中";S.sSel=[];S.sPage=1;render();window.scrollTo(0,0);
+  toast(skip?("导入成功 "+okN+" 条，"+skip+" 条校验未通过已跳过"):"成功导入 "+okN+" 条笔试记录","ok");
+}
+function pgExamImp(){
+  var ex=S.eximp||{},okN=(ex.rows||[]).filter(function(r){return !examImpMatch(r)}).length;
+  var steps=[["1","下载模板","下载 Excel 模板，内含标准表头与填写示例"],
+    ["2","填写记录","按模板逐行填写笔试结果，一行一位候选人"],
+    ["3","上传解析","上传填好的 Excel 文件，系统自动解析内容"],
+    ["4","校验导入","确认逐行校验结果后导入，写入候选人档案"]];
+  var h='<a class="btn sm" onclick="go(\'subs\')" style="cursor:pointer;margin-bottom:12px;display:inline-block">← 返回候选人列表</a>'+
+    '<div class="notice" style="margin-bottom:14px"><b>操作步骤指引</b><div style="display:flex;gap:18px;flex-wrap:wrap;margin-top:10px">'+
+    steps.map(function(st){
+      return '<div style="flex:1;min-width:200px;display:flex;gap:9px;align-items:flex-start">'+
+        '<div style="width:24px;height:24px;border-radius:50%;background:var(--pri);color:#fff;font-size:12.5px;display:flex;align-items:center;justify-content:center;flex:none">'+st[0]+'</div>'+
+        '<div><div style="font-size:13px;font-weight:600;color:var(--ink)">'+st[1]+'</div>'+
+        '<div style="font-size:12px;color:var(--ink3);line-height:1.6;margin-top:2px">'+st[2]+'</div></div></div>';
+    }).join("")+'</div></div>';
+  var fdesc=["必填，候选人姓名","必填，11 位手机号，用于匹配候选人","必填，与系统投递记录一致","必填：到场 / 缺考","到场时必填：通过 / 不通过，缺考留空","选填，数字分数","选填，文字评价"];
+  h+='<div class="sec-t">模板字段说明（7 个字段，顺序如下）</div><div class="tbwrap" style="margin-bottom:14px"><table class="data">'+
+    '<thead><tr>'+["候选人","手机号","投递岗位","到场情况","笔试结论","成绩","笔试评价"].map(function(x){return "<th>"+x+"</th>"}).join("")+'</tr></thead>'+
+    '<tbody><tr>'+fdesc.map(function(d){return '<td style="font-size:12.5px;color:var(--ink2)">'+d+'</td>'}).join("")+'</tr></tbody></table></div>';
+  h+='<div class="sec-t">上传 Excel 文件</div>'+
+    upBox("impx",{multi:false,accept:".xlsx,.xls,.csv",t:"点击上传 Excel 文件，或将文件拖到此处",s:"支持 .xlsx / .xls，单份文件"})+
+    '<div style="display:flex;gap:9px;margin-top:12px;flex-wrap:wrap">'+
+    '<button class="btn pri" onclick="examImpParse()">解析文件</button>'+
+    '<button class="btn" onclick="dlExamTpl()">下载 Excel 模板</button>'+
+    (ex.rows?'<button class="btn" onclick="examImpReset()">清除解析结果</button>':"")+'</div>';
+  if(ex.rows){
+    var trs=ex.rows.map(function(r){
+      var err=examImpMatch(r);
+      return '<tr><td>'+esc(r.name)+'</td><td>'+esc(r.phone)+'</td><td>'+esc(r.job)+'</td>'+
+        '<td>'+esc(r.attend)+'</td><td>'+esc(r.result||"—")+'</td><td>'+esc(r.score||"—")+'</td>'+
+        '<td>'+esc(r.comment||"—")+'</td>'+
+        '<td>'+(err?'<span class="pill r" title="'+esc(err)+'">'+esc(err)+'</span>':'<span class="pill g">校验通过</span>')+'</td></tr>';
+    }).join("");
+    h+='<div class="sec-t" style="margin-top:18px">校验预览<span style="font-weight:400;font-size:12px;color:var(--ink3);margin-left:10px">来源文件：'+esc(ex.file||"")+' · 共 '+ex.rows.length+' 条，'+okN+' 条可导入</span></div>'+
+      '<div class="tbwrap"><table class="data"><thead><tr><th>候选人</th><th>手机号</th><th>投递岗位</th><th>到场情况</th><th>笔试结论</th><th>成绩</th><th>笔试评价</th><th>校验结果</th></tr></thead><tbody>'+trs+'</tbody></table></div>'+
+      '<div style="display:flex;gap:9px;margin-top:14px;flex-wrap:wrap">'+
+      '<button class="btn pri"'+(okN?"":" disabled")+' onclick="doExamImp()">确认导入（'+okN+' 条）</button>'+
+      '<button class="btn" onclick="go(\'subs\')">取消</button></div>'+
+      '<div class="hint" style="margin-top:10px">仅导入校验通过的记录；导入后不自动流转，请回列表继续「批量安排面试」或「批量不合适」。手机号已匹配但姓名 / 岗位不一致的行会被拦截。</div>';
+  }
+  return h;
 }
 /* 批量重新安排：为重考 / 时间冲突的候选人重排一场，安排次数累加，成绩与结论作废等待重评 */
 function batchReExam(){
@@ -2365,16 +2746,14 @@ function batchReExam(){
   if(S.sSel.length>SUB_BATCH_MAX){toast("单次最多处理 "+SUB_BATCH_MAX+" 份，请分批操作","err");return}
   var one=(bySub(S.sSel[0])||{}).exam||{};
   openModal("批量重新安排笔试",
-    '<div class="notice" style="margin-bottom:12px">将为选中的 <b>'+S.sSel.length+'</b> 份简历写入<b>同一场</b>新的笔试安排。<br>重新安排会作废上一场的成绩与结论，状态保持「笔试中」等待重新评阅；安排次数累加。</div>'+
-    '<div class="fld"><label>新的笔试时间</label><input class="ip" id="ex_time" value="'+esc(one.examTime||"")+'" placeholder="如：2026-11-12 14:00"></div>'+
+    '<div class="fld"><label>新的笔试时间</label><input class="ip" type="datetime-local" id="ex_time" value="'+dtIn(one.examTime)+'"></div>'+
     '<div class="fld"><label>新的笔试地点</label><input class="ip" id="ex_place" value="'+esc(one.place||"")+'" placeholder="如：集团总部 3 楼会议室"></div>'+
-    '<div class="fld"><label>注意事项</label><input class="ip" id="ex_tips" value="'+esc(one.tips||"")+'" placeholder="如：携带身份证与黑色签字笔"></div>'+
-    '<div class="hint">线下笔试：安排后需 HR 线下另行联系候选人（系统不自动发通知）。个别换场请在其详情页单独「重新安排」。</div>',
+    '<div class="fld"><label>注意事项</label><textarea class="ip" id="ex_tips" rows="4" placeholder="如：携带身份证与黑色签字笔">'+esc(one.tips||"")+'</textarea></div>',
     '<button class="btn" onclick="closeAll()">取消</button><button class="btn pri" onclick="doBatchReExam()">确认重新安排（'+S.sSel.length+' 份）</button>');
 }
 function doBatchReExam(){
   if(!canWrite()){toast("只读角色不可安排笔试","err");return}
-  var t=(val("ex_time")||"").trim(),p=(val("ex_place")||"").trim(),tips=(val("ex_tips")||"").trim();
+  var t=dtOut(val("ex_time")),p=(val("ex_place")||"").trim(),tips=(val("ex_tips")||"").trim();
   if(!t||!p){toast("笔试时间与地点必填","err");return}
   closeAll();
   var r=batchRun(function(s){
@@ -2398,39 +2777,21 @@ function toggleReveal(id){
   if(S.reveal[id])addLog("查看完整手机号",(bySub(id)||{}).name||"","","已脱敏展示 → 明文（记录留痕）");
   save();renderSubs();
 }
-/* 详情页模块折叠：标题可点，状态记在 S.secClosed，重绘 / 换人后保持 */
-var SEC_KEYS=["base","msg","attach","exam","offer","onboard","hist","notes"];
+/* 详情页模块折叠：标题可点，手动状态记在 S.secClosed（会话内有效）。tab 化后每屏只有 1-4 块，默认全部展开 */
+var SEC_KEYS=["base","msg","attach","exam","itv","plan","offer","onboard","hist","notes"];
 function secClosed(k){return !!(S.secClosed&&S.secClosed[k])}
-function secAnyOpen(){return SEC_KEYS.some(function(k){return !secClosed(k)})}
-function secBox(k,title,inner,cnt){
+function secBox(k,title,inner){
   return '<div class="sec'+(secClosed(k)?" closed":"")+'" id="sc_'+k+'">'+
     '<div class="sec-t tg" onclick="toggleSec(\''+k+'\')" title="点击展开 / 收起">'+
       '<span>'+title+'</span>'+
-      '<span class="rt">'+(cnt?'<span class="cnt">'+esc(cnt)+'</span>':'')+'<span class="chev">▾</span></span>'+
+      '<span class="rt"><span class="chev">▾</span></span>'+
     '</div><div class="sb">'+inner+'</div></div>';
-}
-function examTag(s){
-  var e=s.exam;
-  if(!e)return "未安排";
-  if(e.status==="已完成")return e.attend==="缺考"?"缺考":(e.result||"已评阅");
-  return "已安排";
 }
 function toggleSec(k){
   var el=$("sc_"+k);if(!el)return;
   var toClose=!el.classList.contains("closed");
   if(toClose)el.classList.add("closed");else el.classList.remove("closed");
   S.secClosed=S.secClosed||{};S.secClosed[k]=toClose;
-  var all=$("sec_all");if(all)all.textContent=secAnyOpen()?"全部收起":"全部展开";
-  save();
-}
-function toggleAllSec(){
-  var close=secAnyOpen();
-  SEC_KEYS.forEach(function(k){
-    var el=$("sc_"+k);
-    if(el){if(close)el.classList.add("closed");else el.classList.remove("closed")}
-    S.secClosed=S.secClosed||{};S.secClosed[k]=close;
-  });
-  var all=$("sec_all");if(all)all.textContent=close?"全部展开":"全部收起";
   save();
 }
 /* 同一候选人的多份投递切换：人才库/黑名单是「人」维度，详情是「投递」维度，用一条 chips 把两者接上（B-54） */
@@ -2452,10 +2813,27 @@ function subTabs(s){
     }).join("")+'</div>';
 }
 var FLOW_PERM={"初筛通过":"subs.screen","笔试中":"subs.exam","面试中":"subs.interview",
-  "已发 offer":"subs.offer","不合适":"subs.reject","转入人才库":"pool.manage"};
+  "拟录用":"subs.offer","已发 offer":"subs.offer","不合适":"subs.reject","转入人才库":"pool.manage"};
+/* ---------- 详情页三 tab：档案（静态画像+备注）/ 流程（环节产物）/ 记录（流转留痕） ---------- */
+var SUB_TABS=[{k:"profile",t:"档案"},{k:"process",t:"流程"},{k:"log",t:"记录"}];
+function subTabBar(){
+  return '<div class="dtabs">'+SUB_TABS.map(function(x){
+    return '<span class="dtab'+(S.subTab===x.k?" on":"")+'" onclick="setSubTab(\''+x.k+'\')">'+x.t+'</span>';
+  }).join("")+'</div>';
+}
+/* 切 tab：离开档案前把备注输入框静默保存（备注归档档案 tab，切走按钮会跟着消失，不保存会丢输入） */
+function setSubTab(t){
+  var id=S.curSub;if(!id||S.subTab===t)return;
+  var ip=$("rmk_ip");
+  if(ip){var s=bySub(id);if(s){s.remark=(ip.value||"").trim();save()}}
+  S.subTab=t;openSub(id);
+}
+/* 未到环节的占位：模块常驻不消失，避免被误以为数据丢失 */
+function demptySec(t){return '<div class="dempty">'+t+'</div>'}
 function openSub(id,src){
   if(src==="pool")S.subPool=1;
   else if(src==="sub")S.subPool=0;      /* 传了来源才改状态；详情内的二次刷新（保存、隐藏手机号等）沿用原来源 */
+  if(S.curSub!==id)S.subTab="profile";  /* 换投递回默认 tab；详情内切 tab / 二次刷新不重置 */
   S.curSub=id;
   var s=bySub(id);if(!s)return;
   var j=byId(s.jobId)||{title:"—",city:"",track:""};
@@ -2494,43 +2872,62 @@ function openSub(id,src){
       '<button class="btn pri" onclick="saveRemark(\''+id+'\')">保存备注</button></div>'
     :'<div style="font-size:13.5px;color:var(--ink2);background:#fafbfc;border-radius:8px;padding:11px 13px;white-space:pre-wrap">'+(esc(rmk)||'（未填写备注）')+'</div>';
 
-  /* 详情页不展示人才库 / 黑名单模块：沉淀与拉黑统一走「人才库」「黑名单」菜单，或列表页签的批量动作 */
+  /* 环节模块的渲染边界保持原判权限不变，但未到环节不隐藏——显示占位，tab 化后模块常驻可见 */
   var showAdv=(s.status!=="待筛选"&&s.status!=="初筛通过");      /* 线下笔试模块 */
   var showOrg=(showAdv&&s.status!=="笔试中");                     /* Offer 模块：进入面试环节后才出现 */
-  var examBody=showAdv?examSection(s,id,true):"";
-  var offerBody=showOrg?offerSection(s,id,true):"";
-  var offerN=offersOf(id).length;
+  var examBody=showAdv?examSection(s,id,true):demptySec("尚未进入笔试环节");
+  var offerBody=showOrg?offerSection(s,id,true):demptySec("尚未进入 Offer 环节");
   var showOnb=(s.status==="已发 offer")||!!s.onboard;   /* 发 offer 之后才出现；转过不合适的仍保留记录 */
-  var onbBody=showOnb?onboardSection(s,id):"";
+  var onbBody=showOnb?onboardSection(s,id):demptySec("发放 Offer 后开始入职跟进");
   var hb=hiredBefore(s);
   var hbHtml=hb.length?('<div class="notice" style="margin-bottom:14px">该候选人曾入职：'+hb.slice(0,3).map(function(x){
       var L=onbLeft(x);return '「'+esc((byId(x.jobId)||{}).title||"—")+'」'+esc(L.date)+' 离职（'+esc(L.type)+' · '+esc(L.rehire)+'）';
     }).join("；")+(hb.length>3?" 等 "+hb.length+" 段任职":"")+
     '<br><span style="font-size:12.5px;color:var(--ink3)">再次录用前建议先确认离职原因与回流意愿，避免重复面试与重复背调。</span></div>'):"";
   var tabs=subTabs(s);
-  var body=
-  '<div style="display:flex;align-items:center;gap:10px;margin-bottom:'+(tabs?"10px":"14px")+'">'+
-    '<div style="font-size:19px;font-weight:700">'+esc(s.name)+'</div>'+statusPill(s.status)+
-    '<div class="sp" style="flex:1"></div>'+
-    '<span id="sec_all" style="font-size:12.5px;color:var(--brand);cursor:pointer;user-select:none" onclick="toggleAllSec()">'+(secAnyOpen()?"全部收起":"全部展开")+'</span>'+
-    (tabs?'<span style="font-size:12.5px;color:var(--ink3)">共 '+subTabN(s)+' 份投递</span>'
-         :'<span style="font-size:12.5px;color:var(--ink3)">投递：'+esc(j.title)+'</span>')+'</div>'+
-  tabs+
-  hbHtml+
-  secBox("base","基本信息（11 项）",'<div class="kv">'+kv+'</div>')+
-  secBox("msg","个人留言",'<div style="font-size:13.5px;color:var(--ink2);background:#fafbfc;border-radius:8px;padding:11px 13px">'+(esc(s.msg)||"（候选人未填写留言）")+'</div>',s.msg?"":"未填写")+
+  /* 常驻头：摘要条 + 三 tab（sticky 吸附），滚动中随时能看关键字段、随时能切 tab */
+  var headHtml=
+  '<div class="dhead">'+
+    '<div class="dsum">'+
+      '<span><b>学历</b>'+esc(s.deg||"—")+'</span>'+
+      '<span><b>年限</b>'+esc(s.years||"—")+'</span>'+
+      '<span><b>现居</b>'+esc(s.city||"—")+'</span>'+
+      '<span><b>岗位</b>'+esc(j.title)+'</span>'+
+      '<span><b>时间</b>'+esc(s.time)+'</span>'+
+    '</div>'+
+    subTabBar()+
+  '</div>';
+  /* 三个 tab 的模块：档案=静态画像+备注（写入型紧贴阅读动作）；流程=环节产物；记录=只追加的留痕 */
+  var profileBody=
+  secBox("base","基本信息",'<div class="kv">'+kv+'</div>')+
+  secBox("msg","个人留言",'<div style="font-size:13.5px;color:var(--ink2);background:#fafbfc;border-radius:8px;padding:11px 13px">'+(esc(s.msg)||"（候选人未填写留言）")+'</div>')+
   secBox("attach","附件简历",
     '<div style="display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:8px;padding:11px 13px">'+
       '<div style="width:34px;height:34px;border-radius:6px;background:var(--dangerl);color:var(--danger);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700">PDF</div>'+
       '<div style="flex:1;min-width:0"><div style="font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(s.attach)+'</div>'+
       '<div style="font-size:12px;color:var(--ink3)">1.2 MB</div></div>'+
       '<button class="btn sm" onclick="previewAttach(\''+id+'\')">预览</button>'+
-      '<button class="btn sm" onclick="dlAttach(\''+id+'\')">下载</button></div>',"1.2 MB")+
-  (examBody?secBox("exam","线下笔试（B-40 环节 / B-41 记录）",examBody,examTag(s)):"")+
-  (offerBody?secBox("offer","Offer 文件",offerBody,offerN?offerN+" 份":"未生成"):"")+
-  (onbBody?secBox("onboard","入职跟进",onbBody,onbState(s)):"")+
-  secBox("hist","流转记录",'<div class="tl">'+(hist||"")+'</div>',(s.history||[]).length+" 条")+
-  secBox("notes","备注",notesBody,(s.remark||"").trim()?"已填写":"未填写");
+      '<button class="btn sm" onclick="dlAttach(\''+id+'\')">下载</button></div>')+
+  secBox("notes","备注",notesBody);
+  var processBody=
+  secBox("exam","笔试信息",examBody)+
+  secBox("itv","面试信息",interviewSection(s,id))+
+  secBox("plan","拟录用信息",planSection(s,id))+
+  secBox("offer","Offer 文件",offerBody)+
+  secBox("onboard","入职跟进",onbBody);
+  var logBody=
+  secBox("hist","流转记录",'<div class="tl">'+(hist||"")+'</div>');
+  var tabBody=S.subTab==="process"?processBody:(S.subTab==="log"?logBody:profileBody);
+  var body=
+  '<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">'+
+    '<div style="font-size:19px;font-weight:700">'+esc(s.name)+'</div>'+statusPill(s.status)+
+    '<div class="sp" style="flex:1"></div>'+
+    (tabs?'<span style="font-size:12.5px;color:var(--ink3)">共 '+subTabN(s)+' 份投递</span>'
+         :'<span style="font-size:12.5px;color:var(--ink3)">投递：'+esc(j.title)+'</span>')+'</div>'+
+  headHtml+
+  tabs+
+  hbHtml+
+  tabBody;
 
   if(s.status==="已发 offer")btns=onbBtns(id,s);      /* 入职跟进：登记接受 / 登记入职 / 登记未入职 */
   /* 终态逆向（B-53）：仅管理员，且只回到这条投递自己上一次的环节 */
@@ -2592,9 +2989,11 @@ function deptOf(cat){
 function defaultVars(s,j){
   var ac=S.accounts.filter(function(a){return a.name===S.user.name})[0];
   var dept=j?deptOf(j.cat):"";
-  return {"姓名":s.name,"岗位":j?j.title:"","部门":dept,"城市":j?j.city:"",
-    "月薪":j?j.salary:"","合同年限":"3 年","试用期":"3 个月","汇报对象":dept?dept+"负责人":"部门负责人",
-    "入职日期":dayAdd(14),"报到地点":(j?j.city:"")+" 集团总部","有效期":dayAdd(7),"HR联系人":S.user.name,
+  var pl=s.plan||{};      /* 拟录用阶段登记的录用要素优先预填，避免重复录入 */
+  return {"姓名":s.name,"岗位":pl.post||(j?j.title:""),"部门":dept,"城市":j?j.city:"",
+    "月薪":pl.salary||(j?j.salary:""),"合同年限":"3 年","试用期":"3 个月",
+    "汇报对象":pl.manager||(dept?dept+"负责人":"部门负责人"),
+    "入职日期":pl.onboard||dayAdd(14),"报到地点":(j?j.city:"")+" 集团总部","有效期":dayAdd(7),"HR联系人":S.user.name,
     "联系电话":ac?(ac.phone||""):"","发件日期":today()};
 }
 /* 渲染：把 {{变量}} 替换成实际值；未填写的留「（待填写：X）」占位，便于 HR 在预览中发现缺漏 */
@@ -2680,7 +3079,7 @@ function openSendOffer(id){
     '<div class="sec-t">③ 发送对象与邮件</div>'+
     '<div class="fld"><label>收件人<i>*</i></label><input class="ip" id="so_to" value="'+esc(s.email||"")+'" placeholder="候选人邮箱"></div>'+
     '<div class="fld"><label>抄送</label><label style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink2)">'+
-      '<input type="checkbox" id="so_cc" checked>招聘负责人 '+esc(own.name)+'（'+esc(cc)+'）</label></div>'+
+      '<input type="checkbox" id="so_cc" checked>招聘负责人 '+esc(own.name)+(own.email?'（'+esc(cc)+'）':'')+'</label></div>'+
     '<div class="fld"><label>邮件主题</label><input class="ip" id="so_sub" value="'+esc(subj)+'"></div>'+
     '<div class="notice">发送后：候选人状态改为「已发 offer」，进入入职跟进「待回复」；本次发送会记录发送人、时间与收件邮箱，可在 Offer 文件处回看。</div>';
   openModal("发送 Offer · "+esc(s.name)+" · "+esc(j.title),body,
@@ -3408,30 +3807,36 @@ var TPL_STARTER='<p>{{姓名}} 您好：</p>'+
   '<p>联系人：{{HR联系人}}　联系电话：{{联系电话}}</p>'+
   '<p style="text-align:right">红星实业集团 人力资源中心</p>'+
   '<p style="text-align:right">{{发件日期}}</p>';
-function rteToolbar(){
+function rteToolbar(edId,mini){
   function b(cmd,label,title){
-    return '<button type="button" class="rte-b" title="'+title+'" onmousedown="event.preventDefault()" onclick="rteCmd(\''+cmd+'\')">'+label+'</button>';
+    return '<button type="button" class="rte-b" title="'+title+'" onmousedown="event.preventDefault()" onclick="rteCmd(\''+cmd+'\',\''+edId+'\')">'+label+'</button>';
   }
-  return b("bold","<b>B</b>","加粗（Ctrl+B）")+b("italic","<i>I</i>","斜体")+b("underline","<u>U</u>","下划线")+
+  var core=b("bold","<b>B</b>","加粗（Ctrl+B）")+b("italic","<i>I</i>","斜体")+b("underline","<u>U</u>","下划线")+
     '<span class="sp2"></span>'+b("insertUnorderedList","• 列表","无序列表")+b("insertOrderedList","1. 列表","有序列表")+
-    '<span class="sp2"></span>'+b("justifyLeft","左","左对齐")+b("justifyCenter","中","居中")+b("justifyRight","右","右对齐")+
-    '<span class="sp2"></span>'+b("removeFormat","清格式","清除选中内容格式")+b("undo","↶","撤销")+b("redo","↷","重做");
+    '<span class="sp2"></span>'+b("removeFormat","清格式","清除选中内容格式");
+  var hist='<span class="sp2"></span>'+b("undo","↶","撤销")+b("redo","↷","重做");
+  if(mini)return core+hist;
+  return core+'<span class="sp2"></span>'+b("justifyLeft","左","左对齐")+b("justifyCenter","中","居中")+b("justifyRight","右","右对齐")+hist;
 }
-function rteVarBar(){
+function rteVarBar(edId){
   return '<div class="varbar"><div class="lb">可用变量（点击即插入到光标处，带 <span style="color:var(--danger)">*</span> 为创建 Offer 时必填）</div>'+
     '<div class="vs">'+OFFER_VARS.map(function(k){
-      return '<span class="vchip" title="插入 {{'+k+'}}" onmousedown="event.preventDefault()" onclick="rteInsertVar(\''+k+'\')">'+
+      return '<span class="vchip" title="插入 {{'+k+'}}" onmousedown="event.preventDefault()" onclick="rteInsertVar(\''+k+'\',\''+edId+'\')">'+
         esc(k)+(REQ_VARS.indexOf(k)>=0?'<i>*</i>':'')+'</span>';
     }).join("")+'</div></div>';
 }
-function rteBox(html){
-  return '<div class="rte"><div class="rte-tb">'+rteToolbar()+'</div>'+
-    '<div class="rte-bd" id="tp_body_ed" contenteditable="true" spellcheck="false" '+
-      'data-ph="在此撰写 Offer 正文，可从下方变量点击插入到光标处…" onpaste="rtePaste(event)">'+html+'</div></div>'+
-    rteVarBar();
+function rteBox(html,opt){
+  opt=opt||{};
+  var id=opt.id||"tp_body_ed";
+  return '<div class="rte'+(opt.mini?" mini":"")+'"><div class="rte-tb">'+rteToolbar(id,opt.mini)+'</div>'+
+    '<div class="rte-bd" id="'+id+'" contenteditable="true" spellcheck="false" '+
+      'data-ph="'+esc(opt.ph||"在此撰写正文，可从下方变量点击插入到光标处…")+'" '+
+      (opt.input?'oninput="'+opt.input+'" onblur="'+opt.input+'" ':'')+
+      'onpaste="rtePaste(event,\''+id+'\')">'+html+'</div></div>'+
+    (opt.varBar?rteVarBar(id):"");
 }
-function rteKeep(){                      /* 保证编辑器内有光标：在内部就保留，不在就落到末尾 */
-  var ed=$("tp_body_ed");if(!ed)return null;
+function rteKeep(id){                    /* 保证编辑器内有光标：在内部就保留，不在就落到末尾 */
+  var ed=$(id||"tp_body_ed");if(!ed)return null;
   var sel=window.getSelection();
   if(!sel||!sel.rangeCount||!ed.contains(sel.anchorNode)){
     var r=document.createRange();r.selectNodeContents(ed);r.collapse(false);
@@ -3440,28 +3845,32 @@ function rteKeep(){                      /* 保证编辑器内有光标：在内
   }
   return sel;
 }
-function rteCmd(cmd){
-  var ed=$("tp_body_ed");if(!ed)return;
-  ed.focus();rteKeep();
+function rteCmd(cmd,id){
+  var ed=$(id||"tp_body_ed");if(!ed)return;
+  ed.focus();rteKeep(id);
   try{document.execCommand(cmd,false,null)}catch(e){}
+  ed.dispatchEvent(new Event("input"));
 }
-function rteInsertVar(k){
-  var ed=$("tp_body_ed");if(!ed)return;
+function rteInsertVar(k,id){
+  var ed=$(id||"tp_body_ed");if(!ed)return;
   var txt="{{"+k+"}}";
   ed.focus();
-  var sel=rteKeep(),ok=false;
+  var sel=rteKeep(id),ok=false;
   try{ok=document.execCommand("insertText",false,txt)}catch(e){ok=false}
   if(!ok&&sel&&sel.rangeCount){            /* 兜底：直接改 DOM，光标停在插入内容之后 */
     var r=sel.getRangeAt(0);r.deleteContents();
     var tn=document.createTextNode(txt);r.insertNode(tn);
     r.setStartAfter(tn);r.collapse(true);sel.removeAllRanges();sel.addRange(r);
   }
+  ed.dispatchEvent(new Event("input"));
 }
-function rtePaste(e){                     /* 只收纯文本，避免从 Word 带入整段样式污染 PDF 排版 */
+function rtePaste(e,id){                 /* 只收纯文本，避免从 Word 带入整段样式污染排版 */
   if(!e.clipboardData)return;
   e.preventDefault();
   var t=e.clipboardData.getData("text/plain")||"";
   try{document.execCommand("insertText",false,t)}catch(err){}
+  var ed=$(id||"tp_body_ed");
+  if(ed)ed.dispatchEvent(new Event("input"));
 }
 function editTpl(id){
   if(!hasPerm(id?"otpl.edit":"otpl.create")){toast("当前角色无模板编辑权限","err");return}
@@ -3472,7 +3881,7 @@ function editTpl(id){
    '<div class="fld"><label>适用通道</label><select class="ip" id="tp_track">'+TPL_TRACK.map(function(x){return '<option value="'+x[0]+'"'+(tplTrackKey(t)===x[0]?" selected":"")+'>'+x[1]+'</option>'}).join("")+'</select>'+
      '<div class="hint">与岗位的招聘通道对应：社招岗位自动匹配「社招」模板，校招岗位匹配「校招」模板，「通用」作为兜底；HR 创建时仍可手动改选。</div></div>'+
    '<div class="fld"><label>邮件标题（支持变量）</label><input class="ip" id="tp_sub" value="'+esc(t.subject)+'"></div>'+
-   '<div class="fld"><label>正文 <i>*</i></label>'+rteBox(initHtml)+'</div>'+
+   '<div class="fld"><label>正文 <i>*</i></label>'+rteBox(initHtml,{varBar:true,ph:"在此撰写 Offer 正文，可从下方变量点击插入到光标处…"})+'</div>'+
    '<div class="fld"><label>状态</label><select class="ip" id="tp_st"><option value="enabled"'+(t.status==="enabled"?" selected":"")+'>启用</option><option value="disabled"'+(t.status==="disabled"?" selected":"")+'>停用</option></select></div>'+
    '<div class="hint">正文支持加粗、列表、对齐等排版，生成的 PDF 保留同样版式；保存后版本号自动 +1 并记录修改人（B-42 / B-55）。</div>';
   openModal((id?"编辑":"新建")+" Offer 模板",body,
@@ -3515,6 +3924,27 @@ function dupTpl(id){
   addLog("复制 Offer 模板",t.name,"","v1 · 默认停用");
   save();render();toast("已复制为副本（默认停用）","ok");
 }
+/* 拟录用样本：取两份已面试通过的候选人转为拟录用（已填录用要素），便于演示该环节 */
+function seedPlans(){
+  if(S.subs.filter(function(s){return s.status==="拟录用"}).length)return;
+  var n=0;
+  S.subs.forEach(function(s){
+    if(n>=2)return;
+    if(s.status!=="面试中")return;
+    var j=byId(s.jobId)||{},iv=itvLatest(s);
+    if(iv){iv.done=true;iv.attend="到场";iv.result="通过";iv.interviewer=iv.interviewer||"王敏";
+      iv.attach=iv.attach||("面试评估表-"+s.name+".pdf");iv.attachSize=iv.attachSize||186000;
+      iv.doneBy=iv.doneBy||"王敏";iv.doneAt=iv.doneAt||dayAgo(1)+" 17:00";}
+    s.status="拟录用";
+    s.plan={post:j.title||"",salary:n?["12-15K · 13 薪","18-22K · 13 薪"][n%2]:["18-22K · 13 薪","12-15K · 13 薪"][n%2],
+      manager:deptOf(j.cat)+"负责人",onboard:dayAdd(14+n),
+      note:n?"面试评价良好，薪资按区间中位报批":"综合评价优秀，建议按区间上限报批",
+      by:"王敏",at:dayAgo(1)+" 18:20",editAt:""};
+    s.history.push({t:dayAgo(1)+" 18:20",act:"状态流转",by:"王敏",from:"面试中",to:"拟录用",
+      note:s.plan.post+" / "+s.plan.salary});
+    n++;
+  });
+}
 function seedExams(){
   var pool=S.subs.filter(function(s){return s.status==="初筛通过"||s.status==="面试中"});
   function mk(s,n,mode){
@@ -3523,26 +3953,54 @@ function seedExams(){
       tips:"携带身份证与黑色签字笔",ch:"邮件 + 短信",arrangeBy:"王敏",
       arrangeAt:dayAgo(2)+" 10:00",arrangeCount:1,status:"已安排"};
     if(mode==="done"){
-      s.exam.attend="到场";s.exam.score=String(85-n*4);s.exam.level=EXAM_LEVELS[0];
+      s.exam.attend="到场";s.exam.score=String(85-n*4);
       s.exam.grader="王敏";s.exam.gradeAt=dayAgo(1)+" 16:30";
       s.exam.attach="笔试卷-"+s.name+".pdf";s.exam.comment="基础扎实，算法题完成度良好";
       s.exam.result="通过";s.exam.status="已完成";
     }
     if(mode==="fail"){
-      s.exam.attend="到场";s.exam.score="48";s.exam.level=EXAM_LEVELS[3];
+      s.exam.attend="到场";s.exam.score="48";
       s.exam.grader="王敏";s.exam.gradeAt=dayAgo(4)+" 16:30";
       s.exam.attach="笔试卷-"+s.name+".pdf";s.exam.comment="专业基础与岗位要求差距较大";
       s.exam.result="不通过";s.exam.status="已完成";
     }
   }
   var n=0;
-  for(var i=0;i<pool.length&&n<2;i++){var s=pool[i];s.status="笔试中";mk(s,n,"arrange");
+  /* 笔试中保留三份样本：已安排 / 已通过 / 未通过，对应列表状态列的三种副状态 */
+  var modes=["arrange","done","fail"];
+  for(var i=0;i<pool.length&&n<3;i++){var s=pool[i];s.status="笔试中";mk(s,n,modes[n]);
+    if(modes[n]!=="arrange")s.history.push({t:dayAgo(1)+" 16:30",act:"录入笔试记录",by:"王敏",note:(s.exam.score||"—")+" 分 · "+s.exam.result});
     s.history.push({t:dayAgo(2)+" 10:05",act:"状态流转",by:"王敏",from:"初筛通过",to:"笔试中"});n++;}
   for(var k=n;k<pool.length&&k<n+1;k++){var s2=pool[k];s2.status="面试中";mk(s2,k,"done");
     s2.history.push({t:dayAgo(2)+" 10:05",act:"状态流转",by:"王敏",from:"初筛通过",to:"笔试中"});
     s2.history.push({t:dayAgo(1)+" 16:35",act:"状态流转",by:"王敏",from:"笔试中",to:"面试中"});}
   for(var m=n+1;m<pool.length&&m<n+2;m++){var s3=pool[m];s3.status="不合适";mk(s3,m,"fail");
     s3.history.push({t:dayAgo(4)+" 16:35",act:"状态流转",by:"王敏",from:"笔试中",to:"不合适"});}
+}
+function seedInterviews(){
+  var n=0,multi=false;
+  S.subs.forEach(function(s){
+    if((s.interviews&&s.interviews.length)||s.interview)return;
+    if(s.status!=="面试中"&&s.status!=="已发 offer")return;
+    n++;
+    var r1={round:1,time:dayAdd(2-n)+" "+["10:00","14:30","09:30"][n%3],
+      place:["集团总部 3 楼会议室","研发中心 2 楼洽谈室","总部 1 楼会客室"][n%3],
+      resume:(n%2?"是":"否"),tips:"携带身份证，提前 15 分钟到场",
+      by:"王敏",at:dayAgo(1)+" 15:20",arrangeCount:1};
+    s.interviews=[r1];s.interview=r1;
+    /* 第一个面试中的候选人造「一面已通过 + 二面待面」的双轮样本，便于演示 */
+    if(!multi&&s.status==="面试中"){
+      multi=true;
+      r1.time=dayAgo(3)+" 10:00";
+      r1.done=true;r1.attend="到场";r1.result="通过";r1.interviewer="王敏";
+      r1.attach="面试评估表-"+s.name+"-1.pdf";r1.attachSize=186000;
+      r1.comment="技术基础扎实，沟通顺畅，建议进入二面";
+      r1.doneBy="王敏";r1.doneAt=dayAgo(3)+" 17:10";
+      var r2={round:2,time:dayAdd(1)+" 14:00",place:"研发中心 2 楼洽谈室",resume:"是",
+        tips:"与研发总监面谈，提前 10 分钟到场",by:"王敏",at:dayAgo(1)+" 09:30",arrangeCount:1};
+      s.interviews.push(r2);s.interview=r2;
+    }
+  });
 }
 function seedNotes(){
   var facts=["技术基础扎实，能清楚讲出订单系统迁移的排期与风险处理，建议安排一面",
@@ -3551,15 +4009,78 @@ function seedNotes(){
   S.subs.slice(0,6).forEach(function(s,i){s.remark=facts[i%3]});
 }
 function val(id){var e=$(id);return e?e.value:""}
+/* 笔试时间用原生 datetime-local：存储格式「2026-11-05 14:00」，控件值格式「2026-11-05T14:00」 */
+function dtIn(v){v=String(v||"").trim().replace(" ","T");return /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(v)?v.slice(0,16):""}
+function dtOut(v){v=String(v||"").trim();return v?v.replace("T"," ").slice(0,16):""}
 /* 备注：每个候选人一份，随时可覆盖保存，不保留历史版本 */
 function saveRemark(id){
   var s=bySub(id);if(!s)return;
   s.remark=(val("rmk_ip")||"").trim();
   save();S.curSub=id;openSub(id);toast("备注已保存","ok");
 }
+/* 面试轮次：s.interviews[] 每轮一条（一面 / 二面 …），s.interview 恒指向最新一轮，供列表页与批量流程沿用 */
+function itvRounds(s){
+  if(!s)return [];
+  if(!s.interviews||!s.interviews.length){
+    s.interviews=[];
+    if(s.interview&&s.interview.time)s.interviews.push(s.interview);
+  }
+  s.interviews.forEach(function(r,i){if(!r.round)r.round=i+1});
+  s.interview=s.interviews[s.interviews.length-1]||null;
+  return s.interviews;
+}
+/* 取某轮；不传轮次则取最新一轮（当前轮） */
+function itvRound(s,n){
+  var rs=itvRounds(s);
+  if(n==null)return rs[rs.length-1]||null;
+  var hit=rs.filter(function(r){return r.round===n})[0];
+  return hit||rs[rs.length-1]||null;
+}
+/* 面试结论徽标：未录入=等待录入，缺考=红，通过=绿，不通过=红，待定=橙 */
+function itvPill(v){
+  if(!v||!v.done)return '<span class="pill a">等待录入</span>';
+  if(v.attend==="缺考")return '<span class="pill r">缺考</span>';
+  var r=v.result||"待定";
+  return '<span class="pill '+(r==="通过"?"g":(r==="不通过"?"r":"a"))+'">'+esc(r)+'</span>';
+}
+/* 面试信息：按轮次倒序展示（最新的一面在最上），每轮自带「录入 / 重新安排」按钮，操作对象一目了然 */
+function interviewSection(s,id){
+  var rs=itvRounds(s),can=canWrite();
+  if(!rs.length)
+    return '<div style="font-size:13px;color:var(--ink3);background:#fafbfc;border-radius:8px;padding:11px 13px">尚未安排面试。</div>';
+  var blocks=rs.slice().reverse().map(function(v){
+    var rn=v.round||1;
+    var kv=[["面试时间",v.time],["面试地点",v.place],["是否携带简历",v.resume||"是"],["注意事项",v.tips||"—"]];
+    if((v.arrangeCount||1)>1)kv.push(["安排次数",v.arrangeCount+" 次"]);
+    if(v.done){
+      kv=kv.concat([["到场情况",v.attend||"—"],["面试结论",v.result||"—"],["面试官",v.interviewer||"—"],
+        ["附件",v.attach?esc(v.attach)+' <button class="ibtn" title="下载附件" onclick="dlInterviewAttach(\''+id+'\','+rn+')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></button>':"—",1]]);
+      if(v.comment)kv.push(["面试评价",v.comment]);
+      kv.push(["录入人 / 时间",(v.doneBy||"—")+" · "+((v.doneAt||"").slice(0,16)||"—")]);
+    }
+    /* 第 3 位为 1 表示该格是预拼好的 HTML，不再转义 */
+    var kvs=kv.map(function(it){
+      return '<div class="it"><div class="k">'+it[0]+'</div><div class="v">'+(it[2]?it[1]:esc(it[1]||""))+'</div></div>';
+    }).join("");
+    /* 「重新安排」「删除」只给最新一轮（改期 / 安排下一面 / 撤销本轮都在这里操作），历史轮只保留重新录入；
+       仅一面时不显示删除 */
+    var rb="",latest=((rs[rs.length-1]||{}).round||1),isLast=(rn===latest);
+    if(can&&s.status==="面试中"){
+      rb='<div class="itvr-b">'+
+        '<button class="btn pri sm" onclick="openInterviewRec(\''+id+'\','+rn+')">'+(v.done?"重新录入":"录入面试记录")+'</button>'+
+        (isLast?'<button class="btn sm" onclick="openInterview(\''+id+'\',0,1,'+rn+')">重新安排</button>':'')+
+        (isLast&&rs.length>1?'<button class="btn sm dgg" style="margin-left:auto" title="删除第 '+rn+' 面面试" onclick="delInterviewRound(\''+id+'\','+rn+')">删除</button>':'')+
+        '</div>';
+    }
+    return '<div class="itvr"><div class="itvr-h"><span class="t">第 '+rn+' 面</span>'+
+      itvPill(v)+'</div>'+
+      '<div class="kv">'+kvs+'</div>'+rb+'</div>';
+  }).join("");
+  return blocks;
+}
 function examSection(s,id,noHead){
   var e=s.exam,can=canWrite();
-  var head=noHead?"":'<div class="sec-t">线下笔试（B-40 环节 / B-41 记录）</div>';
+  var head=noHead?"":'<div class="sec-t">笔试信息</div>';
   if(!e){
     if(s.status==="初筛通过"&&can)
       return head+'<div style="display:flex;align-items:center;gap:10px;background:#fafbfc;border-radius:8px;padding:11px 13px">'+
@@ -3572,27 +4093,27 @@ function examSection(s,id,noHead){
           ["安排人 / 时间",(e.arrangeBy||"—")+" · "+((e.arrangeAt||"").slice(0,16)||"—")],
           ["安排次数",(e.arrangeCount||1)+" 次"]];
   if(e.status==="已完成"){
-    kv=kv.concat([["到场情况",e.attend||"—"],["成绩 / 等级",(e.score||"—")+" / "+(e.level||"—")],
+    kv=kv.concat([["到场情况",e.attend||"—"],["成绩",e.score||"—"],
       ["阅卷人 / 时间",(e.grader||"—")+" · "+((e.gradeAt||"").slice(0,16)||"—")],
-      ["附件",e.attach||"—"],["笔试结论",e.result||"—"]]);
+      ["附件",e.attach?esc(e.attach)+' <button class="ibtn" title="下载附件" onclick="dlExamAttach(\''+id+'\')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></button>':"—",1],
+      ["笔试结论",e.result||"—"]]);
     if(e.comment)kv=kv.concat([["笔试评价",e.comment]]);
   }
+  /* 第 3 位为 1 表示该格是预拼好的 HTML，不再转义 */
   var kvs=kv.map(function(it){
-    return '<div class="it"><div class="k">'+it[0]+'</div><div class="v">'+esc(it[1]||"")+'</div></div>';
+    return '<div class="it"><div class="k">'+it[0]+'</div><div class="v">'+(it[2]?it[1]:esc(it[1]||""))+'</div></div>';
   }).join("");
   var btns="";
   if(can&&s.status==="笔试中"){
-    btns='<div style="display:flex;gap:9px;flex-wrap:wrap">'+
+    btns='<div style="display:flex;gap:9px;flex-wrap:wrap;margin-top:16px">'+
       '<button class="btn pri" onclick="openGrade(\''+id+'\')">录入笔试记录</button>'+
-      '<button class="btn" onclick="openExam(\''+id+'\')">重新安排</button></div>'+
-      '<div style="font-size:12px;color:var(--ink3);margin-top:8px">录入结果后<b>不自动流转</b>，请在页脚自行流转到面试中 / 不合适；缺考需先「重新安排」。</div>';
+      '<button class="btn" onclick="openExam(\''+id+'\')">重新安排</button></div>';
   }
   var badge=e.status==="已完成"
     ?(e.attend==="缺考"?'<span class="pill r">缺考</span>'
       :'<span class="pill '+(e.result==="通过"?"g":"r")+'">'+esc(e.result||"已评阅")+'</span>')
     :'<span class="pill a">已安排</span>';
-  return head+'<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">'+badge+
-      '<span style="font-size:12.5px;color:var(--ink3)">'+(e.status==="已完成"?"已完成评阅":"等待评阅")+'</span></div>'+
+  return head+'<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">'+badge+'</div>'+
     '<div class="kv">'+kvs+'</div>'+btns;
 }
 function openExam(id){
@@ -3600,18 +4121,16 @@ function openExam(id){
   var s=bySub(id);if(!s)return;
   var e=s.exam||{};
   var body=
-   '<div class="notice" style="margin-bottom:12px">线下笔试：系统不提供在线作答，仅记录安排与结果。确认后流转至「笔试中」（笔试安排由 HR 线下另行联系候选人，系统不自动发通知）。</div>'+
-   '<div class="fld"><label>笔试时间</label><input class="ip" id="ex_time" value="'+esc(e.examTime||"")+'" placeholder="如：2026-11-05 14:00"></div>'+
+   '<div class="fld"><label>笔试时间</label><input class="ip" type="datetime-local" id="ex_time" value="'+dtIn(e.examTime)+'"></div>'+
    '<div class="fld"><label>笔试地点</label><input class="ip" id="ex_place" value="'+esc(e.place||"")+'" placeholder="如：集团总部 3 楼会议室"></div>'+
-   '<div class="fld"><label>注意事项</label><input class="ip" id="ex_tips" value="'+esc(e.tips||"")+'" placeholder="如：携带身份证与黑色签字笔"></div>'+
-   (e.arrangeCount?'<div class="hint">已安排 '+e.arrangeCount+' 次，本次为重新安排（缺考或时间冲突）。</div>':'');
+   '<div class="fld"><label>注意事项</label><textarea class="ip" id="ex_tips" rows="4" placeholder="如：携带身份证与黑色签字笔">'+esc(e.tips||"")+'</textarea></div>';
   openModal("安排线下笔试 · "+esc(s.name),body,
     '<button class="btn" onclick="closeAll()">取消</button><button class="btn pri" onclick="arrangeExam(\''+id+'\')">确认安排</button>');
 }
 function arrangeExam(id){
   var s=bySub(id);if(!s)return;
   var j=byId(s.jobId);
-  var t=(val("ex_time")||"").trim(),p=(val("ex_place")||"").trim();
+  var t=dtOut(val("ex_time")),p=(val("ex_place")||"").trim();
   if(!t||!p){toast("笔试时间与地点必填","err");return}
   var prev=s.exam;
   s.exam={examTime:t,place:p,tips:(val("ex_tips")||"").trim(),
@@ -3624,16 +4143,78 @@ function arrangeExam(id){
   addLog("安排线下笔试",s.name+" · "+(j?j.title:""),"",t+" / "+p);
   save();closeAll();render();S.curSub=id;openSub(id);toast("笔试已安排","ok");
 }
+/* ---------- 附件上传组件（演示环境只留文件名与大小，不落真实二进制） ----------
+   upBox(id,{multi,files,accept,t,s}) 出组件；文件选择 → 拖拽 → upAdd / upRemove / upFiles */
+var UP={},UP_OPT={};
+function upExt(n){
+  var m=String(n||"").split(".");
+  return (m.length>1?m.pop():"FILE").toUpperCase().slice(0,4);
+}
+function upSize(b){
+  if(!b)return "";
+  if(b<1024)return b+" B";
+  if(b<1048576)return (b/1024).toFixed(1)+" KB";
+  return (b/1048576).toFixed(1)+" MB";
+}
+function upListHtml(id){
+  var opt=UP_OPT[id]||{};
+  return (UP[id]||[]).map(function(f,i){
+    return '<div class="upf"><div class="bd">'+esc(upExt(f.name))+'</div>'+
+      '<div class="nm" title="'+esc(f.name)+'">'+esc(f.name)+'</div>'+
+      (f.size?'<div class="sz">'+upSize(f.size)+'</div>':'')+
+      (!opt.multi?'<button class="btn sm" onclick="upPick(\''+id+'\')">重新上传</button>':'')+
+      '<button class="x" title="删除" onclick="upRemove(\''+id+'\','+i+')">×</button></div>';
+  }).join("");
+}
+function upBox(id,opt){
+  opt=opt||{};UP_OPT[id]=opt;
+  UP[id]=(opt.files||[]).map(function(f){return typeof f==="string"?{name:f,size:0}:f});
+  var n=(UP[id]||[]).length;
+  return '<div class="upz" id="uz_'+id+'"'+(n&&!opt.multi?' style="display:none"':'')+
+      ' onclick="upPick(\''+id+'\')"'+
+      ' ondragover="event.preventDefault();this.classList.add(\'on\')"'+
+      ' ondragleave="this.classList.remove(\'on\')"'+
+      ' ondrop="event.preventDefault();this.classList.remove(\'on\');upAdd(\''+id+'\',event.dataTransfer.files)">'+
+      '<div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5"/><path d="M4 15v3.5A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V15"/></svg></div>'+
+      '<div class="t">'+(opt.t||"点击上传，或将文件拖到此处")+'</div>'+
+      '<div class="s">'+(opt.s||"")+'</div></div>'+
+    '<div class="upl" id="ul_'+id+'">'+upListHtml(id)+'</div>';
+}
+function upSync(id){
+  var opt=UP_OPT[id]||{},n=(UP[id]||[]).length;
+  var z=$("uz_"+id),l=$("ul_"+id);
+  if(l)l.innerHTML=upListHtml(id);
+  if(z)z.style.display=(!opt.multi&&n>=1)?"none":"";
+}
+function upPick(id){
+  var opt=UP_OPT[id]||{};
+  var inp=document.createElement("input");
+  inp.type="file";inp.accept=opt.accept||".pdf,.jpg,.jpeg,.png,.doc,.docx";
+  if(opt.multi)inp.multiple=true;
+  inp.style.display="none";
+  inp.onchange=function(){upAdd(id,inp.files);};
+  document.body.appendChild(inp);inp.click();
+}
+function upAdd(id,fl){
+  var opt=UP_OPT[id]||{},add=[];
+  Array.prototype.forEach.call(fl||[],function(f){add.push({name:f.name,size:f.size||0})});
+  if(!add.length)return;
+  UP[id]=opt.multi?(UP[id]||[]).concat(add):[add[0]];   /* 单份：新选中的直接替换旧文件 */
+  upSync(id);
+}
+function upRemove(id,i){
+  UP[id]=(UP[id]||[]).slice();UP[id].splice(i,1);upSync(id);
+}
+function upFiles(id){return (UP[id]||[]).slice()}
 function openGrade(id){
   var s=bySub(id);if(!s||!s.exam)return;
   var e=s.exam;
   var body=
-   '<div class="notice" style="margin-bottom:12px">录入线下笔试结果（B-41）。保存后仅落库，<b>不自动流转</b>：请在抽屉页脚自行流转到「面试中」或「不合适」。</div>'+
-   '<div class="fld"><label>到场情况</label><select class="ip" id="gd_attend"><option>到场</option><option>缺考</option></select></div>'+
+   '<div class="fld"><label>到场情况</label><select class="ip" id="gd_attend"><option'+(e.attend==="缺考"?"":" selected")+'>到场</option><option'+(e.attend==="缺考"?" selected":"")+'>缺考</option></select></div>'+
+   '<div class="fld"><label>笔试结论</label><select class="ip" id="gd_result"><option'+(e.result==="不通过"?"":" selected")+'>通过</option><option'+(e.result==="不通过"?" selected":"")+'>不通过</option></select></div>'+
    '<div class="fld"><label>成绩（可留空）</label><input class="ip" id="gd_score" value="'+esc(e.score||"")+'" placeholder="如：82"></div>'+
-   '<div class="fld"><label>等级</label><select class="ip" id="gd_level">'+EXAM_LEVELS.map(function(x){return '<option'+(e.level===x?" selected":"")+'>'+x+'</option>'}).join("")+'</select></div>'+
-   '<div class="fld"><label>附件（扫描件 / 照片文件名）</label><input class="ip" id="gd_attach" value="'+esc(e.attach||"")+'" placeholder="如：笔试卷-李明轩.pdf"></div>'+
-   '<div class="fld"><label>笔试结论</label><select class="ip" id="gd_result"><option>通过</option><option>不通过</option></select></div>'+
+   '<div class="fld"><label>附件</label>'+upBox("gd_attach",{multi:false,files:e.attach?[{name:e.attach,size:e.attachSize||0}]:[],
+      t:"点击上传笔试附件，或将文件拖到此处",s:"支持 PDF / 图片 / Word，仅 1 份"})+'</div>'+
    '<div class="fld"><label>笔试评价</label><textarea class="ip" id="gd_comment" rows="3" style="min-height:62px" placeholder="如：基础扎实，算法题完成度偏低">'+esc(e.comment||"")+'</textarea></div>'+
    '<div class="hint">缺考只记录到场情况，不改状态，可在详情页「重新安排」再考一次。</div>';
   openModal("录入笔试记录 · "+esc(s.name),body,
@@ -3643,9 +4224,11 @@ function saveGrade(id){
   var s=bySub(id);if(!s||!s.exam)return;
   var j=byId(s.jobId),e=s.exam;
   var attend=val("gd_attend"),result=val("gd_result");
-  var before=(e.score||"—")+" / "+(e.level||"—")+(e.result?" · "+e.result:"");
-  e.attend=attend;e.score=(val("gd_score")||"").trim();e.level=val("gd_level");
-  e.grader=S.user.name;e.gradeAt=now();e.attach=(val("gd_attach")||"").trim();
+  var before=(e.score||"—")+(e.result?" · "+e.result:"");
+  var fs=upFiles("gd_attach");
+  e.attend=attend;e.score=(val("gd_score")||"").trim();
+  e.grader=S.user.name;e.gradeAt=now();
+  e.attach=fs.length?fs[0].name:"";e.attachSize=fs.length?(fs[0].size||0):0;
   e.comment=(val("gd_comment")||"").trim();e.status="已完成";
   save();
   if(attend==="缺考"){
@@ -3654,13 +4237,144 @@ function saveGrade(id){
     save();closeAll();render();S.curSub=id;openSub(id);toast("已标记缺考，可重新安排","ok");return;
   }
   e.result=result;
-  addLog("录入笔试记录",s.name+" · "+(j?j.title:""),before,(e.score||"—")+" / "+e.level+" · "+result);
+  addLog("录入笔试记录",s.name+" · "+(j?j.title:""),before,(e.score||"—")+" · "+result);
   save();closeAll();render();S.curSub=id;openSub(id);
   toast("笔试记录已保存，请在页脚手动流转","ok");
+}
+/* 录入面试记录：录指定轮次（缺省为最新一面）；到场情况 / 面试结论 / 面试官（选填）/ 附件（必传）/ 面试评价；不自动流转 */
+function openInterviewRec(id,round){
+  if(!canWrite()){toast("只读角色不可录入面试记录","err");return}
+  var s=bySub(id);if(!s)return;
+  S.curItvRound=round==null?null:round;
+  var v=itvRound(s,round);
+  if(!v||!v.time){toast("该候选人尚未安排面试","err");return}
+  var rn=v.round||1;
+  var body=
+   '<div class="fld"><label>到场情况</label><select class="ip" id="ir_attend"><option'+(v.attend==="缺考"?"":" selected")+'>到场</option><option'+(v.attend==="缺考"?" selected":"")+'>缺考</option></select></div>'+
+   '<div class="fld"><label>面试结论</label><select class="ip" id="ir_result">'+
+     ["通过","不通过","待定"].map(function(x){return '<option'+(v.result===x?" selected":"")+'>'+x+'</option>'}).join("")+'</select></div>'+
+   '<div class="fld"><label>面试官</label><input class="ip" id="ir_itv" value="'+esc(v.interviewer||"")+'" placeholder="如：王敏（选填）"></div>'+
+   '<div class="fld"><label>附件 <i>*</i></label>'+upBox("ir_attach",{multi:false,files:v.attach?[{name:v.attach,size:v.attachSize||0}]:[],
+      t:"点击上传面试记录附件，或将文件拖到此处",s:"支持 PDF / 图片 / Word，仅 1 份"})+'</div>'+
+   '<div class="fld"><label>面试评价</label><textarea class="ip" id="ir_comment" rows="3" style="min-height:62px" placeholder="如：沟通表达清晰，项目经验匹配度高">'+esc(v.comment||"")+'</textarea></div>'+
+   '<div class="hint">保存后不自动流转；如需继续下一面，请在详情页「重新安排」中选择「安排下一面」。</div>';
+  openModal("录入面试记录 · "+esc(s.name)+"（第 "+rn+" 面）",body,
+    '<button class="btn" onclick="closeAll()">取消</button><button class="btn pri" onclick="doInterviewRec(\''+id+'\')">保存记录</button>');
+}
+function doInterviewRec(id){
+  if(!canWrite()){toast("只读角色不可录入面试记录","err");return}
+  var s=bySub(id);if(!s)return;
+  var j=byId(s.jobId),v=itvRound(s,S.curItvRound);
+  if(!v){toast("该候选人尚未安排面试","err");return}
+  var attend=val("ir_attend"),result=val("ir_result"),itv=(val("ir_itv")||"").trim();
+  var fs=upFiles("ir_attach");
+  if(!fs.length){toast("请上传面试记录附件","err");return}
+  v.attend=attend;v.result=attend==="缺考"?"":result;v.interviewer=itv;
+  v.attach=fs[0].name;v.attachSize=fs[0].size||0;
+  v.comment=(val("ir_comment")||"").trim();
+  v.done=true;v.doneBy=S.user.name;v.doneAt=now();
+  var rs=itvRounds(s);s.interview=rs[rs.length-1];
+  save();
+  addLog("录入面试记录",s.name+" · "+(j?j.title:"")+"（第 "+(v.round||1)+" 面）","",
+    attend==="缺考"?"缺考":(result+(itv?" · "+itv:"")));
+  save();closeAll();render();S.curSub=id;openSub(id);
+  toast("第 "+(v.round||1)+" 面记录已保存，请在页脚手动流转","ok");
+}
+/* 下载面试附件：按轮次取（不传轮次则取最新一面） */
+/* 拟录用（面试通过 → 内部确认录用要素 → 发正式 offer）：不做审批流，登记即生效；该环节不通知候选人
+   拟录岗位 / 拟定薪资必填，汇报对象 / 期望到岗 / 备注选填；信息存 s.plan，供发 offer 时预填 */
+function openPlan(id,edit){
+  if(!hasPerm("subs.offer")){toast("当前角色无该操作权限","err");return}
+  if(!canWrite()){toast("只读角色不可登记拟录用","err");return}
+  var s=bySub(id);if(!s)return;
+  var j=byId(s.jobId)||{},p=s.plan||{};
+  var body=
+   '<div class="notice" style="margin-bottom:12px">拟录用为<b>内部录用确认</b>环节：登记后候选人状态变为「拟录用」，<b>不会通知候选人</b>，可继续发送正式 Offer。</div>'+
+   '<div class="fld"><label>拟录岗位 <i>*</i></label><input class="ip" id="pl_post" value="'+esc(p.post||j.title||"")+'" placeholder="如：Java 开发工程师"></div>'+
+   '<div class="fld"><label>拟定薪资 <i>*</i></label><input class="ip" id="pl_salary" value="'+esc(p.salary||j.salary||"")+'" placeholder="如：18-22K · 13 薪"></div>'+
+   '<div class="fld"><label>汇报对象</label><input class="ip" id="pl_mgr" value="'+esc(p.manager||"")+'" placeholder="如：技术研发中心负责人（选填）"></div>'+
+   '<div class="fld"><label>期望到岗时间</label><input class="ip" type="date" id="pl_date" value="'+esc(p.onboard||"")+'"></div>'+
+   '<div class="fld"><label>录用备注</label><textarea class="ip" id="pl_note" rows="3" placeholder="如：面试综合评价优秀，薪资按 20K 报批（选填）">'+esc(p.note||"")+'</textarea></div>';
+  openModal(edit?"修改拟录用信息":"登记拟录用 · "+esc(s.name),body,
+    '<button class="btn" onclick="closeAll()">取消</button>'+
+    '<button class="btn pri" onclick="doPlan(\''+id+'\','+(edit?1:0)+')">'+(edit?"保存":"确认拟录用")+'</button>');
+}
+function doPlan(id,edit){
+  if(!canWrite()){toast("只读角色不可登记拟录用","err");return}
+  var s=bySub(id);if(!s)return;
+  var post=(val("pl_post")||"").trim(),salary=(val("pl_salary")||"").trim();
+  if(!post||!salary){toast("拟录岗位与拟定薪资必填","err");return}
+  var j=byId(s.jobId)||{};
+  var old=(s.plan||{}).salary||"—";
+  s.plan={post:post,salary:salary,manager:(val("pl_mgr")||"").trim(),
+    onboard:(val("pl_date")||"").trim(),note:(val("pl_note")||"").trim(),
+    by:S.user.name,at:now(),editAt:edit?now():""};
+  if(edit){
+    addLog("修改拟录用信息",s.name+" · "+(j.title||""),old,salary);
+    save();closeAll();render();toast("拟录用信息已保存","ok");
+    S.curSub=id;openSub(id);return;
+  }
+  addLog("登记拟录用",s.name+" · "+(j.title||""),s.status,post+" / "+salary);
+  closeAll();
+  doAdvance(id,"拟录用",{noNotify:true,noToast:true});
+  toast("已转为「拟录用」（不通知候选人），可继续发送 Offer","ok");
+}
+/* 拟录用信息模块（详情页流程 tab）：未进入该环节时显示占位；已登记显示录用要素 */
+function planSection(s,id){
+  var p=s.plan,can=canWrite();
+  if(!p)
+    return '<div style="font-size:13px;color:var(--ink3);background:#fafbfc;border-radius:8px;padding:11px 13px">尚未进入拟录用环节。面试通过后可登记拟录岗位与拟定薪资，作为发送 Offer 的依据。</div>'+
+      (can&&s.status==="面试中"?'<div style="margin-top:12px"><button class="btn pri" onclick="openPlan(\''+id+'\',0)">登记拟录用</button></div>':"");
+  var kv=[["拟录岗位",p.post],["拟定薪资",p.salary],["汇报对象",p.manager||"—"],
+    ["期望到岗",p.onboard||"—"],["录用备注",p.note||"—"],
+    ["登记人 / 时间",(p.by||"—")+" · "+((p.at||"").slice(0,16)||"—")]];
+  var kvs=kv.map(function(it){
+    return '<div class="it"><div class="k">'+it[0]+'</div><div class="v">'+esc(it[1]||"")+'</div></div>';
+  }).join("");
+  var btns=(can&&s.status==="拟录用")?'<div style="display:flex;gap:9px;flex-wrap:wrap;margin-top:16px">'+
+    '<button class="btn" onclick="openPlan(\''+id+'\',1)">修改拟录用信息</button></div>':"";
+  return '<div class="kv">'+kvs+'</div>'+btns;
+}
+function dlInterviewAttach(id,round){
+  var s=bySub(id);
+  var v=itvRound(s,round==null?null:round);
+  if(!s||!v||!v.attach){toast("该候选人暂无面试记录附件","err");return}
+  addLog("下载面试附件",s.name+" · "+((byId(s.jobId)||{}).title||""),"第 "+(v.round||1)+" 面 · "+v.attach,"签名 URL（5 分钟有效）");
+  save();toast("已生成签名下载链接（演示：5 分钟内有效）","ok");
+}
+/* 删除最新一轮面试：确认后移除该轮，s.interview 退回上一轮，操作按钮随之回到上一轮；仅剩一面时不可删 */
+function delInterviewRound(id,round){
+  if(!canWrite()){toast("只读角色不可删除面试记录","err");return}
+  var s=bySub(id);if(!s)return;
+  var rs=itvRounds(s);
+  if(rs.length<=1){toast("仅有一面面试，不可删除","err");return}
+  var v=itvRound(s,round),rn=(v&&v.round)||round;
+  confirmBox("删除面试","确认删除 <b>"+esc(s.name)+"</b> 的 <b>第 "+rn+" 面</b>面试？<br>"+
+    "该轮的安排信息、面试结论、附件与评价将一并删除（仅保留流转日志），删除后不可恢复。",
+    "确认删除","function(){doDelInterviewRound('"+id+"',"+rn+")}",1);
+}
+function doDelInterviewRound(id,round){
+  var s=bySub(id);if(!s)return;
+  var rs=itvRounds(s);
+  if(rs.length<=1){toast("仅有一面面试，不可删除","err");return}
+  var last=rs[rs.length-1];
+  if((last.round||1)!==round){toast("只能删除最新一轮面试","err");return}
+  rs.pop();
+  s.interview=rs[rs.length-1]||null;
+  addLog("删除面试",s.name+" · "+((byId(s.jobId)||{}).title||""),"第 "+round+" 面 · "+(last.time||"—"),"已删除该轮面试记录");
+  save();closeAll();render();S.curSub=id;openSub(id);
+  toast("第 "+round+" 面面试已删除","ok");
 }
 function dlAttach(id){
   var s=bySub(id);
   addLog("下载附件简历",s.name,s.attach,"签名 URL（5 分钟有效）");
+  save();toast("已生成签名下载链接（演示：5 分钟内有效）","ok");
+}
+/* 下载笔试附件（演示：只留痕 + 签名 URL 提示，不落真实二进制） */
+function dlExamAttach(id){
+  var s=bySub(id);
+  if(!s||!s.exam||!s.exam.attach){toast("该候选人暂无笔试附件","err");return}
+  addLog("下载笔试附件",s.name+" · "+((byId(s.jobId)||{}).title||""),s.exam.attach,"签名 URL（5 分钟有效）");
   save();toast("已生成签名下载链接（演示：5 分钟内有效）","ok");
 }
 /* 预览附件简历（B-25）：新窗口打开；演示环境无真实二进制，按候选人信息渲染预览页并标注 */
@@ -3701,12 +4415,9 @@ function advance(id,to){
   var s=bySub(id),j=byId(s.jobId),from=s.status;
   if(SUB_FLOW[from].indexOf(to)<0){toast("不允许的流转："+from+" → "+to,"err");return}
   if(to==="不合适"){openReject(id,0);return}   /* 备注必填 + 两个分支，统一走不合适处理弹窗 */
-  if(to==="面试中"){                          /* 安排面试：二次确认后执行 */
-    confirmBox("安排面试 · "+esc(s.name),
-      '确定为 <b>'+esc(s.name)+'</b> 安排面试吗？<br>当前状态「'+esc(from)+'」→「面试中」。',
-      "确认安排","doAdvance('"+id+"','面试中')",0);
-    return;
-  }
+  if(to==="初筛通过"){openScreenPass(id,0);return}   /* 初筛意见选填，写入流转记录节点备注 */
+  if(to==="面试中"){openInterview(id,0);return}   /* 先填面试时间 / 地点 / 携带简历 / 注意事项 */
+  if(to==="拟录用"){openPlan(id,0);return}       /* 先填拟录岗位 / 拟定薪资等录用要素，不通知候选人 */
   if(to==="已发 offer"){openSendOffer(id);return}   /* 发送 Offer：核对附件 / 条款 / 收件人后再流转 */
   doAdvance(id,to);
 }
@@ -3721,7 +4432,7 @@ function doAdvance(id,to,opt){
     c.pooled=1;c.poolBy=S.user.name;c.poolAt=now();c.poolReason=c.poolReason||"流转节点转存（"+from+"）";
   }
   s.status=to;
-  s.history.push({t:now(),act:"状态流转",by:S.user.name,from:from,to:to});
+  s.history.push({t:now(),act:"状态流转",by:S.user.name,from:from,to:to,note:(opt&&opt.note)||""});
   var nf=NOTIFY[to],quiet=(opt&&opt.noNotify);
   if(nf&&!quiet)s.notify.push({t:now(),ch:nf.ch,to:s.email,
     cc:nf.ccOwner?ownerEmail(j?j.owner:null):"",content:nf.txt(s,j)});
@@ -3738,7 +4449,7 @@ function doAdvance(id,to,opt){
 function pgAccounts(){
   if(!hasPerm("sys.account")){return '<div class="card"><div class="empty"><b>无权限</b>需要「账号管理」权限</div></div>'}
   var rows=S.accounts.map(function(a){
-    var jobs=S.jobs.filter(function(j){return j.owner===a.id&&j.status!=="deleted"}).length;
+    var jobs=S.jobs.filter(function(j){return ownerResolve(j.owner)===a.id&&j.status!=="deleted"}).length;
     return '<tr><td><div class="tt">'+esc(a.name)+'</div><div class="mt"><span>'+esc(a.title)+'</span></div></td>'+
       '<td style="font-size:13px">'+esc(a.email)+'<div class="mt"><span>'+esc(a.phone)+'</span></div></td>'+
       '<td><span class="pill '+roleCls(a.role)+'">'+esc(roleName(a.role))+'</span></td>'+
@@ -4055,6 +4766,8 @@ function runExpire(manual){
    启动
    ========================================================== */
 if(!load()){seedAll()}
+seedInterviews();   /* 兼容旧数据：仅补齐缺失的演示面试信息，不覆盖已填内容 */
+seedPlans();        /* 兼容旧数据：尚无拟录用样本时补两份，供演示该环节 */
 runExpire(0);
 render();
 document.addEventListener("keydown",function(e){if(e.key==="Escape")closeAll()});
