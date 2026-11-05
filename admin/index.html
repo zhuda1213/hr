@@ -79,6 +79,12 @@ table{border-collapse:collapse;width:100%}
 .stat .vl{font-size:27px;font-weight:700;line-height:1.3;margin-top:4px;letter-spacing:-.5px}
 .stat .ex{font-size:12px;color:var(--ink3);margin-top:2px}
 .stat.b .vl{color:var(--brand)}.stat.g .vl{color:var(--ok)}.stat.o .vl{color:var(--warn)}.stat.p .vl{color:var(--purple)}
+/* 漏斗行：值列更宽，容纳「人数 · 转化率」 */
+.frow .bl{width:82px;color:var(--ink2);flex:none;text-align:right}
+.frow .btr{flex:1;height:9px;background:#f0f2f5;border-radius:5px;overflow:hidden}
+.frow .btr i{display:block;height:100%;border-radius:5px;background:var(--brand)}
+.frow .fv{width:74px;flex:none;text-align:right;color:var(--ink2);font-variant-numeric:tabular-nums;white-space:nowrap}
+.frow .fv em{font-style:normal;font-size:11px;color:var(--ink3)}
 
 .btn{height:34px;padding:0 15px;border-radius:7px;border:1px solid var(--line2);background:#fff;color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:6px;font-size:13.5px;transition:.15s;white-space:nowrap}
 .btn:hover{border-color:var(--brand);color:var(--brand)}
@@ -196,6 +202,21 @@ table.data .mt span{margin-right:10px}
 table.data .mt .mnote{color:var(--ink3);cursor:default;white-space:nowrap}
 table.data td.op{white-space:nowrap;text-align:right}
 table.data td.op .btn{margin-left:5px}
+/* 候选人列表操作列：文字按钮、垂直居中排列（动作多，横排会把表格撑太长） */
+table.data td.op .acts{display:flex;flex-direction:column;align-items:center;gap:0}
+.op-a{cursor:pointer;font-size:12.5px;line-height:1.75;color:var(--ink2);white-space:nowrap}
+.op-a:hover{text-decoration:underline}
+.op-a.off{color:var(--ink4);cursor:not-allowed}
+.op-a.off:hover{text-decoration:none}
+/* 在线简历（候选人 H5 端填写的结构化简历，拆分为四个可折叠模块） */
+.rit{padding:9px 0;border-bottom:1px dashed var(--line)}
+.rit:last-child{border-bottom:0}
+.rhd{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.rhd b{font-size:13.5px;color:var(--ink)}
+.rrole{font-size:12.5px;color:var(--ink2)}
+.rtime{margin-left:auto;font-size:12px;color:var(--ink3);white-space:nowrap}
+.rdesc{font-size:12.5px;color:var(--ink3);margin-top:4px;line-height:1.8;white-space:pre-line}
+.rtag{display:inline-block;font-size:12px;color:var(--brand-d);background:var(--brand-l);border-radius:4px;padding:2px 8px;margin:4px 6px 0 0}
 .empty{padding:56px 20px;text-align:center;color:var(--ink3);font-size:13.5px}
 .empty b{display:block;font-size:15px;color:var(--ink2);margin-bottom:6px;font-weight:600}
 
@@ -256,12 +277,22 @@ table.data td.op .btn{margin-left:5px}
 .dw .dhead{position:sticky;top:-18px;z-index:6;background:var(--white);margin:0 0 14px}
 .dw .dsum{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--ink2);white-space:nowrap;padding:0 0 9px}
 .dw .dsum b{font-weight:400;color:var(--ink3);font-size:11px;margin-right:5px}
-.dw .dtabs{display:flex;gap:4px;border-bottom:1px solid var(--line)}
+.dw .dtabs{display:flex;gap:4px;border-bottom:1px solid var(--line);align-items:center}
+.dw .dall{margin-left:auto;padding:0 2px 9px;font-size:12.5px;color:var(--brand);cursor:pointer;white-space:nowrap}
+.dw .dall:hover{text-decoration:underline}
 .dw .dtab{padding:8px 15px 9px;font-size:13px;color:var(--ink2);cursor:pointer;user-select:none;
   border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap}
 .dw .dtab:hover{color:var(--brand)}
 .dw .dtab.on{color:var(--brand);border-bottom-color:var(--brand);font-weight:600}
 .dw .dempty{font-size:13px;color:var(--ink3);background:#fafbfc;border-radius:8px;padding:11px 13px}
+/* 档案页面试评价摘要（只读） */
+.isum{padding:9px 0;border-bottom:1px dashed var(--line)}
+.isum:first-child{padding-top:0}
+.isum-h{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.isum-h b{font-size:13.5px;font-weight:600}
+.isum-m{font-size:12px;color:var(--ink3)}
+.isum-b{font-size:12.5px;color:var(--ink2);line-height:1.7;margin-top:5px;padding-left:1px}
+.isum-b.ph{color:var(--ink4)}
 .dw .df{padding:13px 20px;border-top:1px solid var(--line);display:flex;gap:10px;justify-content:flex-end;background:#fafbfc}
 .md{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:520px;max-width:94vw;max-height:88vh;background:#fff;border-radius:12px;z-index:61;display:none;flex-direction:column;overflow:hidden;box-shadow:0 20px 50px rgba(16,24,40,.24)}
 .md.on{display:flex}
@@ -317,6 +348,11 @@ table.data td.op .btn{margin-left:5px}
 .eye{cursor:pointer;color:var(--brand);font-size:12px;margin-left:6px}
 .dmono{font-variant-numeric:tabular-nums}
 .sec-t{font-size:13px;font-weight:600;color:var(--ink2);margin:18px 0 10px;padding-left:9px;border-left:3px solid var(--brand)}
+/* 工作城市字典标签 */
+.ctags{display:flex;flex-wrap:wrap;gap:8px}
+.ctag{display:inline-flex;align-items:center;gap:6px;padding:3px 8px 3px 11px;border:1px solid var(--line);border-radius:16px;font-size:12.5px;background:#fff;color:var(--ink2)}
+.ctag .x{cursor:pointer;color:var(--ink3);font-size:15px;line-height:1;padding:0 1px}
+.ctag .x:hover{color:var(--danger)}
 .db>.sec-t:first-child,.mb>.sec-t:first-child{margin-top:0}
 .sec>.sec-t.tg{display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none;margin:13px 0 0;
   padding-top:8px;padding-bottom:8px;padding-right:2px;border-radius:0 8px 8px 0;transition:background .14s}
@@ -407,7 +443,17 @@ function stripHtml(h){
 
 /* ---------- 业务字典 ---------- */
 var CITIES=["长沙","武汉","南昌","广州","深圳","成都","上海","北京"];
+/* 工作城市字典：以「系统设置 - 工作城市」中的配置为准，未配置时回落到内置默认值 */
+function cityList(){
+  var a=(S&&S.settings&&S.settings.cities)||[];
+  return a.length?a:CITIES;
+}
 var CATS=["技术","数据","产品","运营","市场","职能","供应链","管培"];
+/* 职位类别字典：以「系统设置 - 职位类别」中的配置为准，未配置时回落到内置默认值 */
+function catList(){
+  var a=(S&&S.settings&&S.settings.cats)||[];
+  return a.length?a:CATS;
+}
 var DEGS=["高中","大专","本科","硕士","博士"];
 var SOCIAL_EXP=["不限","1年以内","1-3年","3-5年","5-10年","10年以上"];
 var CAMPUS_EXP=["2026届","2027届","2028届","不限"];
@@ -487,11 +533,12 @@ var JOB_STATUS={
   expired:{t:"已过期",c:"o"},
   deleted:{t:"已删除",c:"n"}
 };
-/* 投递状态机（B-22 ~ B-25）：终态 = 不合适 / 转入人才库；已入职 / 未入职 挂在「已发 offer」的跟进下 */
+/* 投递状态机（B-22 ~ B-25）：淘汰终态 = 不合适；「转入人才库」是复合动作（状态置不合适 + 人入池，见 openPool），
+   保留在流转表里仅作为按钮入口；已入职 / 未入职 挂在「已发 offer」的跟进下 */
 var SUB_STATUS=["全部","待筛选","初筛通过","笔试中","面试中","拟录用","已发 offer","不合适"];
 var SUB_COLOR={"待筛选":"n","初筛通过":"b","笔试中":"o","面试中":"p","拟录用":"a","已发 offer":"g","不合适":"r","转入人才库":"t"};
 var SUB_FLOW={
-  "待筛选":["初筛通过","不合适","转入人才库"],
+  "待筛选":["初筛通过","不合适"],
   "初筛通过":["笔试中","面试中","不合适","转入人才库"],
   "笔试中":["面试中","不合适","转入人才库"],
   "面试中":["拟录用","已发 offer","不合适","转入人才库"],
@@ -508,9 +555,6 @@ var ONB_COLOR={"待回复":"n","待入职":"o","已入职":"g","未入职":"r"};
 var ONB_CASES=["候选人拒绝","候选人失联","材料未通过","岗位调整","其他"];
 var ONB_REASONS=["接受了其他 offer","薪资未达预期","通勤 / 城市原因","家庭原因","背景调查未通过","其他"];
 var ONB_TO=[["","暂不处理"],["人才库","转入人才库"],["不合适","转不合适"],["黑名单","加入黑名单"]];
-var ONB_LEAVE_TYPES=["主动离职","协商解除","试用期不通过","合同到期","公司辞退"];
-var ONB_LEAVE_REASONS=["职业发展","薪资待遇","团队氛围","通勤 / 城市","家庭原因","绩效不达标"];
-var ONB_REHIRE=["可再联系","观察后再定","不建议再联系"];
 
 /* Offer（B-42 ~ B-45） */
 var OFFER_VARS=["姓名","岗位","部门","城市","月薪","合同年限","试用期","汇报对象","入职日期","报到地点","有效期","HR联系人","联系电话","发件日期"];
@@ -521,6 +565,8 @@ var TPL_TRACK=[["social","社招"],["campus","校招"],["any","通用"]];
 
 /* 黑名单 / 笔试 */
 var BLOCK_REASONS=["学历 / 履历造假","背景调查异常","多次爽约","恶意投递","其他"];
+/* 入池原因（转入人才库时必选）：记录"人可用、本次未录用"的具体原因，供人才库复用时参考 */
+var POOL_REASONS=["岗位不匹配","暂无编制","薪资未谈拢","候选人放弃","经验方向不符","本轮暂不推进，留档复用"];
 
 /* 系统默认角色（自定义角色在 S.roles 中维护） */
 var ROLES={admin:{t:"管理员",c:"b"},hr:{t:"招聘负责人",c:"g"},viewer:{t:"只读面试官",c:"p"}};
@@ -591,8 +637,6 @@ var MENUS=[
  {id:"roles",name:"角色管理",desc:"角色与权限配置",actions:[
    ["roles.view","查看角色"],["roles.create","新建角色"],["roles.perm","配置权限"],
    ["roles.edit","编辑角色"],["roles.delete","删除角色"]]},
- {id:"logs",name:"操作日志",desc:"后台操作留痕",actions:[
-   ["logs.view","查看日志"]]},
  {id:"settings",name:"系统设置",desc:"邮件、合规与数据",actions:[
    ["settings.view","查看设置"],["settings.save","保存设置"],["settings.expire","执行过期检测"],
    ["settings.reset","重置演示数据"],["settings.export","导出数据"]]}
@@ -610,7 +654,7 @@ MENUS.forEach(function(m){
 });
 /* 只读权限（其余均为写操作），用于判断账号是否只读 */
 var READ_PERMS=["dash.view","jobs.view","jobs.preview","subs.view","subs.contact","subs.export",
-  "pool.view","block.view","otpl.view","accounts.view","roles.view","logs.view","settings.view"];
+  "pool.view","block.view","otpl.view","accounts.view","roles.view","settings.view"];
 var WRITE_PERMS=PERM_KEYS.filter(function(k){return READ_PERMS.indexOf(k)<0});
 /* 旧版扁平权限 → 新两级权限，用于已有本地数据的迁移 */
 var LEGACY_MAP={
@@ -626,7 +670,6 @@ var LEGACY_MAP={
  "otpl.edit":["otpl.view","otpl.create","otpl.edit","otpl.toggle","otpl.dup"],
  "sys.account":["accounts.view","accounts.create","accounts.edit","accounts.toggle"],
  "sys.role":["roles.view","roles.create","roles.perm","roles.edit","roles.delete"],
- "sys.log":["logs.view"],
  "sys.setting":["settings.view","settings.save","settings.expire","settings.reset","settings.export"]
 };
 var SCOPE_NAME={all:"全部数据",own:"仅本人负责",read:"只读全部候选人"};
@@ -737,7 +780,7 @@ var S={user:null,page:"dash",jobs:[],subs:[],cands:[],logs:[],accounts:[],roles:
   pQ:"",pPage:1,pPS:SUB_PAGE,bQ:"",bPage:1,bPS:SUB_PAGE,oQ:"",reveal:{},
   editJob:null,formErr:{},curSub:null,subPool:0};
 
-var DEFAULT_SETTINGS={inbox:"hr@redstar-hr.com",cc:"talent-pool@redstar-hr.com",retain:"24",maxSize:"10",autoExpire:"1",blockIntercept:"1"};
+var DEFAULT_SETTINGS={inbox:"hr@redstar-hr.com",cc:"talent-pool@redstar-hr.com",retain:"24",maxSize:"10",autoExpire:"1",blockIntercept:"1",cities:CITIES.slice(),cats:CATS.slice()};
 
 /* ---------- 初始化岗位字段 ---------- */
 function autoOwner(j){
@@ -814,11 +857,11 @@ function genSubs(jobs){
     });
   });
   out.sort(function(a,b){return a.time<b.time?1:-1});
-  /* 已发 offer 的候选人补齐入职跟进样本：待回复 / 待入职 / 在职 / 已离职 / 未入职（B-50 / B-52） */
+  /* 已发 offer 的候选人补齐入职跟进样本：待回复 / 待入职 / 在职 / 未入职（B-50 / B-52） */
   var oi=0;
   out.forEach(function(s){
     if(s.status!=="已发 offer")return;
-    var k=oi++%5;
+    var k=oi++%4;
     if(k===0)return;                       /* 待回复 = 默认值，不写对象 */
     if(k===1){
       s.onboard={state:"待入职",planDate:dayAdd(6),realDate:"",cs:"",reason:"",note:"",to:"",by:"HR",at:dayAgo(1)+" 16:20"};
@@ -826,32 +869,11 @@ function genSubs(jobs){
     }else if(k===2){
       s.onboard={state:"已入职",planDate:dayAgo(9),realDate:dayAgo(7),cs:"",reason:"",note:"已到岗，材料齐全",to:"",by:"HR",at:dayAgo(7)+" 09:40"};
       s.history.push({t:dayAgo(7)+" 09:40",act:"已入职",by:"HR",note:"实际入职 "+dayAgo(7)});
-    }else if(k===3){
-      s.onboard={state:"已入职",planDate:dayAgo(300),realDate:dayAgo(290),cs:"",reason:"",note:"已到岗，材料齐全",to:"",by:"HR",at:dayAgo(40)+" 17:10",
-        left:{date:dayAgo(40),type:"主动离职",reason:"职业发展",rehire:"可再联系",note:"在职期间表现良好，个人发展原因离职，可再次联系",to:"人才库",by:"HR",at:dayAgo(40)+" 17:10"}};
-      s.history.push({t:dayAgo(290)+" 09:40",act:"已入职",by:"HR",note:"实际入职 "+dayAgo(290)});
-      s.history.push({t:dayAgo(40)+" 17:10",act:"登记离职",by:"HR",note:dayAgo(40)+" 离职（主动离职 · 职业发展）· 可再联系（已转入人才库）"});
     }else{
       s.onboard={state:"未入职",planDate:dayAgo(4),realDate:"",cs:"候选人拒绝",reason:"接受了其他 offer",note:"",to:"",by:"HR",at:dayAgo(3)+" 11:05"};
       s.history.push({t:dayAgo(3)+" 11:05",act:"未入职",by:"HR",note:"候选人拒绝 · 接受了其他 offer"});
     }
   });
-  /* 回流样本：已离职者再次投递另一岗位，用于验证「曾入职」提示（B-52） */
-  var lv=out.filter(function(s){return !!onbLeft(s)})[0];
-  if(lv&&!out.filter(function(s){return s.phone===lv.phone&&s.id!==lv.id}).length){
-    var j2=pool.filter(function(j){return j.id!==lv.jobId})[0];
-    if(j2){
-      var r2=JSON.parse(JSON.stringify(lv));
-      r2.id="s"+(3000+out.length);
-      r2.jobId=j2.id;r2.status="待筛选";r2.time=dayAgo(1)+" 10:20";
-      r2.history=[{t:r2.time,act:"投递成功",by:"候选人",from:"",to:"",note:"H5 投递"}];
-      r2.notes=[];r2.notify=[];delete r2.onboard;
-      r2.attach=r2.name+"-简历-"+j2.title.replace(/（.*?）/g,"")+".pdf";
-      r2.msg="此前曾在贵司任职，因个人发展离开，现希望重新加入。";
-      out.push(r2);
-      out.sort(function(a,b){return a.time<b.time?1:-1});
-    }
-  }
   return out;
 }
 
@@ -870,6 +892,10 @@ function load(){
     var d=JSON.parse(raw);
     S.jobs=d.jobs||[];S.subs=d.subs||[];S.cands=d.cands||[];S.logs=d.logs||[];S.accounts=d.accounts||[];
     S.settings=d.settings||JSON.parse(JSON.stringify(DEFAULT_SETTINGS));S.user=d.user||null;
+    if(!S.settings.cities||!S.settings.cities.length)S.settings.cities=CITIES.slice(); /* 老数据补齐城市字典 */
+    if(!S.settings.cats||!S.settings.cats.length)S.settings.cats=CATS.slice();          /* 老数据补齐类别字典 */
+    /* 老数据迁移：原「转入人才库」状态并入「不合适」（人才库标记在候选人主档上，无损） */
+    S.subs.forEach(function(s){if(s.status==="转入人才库")s.status="不合适"});
     S.roles=d.roles||seedRoles();
     S.offers=d.offers||[];S.offerTpls=d.offerTpls||[];
     if(!S.cands.length&&S.subs.length)S.cands=buildCands();
@@ -919,7 +945,7 @@ function isAdmin(){
   if(!S.user)return false;
   var r=roleOf(S.user.role);
   if(r.id==="admin")return true;
-  return ["accounts","roles","logs","settings"].every(function(m){
+  return ["accounts","roles","settings"].every(function(m){
     return !!MENU_BY_ID[m]&&permCount(r.perms,m)===MENU_BY_ID[m].actions.length;
   });
 }
@@ -978,22 +1004,16 @@ function seedCandFlags(){
     if(n>=2||s.status!=="不合适")return;
     var c=candOf(s.phone);if(!c||c.blocked)return;
     var j=byId(s.jobId)||{title:"—"};
-    s.status="转入人才库";
-    s.history.push({t:dayAgo(2)+" 15:20",act:"状态流转",by:"王敏",from:"不合适",to:"转入人才库"});
-    c.pooled=1;c.poolBy="王敏";c.poolAt=dayAgo(2);c.poolReason="本轮不匹配，履历优质可复用";
+    /* 新模型：入池不再改状态，投递停在「不合适」，人级 pooled 标记进人才库 */
+    s.history.push({t:dayAgo(2)+" 15:20",act:"转入人才库",by:"王敏",note:"本轮不匹配，履历优质可复用"});
+    c.pooled=1;c.poolBy="王敏";c.poolAt=dayAgo(2);c.poolReason="岗位不匹配 · 履历优质可复用";
     n++;
   });
-  /* 离职回流：已登记离职且「可再联系」的候选人同步进人才库（B-52） */
-  S.subs.forEach(function(s){
-    var L=onbLeft(s);
-    if(!L||L.to!=="人才库")return;
-    var c=candOf(s.phone);
-    if(c&&!c.blocked){c.pooled=1;c.poolBy=L.by||"HR";c.poolAt=L.date;c.poolReason="离职回流 · "+L.reason}
-  });
 }
-/* 移出人才库：把「转入人才库」留下的终态投递一并了结，避免人被移出、投递永远卡在终态（B-54） */
+/* 移出人才库：把与入池相关的终态投递一并了结，避免人被移出、投递永远卡在终态（B-54）
+   新模型下入池不改状态，这些投递停在「不合适」，故按「不合适 + 可恢复」识别 */
 function poolStuck(c){
-  return subsOfCand(c).filter(function(s){return s.status==="转入人才库"&&!!revertTo(s)});
+  return subsOfCand(c).filter(function(s){return s.status==="不合适"&&!!revertTo(s)});
 }
 function togglePool(id,fromList){
   if(!hasPerm("pool.manage")){toast("当前角色无人才库维护权限","err");return}
@@ -1017,7 +1037,7 @@ function openPoolRemove(id,fromList){
     var j=byId(x.jobId)||{};
     return '· 「'+esc(j.title||"—")+'」 → 可恢复到 <b>'+esc(revertTo(x))+'</b>';
   }).join("<br>")+'</div>';
-  var body='<div class="notice" style="margin-bottom:12px">该候选人名下有 <b>'+bl.length+'</b> 份投递因为「转入人才库」停在终态。移出人才库后，它们不会自动消失，仍会留在「候选人管理」的「全部」页签里。</div>'+
+  var body='<div class="notice" style="margin-bottom:12px">该候选人名下有 <b>'+bl.length+'</b> 份投递停在「不合适」终态。移出人才库后，它们不会自动消失，仍会留在「候选人管理」的「全部」页签里。</div>'+
     rows+
     (isAdmin()
       ? '<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;color:var(--ink2);margin-top:12px">'+
@@ -1122,18 +1142,7 @@ function addLog(act,obj,before,after){
   S.logs.unshift({id:uid(),t:now(),who:S.user?S.user.name:"系统",whoId:S.user?S.user.id:"system",act:act,obj:obj||"",before:before||"",after:after||""});
   if(S.logs.length>400)S.logs.length=400;
 }
-function logHtml(){
-  return S.logs.slice(0,200).map(function(l){
-    var ch="";
-    if(l.before&&l.after)ch='<div style="font-size:12px;color:var(--ink3);margin-top:3px">'+esc(l.before)+' → '+esc(l.after)+'</div>';
-    else if(l.after)ch='<div style="font-size:12px;color:var(--ink3);margin-top:3px">'+esc(l.after)+'</div>';
-    return '<tr><td class="dmono" style="color:var(--ink3);white-space:nowrap">'+esc(l.t)+'</td>'+
-      '<td>'+esc(l.who)+'</td><td>'+esc(l.act)+'</td><td>'+esc(l.obj)+ch+'</td></tr>';
-  }).join("");
-}
-
-/* ---------- 通用 UI ---------- */
-var _tt=null;
+var _tt=null;   /* toast 定时器句柄（未声明时 clearTimeout 读未定义变量会抛错，导致提示条永不显示） */
 function toast(msg,type){
   var el=$("toast");el.className="toast on"+(type?" "+type:"");el.textContent=msg;
   clearTimeout(_tt);_tt=setTimeout(function(){el.className="toast"},2600);
@@ -1183,7 +1192,7 @@ function renderLogin(){
   $("app").innerHTML='<div class="login"><div class="login-l">'+
     '<div class="mk">红</div><h1>红星实业集团 · 招聘管理后台</h1>'+
     '<p>中南地区最大的一级农副产品流通枢纽。岗位发布、候选人流转、招聘数据与账号权限的统一管理入口。</p>'+
-    '<div class="tags"><span>岗位管理</span><span>候选人流转</span><span>账号与权限</span><span>操作日志</span><span>人才库</span><span>黑名单</span></div>'+
+    '<div class="tags"><span>岗位管理</span><span>候选人流转</span><span>账号与权限</span><span>人才库</span><span>黑名单</span></div>'+
     '</div><div class="login-r">'+
     '<h2>管理员登录</h2><div class="sub">后台账号与应聘者账号完全隔离 · 演示环境</div>'+
     '<div style="margin-bottom:16px">'+list+'</div>'+
@@ -1228,7 +1237,6 @@ function render(){
   var navSys=[];
   if(canMenu("accounts"))navSys.push(["accounts","账号管理",S.accounts.length]);
   if(canMenu("roles"))navSys.push(["roles","角色管理",S.roles.length]);
-  if(canMenu("logs"))navSys.push(["logs","操作日志",""]);
   if(canMenu("settings"))navSys.push(["settings","系统设置",""]);
   function navItem(n){return '<a class="'+(S.page===n[0]?"on":"")+'" onclick="go(\''+n[0]+'\')">'+n[1]+(n[2]!==''&&n[2]!=null?'<span class="cnt">'+n[2]+'</span>':'')+'</a>'}
   var side='<div class="lg"><div class="mk">红</div><b>红星招聘</b></div><div class="nav">'+
@@ -1236,7 +1244,7 @@ function render(){
     (navSys.length?'<div class="gp">系统管理</div>'+navSys.map(navItem).join(""):'')+
     '</div><div class="ft">演示原型 v1.6<br>需求清单 B-01 ~ B-56</div>';
 
-  var titles={dash:"数据概览",jobs:"岗位管理",subs:"候选人管理",pool:"人才库",block:"黑名单",otpl:"Offer 模板",accounts:"账号管理",roles:"角色管理",logs:"操作日志",settings:"系统设置",examimp:"批量导入笔试记录"};
+  var titles={dash:"数据概览",jobs:"岗位管理",subs:"候选人管理",pool:"人才库",block:"黑名单",otpl:"Offer 模板",accounts:"账号管理",roles:"角色管理",settings:"系统设置",examimp:"批量导入笔试记录"};
   var rl=roleOf(S.user.role);
   var roleTip='<span class="pill '+roleCls(S.user.role)+'">'+esc(rl.name)+' · '+SCOPE_TIP[rl.scope]+'</span>';
   var top='<h2>'+titles[S.page]+'</h2><div class="sp"></div>'+roleTip+
@@ -1255,7 +1263,6 @@ function render(){
   else if(S.page==="block")main=pgBlock();
   else if(S.page==="accounts")main=pgAccounts();
   else if(S.page==="roles")main=pgRoles();
-  else if(S.page==="logs")main=pgLogs();
   else if(S.page==="otpl")main=pgOfferTpl();
   else if(S.page==="settings")main=pgSettings();
 
@@ -1278,7 +1285,6 @@ function pgDash(){
   var interview=subs.filter(function(s){return s.status==="面试中"});
   var plan=subs.filter(function(s){return s.status==="拟录用"});
   var offer=subs.filter(function(s){return s.status==="已发 offer"});
-  var expiredN=jobs.filter(function(j){return jobEffStatus(j)==="expired"}).length;
 
   var stHtml=Object.keys(JOB_STATUS).filter(function(k){return k!=="deleted"}).map(function(k){
     var n=jobs.filter(function(j){return j.status===k}).length;
@@ -1286,47 +1292,23 @@ function pgDash(){
     return barRow(JOB_STATUS[k].t,n,Math.max(1,jobs.length),col);
   }).join("");
 
-  // 近 14 日投递趋势
-  var days=[],mm={};
-  for(var i=13;i>=0;i--){var d=dayAgo(i);days.push(d);mm[d]=0}
-  subs.forEach(function(s){var d=(s.time||"").slice(0,10);if(mm[d]!=null)mm[d]++});
-  var mx=Math.max(1,Math.max.apply(null,days.map(function(d){return mm[d]})));
-  var trend='<div class="trend">'+days.map(function(d){
-    var v=mm[d];
-    return '<div class="col"><b>'+(v||"")+'</b><i style="height:'+Math.round(v/mx*86)+'%"></i><span>'+d.slice(5)+'</span></div>';
-  }).join("")+'</div>';
-
-  var catM={};subs.forEach(function(s){var j=byId(s.jobId);var c=j?j.cat:"其他";catM[c]=(catM[c]||0)+1});
+  // 转化分析区：受时间筛选（R=null 表示全部）
+  S.dashRange=S.dashRange||{type:"month",from:"",to:""};
+  var R=dashRangeDays();
+  var rs=R?subs.filter(function(s){return inRng((s.time||"").slice(0,10),R)}):subs;
+  var rv=dashRateVals(R);
+  var catM={};rs.forEach(function(s){var j=byId(s.jobId);var c=j?j.cat:"其他";catM[c]=(catM[c]||0)+1});
   var catArr=Object.keys(catM).sort(function(a,b){return catM[b]-catM[a]});
   var cmx=Math.max(1,catArr.length?catM[catArr[0]]:1);
   var catHtml=catArr.map(function(c){return barRow(c+"类",catM[c],cmx,"var(--brand)")}).join("");
 
-  var recent=subs.slice().sort(function(a,b){return a.time<b.time?1:-1}).slice(0,6).map(function(s){
-    var j=byId(s.jobId);
-    return '<tr><td>'+esc(s.name)+'</td><td style="color:var(--ink2)">'+esc(j?j.title:"—")+'</td>'+
-      '<td>'+statusPill(s.status)+'</td><td class="dmono" style="color:var(--ink3)">'+esc(s.time)+'</td></tr>';
-  }).join("");
-
-  var logs=S.logs.slice(0,6).map(function(l){
-    return '<div class="ti g"><div class="th"><b>'+esc(l.act)+'</b></div><div class="td">'+esc(l.who)+' · '+esc(l.t)+' · '+esc(l.obj)+'</div></div>';
-  }).join("");
-
-  var banner=expiredN?'<div class="banner"><span>⚠</span><div class="sp">有 <b>'+expiredN+'</b> 个岗位已过截止日期自动置为「已过期」，请及时处理或延长截止日期。</div><button class="btn sm" onclick="go(\'jobs\')">去处理</button></div>':'';
-
-  return banner+
-  '<div class="grid g4" style="margin-bottom:16px">'+
-    stat("在招岗位",online.length,"共 "+jobs.length+" 个岗位（含草稿/下线）","b")+
-    stat("招聘人数合计",hc,"仅统计在招岗位","g")+
-    stat("累计收到简历",subs.length,"待筛选 "+pending.length+" 份","o")+
-    stat("面试中 / 拟录用 / 已发 offer",interview.length+" / "+plan.length+" / "+offer.length,
-      "待入职 "+offer.filter(function(s){var t=onbState(s);return t==="待回复"||t==="待入职"}).length+
-      " · 在职 "+offer.filter(function(s){return onbState(s)==="已入职"&&!onbLeft(s)}).length+
-      " · 已离职 "+offer.filter(function(s){return !!onbLeft(s)}).length+
-      " · 未入职 "+offer.filter(function(s){return onbState(s)==="未入职"}).length,"p")+
-  '</div>'+
-  '<div class="grid g2" style="margin-bottom:16px">'+
-    stat("笔试中",mySubs().filter(function(s){return s.status==="笔试中"}).length,"线下笔试已安排，等待录入成绩（B-40 / B-41）","o")+
-    stat("Offer 文件",offerList().length,"已按模板生成的 PDF，可预览 / 下载 / 删除","p")+
+  return '<div class="grid g4" style="margin-bottom:16px">'+
+    stat("在招岗位",online.length,"状态为「招聘中」的岗位数（不含草稿/已下线/已过期）","b")+
+    stat("招聘人数合计",hc,"在招岗位招聘人数的总和","g")+
+    stat("累计收到简历",subs.length,"全部投递记录总数（含各环节与已淘汰）","o")+
+    stat("笔试中 / 面试中 / 拟录用 / 已发 offer",
+      subs.filter(function(s){return s.status==="笔试中"}).length+" / "+interview.length+" / "+plan.length+" / "+offer.length,
+      "四个环节的当前存量人数（实时快照）","p")+
   '</div>'+
   '<div class="grid g2" style="margin-bottom:16px">'+
     (isViewer()?stat("人才库人数",poolCount(),"按人去重（B-32 / B-36）","g")
@@ -1334,18 +1316,149 @@ function pgDash(){
     (hasPerm("block.view")?statGo("黑名单人数",blockCount(),"点击查看 · 投递由服务端静默拦截（B-33 / B-37）","o","block")
              :stat("黑名单人数",blockCount(),"当前角色无黑名单查看权限（B-33 / B-37）","o"))+
   '</div>'+
-  '<div class="grid g2">'+
-    '<div class="card"><div class="hd"><h3>岗位状态分布</h3></div><div class="bd">'+stHtml+'</div></div>'+
-    '<div class="card"><div class="hd"><h3>近 14 日投递趋势</h3></div><div class="bd">'+trend+'</div></div>'+
+  '<div class="card" style="margin-bottom:16px">'+
+    '<div class="hd"><h3>转化分析<span style="font-weight:400;font-size:12.5px;color:var(--ink3);margin-left:10px">'+dashRangeLabel(R)+'：新增投递 '+rs.length+' 份</span></h3><div class="sp"></div>'+dashRangeBar()+'</div>'+
+    '<div class="bd">'+
+      '<div class="grid g4" style="margin-bottom:14px">'+
+        stat("面试赴约率",pctTxt(rv.ia,rv.ish),"到场 ÷ 应到，缺考即爽约（按面试时间）","b")+
+        stat("面试合格率",pctTxt(rv.ip,rv.idn),"结论「通过」÷ 已出结论（按面试时间）","g")+
+        stat("Offer 接受率",pctTxt(rv.acc,rv.replied),"已回复且接受 ÷ 已回复（按 Offer 发送时间）","p")+
+        stat("入职达成率",pctTxt(rv.hired,rv.offn),"已入职 ÷ 已发 offer（按 Offer 发送时间）","o")+
+      '</div>'+
+      '<div class="grid g2" style="margin-bottom:14px">'+
+        dashFunnelCard(R)+
+        '<div class="card"><div class="hd"><h3>简历类别分布</h3></div><div class="bd">'+(catHtml||'<div class="empty">暂无数据</div>')+'</div></div>'+
+      '</div>'+
+      dashTrendCard(R)+
+    '</div>'+
   '</div>'+
-  '<div class="grid g2">'+
-    '<div class="card"><div class="hd"><h3>最近投递</h3><div class="sp"></div><a style="font-size:13px;color:var(--brand);cursor:pointer" onclick="go(\'subs\')">查看全部</a></div>'+
-      '<div class="bd np"><div class="tbwrap"><table class="data"><thead><tr><th>候选人</th><th>投递岗位</th><th>状态</th><th>投递时间</th></tr></thead><tbody>'+
-      (recent||'<tr><td colspan="4"><div class="empty">暂无投递</div></td></tr>')+'</tbody></table></div></div></div>'+
-    '<div class="card"><div class="hd"><h3>简历类别分布</h3></div><div class="bd">'+(catHtml||'<div class="empty">暂无数据</div>')+'</div></div>'+
-  '</div>'+
-  '<div class="card"><div class="hd"><h3>最近操作</h3><div class="sp"></div>'+(hasPerm("sys.log")?'<a style="font-size:13px;color:var(--brand);cursor:pointer" onclick="go(\'logs\')">全部日志</a>':'')+'</div>'+
-    '<div class="bd"><div class="tl">'+(logs||'<div class="empty">暂无操作记录</div>')+'</div></div></div>';
+  '<div class="card"><div class="hd"><h3>岗位状态分布</h3></div><div class="bd">'+stHtml+'</div></div>';
+}
+/* ==== 概览扩展：时间筛选 / 转化率 / 招聘漏斗 / 投递趋势 ==== */
+function inRng(d,R){return !R?(!!d):(!!d&&d>=R.from&&d<=R.to)}
+function dashRangeDays(){   /* 当前筛选范围的 {from,to}；null=全部 */
+  var d=S.dashRange||{type:"month"};
+  if(d.type==="all")return null;
+  var today=fmtD(new Date());
+  if(d.type==="week"){var x=new Date();x.setDate(x.getDate()-6);return{from:fmtD(x),to:today}}
+  if(d.type==="month"){var m=new Date();m.setDate(1);return{from:fmtD(m),to:today}}
+  if(d.type==="half"){var h=new Date();h.setMonth(h.getMonth()-6);return{from:fmtD(h),to:today}}
+  return{from:d.from||today,to:d.to||today};
+}
+function dashRangeLabel(R){ /* 筛选范围的中文名 */
+  var d=S.dashRange||{};
+  if(!R)return "近 12 个月";
+  if(d.type==="week")return "近 7 天";
+  if(d.type==="month")return "本月";
+  if(d.type==="half")return "最近半年";
+  return R.from+" ~ "+R.to;
+}
+function dashRangeBar(){    /* 时间筛选控件：本周 / 本月 / 最近半年 / 全部 / 自定义（起止日期） */
+  var t=(S.dashRange||{}).type||"month";
+  var bs=[["week","本周"],["month","本月"],["half","最近半年"],["all","全部"]].map(function(x){
+    return '<button class="btn sm '+(t===x[0]?"pri":"")+'" onclick="setDashRange(\''+x[0]+'\')">'+x[1]+'</button>';
+  }).join("");
+  var dates=t==="custom"?
+    '<input class="ip" type="date" id="drFrom" value="'+esc(S.dashRange.from||"")+'" style="width:132px" onchange="applyDashCustom()">'+
+    '<span style="color:var(--ink3);font-size:12.5px">至</span>'+
+    '<input class="ip" type="date" id="drTo" value="'+esc(S.dashRange.to||"")+'" style="width:132px" onchange="applyDashCustom()">':"";
+  return '<div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">'+
+    bs+'<button class="btn sm '+(t==="custom"?"pri":"")+'" onclick="setDashRange(\'custom\')">自定义</button>'+dates+'</div>';
+}
+function setDashRange(t){
+  S.dashRange=S.dashRange||{type:"month",from:"",to:""};
+  S.dashRange.type=t;
+  if(t==="custom"&&!S.dashRange.from){S.dashRange.from=fmtD(new Date(new Date().getFullYear(),new Date().getMonth(),1));S.dashRange.to=fmtD(new Date())}
+  render();
+}
+function applyDashCustom(){
+  var f=(document.getElementById("drFrom")||{}).value,t2=(document.getElementById("drTo")||{}).value;
+  if(f&&t2&&f<=t2){S.dashRange.from=f;S.dashRange.to=t2;render()}
+  else toast("请选择有效的起止日期（开始不晚于结束）","err");
+}
+function offerTime(s){      /* Offer 发送时间：优先 Offer 文件的发送记录，兜底入职跟进登记时间 */
+  var o=(S.offers||[]).filter(function(x){return x.subId===s.id&&x.sentAt})[0];
+  if(o)return o.sentAt.slice(0,10);
+  return (s.onboard&&s.onboard.at)?s.onboard.at.slice(0,10):"";
+}
+function itvAllRounds(s){   /* 只读取面试轮次（不触发迁移），供统计使用 */
+  return (s.interviews&&s.interviews.length)?s.interviews:((s.interview&&s.interview.time)?[s.interview]:[]);
+}
+function pctTxt(a,b){return b?(Math.round(a/b*100)+"%"):"—"}
+function dashRateVals(R){   /* 转化率原始计数：按面试时间筛面试轮、按 Offer 发送时间筛 Offer */
+  var subs=mySubs(),v={ip:0,idn:0,ia:0,ish:0,replied:0,acc:0,offn:0,hired:0};
+  subs.forEach(function(s){
+    itvAllRounds(s).forEach(function(r){
+      if(!inRng((r.time||"").slice(0,10),R))return;
+      if(r.result==="通过")v.ip++;
+      if(r.result==="通过"||r.result==="不通过")v.idn++;
+      if(r.attend==="到场")v.ia++;
+      if(r.attend==="到场"||r.attend==="缺考")v.ish++;
+    });
+    if(s.status==="已发 offer"||(s.onboard&&s.onboard.state)){
+      if(!inRng(offerTime(s),R))return;
+      v.offn++;
+      var st=onbState(s);
+      if(st==="已入职")v.hired++;
+      if(st!=="待回复"){v.replied++;if(st==="待入职"||st==="已入职")v.acc++;}
+    }
+  });
+  return v;
+}
+function dashFunnelCard(R){  /* 招聘漏斗：范围内投递的候选人当前走到哪一层 */
+  var subs=mySubs();
+  if(R)subs=subs.filter(function(s){return inRng((s.time||"").slice(0,10),R)});
+  var L=[];
+  L.push(["投递",subs.length]);
+  L.push(["初筛通过",subs.filter(function(s){return ["初筛通过","笔试中","面试中","拟录用","已发 offer"].indexOf(s.status)>=0}).length]);
+  L.push(["笔试通过",subs.filter(function(s){return s.exam&&s.exam.result==="通过"}).length]);
+  L.push(["面试通过",subs.filter(function(s){
+    return ["拟录用","已发 offer"].indexOf(s.status)>=0||itvAllRounds(s).some(function(r){return r.result==="通过"});
+  }).length]);
+  L.push(["拟录用",subs.filter(function(s){return s.plan||s.status==="拟录用"||s.status==="已发 offer"}).length]);
+  L.push(["已发 offer",subs.filter(function(s){return s.status==="已发 offer"}).length]);
+  L.push(["已入职",subs.filter(function(s){return onbState(s)==="已入职"}).length]);
+  var mx=Math.max(1,Math.max.apply(null,L.map(function(x){return x[1]})));
+  var rows=L.map(function(x,i){
+    var prev=i?L[i-1][1]:0;
+    var conv=(prev&&x[1]<prev)?('<em> · '+Math.round(x[1]/prev*100)+'%</em>'):"";
+    return '<div class="frow" style="display:flex;align-items:center;gap:12px;margin-bottom:11px;font-size:13px">'+
+      '<span class="bl">'+x[0]+'</span><div class="btr"><i style="width:'+Math.round(x[1]/mx*100)+'%"></i></div>'+
+      '<span class="fv">'+x[1]+conv+'</span></div>';
+  }).join("");
+  return '<div class="card"><div class="hd"><h3>招聘漏斗</h3></div><div class="bd">'+(rows||'<div class="empty">暂无数据</div>')+
+    '<div style="font-size:12px;color:var(--ink3);margin-top:6px">按投递时间筛选；已到更深层的人回填到途经层；「不合适 / 人才库」不计入；百分比为相对上一层的转化率（笔试、拟录用等环节可跳过）。</div></div></div>';
+}
+function dashBuckets(R){    /* 趋势图分桶：全部=近 12 个自然月；≤14 天按天；≤70 天按周；其余按月 */
+  if(!R){var a=[],n=new Date();n.setDate(1);
+    for(var i=11;i>=0;i--){var x=new Date(n.getFullYear(),n.getMonth()-i,1);
+      a.push({lb:(x.getMonth()+1)+"月",from:fmtD(x),to:fmtD(new Date(x.getFullYear(),x.getMonth()+1,0))})}
+    return a}
+  var days=Math.round((new Date(R.to+"T00:00:00")-new Date(R.from+"T00:00:00"))/86400000)+1,a=[];
+  if(days<=14){var x=new Date(R.from+"T00:00:00");
+    for(var i=0;i<days;i++){a.push({lb:fmtD(x).slice(5),from:fmtD(x),to:fmtD(x)});x.setDate(x.getDate()+1)}
+    return a}
+  if(days<=70){var x=new Date(R.from+"T00:00:00");
+    while(fmtD(x)<=R.to){var f=fmtD(x),e=new Date(x);e.setDate(e.getDate()+6);
+      a.push({lb:f.slice(5).replace("-","/")+"起",from:f,to:fmtD(e)>R.to?R.to:fmtD(e)});x.setDate(x.getDate()+7)}
+    return a}
+  var x=new Date(R.from+"T00:00:00");x.setDate(1);
+  while(fmtD(x)<=R.to){var nx=new Date(x.getFullYear(),x.getMonth()+1,1);
+    var t=fmtD(new Date(nx.getTime()-86400000));
+    a.push({lb:(x.getMonth()+1)+"月",from:fmtD(x),to:t>R.to?R.to:t});x=nx}
+  return a;
+}
+function dashTrendCard(R){  /* 投递趋势：跟随筛选范围自动分桶聚合 */
+  var B=dashBuckets(R),mm={};
+  B.forEach(function(b){mm[b.lb]=0});
+  mySubs().forEach(function(s){
+    var d=(s.time||"").slice(0,10);if(!d)return;
+    B.forEach(function(b){if(d>=b.from&&d<=b.to)mm[b.lb]++});
+  });
+  var mx=Math.max(1,Math.max.apply(null,B.map(function(b){return mm[b.lb]})));
+  var cols=B.map(function(b){var v=mm[b.lb];
+    return '<div class="col"><b>'+(v||"")+'</b><i style="height:'+Math.round(v/mx*86)+'%"></i><span>'+b.lb+'</span></div>'}).join("");
+  return '<div class="card"><div class="hd"><h3>投递趋势 · '+dashRangeLabel(R)+'</h3></div><div class="bd"><div class="trend">'+cols+'</div></div></div>';
 }
 function stat(lb,vl,ex,c){
   return '<div class="stat '+(c||"")+'"><div class="lb">'+lb+'</div><div class="vl">'+vl+'</div><div class="ex">'+ex+'</div></div>';
@@ -1359,8 +1472,8 @@ function statusPill(st){
 /* 笔试中的副状态：列表状态列在主状态下方显示，已安排 / 通过 / 不通过 / 缺考 */
 function examSubPill(s){
   var e=s.exam;
-  if(!e)return '<span class="pill n"><i class="dt"></i>未安排</span>';
-  if(e.status!=="已完成")return '<span class="pill o"><i class="dt"></i>已安排</span>';
+  if(!e)return '';                       /* 未安排不显示副状态 */
+  if(e.status!=="已完成")return '';      /* 未录入不显示「已安排」，避免与主状态重复 */
   if(e.attend==="缺考")return '<span class="pill r"><i class="dt"></i>缺考</span>';
   if(e.result==="通过")return '<span class="pill g"><i class="dt"></i>通过</span>';
   if(e.result==="不通过")return '<span class="pill r"><i class="dt"></i>不通过</span>';
@@ -1374,9 +1487,9 @@ function itvLatest(s){
 /* 面试中的副状态：永远取最新一轮面试的状态 —— 未安排 / 待面试 / 通过 / 不通过 / 待定 / 缺考 */
 function itvSubPill(s){
   var v=itvLatest(s);
-  if(!v||!v.time)return '<span class="pill n"><i class="dt"></i>未安排</span>';
+  if(!v||!v.time)return '';   /* 未安排不显示副状态 */
   var tip=' title="第 '+(v.round||1)+' 面"';
-  if(!v.done)return '<span class="pill o"'+tip+'><i class="dt"></i>待面试</span>';
+  if(!v.done)return '';       /* 未录入不显示「待面试」，避免与主状态重复 */
   if(v.attend==="缺考")return '<span class="pill r"'+tip+'><i class="dt"></i>缺考</span>';
   var r=v.result||"待定";
   return '<span class="pill '+(r==="通过"?"g":(r==="不通过"?"r":"a"))+'"'+tip+'><i class="dt"></i>'+esc(r)+'</span>';
@@ -1387,17 +1500,9 @@ function onb(s){                 /* 首次写入时才建对象，避免读渲�
   return s.onboard;
 }
 function onbState(s){return (s.onboard&&s.onboard.state)||"待回复"}
-function onbLeft(s){return (s.onboard&&s.onboard.left)||null}          /* 离职标记：仅挂在「已入职」之下 */
 function onbOpen(s){var st=onbState(s);return st==="待回复"||st==="待入职"}   /* 跟进未终结，可参与批量（B-51） */
 function batchableRow(s,bt){return s.status===bt&&(bt!=="已发 offer"||onbOpen(s))}  /* 已发 offer 的终结跟进（已入职 / 未入职）不进批量 */
-function hiredBefore(s){          /* 同一候选人（按手机号、限本人可见范围）此前的入职记录，用于回流提示 */
-  var m=mySubIds();
-  return subsOfPhone(s.phone).filter(function(x){return x.id!==s.id&&m[x.id]&&onbLeft(x)})
-    .sort(function(a,b){return (onbLeft(a).date||"")<(onbLeft(b).date||"")?1:-1});
-}
 function onbPill(s){
-  var L=onbLeft(s);
-  if(L)return '<span class="pill n" title="曾入职，'+esc(L.date)+' 离职 · '+esc(L.type)+'"><i class="dt"></i>已离职</span>';
   var st=onbState(s);
   return '<span class="pill '+(ONB_COLOR[st]||"n")+'"><i class="dt"></i>'+st+'</span>';
 }
@@ -1411,12 +1516,6 @@ function onbBtns(id,s){
   if(st==="待入职")
     return '<button class="btn ok" onclick="openOnboard(\''+id+'\')">登记入职</button>'+
       '<button class="btn dgg" onclick="openNoShow(\''+id+'\')">登记未入职</button>';
-  if(st==="已入职"){                      /* 入职之后：可登记离职（B-52），离职后仅可修改 */
-    var L=onbLeft(s);
-    return (L?'<button class="btn" onclick="openLeave(\''+id+'\',1)">修改离职信息</button>'
-             :'<button class="btn" onclick="openLeave(\''+id+'\')">登记离职</button>')+
-      (isAdmin()?'<button class="btn" onclick="resetOnb(\''+id+'\')">更正跟进结果</button>':"");
-  }
   return isAdmin()?'<button class="btn" onclick="resetOnb(\''+id+'\')">更正跟进结果</button>':"";
 }
 function jobEffStatus(j){return (j.status==="online"&&j.deadline<today())?"expired":j.status}
@@ -1515,7 +1614,7 @@ function pgJobs(){
   '<div class="toolbar">'+
     '<input class="ip sr" placeholder="搜索职位名称或类别" value="'+esc(S.jQ)+'" oninput="S.jQ=this.value;S.jPage=1;renderJobs()">'+
     '<select class="ip" onchange="S.jF.status=this.value;S.jPage=1;renderJobs()"><option value="">全部状态</option>'+stOpts+'</select>'+
-    '<select class="ip" onchange="S.jF.city=this.value;S.jPage=1;renderJobs()"><option value="">全部城市</option>'+CITIES.map(function(c){return '<option'+(S.jF.city===c?" selected":"")+'>'+c+'</option>'}).join("")+'</select>'+
+    '<select class="ip" onchange="S.jF.city=this.value;S.jPage=1;renderJobs()"><option value="">全部城市</option>'+cityList().map(function(c){return '<option'+(S.jF.city===c?" selected":"")+'>'+c+'</option>'}).join("")+'</select>'+
     '<select class="ip" onchange="S.jF.cat=this.value;S.jPage=1;renderJobs()"><option value="">全部类别</option>'+CATS.map(function(c){return '<option'+(S.jF.cat===c?" selected":"")+'>'+c+'</option>'}).join("")+'</select>'+
     '<select class="ip" onchange="S.jF.owner=this.value;S.jPage=1;renderJobs()"><option value="">全部负责人</option>'+owners.map(function(a){return '<option value="'+a.id+'"'+(S.jF.owner===a.id?" selected":"")+'>'+esc(a.name)+'</option>'}).join("")+'</select>'+
     '<button class="btn" onclick="resetJobFilter()">重置筛选</button>'+
@@ -1594,7 +1693,7 @@ function drawJobForm(){
     '<div class="fld"><label>招聘通道</label><select class="ip" onchange="S.editJob.track=this.value;if(S.editJob.track===\'campus\'){S.editJob.exp=\'2027届\'}else{S.editJob.exp=\'3-5年\'};drawJobForm()">'+
       '<option value="social"'+(j.track==="social"?" selected":"")+'>社招</option><option value="campus"'+(j.track==="campus"?" selected":"")+'>校招</option></select></div>'+
     '<div class="fld"><label>职位类别</label><select class="ip" onchange="S.editJob.cat=this.value">'+CATS.map(function(c){return '<option'+(j.cat===c?" selected":"")+'>'+c+'</option>'}).join("")+'</select></div>'+
-    '<div class="fld"><label>工作城市</label><select class="ip" onchange="S.editJob.city=this.value;drawJobForm()">'+CITIES.map(function(c){return '<option'+(j.city===c?" selected":"")+'>'+c+'</option>'}).join("")+'</select></div>'+
+    '<div class="fld"><label>工作城市</label><select class="ip" onchange="S.editJob.city=this.value;drawJobForm()">'+cityList().map(function(c){return '<option'+(j.city===c?" selected":"")+'>'+c+'</option>'}).join("")+'</select></div>'+
     '<div class="fld"><label>工作地点</label>'+'<input class="ip" list="officeList" value="'+esc(j.addr||"")+'" oninput="S.editJob.addr=this.value" placeholder="如：长沙市雨花区万家丽中路二段68号 红星总部大楼 12F">'+
       '<datalist id="officeList">'+((OFFICES[j.city]||[]).map(function(o){return '<option value="'+esc(o)+'"></option>'}).join(""))+'</datalist></div>'+
     '<div class="'+fldCls("salary")+'"><label>薪资范围<i>*</i></label><input class="ip'+(S.formErr.salary?" err":"")+'" value="'+esc(j.salary)+'" oninput="S.editJob.salary=this.value" placeholder="如：20-35K·14薪">'+fieldErr("salary")+'</div>'+
@@ -1860,8 +1959,7 @@ function subsFiltered(){
   });
   if(S.sF.onb)list=list.filter(function(s){
     if(s.status!=="已发 offer")return false;
-    if(S.sF.onb==="已离职")return !!onbLeft(s);          /* 已离职是「已入职」下的标记，作为独立筛选维度 */
-    return onbState(s)===S.sF.onb&&!onbLeft(s);          /* 选「已入职」时只保留在职者，避免与已离职混算 */
+    return onbState(s)===S.sF.onb;
   });
   var sc=S.sF.scope;
   if(sc)list=list.filter(function(s){
@@ -1901,13 +1999,11 @@ function pgSubs(){
     var rv=S.reveal[s.id];
     var c0=candOf(s.phone);
     var bd=(c0&&c0.pooled?' <span class="pill t">人才库</span>':'')+(c0&&c0.blocked?' <span class="pill r">黑名单</span>':'');
-    var hb0=hiredBefore(s)[0],L0=hb0?onbLeft(hb0):null;
-    var hbTag=hb0?' <span class="pill n" title="曾入职「'+esc((byId(hb0.jobId)||{}).title||"—")+'」，'+esc(L0.date)+' 离职（'+esc(L0.type)+'）">曾入职</span>':"";
     var othN=c0?subsOfCand(c0).filter(function(x){return x.id!==s.id&&!isTerminal(x.status)}).length:0;
     var cross=(j&&s.city&&j.city&&s.city!==j.city);
     return '<tr class="'+(sel?"sel":"")+'">'+
       (canBatch?'<td style="width:36px">'+(S.sTab==="已发 offer"&&!onbOpen(s)?'':'<input type="checkbox" '+(sel?"checked":"")+' onchange="toggleSubSel(\''+s.id+'\',this.checked)">')+'</td>':'')+
-      '<td><div class="tt">'+esc(s.name)+bd+hbTag+'</div><div class="mt"><span>'+esc(s.deg)+' · '+esc(s.school)+'</span>'+
+      '<td><div class="tt">'+esc(s.name)+bd+'</div><div class="mt"><span>'+esc(s.deg)+' · '+esc(s.school)+'</span>'+
         (othN?'<span class="mnote" title="该候选人还有 '+othN+' 份投递在流程中，可在「全部」页签搜索其姓名或手机号查看">另有 '+othN+' 个投递在流程中</span>':'')+'</div></td>'+
       '<td class="dmono">'+(rv?esc(s.phone):esc(maskPhone(s.phone)))+
         (hasPerm("subs.contact")?'<span class="eye" onclick="toggleReveal(\''+s.id+'\')">'+(rv?"隐藏":"查看")+'</span>':'')+'</td>'+
@@ -1920,7 +2016,8 @@ function pgSubs(){
         (s.status==="已发 offer"?'<div style="margin-top:4px">'+onbPill(s)+'</div>':'')+
         (s.status==="笔试中"?'<div style="margin-top:4px">'+examSubPill(s)+'</div>':'')+
         (s.status==="面试中"?'<div style="margin-top:4px">'+itvSubPill(s)+'</div>':'')+'</td>'+
-      '<td class="op"><button class="btn sm" onclick="openSub(\''+s.id+'\',\'sub\')">查看</button></td>'+
+      '<td class="op"><div class="acts">'+
+        '<span class="op-a mute" onclick="openSub(\''+s.id+'\',\'sub\')">查看</span>'+subRowActs(s.id)+'</div></td>'+
     '</tr>';
   }).join("");
 
@@ -1937,7 +2034,7 @@ function pgSubs(){
         '<option value="cross"'+(S.sF.cross==="cross"?" selected":"")+'>跨城（现居 ≠ 岗位城市）</option>'+
         '<option value="same"'+(S.sF.cross==="same"?" selected":"")+'>同城</option></select>'+
       (S.sTab==="已发 offer"?'<select class="ip" onchange="S.sPage=1;S.sF.onb=this.value;renderSubs()"><option value="">全部跟进状态</option>'+
-        ONB_STATES.concat(["已离职"]).map(function(x){return '<option value="'+x+'"'+(S.sF.onb===x?" selected":"")+'>'+x+'</option>'}).join("")+'</select>':'')+
+        ONB_STATES.map(function(x){return '<option value="'+x+'"'+(S.sF.onb===x?" selected":"")+'>'+x+'</option>'}).join("")+'</select>':'')+
       '<button class="btn" onclick="S.sQ=\'\';S.sF={job:\'\',deg:\'\',scope:\'\',cross:\'\',onb:\'\'};S.sSel=[];S.sPage=1;render()">重置</button>'+
       (hasPerm("subs.export")?'<button class="btn pri" onclick="openExport()">导出</button>':'')+
       '<div class="sp" style="flex:1"></div>'+
@@ -1955,7 +2052,7 @@ function pgSubs(){
       '</span></div>':'')+
     '<div class="bd np"><div class="tbwrap"><table class="data"><thead><tr>'+
       (canBatch?'<th style="width:36px"><input type="checkbox" '+(allSel?"checked":"")+' onchange="selAllFiltered(this.checked)"></th>':'')+
-      '<th>候选人</th><th>手机号</th><th>投递岗位</th><th>年限 / 专业</th><th>现居城市</th><th>投递时间</th><th>状态</th><th style="text-align:right">操作</th>'+
+      '<th>候选人</th><th>手机号</th><th>投递岗位</th><th>年限 / 专业</th><th>现居城市</th><th>投递时间</th><th>状态</th><th style="text-align:center">操作</th>'+
     '</tr></thead><tbody>'+(rows||'<tr><td colspan="'+(canBatch?9:8)+'"><div class="empty"><b>没有符合条件的候选人</b>试试调整筛选或搜索条件</div></td></tr>')+
     '</tbody></table></div>'+
     (total>0?'<div style="padding:11px 18px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:flex-end;gap:10px;font-size:13px;flex-wrap:wrap">'+
@@ -2069,7 +2166,7 @@ function doExport(){
 function statGo(lb,vl,ex,c,pg){
   return '<div class="stat '+(c||"")+'" style="cursor:pointer" onclick="go(\''+pg+'\')"><div class="lb">'+lb+'</div><div class="vl">'+vl+'</div><div class="ex">'+ex+'</div></div>';
 }
-function isTerminal(st){return st==="已发 offer"||st==="不合适"||st==="转入人才库"}
+function isTerminal(st){return st==="已发 offer"||st==="不合适"}
 function mySubIds(){var m={};mySubs().forEach(function(s){m[s.id]=1});return m}
 function subsOfCand(c){
   var m=mySubIds();
@@ -2146,7 +2243,7 @@ function pgPool(){
     '<div class="bd np"><div class="tbwrap"><table class="data"><thead><tr>'+
       '<th>候选人</th><th>手机号</th><th>最近投递岗位</th><th>入库时间 / 原因</th><th>邀约次数</th><th>入库人</th><th style="text-align:right">操作</th>'+
     '</tr></thead><tbody>'+
-    (rows||'<tr><td colspan="7"><div class="empty"><b>人才库还是空的</b>在「候选人管理」的「初筛通过 / 笔试中 / 面试中」页签，单条走抽屉页脚「转入人才库」，或勾选后点「批量转入人才库」</div></td></tr>')+
+    (rows||'<tr><td colspan="7"><div class="empty"><b>人才库还是空的</b>在「候选人管理」各页签单条点操作列「转入人才库」，或勾选后点「批量转入人才库」（投递会记为「不合适」，人进人才库）</div></td></tr>')+
     '</tbody></table></div>'+
     pageBar(S.pPage,ps,total,"人","setPPoolSize","setPPoolPage")+
     '</div></div>';
@@ -2265,8 +2362,8 @@ function toggleSubSel(id,on){
   if(!on&&i>=0)S.sSel.splice(i,1);
   renderSubs();
 }
-function batchTabStatus(){   /* 支持批量操作的页签 → 对应的源状态；非批量页签返回空串 */
-  return (S.sTab==="待筛选"||S.sTab==="初筛通过"||S.sTab==="笔试中"||S.sTab==="面试中"||S.sTab==="拟录用"||S.sTab==="已发 offer")?S.sTab:"";
+function batchTabStatus(){   /* 支持批量操作的页签 → 对应的源状态；非批量页签返回空串（不合适页签支持批量转入人才库） */
+  return (S.sTab==="待筛选"||S.sTab==="初筛通过"||S.sTab==="笔试中"||S.sTab==="面试中"||S.sTab==="拟录用"||S.sTab==="已发 offer"||S.sTab==="不合适")?S.sTab:"";
 }
 function batchBtns(n){       /* 批量栏按钮组：按当前页签给出该环节可用动作 */
   if(S.sTab==="已发 offer")return onbBatchBtns(n);   /* 已发 offer：批量跟进（B-51） */
@@ -2284,11 +2381,13 @@ function batchBtns(n){       /* 批量栏按钮组：按当前页签给出该环
   if(S.sTab==="笔试中")      /* 笔试后：Excel 导入记录 / 重排 / 安排面试 / 不合适（不合适含拉黑分支） */
     return '<button class="btn sm pri" onclick="openExamImp()">批量导入笔试记录</button>'+
       '<button class="btn sm pri"'+d+' onclick="batchReExam()">批量重新安排</button>'+
-      b["面试中"]+b["不合适"];
+      b["面试中"]+b["不合适"]+b["转入人才库"];
   if(S.sTab==="面试中")      /* 面试后：发 offer 前的两个出口 —— 不合适（含拉黑分支）/ 转入人才库 */
     return b["不合适"]+b["转入人才库"];
   if(S.sTab==="拟录用")      /* 拟录用：不做批量发 offer / 批量拟录用，只保留两个出口 */
     return b["不合适"]+b["转入人才库"];
+  if(S.sTab==="不合适")      /* 不合适：唯一的批量出口是转入人才库（已在库的行由 doPool 自动跳过） */
+    return b["转入人才库"];
   return "";
 }
 /* 已发 offer 的批量跟进：动作与单条页脚一一对应（接受 / 入职 / 未入职），不做批量发 offer 与批量更正 */
@@ -2320,7 +2419,7 @@ function selAllFiltered(on){
   renderSubs();
 }
 var BTIP={
-  "转入人才库":'流转到「转入人才库」后本次投递进入终态，候选人本人（按手机号识别）进入人才库供后续岗位复用。'
+  "转入人才库":'转入人才库 = 本次投递记为「不合适」+ 候选人（按手机号识别）进入人才库供后续岗位复用；入池原因必填。'
 };
 function batchAdvance(to){
   if(!hasPerm("subs.batch")){toast("当前角色无批量操作权限","err");return}
@@ -2332,10 +2431,13 @@ function batchAdvance(to){
   if(to==="初筛通过"){openScreenPass("",1);return}
   /* 「面试中」先填面试信息，走独立弹窗 */
   if(to==="面试中"){openInterview("",1);return}
+  /* 「转入人才库」需要录入池原因，走独立弹窗（状态结果是不合适 + 人入池） */
+  if(to==="转入人才库"){openPool("",1);return}
   confirmBox("批量"+to,"确定将选中的 <b>"+S.sSel.length+"</b> 份简历流转到「"+to+"」吗？"+(BTIP[to]?'<br>'+BTIP[to]:""),
     "确认流转","doBatchAdvance('"+to+"')",0);
 }
-/* 不合适处理：三种方式（不合适 / 不合适并转入人才库 / 不合适并拉黑）+ 备注必填；备注写入流转记录（与批量共用一套） */
+/* 不合适处理：两种方式（不合适 / 不合适并拉黑）+ 备注必填；备注写入流转记录（与批量共用一套）
+   入池不再是「不合适」的分支——需要留人请走独立的「转入人才库」动作（openPool） */
 function openReject(id,batch){
   if(!hasPerm("subs.reject")){toast("当前角色无权转不合适","err");return}
   if(batch&&!S.sSel.length){toast("请先勾选候选人","err");return}
@@ -2343,7 +2445,6 @@ function openReject(id,batch){
   var n=batch?S.sSel.length:1,nm=batch?"":esc(((bySub(id)||{}).name)||"");
   RJ_FILES=[];
   var modes=[{v:"不合适",t:"不合适"}];
-  if(hasPerm("pool.manage"))modes.push({v:"人才库",t:"不合适，并转入人才库"});
   if(hasPerm("block.add"))modes.push({v:"黑名单",t:"不合适，并加入黑名单"});
   var body=
    '<div class="fld"><label>处理方式 <i>*</i></label><div class="rjopts" id="rj_opts">'+
@@ -2506,17 +2607,14 @@ function doReject(id,batch){
   function markTrue(s,c,from){          /* 写入状态 + 备注流转记录 + 拉黑（黑名单分支） */
     s.status="不合适";
     s.history.push({t:now(),act:batch?"批量流转":"状态流转",by:S.user.name,from:from,to:"不合适",
-      note:note+(m==="黑名单"?"（同时加入黑名单："+reason+"）":(m==="人才库"?"（同时转入人才库）":""))});
+      note:note+(m==="黑名单"?"（同时加入黑名单："+reason+"）":"")});
     if(m==="黑名单"){
       c.blocked=1;c.blockReason=reason;c.blockEvidence=ev;c.blockBy=S.user.name;c.blockAt=now();
       c.blockUntil=dayAdd(730);c.pooled=0;
-    }else if(m==="人才库"&&!c.blocked){
-      c.pooled=1;c.poolBy=S.user.name;c.poolAt=now();
-      c.poolReason="不合适处理 · "+(note.length>40?note.slice(0,40)+"…":note);
     }
     var jt=((byId(s.jobId)||{}).title)||"";
-    addLog(m==="黑名单"?"不合适并拉黑":(m==="人才库"?"不合适并转人才库":"不合适"),
-      s.name+" · "+jt,from,"不合适"+(m==="黑名单"?" · 黑名单":(m==="人才库"?" · 人才库":"")));
+    addLog(m==="黑名单"?"不合适并拉黑":"不合适",
+      s.name+" · "+jt,from,"不合适"+(m==="黑名单"?" · 黑名单":""));
     return true;
   }
   if(batch){
@@ -2526,7 +2624,7 @@ function doReject(id,batch){
     });
     if(!r)return;
     batchResult('已处理为「<b>不合适</b>」：<b>'+r.okN+'</b> 份'+
-      (m==="黑名单"?'，并已加入黑名单':(m==="人才库"?'，并已转入人才库':''))+'。备注：'+esc(note),
+      (m==="黑名单"?'，并已加入黑名单':'')+'。备注：'+esc(note),
       '备注已逐条写入流转记录（动作：批量流转）。',r);
     return;
   }
@@ -2536,7 +2634,58 @@ function doReject(id,batch){
   if(m==="黑名单"&&c.blocked){toast("该候选人已在黑名单中","err");return}
   markTrue(s,c,s.status);
   save();render();
-  toast("已处理为「不合适」"+(m==="黑名单"?"，并加入黑名单":(m==="人才库"?"，并转入人才库":"")),"ok");
+  toast("已处理为「不合适」"+(m==="黑名单"?"，并加入黑名单":""),"ok");
+  setTimeout(function(){S.curSub=id;openSub(id)},10);
+}
+/* 转入人才库（复合动作，单条与批量共用）：
+   ① 投递状态置「不合适」（本岗位本轮不录用）② 候选人主档打人才库标记 ③ 入池原因必填（下拉）
+   状态机不再有「转入人才库」这个状态值，避免与「不合适」语义重复 */
+function openPool(id,batch){
+  if(!hasPerm("pool.manage")){toast("当前角色无人才库维护权限","err");return}
+  if(batch&&!S.sSel.length){toast("请先勾选候选人","err");return}
+  if(batch&&S.sSel.length>SUB_BATCH_MAX){toast("单次最多处理 "+SUB_BATCH_MAX+" 份，请分批操作","err");return}
+  var n=batch?S.sSel.length:1,nm=batch?"":esc(((bySub(id)||{}).name)||"");
+  var body=
+   '<div class="fld"><label>入池原因 <i>*</i></label><select class="ip" id="pl_r">'+
+     '<option value="">请选择原因</option>'+
+     POOL_REASONS.map(function(r){return '<option value="'+esc(r)+'">'+esc(r)+'</option>'}).join("")+'</select>'+
+     '<div class="hint">原因会记在候选人的人才库档案里，复用时可直接参考</div></div>'+
+   '<div class="notice" style="margin-top:4px">确认后：本次投递状态记为<b>「不合适」</b>，候选人（按手机号识别）加入<b>人才库</b>，可被后续岗位复用；黑名单候选人不可入池。</div>';
+  openModal("转入人才库"+(batch?" · 已选 "+n+" 份":" · "+nm),body,
+    '<button class="btn" onclick="closeAll()">取消</button>'+
+    '<button class="btn pri" onclick="doPool(\''+(batch?"":id)+'\','+(batch?1:0)+')">确认转入'+(batch?"（"+n+" 份）":"")+'</button>');
+}
+function doPool(id,batch){
+  var reason=(val("pl_r")||"").trim();
+  if(!reason){toast("请选择入池原因","err");return}
+  function mark(s,c,from){
+    var already=(s.status==="不合适");
+    s.status="不合适";
+    if(c.blocked)return "黑名单候选人";
+    c.pooled=1;c.poolBy=S.user.name;c.poolAt=now();c.poolReason=reason;
+    s.history.push({t:now(),act:batch?"批量转入人才库":"转入人才库",by:S.user.name,
+      from:from,to:"不合适",note:(already?"补充入池（投递已是不合适）":"转入人才库")+" · 原因："+reason});
+    addLog("转入人才库",s.name+" · "+((byId(s.jobId)||{}).title||""),from,"不合适 · 人才库（"+reason+"）");
+    return true;
+  }
+  if(batch){
+    var r=batchRun(function(s,c){
+      if(SUB_FLOW[s.status].indexOf("转入人才库")<0)return "当前状态不可转入人才库（"+s.status+"）";
+      if(c.pooled)return "已在人才库";   /* 已入池的不再重复打标 */
+      return mark(s,c,s.status);
+    });
+    if(!r)return;
+    batchResult('已转入人才库：<b>'+r.okN+'</b> 份（状态记为「不合适」）。入池原因：'+esc(reason),
+      '入池标记打在候选人主档上，投递停在「不合适」。',r);
+    return;
+  }
+  var s=bySub(id);if(!s)return;
+  if(SUB_FLOW[s.status].indexOf("转入人才库")<0){toast("当前状态不可转入人才库","err");return}
+  var c=ensureCand(s);
+  if(c.blocked){toast("黑名单候选人不可转入人才库（两者互斥）","err");return}
+  mark(s,c,s.status);
+  closeAll();save();render();
+  toast("已转入人才库（状态记为「不合适」）","ok");
   setTimeout(function(){S.curSub=id;openSub(id)},10);
 }
 /* 批量执行骨架：统一前置校验 + 遍历选择集；act(s,c) 返回 true=成功，返回字符串=跳过原因 */
@@ -2573,11 +2722,6 @@ function doBatchAdvance(to,note){
   var r=batchRun(function(s,c){
     if(SUB_FLOW[s.status].indexOf(to)<0)return "不允许的流转";
     var from=s.status;
-    if(to==="转入人才库"){   /* 与单条流转一致：人才库标记打在「人」上，与黑名单互斥 */
-      if(c.blocked)return "黑名单候选人";
-      if(!c.pooled){c.pooled=1;c.poolBy=S.user.name;c.poolAt=now();
-        c.poolReason=c.poolReason||"批量转存（"+from+"）"}
-    }
     s.status=to;
     s.history.push({t:now(),act:"批量流转",by:S.user.name,from:from,to:to,note:note||""});
     addLog("批量"+to,s.name+" · "+((byId(s.jobId)||{}).title||""),from,to);
@@ -2779,7 +2923,68 @@ function toggleReveal(id){
 }
 /* 详情页模块折叠：标题可点，手动状态记在 S.secClosed（会话内有效）。tab 化后每屏只有 1-4 块，默认全部展开 */
 var SEC_KEYS=["base","msg","attach","exam","itv","plan","offer","onboard","hist","notes"];
-function secClosed(k){return !!(S.secClosed&&S.secClosed[k])}
+/* 各页签下的模块（供「全部展开 / 全部收起」按当前页签作用） */
+var TAB_SECS={
+  profile:["base","edu","work","proj","skill","msg","attach","itvsum","notes"],
+  process:["exam","itv","plan","offer","onboard"],
+  log:["hist"]
+};
+/* 校招场景：在线简历四段（教育/工作/项目/技能）默认收起，基本信息与备注等常看的保持展开 */
+var SEC_CLOSED_DEF={edu:1,work:1,proj:1,skill:1};
+function secClosed(k){
+  if(S.secClosed&&Object.prototype.hasOwnProperty.call(S.secClosed,k))return !!S.secClosed[k];
+  return !!SEC_CLOSED_DEF[k];
+}
+/* ============ 在线简历（H5 候选人端填写的结构化简历：教育 / 工作 / 项目 / 技能） ============ */
+var R_COMPANIES=["红星邻里鲜连锁商超","湖南星辰网络科技","绿源农业集团","启明信息技术","优品供应链管理","恒宇物流科技","新沃农业发展","云链数据服务"];
+var R_PROJS=["门店库存周转优化系统","供应商对账平台","冷链运输调度项目","会员增长运营专项","仓储 WMS 升级项目","数据报表中台建设"];
+function sexOf(s){             /* 性别：演示数据按手机号确定性派生 */
+  var g=0,p=String(s.phone||"");for(var i=0;i<p.length;i++)g+=(p.charCodeAt(i)-48);
+  return g%2?"女":"男";
+}
+function resumeOf(s,j){       /* 演示数据：从投递信息确定性派生（同一个人每次看都一样），不落库 */
+  var h=0,p=String(s.phone||"");for(var i=0;i<p.length;i++)h=(h*31+p.charCodeAt(i))>>>0;
+  var rp=function(a){return a[h%a.length]};
+  var yn=parseInt(s.years)||0;                       /* 应届毕业生 → 0 */
+  var eduEnd=2026-yn-1;
+  var role=(j&&j.title?j.title.replace(/（.*?）/g,""):"职员");
+  var edu=[{n:s.school||"—",sub:(s.deg||"—")+" · "+(s.major||"—"),from:(eduEnd-4)+"-09",to:eduEnd+"-06"}];
+  var work=[];
+  if(yn>0){
+    work.push({n:rp(R_COMPANIES),sub:role,from:(eduEnd+1)+"-03",to:"至今",
+      desc:"负责"+rp(["核心业务模块的日常迭代与需求落地","跨部门协作项目的推进与复盘","关键流程的优化与效率提升"])+"，配合团队按期完成阶段性目标。"});
+    if(yn>=4)work.push({n:rp(R_COMPANIES),sub:role+"（初级）",from:eduEnd+"-07",to:(eduEnd+1)+"-02",
+      desc:"从基础事务做起，熟悉业务全流程，逐步独立承担执行工作。"});
+  }else{
+    work.push({n:rp(R_COMPANIES),sub:"实习生",from:"2026-03",to:"2026-08",
+      desc:"实习期间参与"+rp(["日常运营支持","项目资料整理与数据分析","测试与文档编写"])+"，表现良好。"});
+  }
+  /* 项目经历：按「1、项目背景 2、项目职责 3、达成业绩」三段结构 */
+  var proj=[
+    {n:rp(R_PROJS),sub:"核心成员",from:(eduEnd+1)+"-03",to:"至今",
+      desc:"1、项目背景：业务规模快速扩张，原有流程依赖线下台账与人工流转，跨部门对账平均耗时 3 天，旺季差错率居高不下。\n"+
+        "2、项目职责：主导需求梳理与方案设计，拆解为 4 个迭代并制定里程碑；协调产品、研发、业务三方资源，把控关键节点风险；牵头制定验收标准与上线切换方案。\n"+
+        "3、达成业绩：按期上线后核心流程处理时长由 3 天缩短至 1 天，差错率下降约 60%，沉淀的模板被后续 2 个同类项目复用。"},
+    {n:rp(R_PROJS),sub:"执行负责人",from:eduEnd+"-01",to:(eduEnd+1)+"-02",
+      desc:"1、项目背景：项目涉及 5 个业务部门、20 余家供应商，各方数据口径不一致，历史遗留问题较多，交付节点压力大。\n"+
+        "2、项目职责：负责整体排期与进度跟踪，建立周会与风险台账机制；对接外部供应商完成接口联调；组织业务方培训与试运行，处理上线初期问题。\n"+
+        "3、达成业绩：提前 2 周完成验收，上线首月覆盖 90% 以上业务量，人工对账工作量减少约一半。"},
+    {n:rp(R_PROJS),sub:"参与成员",from:(eduEnd-1)+"-06",to:eduEnd+"-12",
+      desc:"1、项目背景：项目处于探索阶段，缺乏可参考的成熟方案，需要在有限资源下快速验证可行性。\n"+
+        "2、项目职责：承担数据采集与整理，搭建指标口径与周报模板；参与方案讨论与原型验证，输出测试用例与问题清单。\n"+
+        "3、达成业绩：完成 3 轮方案验证，输出的分析结论被采纳为正式方案，相关模板沿用至今。"}
+  ];
+  var skills=String(s.skill||"").split(/[\/、,，;；\s]+/).filter(Boolean);
+  return {edu:edu,work:work,proj:proj,skills:skills};
+}
+function resumeHtml(s,j,k){     /* k: edu / work / proj / skill —— 每段独立成模块 */
+  var r=resumeOf(s,j);
+  var item=function(x){return '<div class="rit"><div class="rhd"><b>'+esc(x.n)+'</b><span class="rrole">'+esc(x.sub)+'</span><span class="rtime">'+esc(x.from)+' — '+esc(x.to)+'</span></div>'+(x.desc?'<div class="rdesc">'+esc(x.desc)+'</div>':'')+'</div>'};
+  if(k==="edu")return r.edu.map(item).join("");
+  if(k==="work")return r.work.map(item).join("");
+  if(k==="proj")return r.proj.map(item).join("");
+  return r.skills.length?'<div style="padding-top:4px">'+r.skills.map(function(x){return '<span class="rtag">'+esc(x)+'</span>'}).join("")+'</div>':'<div class="rdesc">（未填写）</div>';
+}
 function secBox(k,title,inner){
   return '<div class="sec'+(secClosed(k)?" closed":"")+'" id="sc_'+k+'">'+
     '<div class="sec-t tg" onclick="toggleSec(\''+k+'\')" title="点击展开 / 收起">'+
@@ -2792,7 +2997,26 @@ function toggleSec(k){
   var toClose=!el.classList.contains("closed");
   if(toClose)el.classList.add("closed");else el.classList.remove("closed");
   S.secClosed=S.secClosed||{};S.secClosed[k]=toClose;
+  syncAllBtn();
   save();
+}
+/* 当前页签下是否还有展开的模块（决定开关文案）；按状态判定，避免页签栏先于正文渲染时查不到 DOM */
+function tabAnyOpen(){
+  return (TAB_SECS[S.subTab]||[]).some(function(k){return !secClosed(k)});
+}
+function syncAllBtn(){
+  var b=$("sec_all");if(b)b.textContent=tabAnyOpen()?"全部收起":"全部展开";
+}
+/* 全部展开 / 全部收起：只作用于当前页签的模块；直接改 DOM 不重绘，保留滚动位置与输入内容 */
+function toggleTabSecs(){
+  var anyOpen=tabAnyOpen(),ks=TAB_SECS[S.subTab]||[];
+  S.secClosed=S.secClosed||{};
+  ks.forEach(function(k){
+    var el=$("sc_"+k);if(!el)return;
+    if(anyOpen)el.classList.add("closed");else el.classList.remove("closed");
+    S.secClosed[k]=anyOpen;
+  });
+  syncAllBtn();save();
 }
 /* 同一候选人的多份投递切换：人才库/黑名单是「人」维度，详情是「投递」维度，用一条 chips 把两者接上（B-54） */
 function subTabN(s){var c=candOf(s.phone);return c?subsOfCand(c).length:1}
@@ -2814,12 +3038,57 @@ function subTabs(s){
 }
 var FLOW_PERM={"初筛通过":"subs.screen","笔试中":"subs.exam","面试中":"subs.interview",
   "拟录用":"subs.offer","已发 offer":"subs.offer","不合适":"subs.reject","转入人才库":"pool.manage"};
+/* 列表操作列：与详情页底部一致的流转动作（文字按钮、竖排），按状态与权限生成 */
+function subRowActs(id){
+  var s=bySub(id);if(!s)return"";
+  var c=candOf(s.phone);
+  var pre="";
+  /* 笔试中：补环节专属动作（与详情页笔试信息区一致）—— 录入笔试记录（已录入显示重新录入）/ 重新安排 */
+  if(s.status==="笔试中"&&s.exam&&canWrite()&&hasPerm("subs.exam"))
+    pre='<span class="op-a" onclick="openGrade(\''+id+'\')">'+(s.exam.status==="已完成"?"更新笔试记录":"录入笔试记录")+'</span>'+
+        '<span class="op-a" onclick="openExam(\''+id+'\')">重新安排</span>';
+  /* 面试中：补环节专属动作（与详情页面试轮次一致）—— 录入面试记录（已录显示重新录入）/ 重新安排（仅针对最新一轮） */
+  if(s.status==="面试中"&&canWrite()&&hasPerm("subs.interview")){
+    var ivs=itvRounds(s),lv=ivs[ivs.length-1];
+    if(lv){
+      var lr=lv.round||1;
+      pre='<span class="op-a" onclick="openInterviewRec(\''+id+'\','+lr+')">'+(lv.done?"更新面试记录":"录入面试记录")+'</span>'+
+          '<span class="op-a" onclick="openInterview(\''+id+'\',0,1,'+lr+')">重新安排</span>';
+    }
+  }
+  /* 已发 offer：把详情页页脚的入职跟进动作同步为文字按钮（口径与 onbBtns 一致，权限在各弹窗内校验） */
+  if(s.status==="已发 offer"&&canWrite()){
+    var ost=onbState(s);
+    if(ost==="待回复")
+      pre='<span class="op-a ok" onclick="openAccept(\''+id+'\')">登记 offer 接受</span>'+
+          '<span class="op-a dgg" onclick="openNoShow(\''+id+'\')">登记未入职</span>';
+    else if(ost==="待入职")
+      pre='<span class="op-a ok" onclick="openOnboard(\''+id+'\')">登记入职</span>'+
+          '<span class="op-a dgg" onclick="openNoShow(\''+id+'\')">登记未入职</span>';
+    else if(isAdmin())
+      pre='<span class="op-a" onclick="resetOnb(\''+id+'\')">更正跟进结果</span>';
+  }
+  var _hired=(s.status==="已发 offer"&&onbState(s)==="已入职");   /* 已入职 = 成功终态：不再回流转出口（与批量口径一致） */
+  return pre+(SUB_FLOW[s.status]||[]).filter(function(to){
+    /* 已在人才库（姓名旁有「人才库」标签）不再显示「转入人才库」 */
+    if(to==="转入人才库"&&c&&c.pooled)return false;
+    /* 已入职的人不提供「不合适 / 转入人才库」——在职员工不属于候选人流程 */
+    if(_hired&&(to==="不合适"||to==="转入人才库"))return false;
+    return hasPerm(FLOW_PERM[to]||"subs.screen");
+  }).map(function(to){
+    var cls=to==="不合适"?" dgg":(to==="已发 offer"?" ok":"");
+    var lb=to==="笔试中"?"安排笔试":(to==="面试中"?"安排面试":(to==="已发 offer"?"发送 Offer":to));
+    var fn=to==="笔试中"?"openExam":"advance";
+    return '<span class="op-a'+cls+'" onclick="'+fn+'(\''+id+'\''+(fn==="advance"?",'"+to+"'":"")+')">'+lb+'</span>';
+  }).join("");
+}
 /* ---------- 详情页三 tab：档案（静态画像+备注）/ 流程（环节产物）/ 记录（流转留痕） ---------- */
 var SUB_TABS=[{k:"profile",t:"档案"},{k:"process",t:"流程"},{k:"log",t:"记录"}];
 function subTabBar(){
   return '<div class="dtabs">'+SUB_TABS.map(function(x){
     return '<span class="dtab'+(S.subTab===x.k?" on":"")+'" onclick="setSubTab(\''+x.k+'\')">'+x.t+'</span>';
-  }).join("")+'</div>';
+  }).join("")+
+    '<span class="dall" id="sec_all" onclick="toggleTabSecs()">'+(tabAnyOpen()?"全部收起":"全部展开")+'</span></div>';
 }
 /* 切 tab：离开档案前把备注输入框静默保存（备注归档档案 tab，切走按钮会跟着消失，不保存会丢输入） */
 function setSubTab(t){
@@ -2838,7 +3107,15 @@ function openSub(id,src){
   var s=bySub(id);if(!s)return;
   var j=byId(s.jobId)||{title:"—",city:"",track:""};
   var rv=S.reveal[id];
-  var flow=(SUB_FLOW[s.status]||[]).filter(function(to){return hasPerm(FLOW_PERM[to]||"subs.screen")});
+  var _pc=candOf(s.phone);
+  var _hired2=(s.status==="已发 offer"&&onbState(s)==="已入职");   /* 已入职 = 成功终态：页脚不再提供流转出口 */
+  var flow=(SUB_FLOW[s.status]||[]).filter(function(to){
+    /* 已在人才库的候选人不重复提供「转入人才库」（与列表操作列口径一致） */
+    if(to==="转入人才库"&&_pc&&_pc.pooled)return false;
+    /* 已入职的人不提供「不合适 / 转入人才库」——在职员工不属于候选人流程 */
+    if(_hired2&&(to==="不合适"||to==="转入人才库"))return false;
+    return hasPerm(FLOW_PERM[to]||"subs.screen");
+  });
   var btns=flow.map(function(to){
     var cls=to==="不合适"?"dgg":(to==="已发 offer"?"ok":"pri");
     /* 初筛通过不再展示笔试模块，笔试入口改由页脚「安排笔试」承载（安排成功即转笔试中） */
@@ -2851,10 +3128,9 @@ function openSub(id,src){
     return '<button class="btn '+cls+'" onclick="advance(\''+id+'\',\''+to+'\')">'+to+'</button>';
   }).join("");
   var kv=[
-    ["姓名",s.name],["手机号",(rv?esc(s.phone):esc(maskPhone(s.phone)))+(hasPerm("subs.contact")?'<span class="eye" onclick="toggleReveal(\''+id+'\');openSub(\''+id+'\')">'+(rv?"隐藏":"查看")+'</span>':"")],
+    ["姓名",s.name],["性别",sexOf(s)],["手机号",(rv?esc(s.phone):esc(maskPhone(s.phone)))+(hasPerm("subs.contact")?'<span class="eye" onclick="toggleReveal(\''+id+'\');openSub(\''+id+'\')">'+(rv?"隐藏":"查看")+'</span>':"")],
     ["邮箱",esc(s.email)],["学历",s.deg],["毕业院校",s.school],["专业",s.major],
-    ["工作年限",s.years],["现居城市",s.city],["投递岗位",esc(j.title)],
-    ["投递时间",s.time],["技能关键词",s.skill]
+    ["工作年限",s.years],["现居城市",s.city]
   ].map(function(it){return '<div class="it"><div class="k">'+it[0]+'</div><div class="v">'+it[1]+'</div></div>'}).join("");
   var hist=s.history.map(function(h){
     return '<div class="ti'+(h.act==="投递成功"?" g":"")+'"><div class="th"><b>'+esc(h.act)+'</b>'+
@@ -2879,11 +3155,6 @@ function openSub(id,src){
   var offerBody=showOrg?offerSection(s,id,true):demptySec("尚未进入 Offer 环节");
   var showOnb=(s.status==="已发 offer")||!!s.onboard;   /* 发 offer 之后才出现；转过不合适的仍保留记录 */
   var onbBody=showOnb?onboardSection(s,id):demptySec("发放 Offer 后开始入职跟进");
-  var hb=hiredBefore(s);
-  var hbHtml=hb.length?('<div class="notice" style="margin-bottom:14px">该候选人曾入职：'+hb.slice(0,3).map(function(x){
-      var L=onbLeft(x);return '「'+esc((byId(x.jobId)||{}).title||"—")+'」'+esc(L.date)+' 离职（'+esc(L.type)+' · '+esc(L.rehire)+'）';
-    }).join("；")+(hb.length>3?" 等 "+hb.length+" 段任职":"")+
-    '<br><span style="font-size:12.5px;color:var(--ink3)">再次录用前建议先确认离职原因与回流意愿，避免重复面试与重复背调。</span></div>'):"";
   var tabs=subTabs(s);
   /* 常驻头：摘要条 + 三 tab（sticky 吸附），滚动中随时能看关键字段、随时能切 tab */
   var headHtml=
@@ -2900,6 +3171,10 @@ function openSub(id,src){
   /* 三个 tab 的模块：档案=静态画像+备注（写入型紧贴阅读动作）；流程=环节产物；记录=只追加的留痕 */
   var profileBody=
   secBox("base","基本信息",'<div class="kv">'+kv+'</div>')+
+  secBox("edu","教育经历",resumeHtml(s,j,"edu"))+
+  secBox("work","工作经历",resumeHtml(s,j,"work"))+
+  secBox("proj","项目经历",resumeHtml(s,j,"proj"))+
+  secBox("skill","专业技能",resumeHtml(s,j,"skill"))+
   secBox("msg","个人留言",'<div style="font-size:13.5px;color:var(--ink2);background:#fafbfc;border-radius:8px;padding:11px 13px">'+(esc(s.msg)||"（候选人未填写留言）")+'</div>')+
   secBox("attach","附件简历",
     '<div style="display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:8px;padding:11px 13px">'+
@@ -2908,6 +3183,7 @@ function openSub(id,src){
       '<div style="font-size:12px;color:var(--ink3)">1.2 MB</div></div>'+
       '<button class="btn sm" onclick="previewAttach(\''+id+'\')">预览</button>'+
       '<button class="btn sm" onclick="dlAttach(\''+id+'\')">下载</button></div>')+
+  ((s.exam||itvRounds(s).length)?secBox("itvsum","笔试/面试评价",evalSummarySec(s)):"")+
   secBox("notes","备注",notesBody);
   var processBody=
   secBox("exam","笔试信息",examBody)+
@@ -2922,13 +3198,13 @@ function openSub(id,src){
   '<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">'+
     '<div style="font-size:19px;font-weight:700">'+esc(s.name)+'</div>'+statusPill(s.status)+
     '<div class="sp" style="flex:1"></div>'+
-    (tabs?'<span style="font-size:12.5px;color:var(--ink3)">共 '+subTabN(s)+' 份投递</span>'
-         :'<span style="font-size:12.5px;color:var(--ink3)">投递：'+esc(j.title)+'</span>')+'</div>'+
+    (tabs?'<span style="font-size:12.5px;color:var(--ink3)">共 '+subTabN(s)+' 份投递</span>':"")+'</div>'+
   headHtml+
   tabs+
-  hbHtml+
   tabBody;
 
+  if(canWrite()&&s.status==="拟录用")   /* 拟录用：修改入口放页脚固定栏最左（发送 Offer 左侧） */
+    btns='<button class="btn" onclick="openPlan(\''+id+'\',1)">修改拟录用信息</button>'+(btns||"");
   if(s.status==="已发 offer")btns=onbBtns(id,s);      /* 入职跟进：登记接受 / 登记入职 / 登记未入职 */
   /* 终态逆向（B-53）：仅管理员，且只回到这条投递自己上一次的环节 */
   var rvTo=revertTo(s);
@@ -2944,7 +3220,7 @@ function openSub(id,src){
                      :"只读角色不可登记入职跟进结果，仅可查看。")
           :"该候选人已处于终态（"+esc(s.status)+"），不可再流转。")+'</span>')+
     '<button class="btn" onclick="closeAll()">关闭</button>';
-  openDrawer("候选人详情 · "+esc(s.name),body,foot);
+  openDrawer("候选人详情",body,foot);
 }
 function seedTpls(){
   function j(a){return a.join("\n")}
@@ -3044,11 +3320,7 @@ function openSendOffer(id){
   var o=offersOf(id)[0];
   if(!o){                                   /* 没有附件不发：先引导去创建，避免"发了 offer 却找不到文件" */
     openModal("发送 Offer · "+esc(s.name)+" · "+esc(j.title),
-      '<div class="banner"><span>⚠</span><div class="sp">该候选人还没有 Offer 文件，发送前需要先生成或上传。</div></div>'+
-      '<div style="font-size:13px;color:var(--ink2);line-height:2">'+
-        '1. 关闭本窗口，在详情页「Offer 文件」区块点「创建 Offer」<br>'+
-        '2. 按匹配的模板填写月薪 / 入职日期 / 有效期并生成 PDF，或直接上传已盖章的 Offer<br>'+
-        '3. 回到这里再次点击「发送 Offer」，核对附件与收件人后发送</div>',
+      '<div class="banner"><span>⚠</span><div class="sp">该候选人还没有 Offer 文件，发送前需要先生成或上传。</div></div>',
       '<button class="btn" onclick="closeAll()">取消</button>'+
       '<button class="btn pri" onclick="closeAll();openOffer(\''+id+'\')">去创建 Offer</button>');
     return;
@@ -3111,19 +3383,12 @@ function doSendOffer(id){
 /* ---------- 入职跟进：发 offer 之后的三个动作（登记接受 / 登记入职 / 登记未入职） ---------- */
 function onboardSection(s,id){
   var o=s.onboard||{state:"待回复"};
-  var st=o.state||"待回复",toShow=onbToTxt(o.to),L=onbLeft(s);
+  var st=o.state||"待回复",toShow=onbToTxt(o.to);
   var kv=[["跟进状态",'<span class="pill '+(ONB_COLOR[st]||"n")+'"><i class="dt"></i>'+esc(st)+'</span>'+
-      (L?'　<span class="pill n"><i class="dt"></i>已离职</span>':"")+(toShow?'　'+esc(toShow):"")],
+      (toShow?'　'+esc(toShow):"")],
     ["约定入职日期",esc(o.planDate||"—")],
     ["实际入职日期",esc(o.realDate||"—")]];
-  if(L){
-    kv.push(["离职日期",esc(L.date)],
-      ["离职类型 / 原因",esc(L.type)+" · "+esc(L.reason)],
-      ["是否可再联系",'<span class="pill '+(L.rehire==="可再联系"?"g":(L.rehire==="不建议再联系"?"r":"o"))+'">'+esc(L.rehire)+'</span>'+
-        (L.to?'　'+esc(onbToTxt(L.to)||L.to):"")]);
-    if(L.note)kv.push(["离职备注",esc(L.note)]);
-    kv.push(["最近登记",esc(L.by||"—")+" · "+esc(L.at||"—")]);
-  }else if(st==="未入职"){
+  if(st==="未入职"){
     kv.push(["未入职情况",esc(o.cs||"—")],["未入职原因",esc(o.reason||"—")]);
     if(o.note)kv.push(["补充说明",esc(o.note)]);
     kv.push(["最近登记",o.at?(esc(o.by)+" · "+esc(o.at)):"—"]);
@@ -3135,8 +3400,7 @@ function onboardSection(s,id){
       return '<div class="it"><div class="k">'+it[0]+'</div><div class="v">'+it[1]+'</div></div>';
     }).join("")+'</div>'+
     '<div style="font-size:12px;color:var(--ink3);margin-top:10px">'+
-      (L?'离职只做标记：本次投递仍为「已发 offer」，<b>不改投递状态</b>；离职信息用于回流复用参考，不代表人事系统的离职流程。'
-        :'跟进结果只记在这里，<b>不改变投递状态</b>（仍为「已发 offer」），避免与状态两套口径打架；未入职后可转入人才库或加入黑名单。')+
+      '跟进结果只记在这里，<b>不改变投递状态</b>（仍为「已发 offer」），避免与状态两套口径打架；未入职后可转入人才库或加入黑名单。'+
     '</div>';
 }
 function openAccept(id){
@@ -3293,62 +3557,6 @@ function doRevert(id){
   save();closeAll();render();S.curSub=id;openSub(id);
   toast("已从「"+from+"」恢复到「"+to+"」","ok");
 }
-/* ---------- 入职之后：离职标记（B-52） ---------- */
-function applyLeave(s,d,edit){
-  var o=onb(s),c=ensureCand(s),extra="";
-  o.left={date:d.date,type:d.type,reason:d.reason,rehire:d.rehire,note:d.note,to:"",by:S.user.name,at:now()};
-  if(d.rehire==="可再联系"){
-    c.blocked=0;c.pooled=1;c.poolBy=S.user.name;c.poolAt=now();c.poolReason="离职回流 · "+d.reason;
-    o.left.to="人才库";extra="，已转入人才库";
-  }
-  if(d.black){
-    c.blocked=1;c.blockReason="离职 · "+d.type+" · "+d.reason;c.blockEvidence=d.note||"（未附证据文件）";
-    c.blockBy=S.user.name;c.blockAt=now();c.blockUntil=dayAdd(730);c.pooled=0;
-    o.left.to="黑名单";extra="，已加入黑名单";
-  }
-  o.by=S.user.name;o.at=now();
-  s.history.push({t:now(),act:edit?"修改离职信息":"登记离职",by:S.user.name,
-    note:d.date+" 离职（"+d.type+" · "+d.reason+"）· "+d.rehire+(d.note?"；"+d.note:"")+(extra?"（"+extra.replace("，","")+"）":"")});
-  addLog(edit?"修改离职信息":"登记离职",s.name+" · "+(((byId(s.jobId)||{}).title)||""),"已入职","已离职 · "+d.date+extra);
-  return extra;
-}
-function leaveToggle(){
-  var b=$("lv_bk");if(!b)return;
-  b.style.display=(val("lv_h")==="不建议再联系"?"":"none");
-}
-function openLeave(id,edit){
-  if(!hasPerm("subs.onboard")){toast("当前角色无入职跟进权限","err");return}
-  var s=bySub(id);if(!s)return;
-  if(!canWrite()){toast("只读角色不可登记","err");return}
-  if(onbState(s)!=="已入职"){toast("仅「已入职」的候选人可登记离职","err");return}
-  var L=onbLeft(s)||{};
-  var body=
-   '<div class="fld"><label>离职日期 <i>*</i></label><input class="ip" id="lv_d" value="'+esc(L.date||today())+'"></div>'+
-   '<div class="fld"><label>离职类型</label><select class="ip" id="lv_t">'+
-     ONB_LEAVE_TYPES.map(function(x){return '<option'+(L.type===x?" selected":"")+'>'+x+'</option>'}).join("")+'</select></div>'+
-   '<div class="fld"><label>离职原因</label><select class="ip" id="lv_r">'+
-     ONB_LEAVE_REASONS.map(function(x){return '<option'+(L.reason===x?" selected":"")+'>'+x+'</option>'}).join("")+'</select></div>'+
-   '<div class="fld"><label>是否可再联系</label><select class="ip" id="lv_h" onchange="leaveToggle()">'+
-     ONB_REHIRE.map(function(x){return '<option'+(L.rehire===x?" selected":"")+'>'+x+'</option>'}).join("")+'</select>'+
-     '<div class="hint">选「可再联系」自动转入人才库，供后续岗位复用；选「不建议再联系」时管理员可一并拉黑。</div></div>'+
-   '<div class="fld"><label>备注（选填）</label><textarea class="ip" id="lv_note" rows="2" style="min-height:48px" placeholder="如：个人发展原因主动离职，在职表现良好，可再次联系">'+esc(L.note||"")+'</textarea></div>'+
-   (hasPerm("block.manage")?'<div class="fld" id="lv_bk" style="display:none"><label style="display:flex;align-items:center;gap:8px;font-weight:400"><input type="checkbox" id="lv_black"'+(L.to==="黑名单"?" checked":"")+'> 同时加入黑名单（严重违纪，有效期 2 年）</label></div>':'')+
-   '<div class="notice">离职只做标记：本次投递仍记录为「已发 offer」，不改投递状态。离职手续、工作交接、社保减员在人事系统办理，招聘侧只保留「能否再招」的判断依据。</div>';
-  openModal((edit?"修改离职信息":"登记离职")+" · "+esc(s.name),body,
-    '<button class="btn" onclick="closeAll()">取消</button><button class="btn pri" onclick="saveLeave(\''+id+'\','+(edit?1:0)+')">保存</button>');
-  leaveToggle();
-}
-function saveLeave(id,edit){
-  var s=bySub(id);if(!s)return;
-  var d=(val("lv_d")||"").trim();
-  if(!d){toast("请填写离职日期","err");return}
-  var o={date:d,type:val("lv_t")||ONB_LEAVE_TYPES[0],reason:val("lv_r")||ONB_LEAVE_REASONS[0],
-    rehire:val("lv_h")||ONB_REHIRE[0],note:(val("lv_note")||"").trim(),
-    black:!!($("lv_black")&&$("lv_black").checked)};
-  var extra=applyLeave(s,o,edit);
-  save();closeAll();render();S.curSub=id;openSub(id);
-  toast((edit?"离职信息已更新":"已登记离职（"+d+"）")+extra,"ok");
-}
 /* ---------- 已发 offer：批量跟进（B-51） ---------- */
 function openBatchAccept(){
   if(!hasPerm("subs.batch")){toast("当前角色无该操作权限","err");return}
@@ -3460,7 +3668,7 @@ function openOffer(id){
   var s=bySub(id);if(!s)return;
   if(!hasPerm("subs.offer")){toast("当前角色无创建 Offer 权限","err");return}
   if(offersOf(id).length){toast("已存在 Offer 文件，如需重新生成请先删除原文件","err");return}
-  if(s.status!=="面试中"&&s.status!=="已发 offer"){toast("仅「面试中」及之后的候选人可创建 Offer","err");return}
+  if(["面试中","拟录用","已发 offer"].indexOf(s.status)<0){toast("仅「面试中」及之后的候选人可创建 Offer","err");return}
   var j=byId(s.jobId);
   var m=matchTpl(j);            /* 无启用模板时仍可打开表单，改用手动上传 */
   S.offerDraft={subId:id,src:"系统生成",tplId:m?m.tpl.id:"",vars:defaultVars(s,j),
@@ -4043,6 +4251,47 @@ function itvPill(v){
   var r=v.result||"待定";
   return '<span class="pill '+(r==="通过"?"g":(r==="不通过"?"r":"a"))+'">'+esc(r)+'</span>';
 }
+/* 档案页的笔试 / 面试评价摘要：只读，按录入时间倒序（未录入的排最后），完整记录仍在「流程」页签 */
+function evalSummarySec(s){
+  var items=[],e=s.exam;
+  if(e){
+    var done=(e.status==="已完成");
+    var res=done?(e.attend==="缺考"?"缺考":(e.result||"待定")):"待录入";
+    var cls=done?((res==="缺考"||res==="不通过")?"r":(res==="通过"?"g":"a")):"a";
+    items.push({ts:done?(e.gradeAt||""):"",
+      h:'<div class="isum"><div class="isum-h"><b>笔试</b>'+
+      '<span class="isum-m">'+esc(e.examTime||"—")+'</span>'+
+      '<span class="pill '+cls+'"><i class="dt"></i>'+esc(res)+'</span></div>'+
+      '<div class="isum-b'+(done?"":" ph")+'">'+
+        (done?('成绩 '+esc(e.score||"—")+(e.comment?'　'+esc(e.comment):"")):"待录入笔试记录")+
+      '</div></div>'});
+  }
+  var rs=itvRounds(s);
+  rs.slice().reverse().forEach(function(v){
+    var rn=v.round||1;
+    var txt=v.done?esc(v.comment||"（未填写面试评价）"):"待录入面试记录";
+    items.push({ts:v.done?(v.doneAt||""):"",
+      h:'<div class="isum"><div class="isum-h"><b>第 '+rn+' 面</b>'+
+      '<span class="isum-m">'+esc(v.time||"—")+(v.interviewer?' · 面试官 '+esc(v.interviewer):"")+'</span>'+
+      itvPill(v)+'</div>'+
+      '<div class="isum-b'+(v.done?"":" ph")+'">'+txt+'</div></div>'});
+  });
+  items.sort(function(a,b){return (b.ts||"").localeCompare(a.ts||"")});
+  var out=items.map(function(x){return x.h}).join("");
+  if(!out)return '<div class="dempty">尚无笔试 / 面试记录</div>';
+  return out+'<div style="text-align:right;margin-top:8px">'+
+    '<span class="op-a mute" onclick="goItv()">查看完整记录 ›</span></div>';
+}
+/* 从档案跳到流程页签的面试信息模块 */
+function goItv(){
+  var id=S.curSub;if(!id)return;
+  setSubTab("process");
+  setTimeout(function(){
+    var el=$("sc_itv");if(!el)return;
+    if(el.classList.contains("closed"))toggleSec("itv");
+    if(el.scrollIntoView)el.scrollIntoView({block:"start"});
+  },40);
+}
 /* 面试信息：按轮次倒序展示（最新的一面在最上），每轮自带「录入 / 重新安排」按钮，操作对象一目了然 */
 function interviewSection(s,id){
   var rs=itvRounds(s),can=canWrite();
@@ -4067,7 +4316,7 @@ function interviewSection(s,id){
     var rb="",latest=((rs[rs.length-1]||{}).round||1),isLast=(rn===latest);
     if(can&&s.status==="面试中"){
       rb='<div class="itvr-b">'+
-        '<button class="btn pri sm" onclick="openInterviewRec(\''+id+'\','+rn+')">'+(v.done?"重新录入":"录入面试记录")+'</button>'+
+        '<button class="btn pri sm" onclick="openInterviewRec(\''+id+'\','+rn+')">'+(v.done?"更新面试记录":"录入面试记录")+'</button>'+
         (isLast?'<button class="btn sm" onclick="openInterview(\''+id+'\',0,1,'+rn+')">重新安排</button>':'')+
         (isLast&&rs.length>1?'<button class="btn sm dgg" style="margin-left:auto" title="删除第 '+rn+' 面面试" onclick="delInterviewRound(\''+id+'\','+rn+')">删除</button>':'')+
         '</div>';
@@ -4106,7 +4355,7 @@ function examSection(s,id,noHead){
   var btns="";
   if(can&&s.status==="笔试中"){
     btns='<div style="display:flex;gap:9px;flex-wrap:wrap;margin-top:16px">'+
-      '<button class="btn pri" onclick="openGrade(\''+id+'\')">录入笔试记录</button>'+
+      '<button class="btn pri" onclick="openGrade(\''+id+'\')">'+(e.status==="已完成"?"更新笔试记录":"录入笔试记录")+'</button>'+
       '<button class="btn" onclick="openExam(\''+id+'\')">重新安排</button></div>';
   }
   var badge=e.status==="已完成"
@@ -4331,9 +4580,8 @@ function planSection(s,id){
   var kvs=kv.map(function(it){
     return '<div class="it"><div class="k">'+it[0]+'</div><div class="v">'+esc(it[1]||"")+'</div></div>';
   }).join("");
-  var btns=(can&&s.status==="拟录用")?'<div style="display:flex;gap:9px;flex-wrap:wrap;margin-top:16px">'+
-    '<button class="btn" onclick="openPlan(\''+id+'\',1)">修改拟录用信息</button></div>':"";
-  return '<div class="kv">'+kvs+'</div>'+btns;
+  /* 修改入口已移至页脚固定栏（发送 Offer 左侧），模块内不再重复 */
+  return '<div class="kv">'+kvs+'</div>';
 }
 function dlInterviewAttach(id,round){
   var s=bySub(id);
@@ -4415,6 +4663,7 @@ function advance(id,to){
   var s=bySub(id),j=byId(s.jobId),from=s.status;
   if(SUB_FLOW[from].indexOf(to)<0){toast("不允许的流转："+from+" → "+to,"err");return}
   if(to==="不合适"){openReject(id,0);return}   /* 备注必填 + 两个分支，统一走不合适处理弹窗 */
+  if(to==="转入人才库"){openPool(id,0);return}   /* 复合动作：状态置不合适 + 人入池 + 原因必填 */
   if(to==="初筛通过"){openScreenPass(id,0);return}   /* 初筛意见选填，写入流转记录节点备注 */
   if(to==="面试中"){openInterview(id,0);return}   /* 先填面试时间 / 地点 / 携带简历 / 注意事项 */
   if(to==="拟录用"){openPlan(id,0);return}       /* 先填拟录岗位 / 拟定薪资等录用要素，不通知候选人 */
@@ -4427,10 +4676,6 @@ function doAdvance(id,to,opt){
   if(SUB_FLOW[from].indexOf(to)<0){toast("不允许的流转："+from+" → "+to,"err");return}
   if(to==="不合适"){openReject(id,0);return}
   var c=ensureCand(s);
-  if(to==="转入人才库"){
-    if(c.blocked){toast("黑名单候选人不可转入人才库（两者互斥）","err");return}
-    c.pooled=1;c.poolBy=S.user.name;c.poolAt=now();c.poolReason=c.poolReason||"流转节点转存（"+from+"）";
-  }
   s.status=to;
   s.history.push({t:now(),act:"状态流转",by:S.user.name,from:from,to:to,note:(opt&&opt.note)||""});
   var nf=NOTIFY[to],quiet=(opt&&opt.noNotify);
@@ -4673,23 +4918,6 @@ function doDelRole(id){
   save();render();toast("角色已删除","ok");
 }
 
-/* ==========================================================
-   操作日志（B-30）
-   ========================================================== */
-function pgLogs(){
-  if(!hasPerm("sys.log")){return '<div class="card"><div class="empty"><b>无权限</b>需要「操作日志」权限</div></div>'}
-  var rows=logHtml();
-  return '<div class="grid g3" style="margin-bottom:16px">'+
-    stat("日志总数",S.logs.length,"保留最近 400 条","b")+
-    stat("岗位类操作",S.logs.filter(function(l){return l.act.indexOf("岗位")>=0}).length,"新建/编辑/上下架/删除","g")+
-    stat("候选人操作",S.logs.filter(function(l){return l.act.indexOf("候选人")>=0||l.act.indexOf("手机号")>=0}).length,"流转/备注/查看明文","o")+
-  '</div>'+
-  '<div class="card"><div class="hd"><h3>操作日志</h3><div class="sp"></div>'+
-    '<span style="font-size:12.5px;color:var(--ink3)">记录岗位与候选人的关键操作：操作人、时间、动作、变更前后值</span></div>'+
-  '<div class="bd np"><div class="tbwrap"><table class="data"><thead><tr>'+
-    '<th style="width:130px">时间</th><th style="width:100px">操作人</th><th style="width:130px">动作</th><th>对象 / 变更</th>'+
-  '</tr></thead><tbody>'+(rows||'<tr><td colspan="4"><div class="empty">暂无日志</div></td></tr>')+'</tbody></table></div></div></div>';
-}
 
 /* ==========================================================
    系统设置（B-15 / B-28 / N-02 / N-03）
@@ -4716,7 +4944,7 @@ function pgSettings(){
   '<div class="card"><div class="hd"><h3>数据初始化（第 7 节）</h3></div><div class="bd">'+
     '<div class="notice" style="margin-bottom:14px">初始数据：原型 <b>14</b> 个岗位 + <b>3</b> 个演示岗位（草稿/已过期/已下线）、'+
       '<b>'+S.subs.length+'</b> 份候选人简历（<b>'+S.cands.length+'</b> 个候选人主档，按手机号去重）、<b>'+S.accounts.length+'</b> 个 HR 账号。<br>'+
-      '字典：8 城市 / '+CATS.length+' 类别 / '+DEGS.length+' 档学历 / 社招 6 档经验 / 校招 4 档届别。</div>'+
+      '字典：'+cityList().length+' 城市 / '+catList().length+' 类别 / '+DEGS.length+' 档学历 / 社招 6 档经验 / 校招 4 档届别。</div>'+
     '<div class="sec-t">演示数据</div>'+
     '<div style="display:flex;gap:10px;flex-wrap:wrap">'+
       (hasPerm("settings.reset")?'<button class="btn dgg" onclick="confirmBox(\'重置演示数据\',\'将清空本地所有改动，恢复到初始岗位、候选人与账号。确定继续吗？\',\'确认重置\',\'doReset()\',1)">重置为初始数据</button>':'')+
@@ -4725,12 +4953,72 @@ function pgSettings(){
     '<div class="sec-t">对应需求</div>'+
     '<div class="notice">B-01~B-16 岗位管理　B-17~B-21 账号权限　B-22~B-31 候选人管理　B-32/B-35/B-36 人才库　B-33/B-34/B-37 黑名单　B-38/B-39 候选人备注　B-40/B-41 线下笔试　B-42~B-45 Offer<br>N-02 个人信息合规（脱敏 / 签名 URL / 留存期）　N-03 文件存储限制　N-08 隐私政策修订</div>'+
   '</div></div>'+
+  '<div style="margin-top:16px;display:flex;flex-direction:column;gap:16px">'+
+    dictCard({title:"工作城市",desc:"用于「岗位管理 - 新建 / 编辑岗位」的工作城市下拉，以及岗位列表的城市筛选；删除前需先调整在用岗位。",
+      list:cityList(),del:"delCity",add:"addCity",inputId:"st_city",ph:"如 杭州",addLabel:"新增城市"})+
+    dictCard({title:"职位类别",desc:"招聘字典中的职位类别，用于岗位归类与投递统计口径。",
+      list:catList(),del:"delCat",add:"addCat",inputId:"st_cat",ph:"如 设计",addLabel:"新增类别"})+
+  '</div>'+
   '</div>';
+}
+function dictCard(o){   /* 通用字典配置卡：标签列表 + 新增 */
+  return '<div class="card"><div class="hd"><h3>'+o.title+'</h3><div class="sp"></div>'+
+    '<span style="font-size:12.5px;color:var(--ink3)">共 '+o.list.length+' 个</span></div><div class="bd">'+
+    '<div style="font-size:12.5px;color:var(--ink3);margin-bottom:12px">'+o.desc+'</div>'+
+    '<div class="ctags">'+o.list.map(function(c){
+      return '<span class="ctag">'+esc(c)+'<span class="x" title="删除" onclick="'+o.del+'(\''+esc(c)+'\')">×</span></span>';
+    }).join("")+'</div>'+
+    '<div style="display:flex;gap:10px;align-items:flex-end;margin-top:14px">'+
+      '<div class="fld" style="margin:0;width:190px"><label>'+o.addLabel+'</label>'+
+        '<input class="ip" id="'+o.inputId+'" placeholder="'+o.ph+'" onkeydown="if(event.key===\'Enter\')'+o.add+'()"></div>'+
+      '<button class="btn pri" onclick="'+o.add+'()">添加</button>'+
+    '</div>'+
+  '</div></div>';
+}
+function addCity(){
+  if(!hasPerm("sys.setting")){toast("无权限修改系统设置","err");return}
+  var e=$("st_city");if(!e)return;
+  var v=(e.value||"").trim();
+  if(!v){toast("请输入城市名称","warn");e.focus();return}
+  if(v.length>10){toast("城市名称不超过 10 个字","warn");return}
+  S.settings.cities=cityList().slice();
+  if(S.settings.cities.indexOf(v)>=0){toast("「"+v+"」已存在","warn");return}
+  S.settings.cities.push(v);
+  addLog("新增工作城市",v,"","工作城市字典共 "+S.settings.cities.length+" 个");
+  save();render();toast("已添加「"+v+"」","ok");
+}
+function delCity(name){
+  if(!hasPerm("sys.setting")){toast("无权限修改系统设置","err");return}
+  var used=S.jobs.filter(function(j){return j.city===name}).length;
+  if(used){toast("有 "+used+" 个岗位在用「"+name+"」，请先调整岗位工作城市","err");return}
+  if(cityList().length<=1){toast("至少保留一个工作城市","err");return}
+  S.settings.cities=cityList().filter(function(c){return c!==name});
+  addLog("删除工作城市",name,"","工作城市字典剩 "+S.settings.cities.length+" 个");
+  save();render();toast("已删除「"+name+"」","ok");
+}
+function addCat(){
+  if(!hasPerm("sys.setting")){toast("无权限修改系统设置","err");return}
+  var e=$("st_cat");if(!e)return;
+  var v=(e.value||"").trim();
+  if(!v){toast("请输入类别名称","warn");e.focus();return}
+  if(v.length>10){toast("类别名称不超过 10 个字","warn");return}
+  S.settings.cats=catList().slice();
+  if(S.settings.cats.indexOf(v)>=0){toast("「"+v+"」已存在","warn");return}
+  S.settings.cats.push(v);
+  addLog("新增职位类别",v,"","职位类别字典共 "+S.settings.cats.length+" 个");
+  save();render();toast("已添加「"+v+"」","ok");
+}
+function delCat(name){
+  if(!hasPerm("sys.setting")){toast("无权限修改系统设置","err");return}
+  if(catList().length<=1){toast("至少保留一个职位类别","err");return}
+  S.settings.cats=catList().filter(function(c){return c!==name});
+  addLog("删除职位类别",name,"","职位类别字典剩 "+S.settings.cats.length+" 个");
+  save();render();toast("已删除「"+name+"」","ok");
 }
 function saveSettings(){
   var g=function(k){var e=$(k);return e?e.value:""};
   S.settings={inbox:g("st_inbox"),cc:g("st_cc"),retain:g("st_retain"),maxSize:g("st_size"),
-    autoExpire:g("st_exp"),blockIntercept:g("st_block")};
+    autoExpire:g("st_exp"),blockIntercept:g("st_block"),cities:cityList().slice(),cats:catList().slice()};
   addLog("修改系统设置","邮件汇总与合规配置","",S.settings.inbox+" / 抄送 "+S.settings.cc+" / 留存 "+S.settings.retain+" 个月");
   save();render();toast("设置已保存","ok");
 }

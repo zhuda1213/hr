@@ -137,6 +137,7 @@ input,select,textarea{font-family:inherit;font-size:14px;-webkit-appearance:none
 .rbar{height:6px;border-radius:3px;background:#eef0f3;overflow:hidden;margin:12px 0 9px}
 .rbar i{display:block;height:100%;background:var(--brand);border-radius:3px;transition:width .3s}
 .rp-d{font-size:12px;color:var(--ink2);line-height:1.6}
+.rp-i{width:13px;height:13px;vertical-align:-2px;margin-right:5px;color:var(--brand)}
 .mlist{background:var(--white);margin-top:12px}
 .mrow{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line)}
 .mrow:last-child{border-bottom:none}
@@ -390,18 +391,22 @@ var FIELDS=[["name","姓名"],["phone","手机号"],["email","邮箱"],["gender"
 var DEMO={name:"李明轩",phone:"13856789211",email:"mingxuan.li@163.com",gender:"男",deg:"硕士",school:"湖南大学",major:"软件工程",exp:"3年",city:"长沙"};
 var DEMO_EDU=[{from:"2018-09",to:"2021-06",school:"湖南大学",deg:"硕士",major:"软件工程"}];
 var DEMO_WORK=[{from:"2021-07",to:"至今",company:"某互联网科技公司",role:"后端开发工程师",desc:"负责订单与库存核心服务的设计与开发，支撑日均百万级订单处理"}];
-var DEMO_PROJ="农产品溯源平台：主导后端服务拆分与接口设计，将查询响应时间从 1.2s 降至 200ms\n冷链调度系统：实现车辆路径规划算法，调度效率提升 30%";
+var DEMO_PROJ=[
+  {from:"2023-03",to:"至今",name:"农产品溯源平台",role:"后端负责人",desc:"主导后端服务拆分与接口设计，将查询响应时间从 1.2s 降至 200ms"},
+  {from:"2022-05",to:"2023-02",name:"冷链调度系统",role:"核心开发",desc:"实现车辆路径规划算法，调度效率提升 30%"}
+];
 var DEMO_SKILL="Java / Spring Boot / MySQL / Redis / 分布式事务";
 
 /* ============ 状态 ============ */
 var KEY="hx_h5_v1";
-var S={tab:"home",track:"social",jid:null,user:null,fav:[],subs:[],form:{},rEdu:[],rWork:[],rProj:"",rSkill:"",rFile:null,files:[],
+var S={tab:"home",track:"social",jid:null,user:null,fav:[],subs:[],form:{},rEdu:[],rWork:[],rProj:[],rSkill:"",rFile:null,files:[],
   q:"",f:{city:"",cat:"",deg:"",exp:""},sort:"new",pageN:1,edit:false,pending:null,agree:false,code:"",subTab:"all",
   accounts:[],codeSent:false,codeLeft:0,codeInput:"",subsSeed:1};
 function save(){try{localStorage.setItem(KEY,JSON.stringify({user:S.user,fav:S.fav,subs:S.subs,form:S.form,rEdu:S.rEdu,rWork:S.rWork,rProj:S.rProj,rSkill:S.rSkill,files:S.files,accounts:S.accounts,subsSeed:S.subsSeed}))}catch(e){}}
 function load(){
   try{var d=JSON.parse(localStorage.getItem(KEY)||"{}");for(var k in d)S[k]=d[k]}catch(e){}
   if(!(S.accounts instanceof Array))S.accounts=[];
+  if(!(S.rProj instanceof Array))S.rProj=[];      /* 旧版项目经历为字符串，结构化为条目后直接置空 */
   /* 旧数据补齐：面试中的投递若无邀约信息则生成默认邀约；已发 offer 若无详情则补基本信息 */
   if(!(S.subs instanceof Array))S.subs=[];
   S.subs.forEach(function(s){
@@ -472,13 +477,13 @@ function score(){
   total+=4;
   if(S.rEdu.length)done++;
   if(S.rWork.length)done++;
-  if((S.rProj||"").trim())done++;
+  if(S.rProj.length)done++;
   if((S.rSkill||"").trim())done++;
   return Math.round(done/total*100);
 }
 function tip(){
   var sc=score(),f=defFile(),n=S.files.length;
-  if(sc>=90&&f)return {c:"ok",t:"简历完整度 "+sc+"%，默认附件《"+f.name+"》与在线简历均已就绪"+(n>1?"，共 "+n+" 份附件可选":"")};
+  if(sc>=90&&f)return {c:"ok",i:1,t:"简历越完整，越容易被 HR 检索到并优先获得关注"};
   if(sc>=90)return {c:"",t:"完整度 "+sc+"%，但尚未上传附件简历 —— HR 只能看到结构化信息，建议补充一份 PDF"};
   if(f)return {c:"w",t:"附件已上传，但在线简历仅完成 "+sc+"%。结构化字段用于检索，未填写的部分 HR 无法按条件搜到您"};
   return {c:"w",t:"完整度仅 "+sc+"%。上传简历可自动解析填充下方字段，解析结果仍可手动修正"};
@@ -757,11 +762,11 @@ function fillDemo(){
   FIELDS.forEach(function(f){if(!(S.form[f[0]]||"").trim())S.form[f[0]]=DEMO[f[0]]});
   if(!S.rEdu.length)S.rEdu=JSON.parse(JSON.stringify(DEMO_EDU));
   if(!S.rWork.length)S.rWork=JSON.parse(JSON.stringify(DEMO_WORK));
-  if(!(S.rProj||"").trim())S.rProj=DEMO_PROJ;
+  if(!S.rProj.length)S.rProj=JSON.parse(JSON.stringify(DEMO_PROJ));
   if(!(S.rSkill||"").trim())S.rSkill=DEMO_SKILL;
 }
 function demoFill(){fillDemo();drawLogin();toast("解析完成，已填充简历信息，可手动修正")}
-function clearForm(){S.form={};S.rEdu=[];S.rWork=[];S.rProj="";S.rSkill="";drawLogin()}
+function clearForm(){S.form={};S.rEdu=[];S.rWork=[];S.rProj=[];S.rSkill="";drawLogin()}
 
 function addSub(job,note,fid,src){
   var f=fid?fileOf(fid):null;
@@ -983,7 +988,7 @@ function pgMine(){
     '<div class="rp"><div class="rp-top"><div><div class="rp-n">'+sc+'<i>%</i></div><div class="rp-l">简历完整度</div></div>'+
     '<button class="mini" style="margin-left:auto" onclick="goEditResume()">编辑简历</button></div>'+
     '<div class="rbar"><i style="width:'+sc+'%"></i></div>'+
-    '<div class="rp-d">'+esc(tp.t)+'</div></div>'+
+    '<div class="rp-d">'+(tp.i?'<svg class="rp-i" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="8" cy="8" r="6.3"/><path d="M8 7.2v3.6"/><path d="M8 5.1v.9"/></svg>':'')+esc(tp.t)+'</div></div>'+
     '<div class="mlist" style="margin-top:12px">'+
       '<div class="mrow" onclick="go(\'resume\')"><div class="l">我的简历</div><div class="r">'+(S.files.length?"附件 "+S.files.length+" 份 + 在线":"仅在线简历")+'<span class="arw">›</span></div></div>'+
       '<div class="mrow" onclick="goFav()"><div class="l">我的收藏</div><div class="r">'+S.fav.length+' 个职位<span class="arw">›</span></div></div>'+
@@ -1110,12 +1115,23 @@ function pgResume(){
          (w.desc?'<div class="rd">'+esc(w.desc)+'</div>':"")+'</div>'}).join("")
       :'<div class="rsub">暂无工作经历</div>')+'</div>';
 
-  h+='<div class="rblk"><div class="rblk-h"><h4>项目经历与技能<span>这部分决定了您能否被搜索到</span></h4></div>'+
-    (ed?'<div class="fi-wrap"><label>项目经历</label><textarea rows="4" placeholder="每行一个项目，建议写清做了什么、带来什么结果" oninput="S.rProj=this.value">'+esc(S.rProj||"")+'</textarea></div>'+
-      '<div class="fi-wrap"><label>专业技能</label><textarea rows="2" placeholder="用 / 分隔，便于按技能检索" oninput="S.rSkill=this.value">'+esc(S.rSkill||"")+'</textarea></div>'
-      :((S.rProj?'<div class="rsec"><i>项目经历</i><div class="rpre">'+esc(S.rProj)+'</div></div>':"")+
-        (S.rSkill?'<div class="rsec"><i>专业技能</i><div class="rpre">'+esc(S.rSkill)+'</div></div>':"")+
-        (S.rProj||S.rSkill?"":'<div class="rsub">尚未填写项目与技能</div>')))+'</div>';
+  h+='<div class="rblk"><div class="rblk-h"><h4>项目经历<span>写清担任角色与达成的结果</span></h4>'+
+    (ed?'<button class="mini g" onclick="addProj()">+ 添加</button>':"")+'</div>'+
+    (S.rProj.length?S.rProj.map(function(p,i){
+      return ed?'<div class="ritem"><div class="two">'+
+        '<div class="fi-wrap"><label>起止</label><input value="'+esc(p.from)+'" oninput="S.rProj['+i+'].from=this.value"></div>'+
+        '<div class="fi-wrap"><label>至</label><input value="'+esc(p.to)+'" oninput="S.rProj['+i+'].to=this.value"></div>'+
+        '<div class="fi-wrap"><label>项目名称</label><input value="'+esc(p.name)+'" oninput="S.rProj['+i+'].name=this.value"></div>'+
+        '<div class="fi-wrap"><label>担任角色</label><input value="'+esc(p.role)+'" oninput="S.rProj['+i+'].role=this.value"></div></div>'+
+        '<div class="fi-wrap"><label>项目描述</label><textarea rows="2" oninput="S.rProj['+i+'].desc=this.value">'+esc(p.desc||"")+'</textarea></div>'+
+        '<button class="link d" onclick="delProj('+i+')">删除本条</button></div>'
+        :'<div class="ritem"><div class="rt">'+esc(p.name||"—")+'　'+esc(p.role||"")+'</div><div class="rs2">'+esc(p.from||"")+' — '+esc(p.to||"")+'</div>'+
+         (p.desc?'<div class="rd">'+esc(p.desc)+'</div>':"")+'</div>'}).join("")
+      :'<div class="rsub">暂无项目经历</div>')+'</div>';
+
+  h+='<div class="rblk"><div class="rblk-h"><h4>专业技能<span>这部分决定了您能否被搜索到</span></h4></div>'+
+    (ed?'<div class="fi-wrap"><textarea rows="2" placeholder="用 / 分隔，便于按技能检索" oninput="S.rSkill=this.value">'+esc(S.rSkill||"")+'</textarea></div>'
+      :(S.rSkill?'<div class="rpre">'+esc(S.rSkill)+'</div>':'<div class="rsub">尚未填写专业技能</div>'))+'</div>';
   return h+'<div style="height:18px"></div>';
 }
 function saveResume(){
@@ -1135,6 +1151,11 @@ function addWork(){
 }
 function delEdu(i){S.rEdu.splice(i,1);render()}
 function delWork(i){S.rWork.splice(i,1);render()}
+function addProj(){
+  if(S.rProj.length>=6){toast("项目经历最多 6 条");return}
+  S.rProj.push({from:"",to:"至今",name:"",role:"",desc:""});S.edit=true;render();
+}
+function delProj(i){S.rProj.splice(i,1);render()}
 function pickFile(){
   var f=addFile();
   if(!f)return;
@@ -1158,7 +1179,9 @@ function previewResume(){
     (S.rWork.length?'<div class="rblk" style="margin:0 0 12px;padding:12px 14px"><div class="rblk-h"><h4>工作经历</h4></div>'+
       S.rWork.map(function(w){return '<div class="ritem"><div class="rt">'+esc(w.company||"—")+'　'+esc(w.role||"")+'</div>'+
         '<div class="rs2">'+esc(w.from||"")+' — '+esc(w.to||"")+'</div>'+(w.desc?'<div class="rd">'+esc(w.desc)+'</div>':"")+'</div>'}).join("")+'</div>':"")+
-    (S.rProj?'<div class="rblk" style="margin:0 0 12px;padding:12px 14px"><div class="rblk-h"><h4>项目经历</h4></div><div class="rpre">'+esc(S.rProj)+'</div></div>':"")+
+    (S.rProj.length?'<div class="rblk" style="margin:0 0 12px;padding:12px 14px"><div class="rblk-h"><h4>项目经历</h4></div>'+
+      S.rProj.map(function(p){return '<div class="ritem"><div class="rt">'+esc(p.name||"—")+'　'+esc(p.role||"")+'</div>'+
+        '<div class="rs2">'+esc(p.from||"")+' — '+esc(p.to||"")+'</div>'+(p.desc?'<div class="rd">'+esc(p.desc)+'</div>':"")+'</div>'}).join("")+'</div>':"")+
     (S.rSkill?'<div class="rblk" style="margin:0;padding:12px 14px"><div class="rblk-h"><h4>专业技能</h4></div><div class="rpre">'+esc(S.rSkill)+'</div></div>':"")+
     '</div><div class="sh-f"><button class="btn btn-g" onclick="closeS()">关闭</button>'+
     '<button class="btn btn-p" onclick="closeS();exportResumePdf()">导出 PDF</button>'+
@@ -1187,7 +1210,12 @@ function printHtml(){
         '<p>'+esc((w.from||"")+" — "+(w.to||""))+'</p>'+(w.desc?'<p>'+esc(w.desc)+'</p>':"")+'</div>';
     }).join("");
   }
-  if((S.rProj||"").trim())h+='<h2>项目经历</h2><p>'+esc(S.rProj)+'</p>';
+  if(S.rProj.length){
+    h+='<h2>项目经历</h2>'+S.rProj.map(function(p){
+      return '<div class="it"><b>'+esc(p.name||"—")+(p.role?"　"+esc(p.role):"")+'</b>'+
+        '<p>'+esc((p.from||"")+" — "+(p.to||""))+'</p>'+(p.desc?'<p>'+esc(p.desc)+'</p>':"")+'</div>';
+    }).join("");
+  }
   if((S.rSkill||"").trim())h+='<h2>专业技能</h2><p>'+esc(S.rSkill)+'</p>';
   if(S.files.length){
     h+='<h2>附件简历</h2><table>'+S.files.map(function(x){
