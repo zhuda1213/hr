@@ -280,6 +280,23 @@ input,select,textarea{font-family:inherit;font-size:14px;-webkit-appearance:none
 .subcard.act{background:#f7faff}
 .subnote{margin:0 16px 10px;background:var(--brand-l);border-radius:8px;padding:9px 11px;font-size:12px;color:var(--brand-d);line-height:1.7}
 .subnote .hd{font-weight:600;margin-bottom:3px}
+.subnote .stag{float:right;font-weight:500;font-size:10.5px;padding:1px 8px;border-radius:999px;background:#fff}
+.stag.s0{color:#9a6010}   /* 未开始 */
+.stag.s1{color:var(--brand-d)} /* 进行中 */
+.stag.s2{color:var(--ink3)}    /* 已结束 */
+.subnote.inv .hd{cursor:pointer}
+.subnote.inv .tg{text-align:right;font-size:11px;color:var(--brand-d);cursor:pointer;margin-top:2px}
+/* 收起态注意事项：上半清晰、下半递增模糊（双层叠加 + 渐变遮罩） */
+.blwrap{position:relative}
+.blwrap .a{position:relative;z-index:1;
+  -webkit-mask-image:linear-gradient(to bottom,#000 20%,rgba(0,0,0,0) 35%);
+          mask-image:linear-gradient(to bottom,#000 20%,rgba(0,0,0,0) 35%)}
+.blwrap .b{position:absolute;left:0;right:0;top:0;z-index:0;filter:blur(3px);
+  -webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,0) 15%,rgba(0,0,0,.95) 60%);
+          mask-image:linear-gradient(to bottom,rgba(0,0,0,0) 15%,rgba(0,0,0,.95) 60%)}
+.subnote.inv .blwrap{user-select:none;pointer-events:none}
+.subnote.inv.open .blwrap .a{-webkit-mask-image:none;mask-image:none}   /* 展开后整行清晰 */
+.subnote.inv.open .blwrap .b{display:none}
 .subnote .row{display:flex;gap:8px}
 .subnote .row em{font-style:normal;flex:0 0 52px;color:#8b93a8}
 .subnote .row span{flex:1;min-width:0}
@@ -387,8 +404,8 @@ var CITIES=["长沙","深圳","武汉","广州","成都","上海","北京","东�
 var DEGS=["大专","本科","硕士","博士","不限"];
 var SOC_EXP=["1年以下","1-3年","3-5年","5年以上","10年以上","不限"];
 var CAM_EXP=["2027届","2028届","2026届","不限（应届 / 在校实习）"];
-var FIELDS=[["name","姓名"],["phone","手机号"],["email","邮箱"],["gender","性别"],["deg","最高学历"],["school","毕业院校"],["major","专业"],["exp","工作年限"],["city","现居城市"]];
-var DEMO={name:"李明轩",phone:"13856789211",email:"mingxuan.li@163.com",gender:"男",deg:"硕士",school:"湖南大学",major:"软件工程",exp:"3年",city:"长沙"};
+var FIELDS=[["name","姓名"],["gender","性别"],["birth","出生日期"],["phone","手机号"],["email","邮箱"],["deg","最高学历"],["school","毕业院校"],["major","专业"],["exp","工作年限"],["city","现居城市"]];
+var DEMO={name:"李明轩",phone:"13856789211",email:"mingxuan.li@163.com",gender:"男",birth:"1998-05-12",deg:"硕士",school:"湖南大学",major:"软件工程",exp:"3年",city:"长沙"};
 var DEMO_EDU=[{from:"2018-09",to:"2021-06",school:"湖南大学",deg:"硕士",major:"软件工程"}];
 var DEMO_WORK=[{from:"2021-07",to:"至今",company:"某互联网科技公司",role:"后端开发工程师",desc:"负责订单与库存核心服务的设计与开发，支撑日均百万级订单处理"}];
 var DEMO_PROJ=[
@@ -786,6 +803,7 @@ function afBase(job){
     school:(f.school||"").trim(),
     major:(f.major||"").trim(),
     gender:(f.gender||"").trim(),
+    birth:(f.birth||"").trim(),
     city:(f.city||"").trim()||job.city,
     note:"",
     src:"",
@@ -798,13 +816,13 @@ function afSet(k,v){if(!AF)return;AF[k]=v;if(AFERR[k])AFERR[k]=0}
 function afUseResume(){
   if(!AF)return;
   var b=afBase(AFJOB);
-  ["name","phone","deg","school","major","gender","city"].forEach(function(k){if(b[k])AF[k]=b[k]});
+  ["name","phone","deg","school","major","gender","birth","city"].forEach(function(k){if(b[k])AF[k]=b[k]});
   if(!AF.file&&b.file)AF.file=b.file;
   AFERR={};drawApply();toast("已按在线简历填充，可继续修改");
 }
 function afFile(){
   if(!AF)return;
-  AF.file={id:"",name:(AF.name||"我的")+"-简历.pdf",ext:"PDF",size:"1.1MB"};
+  AF.file={id:"",name:(AF.name||"我的")+"-简历.pdf",ext:"PDF",size:"1.1MB"};AF.pick=false;
   drawApply();toast("附件已上传，将随本次投递一并发送");
 }
 function afRmFile(){if(!AF)return;AF.file=null;drawApply()}
@@ -828,6 +846,13 @@ function afSelPick(k,el){
   el.className=el.value?"":"ph";
   el.parentNode.classList.remove("bad");
 }
+function afDate(k,lab,req){
+  var bad=AFERR[k]?" bad":"";
+  var er=AFERR[k]?'<div class="fi-err">请选择'+lab+'</div>':"";
+  return '<div class="fi-wrap'+bad+'"><label'+(req?' class="req"':"")+'>'+lab+'</label>'+
+    '<input type="date" value="'+esc(AF[k]||"")+'"'+
+    ' oninput="afSet(\''+k+'\',this.value);this.parentNode.classList.remove(\'bad\')">'+er+'</div>';
+}
 function afSel(k,lab,list,req){
   var cur=AF[k]||"";
   var bad=AFERR[k]?" bad":"";
@@ -844,11 +869,14 @@ function drawApply(){
     '<div class="sh-b"><div class="tipbox">投递职位：<b>'+esc(job.title)+'</b>　'+esc(job.city)+' · '+esc(job.salary)+'</div>'+
     '<div class="af-hd"><h4>基本信息</h4><span class="lnk" onclick="afUseResume()">填入在线简历</span></div>'+
     '<div class="two">'+afInp("name","姓名","真实姓名")+
-      afSel("gender","性别",[["","请选择"],["男","男"],["女","女"]],0)+'</div>'+
-    '<div class="two">'+afInp("phone","手机号","11 位手机号")+
-      afSel("deg","最高学历",[["","请选择"],["大专","大专"],["本科","本科"],["硕士","硕士"],["博士","博士"]],1)+'</div>'+
-    '<div class="two">'+afInp("school","毕业院校","如 湖南大学")+afInp("major","专业","如 计算机科学与技术")+'</div>'+
-    afInp("city","现居城市","如 长沙市雨花区")+
+      afSel("gender","性别",[["","请选择"],["男","男"],["女","女"]],1)+'</div>'+
+    '<div class="two">'+afDate("birth","出生日期",1)+
+      afInp("phone","手机号","11 位手机号")+'</div>'+
+    '<div class="two">'+
+      afSel("deg","最高学历",[["","请选择"],["大专","大专"],["本科","本科"],["硕士","硕士"],["博士","博士"]],1)+
+      afInp("school","毕业院校","如 湖南大学")+'</div>'+
+    '<div class="two">'+afInp("major","专业","如 计算机科学与技术")+
+      afInp("city","现居城市","如 长沙市雨花区")+'</div>'+
     '<div class="af-hd" style="margin-top:4px"><h4>简历附件</h4>'+
       (AF.pick?'<span class="lnk" onclick="afTogglePick()">返回</span>'
         :'<span style="font-size:11px;color:var(--ink4)">PDF / Word，≤10MB</span>')+'</div>'+
@@ -859,10 +887,10 @@ function drawApply(){
           '<div style="flex:1;min-width:0"><div class="rn">'+esc(x.name)+(x.def?' <span class="bdg b">默认</span>':"")+'</div>'+
           '<div class="rs">'+esc(x.size)+' · 上传于 '+esc(x.time||"-")+'</div></div>'+
           (on?'<span class="bdg b">本次</span>':'<button class="link" onclick="afPickFile(\''+x.id+'\')">选用</button>')+'</div>';
-      }).join("")+'</div>'
+      }).join("")+'<div style="text-align:center;margin-top:4px"><button class="mini" onclick="afFile()">＋ 上传新简历</button></div></div>'
       :(f?'<div class="filed"><div class="fi">'+esc(f.ext)+'</div><div style="flex:1;min-width:0"><div class="rn">'+esc(f.name)+'</div>'+
         '<div class="rs">'+esc(f.size)+' · 随本次投递一并发送</div></div>'+
-        (S.files.length>1?'<button class="link" onclick="afTogglePick()">切换</button>':"")+
+        (S.files.length?'<button class="link" onclick="afTogglePick()">切换</button>':"")+
         '<button class="link d" style="margin-left:12px" onclick="afRmFile()">移除</button></div>'
       :'<div class="af-up"><div class="t">上传附件简历，招聘方可直接查看原件</div>'+
         '<div class="s">不上传也可投递，将用上方信息生成在线简历</div>'+
@@ -870,6 +898,7 @@ function drawApply(){
     '<div class="fi-wrap" style="margin-top:14px"><label>附加留言（选填）</label>'+
       '<textarea rows="2" placeholder="可补充推荐人信息、到岗时间、期望等信息" oninput="AF.note=this.value">'+esc(AF.note||"")+'</textarea></div>'+
     afSel("src","投递来源（选填）",[["","请选择（选填）"],["内部推荐","内部推荐"],["招聘网站","招聘网站"],["校园招聘","校园招聘"],["猎头推荐","猎头推荐"],["企业官网","企业官网"],["其他","其他"]],0)+
+    '<div style="font-size:11px;color:var(--ink4);line-height:1.6;margin:14px 0 2px">提交投递即表示同意：所填个人信息仅用于本次招聘岗位的评估与录用沟通，不用于其他用途。</div>'+
     '</div>'+
     '<div class="sh-f"><button class="btn btn-g" onclick="closeS()">取消</button>'+
     '<button class="btn btn-p" onclick="submitApply('+job.id+')">确认投递</button></div>';
@@ -882,6 +911,8 @@ function submitApply(id){
     if(!(AF[p[0]]||"").trim()){AFERR[p[0]]=1;if(!msg)msg="请填写「"+p[1]+"」"}
   });
   if(!AF.deg){AFERR.deg=1;if(!msg)msg="请选择最高学历"}
+  if(!AF.gender){AFERR.gender=1;if(!msg)msg="请选择性别"}
+  if(!AF.birth){AFERR.birth=1;if(!msg)msg="请选择出生日期"}
   if(!AF.city){AFERR.city=1;if(!msg)msg="请选择现居城市"}
   if((AF.phone||"").trim()&&!/^1\d{10}$/.test(AF.phone.trim())){AFERR.phone=2;msg="手机号格式不正确"}
   if(msg){drawApply();toast(msg);return}
@@ -890,6 +921,7 @@ function submitApply(id){
   S.form.name=AF.name.trim();S.form.phone=AF.phone.trim();S.form.deg=AF.deg;
   S.form.school=AF.school.trim();S.form.major=AF.major.trim();S.form.city=AF.city;
   if(AF.gender)S.form.gender=AF.gender;
+  if(AF.birth)S.form.birth=AF.birth;
   if(S.user)S.user.name=S.form.name;
   /* 附件：本次选用已有的一份，或把新上传的这份存入附件库 */
   var fid="";
@@ -931,13 +963,52 @@ var SUB_EMPTY={
   invite:["暂无面试邀约","收到面试邀约时，这里会显示面试时间与地点"]
 };
 function subIn(tab,s){return tab==="all"||(SUB_GROUPS[tab]||[]).indexOf(s.status)>=0}
-function subCount(tab){return S.subs.filter(function(s){return subIn(tab,s)}).length}
+/* 邀约页签：6 条演示数据（面试邀约 3：未开始/面试中/已结束；笔试邀约 3：未开始/笔试中/已结束），静态展示 */
+var INVITE_DEMO=[
+ {t:"高级后端开发工程师",s:"20-35K·14薪 · 投递于 2026-10-18",type:"面试邀约",st:"未开始",cls:"s0",
+  rows:[["面试时间","11 月 8 日 14:00"],["面试地点","长沙市雨花区总部大楼 12F 会议室 A"],["注意事项","请携带身份证与纸质简历，提前 15 分钟到场"]],c:"王敏",p:"0731-8828 6621"},
+ {t:"Java开发工程师（校招）",s:"10-15K · 投递于 2026-10-12",type:"面试邀约",st:"面试中",cls:"s1",
+  rows:[["面试时间","11 月 3 日 10:30"],["面试地点","长沙市雨花区总部大楼 8F 会议室 C"],["注意事项","面试为一面技术面，请准备项目介绍"]],c:"刘思远",p:"0731-8828 6635"},
+ {t:"区域经理（海口办事处）",s:"15-25K · 投递于 2026-10-12",type:"面试邀约",st:"已结束",cls:"s2",
+  rows:[["面试时间","11 月 2 日 15:00"],["面试地点","长沙市雨花区总部大楼 12F 会议室 B"],["注意事项","请提前准备区域市场分析思路"]],c:"陈静",p:"0731-8828 6618"},
+ {t:"电商运营专员",s:"9-14K · 投递于 2026-10-25",type:"笔试邀约",st:"未开始",cls:"s0",
+  rows:[["笔试时间","11 月 10 日 09:30"],["笔试地点","线上笔试（链接将以短信发送）"],["注意事项","请使用电脑作答，全程开启摄像头"]],c:"赵鹏",p:"0731-8828 6630"},
+ {t:"数据分析专员",s:"10-16K · 投递于 2026-10-15",type:"笔试邀约",st:"笔试中",cls:"s1",
+  rows:[["笔试时间","11 月 4 日 14:00"],["笔试地点","线上笔试（作答时间 90 分钟）"],["注意事项","作答时间 90 分钟，开始后不可暂停"]],c:"王敏",p:"0731-8828 6621"},
+ {t:"供应链专员",s:"8-12K · 投递于 2026-10-20",type:"笔试邀约",st:"已结束",cls:"s2",
+  rows:[["笔试时间","11 月 1 日 10:00"],["笔试地点","线下机考 · 雨花区总部 6F 机房"],["注意事项","请携带学生证或身份证入场"]],c:"刘思远",p:"0731-8828 6635"}
+];
+function inviteCard(d,i){
+  /* 折叠交互：默认收缩显示 时间/地点 两行 + 模糊的注意事项（提示还有更多信息），展开后全部清晰显示 */
+  var base=d.rows.slice(0,2).map(function(r){return '<div class="row"><em>'+r[0]+'</em><span>'+esc(r[1])+'</span></div>'}).join("");
+  var nr=d.rows.slice(2).map(function(r){return '<div class="row"><em>'+r[0]+'</em><span>'+esc(r[1])+'</span></div>'}).join("");
+  var bl='<div class="blwrap"><div class="a">'+nr+'</div><div class="b" aria-hidden="true">'+nr+'</div></div>';
+  var extra='<div class="row"><em>联系人</em><span>'+esc(d.c)+'</span></div>'+
+    '<div class="row"><em>联系电话</em><span><a class="tel" href="tel:'+esc(d.p.replace(/\s/g,""))+'">'+esc(d.p)+'</a></span></div>';
+  return '<div class="subcard"><div class="myrow"><div class="avatar">'+esc(d.t.charAt(0))+'</div>'+
+    '<div style="flex:1;min-width:0"><div class="t">'+esc(d.t)+'</div>'+
+    '<div class="s">'+esc(d.s)+'</div></div>'+
+    '<div class="r"><button class="mini g" style="height:28px;padding:0 10px;font-size:12px" onclick="toast(\'演示数据，仅作展示\')">查看</button></div></div>'+
+    '<div class="subnote inv" id="invb'+i+'"><div class="hd" onclick="tgInv('+i+')">'+d.type+'<span class="stag '+d.cls+'">'+d.st+'</span></div>'+
+    base+bl+
+    '<div class="invx" id="invx'+i+'" style="display:none">'+extra+'</div>'+
+    '<div class="tg" onclick="tgInv('+i+')"><span id="inva'+i+'">展开更多 ▾</span></div></div></div>';
+}
+function tgInv(i){
+  var x=$("invx"+i),a=$("inva"+i),b=$("invb"+i);if(!x)return;
+  var open=x.style.display!=="none";
+  x.style.display=open?"none":"";
+  b.className=open?"subnote inv":"subnote inv open";   /* open 时注意事项取消模糊 */
+  a.textContent=open?"展开更多 ▾":"收起 ▴";
+}
+function subCount(tab){return tab==="invite"?INVITE_DEMO.length:S.subs.filter(function(s){return subIn(tab,s)}).length}
 function setSubTab(t){S.subTab=t;render()}
 function pgSubs(){
   var cur=S.subTab||"all";
   var head='<div class="subtab">'+SUB_TABS.map(function(t){
     return '<div class="'+(cur===t[0]?"on":"")+'" onclick="setSubTab(\''+t[0]+'\')">'+t[1]+'<i>'+subCount(t[0])+'</i></div>';
   }).join("")+'</div>';
+  if(cur==="invite")return head+INVITE_DEMO.map(inviteCard).join("")+'<div style="height:18px"></div>';
   var list=[];
   S.subs.forEach(function(s,i){if(subIn(cur,s))list.push([i,s])});
   if(!list.length){var e=SUB_EMPTY[cur]||SUB_EMPTY.all;
@@ -1051,7 +1122,7 @@ function resField(k,lab){
       list.map(function(v){return '<option value="'+v+'"'+(cur===v?" selected":"")+'>'+v+'</option>'}).join("")+
       '</select></div>';
   }
-  return '<div class="fi-wrap"><label>'+lab+'</label><input value="'+esc(cur)+'" oninput="S.form.'+k+'=this.value"></div>';
+  return '<div class="fi-wrap"><label>'+lab+'</label><input type="'+(k==="birth"?"date":"text")+'" value="'+esc(cur)+'" oninput="S.form.'+k+'=this.value"></div>';
 }
 function pgResume(){
   var ed=S.edit,sc=score(),tp=tip(),h="";
@@ -1062,7 +1133,7 @@ function pgResume(){
       '<div class="rbar"><i style="width:'+sc+'%"></i></div><div class="rp-d">'+esc(tp.t)+'</div>'+
       '<div style="margin-top:12px;display:flex;gap:8px">'+
         '<button class="mini g" style="flex:1;padding:0 6px" onclick="previewResume()">预览</button>'+
-        '<button class="mini g" style="flex:1;padding:0 6px" onclick="exportResumePdf()">导出 PDF</button>'+
+        '<button class="mini g" style="flex:1;padding:0 6px" onclick="openExportResume()">导出简历</button>'+
         '<button class="mini" style="flex:1;padding:0 6px" onclick="toggleEdit()">编辑简历</button></div></div>';
 
     h+='<div class="rblk"><div class="rblk-h"><h4>附件简历<span>PDF / Word，单份 ≤10MB</span></h4>'+
@@ -1184,9 +1255,25 @@ function previewResume(){
         '<div class="rs2">'+esc(p.from||"")+' — '+esc(p.to||"")+'</div>'+(p.desc?'<div class="rd">'+esc(p.desc)+'</div>':"")+'</div>'}).join("")+'</div>':"")+
     (S.rSkill?'<div class="rblk" style="margin:0;padding:12px 14px"><div class="rblk-h"><h4>专业技能</h4></div><div class="rpre">'+esc(S.rSkill)+'</div></div>':"")+
     '</div><div class="sh-f"><button class="btn btn-g" onclick="closeS()">关闭</button>'+
-    '<button class="btn btn-p" onclick="closeS();exportResumePdf()">导出 PDF</button>'+
     '<button class="btn btn-p" onclick="closeS();S.edit=true;render()">继续完善</button></div>';
   showSheet(b);
+}
+
+/* ============ 导出简历（演示效果，不真实生成文件） ============ */
+function openExportResume(){
+  var b='<div class="sh-h"><h3>导出简历</h3><div class="x" onclick="closeS()">×</div></div>'+
+    '<div class="sh-b">'+
+    '<div class="filed" style="margin-bottom:8px;cursor:pointer" onclick="doExportResume(\'PDF\')">'+
+      '<div class="fi">PDF</div><div style="flex:1;min-width:0"><div class="rn">导出 PDF 格式</div>'+
+      '<div class="rs">适合在线投递与打印</div></div><span class="bdg b">选择</span></div>'+
+    '<div class="filed" style="cursor:pointer" onclick="doExportResume(\'Word\')">'+
+      '<div class="fi">DOC</div><div style="flex:1;min-width:0"><div class="rn">导出 Word 格式</div>'+
+      '<div class="rs">适合二次编辑修改</div></div><span class="bdg b">选择</span></div>'+
+    '</div>';
+  showSheet(b);
+}
+function doExportResume(t){
+  closeS();toast("简历已导出为 "+t+" 格式","ok");
 }
 
 /* ============ 在线简历导出 PDF（打印视图） ============ */
